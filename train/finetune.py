@@ -1,24 +1,26 @@
 import json
 import os
+import random
 import subprocess
 import sys
 
 # ── Config ──────────────────────────────────────────────────────────────────
-MODEL_NAME = "./models/llama-base"                   # HuggingFace model ID
+MODEL_NAME = "./models/qwen2.5-1.5b-instruct"                   # HuggingFace model ID
 DATASET_PATH = "data/mixed_dataset.jsonl"           # blended website + chat pairs
-OUTPUT_DIR = "models/llama-finetuned"                # where adapters are saved
+OUTPUT_DIR = "models/qwen1.5b-finetuned"                # where adapters are saved
 TRAIN_PATH = "data/train.jsonl"                     # MLX expects JSONL format
 VALID_PATH = "data/valid.jsonl"                     # validation split
 
 # ── LoRA Hyperparameters ─────────────────────────────────────────────────────
 LORA_RANK = 16       # more capacity, still efficient on M2 Pro
-LORA_LAYERS = 16     # more layers = deeper fine-tuning
+LORA_LAYERS = 8     # more layers = deeper fine-tuning
 LEARNING_RATE = 1e-4 # slightly higher for faster convergence
 ITERATIONS = 800     # enough for 383 pairs to converge
-BATCH_SIZE = 2       # keep this, safe for M2 Pro memory
-STEPS_PER_EVAL = 100 # evaluate every 100 steps
+BATCH_SIZE = 1       # keep this, safe for M2 Pro memory
+STEPS_PER_EVAL = 200 # evaluate every 100 steps
 STEPS_PER_SAVE = 200 # save checkpoint every 200 steps
 TRAIN_SPLIT = 0.9    # 90% train, 10% validation
+SPLIT_SEED = 42      # deterministic train/valid split
 
 # ── Step 1: Convert dataset to MLX JSONL format ──────────────────────────────
 
@@ -29,26 +31,22 @@ def convert_dataset():
     with open(DATASET_PATH, "r") as f:
         pairs = [json.loads(line) for line in f if line.strip()]
 
-    # MLX expects this exact format for Llama chat template
+    # MLX expects pre-formatted chat text; this uses Qwen-style chat tokens.
     def format_pair(pair):
-        conversation = [
-            f"<|start_header_id|>system<|end_header_id|>\n\n"
-            f"You are a helpful AI assistant for Synapse Tech Inc. Answer questions accurately, stay grounded in company information when relevant, and maintain a natural conversational tone."
-            f"<|eot_id|>"
-        ]
-
+        parts = []
+        parts.append("<|im_start|>system\nYou are a helpful AI assistant for Synapse Tech Inc. Answer questions accurately, stay grounded in company information when relevant, and maintain a natural conversational tone.<|im_end|>\n")
         for msg in pair["messages"]:
-            conversation.append(
-                f"<|start_header_id|>{msg['role']}<|end_header_id|>\n\n"
-                f"{msg['content']}"
-                f"<|eot_id|>"
-            )
-
-        return {
-            "text": f"<|begin_of_text|>{''.join(conversation)}"
-        }
+            role = msg["role"]  # user / assistant
+            content = msg["content"].strip()
+            parts.append(f"<|im_start|>{role}\n{content}<|im_end|>\n")
+        parts.append("<|im_start|>assistant\n")
+        return {"text": "".join(parts)}
 
     formatted = [format_pair(p) for p in pairs]
+
+    # Shuffle before split so validation is not biased by dataset ordering.
+    random.seed(SPLIT_SEED)
+    random.shuffle(formatted)
 
     # Split into train/validation
     split_idx = int(len(formatted) * TRAIN_SPLIT)
@@ -100,14 +98,20 @@ def finetune():
         "--val-batches", "10",
     ]
 
-    # Check if checkpoint exists to resume from
+    # Check if checkpoint exists to resume from (.safetensors or legacy .npz)
     checkpoint = None
     if os.path.exists(OUTPUT_DIR):
-        npz_files = [f for f in os.listdir(OUTPUT_DIR) if f.endswith(".npz")]
-        if npz_files:
-            # Pick the latest checkpoint
-            latest = sorted(npz_files)[-1]
-            checkpoint = os.path.join(OUTPUT_DIR, latest.replace(".npz", ""))
+        adapter_files = [
+            f for f in os.listdir(OUTPUT_DIR)
+            if f.endswith(".safetensors") or f.endswith(".npz")
+        ]
+        if adapter_files:
+            # Prefer numbered checkpoints if present (e.g. 0000200_adapters.safetensors).
+            numbered = sorted(
+                [f for f in adapter_files if f[:6].isdigit()]
+            )
+            latest = numbered[-1] if numbered else sorted(adapter_files)[-1]
+            checkpoint = os.path.join(OUTPUT_DIR, latest)
 
     if checkpoint:
         print(f"  🔄 Resuming from checkpoint: {checkpoint}")

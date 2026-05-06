@@ -5,11 +5,11 @@ import shutil
 import time
 
 # ── Config ──────────────────────────────────────────────────────────────────
-BASE_MODEL_PATH = "./models/llama-base"  # original HF model
-ADAPTER_PATH = "models/llama-finetuned"                      # LoRA adapters from training
-MERGED_PATH = "models/llama-merged"                          # merged model (intermediate)
+BASE_MODEL_PATH = "./models/qwen2.5-1.5b-instruct"  # original HF model
+ADAPTER_PATH = "models/qwen1.5b-finetuned"                      # LoRA adapters from training
+MERGED_PATH = "models/qwen1.5b-merged"                          # merged model (intermediate)
 OUTPUT_DIR = "models/gguf"                             # final GGUF output
-GGUF_FILENAME = "synapse-llama3b-q4.gguf"                 # your custom model name
+GGUF_FILENAME = "synapse-qwen1.5b.gguf"                 # your custom model name
 QUANTIZATION = "q4_k_m"                               # 4-bit quantization
 
 MAX_RETRIES = 3

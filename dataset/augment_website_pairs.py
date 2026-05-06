@@ -5,7 +5,7 @@ import time
 
 import requests
 
-RAW_DIR = "data/raw"
+RAW_DIR = "data/raw/cleaned-data"
 INPUT_PATH = "data/dataset.json"
 OUTPUT_PATH = "data/dataset_augmented.jsonl"
 OLLAMA_URL = "http://localhost:11434/api/generate"
@@ -13,8 +13,8 @@ OLLAMA_MODEL = "llama3"
 
 MAX_RETRIES = 3
 RETRY_DELAY = 5
-NEW_ITEMS_PER_PAGE = 12
-MAX_CONTENT_CHARS = 5000
+NEW_ITEMS_PER_PAGE = 8
+MAX_CONTENT_CHARS = 3500
 
 
 def simplify_text(content: str) -> str:
@@ -22,8 +22,51 @@ def simplify_text(content: str) -> str:
 
 
 def extract_json(text: str):
-    match = re.search(r"\[.*\]", text, re.DOTALL)
-    return match.group(0) if match else None
+    text = text.strip()
+
+    fenced = re.search(r"```(?:json)?\s*(\{.*\}|\[.*\])\s*```", text, re.DOTALL)
+    if fenced:
+        return fenced.group(1)
+
+    object_match = re.search(r"\{.*\}", text, re.DOTALL)
+    if object_match:
+        return object_match.group(0)
+
+    array_match = re.search(r"\[.*\]", text, re.DOTALL)
+    return array_match.group(0) if array_match else None
+
+
+def unwrap_items(data):
+    if isinstance(data, list):
+        return data
+
+    if isinstance(data, dict):
+        items = data.get("items")
+        if isinstance(items, list):
+            return items
+
+    return []
+
+
+def normalize_messages(msgs):
+    if not isinstance(msgs, list) or len(msgs) < 2 or len(msgs) % 2 != 0:
+        return None
+
+    clean = []
+    for idx, msg in enumerate(msgs):
+        if not isinstance(msg, dict):
+            return None
+
+        role = msg.get("role")
+        content = msg.get("content")
+        expected_role = "user" if idx % 2 == 0 else "assistant"
+
+        if role != expected_role or not isinstance(content, str) or not content.strip():
+            return None
+
+        clean.append({"role": role, "content": content.strip()})
+
+    return clean
 
 
 def load_existing_questions(path: str):
@@ -63,10 +106,21 @@ Rules:
 - Answers must be 1-3 sentences.
 - No bullet points or numbered lists.
 - No invented claims.
+- Return valid JSON only.
 - Do not repeat or closely paraphrase these existing questions:
 {banned}
 
-Return only a JSON array with objects of shape {{"messages": [...]}}.
+Return only a JSON object like this:
+{{
+  "items": [
+    {{
+      "messages": [
+        {{"role": "user", "content": "..."}},
+        {{"role": "assistant", "content": "..."}}
+      ]
+    }}
+  ]
+}}
 
 Page content:
 {content}
@@ -84,6 +138,7 @@ def generate_pairs(page_name: str, content: str, existing_questions: list[str]):
                 json={
                     "model": OLLAMA_MODEL,
                     "prompt": prompt,
+                    "format": "json",
                     "stream": False,
                     "options": {"temperature": 0.3},
                 },
@@ -97,13 +152,19 @@ def generate_pairs(page_name: str, content: str, existing_questions: list[str]):
                 continue
 
             data = json.loads(json_text)
+            items = unwrap_items(data)
             clean = []
-            for item in data:
-                msgs = item.get("messages")
-                if isinstance(msgs, list) and len(msgs) >= 2:
+            for item in items:
+                if not isinstance(item, dict):
+                    continue
+
+                msgs = normalize_messages(item.get("messages"))
+                if msgs:
                     clean.append({"messages": msgs})
             if clean:
                 return clean
+
+            print("  ❌ No valid structured pairs returned")
         except Exception:
             time.sleep(RETRY_DELAY)
 
@@ -123,13 +184,32 @@ def main():
 
         page_name = os.path.splitext(file)[0].replace("-", " ")
         pairs = generate_pairs(page_name, content, sorted(existing_questions))
+        if not pairs:
+            print("  ❌ No new pairs generated")
+            continue
+
+        added = 0
 
         for item in pairs:
-            first_user = item["messages"][0]["content"].strip().lower()
+            msgs = item.get("messages")
+            if not isinstance(msgs, list) or not msgs:
+                continue
+
+            first = msgs[0]
+            if not isinstance(first, dict):
+                continue
+
+            first_user = first.get("content", "").strip().lower()
+            if not first_user:
+                continue
+
             if first_user in seen:
                 continue
             seen.add(first_user)
             dataset.append(item)
+            added += 1
+
+        print(f"  ✅ Added {added} samples")
 
     with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
         for item in dataset:

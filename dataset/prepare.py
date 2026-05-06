@@ -5,7 +5,7 @@ import time
 import re
 
 # ── Config ─────────────────────────────────────────────────────
-RAW_DIR = "data/raw"
+RAW_DIR = "data/raw/cleaned-data"
 OUTPUT_PATH = "data/dataset.json"
 OLLAMA_URL = "http://localhost:11434/api/generate"
 OLLAMA_MODEL = "llama3"
