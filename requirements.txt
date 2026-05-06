@@ -1,0 +1,14 @@
+# Scraping
+requests
+beautifulsoup4
+lxml
+
+# Dataset preparation
+openai
+
+# Fine-tuning (Apple Silicon)
+mlx-lm
+
+# Model utilities
+transformers
+huggingface-hub

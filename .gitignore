@@ -1,0 +1,29 @@
+.DS_Store
+
+# Python caches
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+venv/
+.venv/
+
+# Local IDE settings
+.idea/
+.vscode/
+
+# Large/generated model artifacts
+models/
+
+# Optional local dependency checkout
+llama.cpp/
+
+# Generated dataset outputs
+data/train.jsonl
+data/valid.jsonl
+data/dataset.json
+data/dataset_augmented.jsonl
+data/mixed_dataset.jsonl
+data/raw/cleaned-data/
+data/raw/scraped.json
+
