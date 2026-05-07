@@ -4,7 +4,7 @@ import random
 
 WEBSITE_DATASET = "data/dataset.json"
 WEBSITE_AUGMENTED_DATASET = "data/dataset_augmented.jsonl"
-CHAT_DATASET = "data/ultrachat_sample.jsonl"
+CHAT_DATASET = "data/ultrachat_sample.clean.jsonl"
 OUTPUT_PATH = "data/mixed_dataset.jsonl"
 
 # Keep website knowledge dominant while still teaching normal chat flow.

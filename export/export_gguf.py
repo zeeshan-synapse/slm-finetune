@@ -15,6 +15,29 @@ QUANTIZATION = "q4_k_m"                               # 4-bit quantization
 MAX_RETRIES = 3
 RETRY_DELAY = 5  # seconds between retries
 
+
+# ── Model helpers ────────────────────────────────────────────────────────────
+
+def is_qwen_model() -> bool:
+    return "qwen" in BASE_MODEL_PATH.lower()
+
+
+def print_llamacpp_instructions():
+    output_path = os.path.join(OUTPUT_DIR, GGUF_FILENAME)
+    print("  ℹ️  Qwen models are not supported by mlx_lm --export-gguf.")
+    print("  ℹ️  Use llama.cpp conversion instead:")
+    print()
+    print("     python3 convert_hf_to_gguf.py \\")
+    print(f"       {os.path.abspath(MERGED_PATH)} \\")
+    print(f"       --outfile {os.path.abspath(output_path)} \\")
+    print("       --outtype f16")
+    print()
+    print("     # Optional quantization")
+    print("     ./build/bin/llama-quantize \\")
+    print(f"       {os.path.abspath(output_path)} \\")
+    print(f"       {os.path.abspath(output_path.replace('.gguf', f'-{QUANTIZATION}.gguf'))} \\")
+    print(f"       {QUANTIZATION.upper()}")
+
 # ── Helpers ──────────────────────────────────────────────────────────────────
 
 def run_with_retry(cmd: list, step_name: str) -> bool:
@@ -131,6 +154,11 @@ def convert_to_gguf():
         print(f"  ⚡ GGUF already exists ({size_mb:.0f}MB), skipping...")
         return True
 
+    # mlx_lm currently cannot export GGUF for Qwen2 architecture.
+    if is_qwen_model():
+        print_llamacpp_instructions()
+        return True
+
     # Use mlx_lm's built-in GGUF export
     cmd = [
         sys.executable, "-m", "mlx_lm", "fuse",
@@ -209,7 +237,12 @@ if __name__ == "__main__":
     print()
 
     # Step 4: Quantize (optional)
-    quantize_gguf()
+    if is_qwen_model():
+        print()
+        print("⚠️  Skipping built-in quantization because Qwen GGUF export is external.")
+        print("   Follow the llama.cpp instructions above.")
+    else:
+        quantize_gguf()
 
     print()
     print("=" * 50)
