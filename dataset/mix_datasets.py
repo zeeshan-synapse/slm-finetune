@@ -4,6 +4,8 @@ import random
 
 WEBSITE_DATASET = "data/dataset.json"
 WEBSITE_AUGMENTED_DATASET = "data/dataset_augmented.jsonl"
+CORRECTIVE_DATASET = "data/corrective_pairs.jsonl"
+CORRECTIVE_FROM_LOGS_DATASET = "data/corrective_pairs_from_logs.jsonl"
 CHAT_DATASET = "data/ultrachat_sample.clean.jsonl"
 OUTPUT_PATH = "data/mixed_dataset.jsonl"
 
@@ -65,6 +67,10 @@ def main():
     website = load_jsonl(WEBSITE_DATASET)
     if os.path.exists(WEBSITE_AUGMENTED_DATASET):
         website.extend(load_jsonl(WEBSITE_AUGMENTED_DATASET))
+    if os.path.exists(CORRECTIVE_DATASET):
+        website.extend(load_jsonl(CORRECTIVE_DATASET))
+    if os.path.exists(CORRECTIVE_FROM_LOGS_DATASET):
+        website.extend(load_jsonl(CORRECTIVE_FROM_LOGS_DATASET))
     website = dedupe(website)
     chat = dedupe(load_jsonl(CHAT_DATASET))
 
