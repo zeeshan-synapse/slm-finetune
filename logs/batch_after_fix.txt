@@ -1,0 +1,103 @@
+============================================================
+Synapse SLM Guardrailed Chat
+============================================================
+Type 'exit' to quit.
+Type 'debug' to toggle attempt-level output.
+Type 'batch' to paste multiple questions and run together.
+
+You: 
+Paste batch questions (one per line). Type 'END' on a new line to run.
+
+Running batch of 20 questions...
+
+[1/20] Processing |[1/20] Processing /[1/20] Processing -[1/20] Processing \[1/20] Processing |[1/20] Processing /[1/20] Processing -[1/20] Processing \[1/20] Processing |[1/20] Processing /[1/20] Processing -[1/20] Processing \[1/20] Processing |[1/20] Processing /                       [1/20] Q: What does Synapse Tech do in 3 concise factual sentences?
+[1/20] A: According to the page, Synapse Tech develops AI-enabled business software. It offers products and services for automation & operational support. And it sells these products and services through various distributors.
+[1/20] status: attempts=1, fallback=False, elapsed=1.43s
+
+[2/20] Processing |[2/20] Processing /[2/20] Processing -[2/20] Processing \[2/20] Processing |[2/20] Processing /[2/20] Processing -[2/20] Processing \[2/20] Processing |[2/20] Processing /[2/20] Processing -[2/20] Processing \[2/20] Processing |                       [2/20] Q: Do you have public pricing for Synapse Tech products? If not, what is the correct next step?
+[2/20] A: Public pricing details are not confirmed in current sources. The user should request official quotes from Synapse Tech directly.
+[2/20] status: attempts=1, fallback=False, elapsed=1.34s
+
+[3/20] Processing |[3/20] Processing /[3/20] Processing -[3/20] Processing \[3/20] Processing |[3/20] Processing /[3/20] Processing -[3/20] Processing \[3/20] Processing |[3/20] Processing /[3/20] Processing -[3/20] Processing \[3/20] Processing |[3/20] Processing /[3/20] Processing -[3/20] Processing \[3/20] Processing |[3/20] Processing /[3/20] Processing -[3/20] Processing \[3/20] Processing |[3/20] Processing /[3/20] Processing -[3/20] Processing \[3/20] Processing |[3/20] Processing /[3/20] Processing -[3/20] Processing \[3/20] Processing |[3/20] Processing /[3/20] Processing -[3/20] Processing \[3/20] Processing |[3/20] Processing /[3/20] Processing -[3/20] Processing \[3/20] Processing |[3/20] Processing /                       [3/20] Q: Which integrations are explicitly confirmed by available Synapse Tech information?
+[3/20] A: The integration list is not explicitly confirmed in available information. Please verify supported integrations with Synapse Tech.
+[3/20] status: attempts=2, fallback=True, elapsed=3.94s
+
+[4/20] Processing |[4/20] Processing /[4/20] Processing -[4/20] Processing \[4/20] Processing |[4/20] Processing /[4/20] Processing -[4/20] Processing \[4/20] Processing |[4/20] Processing /[4/20] Processing -[4/20] Processing \[4/20] Processing |[4/20] Processing /[4/20] Processing -[4/20] Processing \[4/20] Processing |[4/20] Processing /[4/20] Processing -[4/20] Processing \[4/20] Processing |[4/20] Processing /[4/20] Processing -[4/20] Processing \[4/20] Processing |[4/20] Processing /[4/20] Processing -[4/20] Processing \[4/20] Processing |[4/20] Processing /[4/20] Processing -[4/20] Processing \[4/20] Processing |[4/20] Processing /[4/20] Processing -[4/20] Processing \[4/20] Processing |[4/20] Processing /[4/20] Processing -                       [4/20] Q: Can you guarantee a fixed ROI percentage in 3 months?
+[4/20] A: No fixed ROI percentage can be guaranteed. Outcomes depend on implementation scope, execution, and adoption.
+[4/20] status: attempts=2, fallback=True, elapsed=4.04s
+
+[5/20] Processing |[5/20] Processing /[5/20] Processing -[5/20] Processing \[5/20] Processing |                       [5/20] Q: If a feature is not confirmed in available information, should you guess or state it is unknown?
+[5/20] A: If a feature is not confirmed, state it as unconfirmed and do not guess.
+[5/20] status: attempts=1, fallback=True, elapsed=0.52s
+
+[6/20] Processing |[6/20] Processing /[6/20] Processing -[6/20] Processing \[6/20] Processing |[6/20] Processing /[6/20] Processing -[6/20] Processing \[6/20] Processing |[6/20] Processing /[6/20] Processing -[6/20] Processing \[6/20] Processing |[6/20] Processing /[6/20] Processing -[6/20] Processing \[6/20] Processing |[6/20] Processing /[6/20] Processing -[6/20] Processing \[6/20] Processing |[6/20] Processing /[6/20] Processing -[6/20] Processing \[6/20] Processing |[6/20] Processing /[6/20] Processing -[6/20] Processing \[6/20] Processing |[6/20] Processing /[6/20] Processing -[6/20] Processing \[6/20] Processing |[6/20] Processing /[6/20] Processing -[6/20] Processing \[6/20] Processing |[6/20] Processing /[6/20] Processing -[6/20] Processing \[6/20] Processing |[6/20] Processing /[6/20] Processing -[6/20] Processing \[6/20] Processing |[6/20] Processing /[6/20] Processing -[6/20] Processing \[6/20] Processing |[6/20] Processing /[6/20] Processing -[6/20] Processing \[6/20] Processing |[6/20] Processing /[6/20] Processing -[6/20] Processing \[6/20] Processing |[6/20] Processing /[6/20] Processing -[6/20] Processing \[6/20] Processing |[6/20] Processing /[6/20] Processing -[6/20] Processing \[6/20] Processing |[6/20] Processing /[6/20] Processing -[6/20] Processing \[6/20] Processing |[6/20] Processing /[6/20] Processing -[6/20] Processing \[6/20] Processing |[6/20] Processing /[6/20] Processing -                       [6/20] Q: What should a retail support team deploy first, and which KPI should they track first?
+[6/20] A: Start with support workflow automation for repetitive requests. Track first-response time as the first KPI.
+[6/20] status: attempts=2, fallback=True, elapsed=7.77s
+
+[7/20] Processing |[7/20] Processing /[7/20] Processing -[7/20] Processing \[7/20] Processing |[7/20] Processing /[7/20] Processing -[7/20] Processing \[7/20] Processing |[7/20] Processing /[7/20] Processing -[7/20] Processing \[7/20] Processing |[7/20] Processing /[7/20] Processing -[7/20] Processing \[7/20] Processing |[7/20] Processing /[7/20] Processing -[7/20] Processing \[7/20] Processing |[7/20] Processing /[7/20] Processing -[7/20] Processing \[7/20] Processing |[7/20] Processing /[7/20] Processing -[7/20] Processing \[7/20] Processing |[7/20] Processing /                       [7/20] Q: What should a banking operations team deploy first to improve traceability and efficiency?
+[7/20] A: Deploying A. Traceback software first will help improve traceability and efficiency by providing real-time visibility and compliance support. Cautions: This may not address all issues without additional tools.
+[7/20] status: attempts=2, fallback=False, elapsed=3.09s
+
+[8/20] Processing |[8/20] Processing /[8/20] Processing -[8/20] Processing \[8/20] Processing |[8/20] Processing /[8/20] Processing -[8/20] Processing \[8/20] Processing |[8/20] Processing /[8/20] Processing -[8/20] Processing \[8/20] Processing |[8/20] Processing /[8/20] Processing -[8/20] Processing \[8/20] Processing |[8/20] Processing /[8/20] Processing -[8/20] Processing \[8/20] Processing |[8/20] Processing /[8/20] Processing -[8/20] Processing \[8/20] Processing |[8/20] Processing /[8/20] Processing -[8/20] Processing \[8/20] Processing |[8/20] Processing /[8/20] Processing -[8/20] Processing \[8/20] Processing |[8/20] Processing /[8/20] Processing -[8/20] Processing \[8/20] Processing |[8/20] Processing /[8/20] Processing -[8/20] Processing \[8/20] Processing |[8/20] Processing /[8/20] Processing -[8/20] Processing \[8/20] Processing |[8/20] Processing /[8/20] Processing -                       [8/20] Q: How should a BPO support center start with automation, and what first metric should they monitor?
+[8/20] A: Start with automation by automating repetitive tasks and then monitor response time as your initial KPI. Track resolution time too initially to gauge improvements. As well, follow up on user feedback periodically for refinement. Keep adjusting parameters according to available data. Monitor continuously until finding the sweet spot balancing efficiency with human oversight. Automation should be a gradual process involving refined monitoring.
+[8/20] status: attempts=2, fallback=False, elapsed=4.86s
+
+[9/20] Processing |[9/20] Processing /[9/20] Processing -[9/20] Processing \[9/20] Processing |[9/20] Processing /[9/20] Processing -[9/20] Processing \[9/20] Processing |[9/20] Processing /[9/20] Processing -[9/20] Processing \[9/20] Processing |[9/20] Processing /[9/20] Processing -[9/20] Processing \[9/20] Processing |[9/20] Processing /[9/20] Processing -[9/20] Processing \[9/20] Processing |[9/20] Processing /[9/20] Processing -[9/20] Processing \[9/20] Processing |[9/20] Processing /[9/20] Processing -[9/20] Processing \[9/20] Processing |[9/20] Processing /[9/20] Processing -[9/20] Processing \[9/20] Processing |[9/20] Processing /[9/20] Processing -[9/20] Processing \[9/20] Processing |[9/20] Processing /[9/20] Processing -                       [9/20] Q: Give a concise comparison between Coversaction AI and Opira AI without inventing unconfirmed details.
+[9/20] A: This detail is not confirmed in available information. Please verify with Synapse Tech.
+[9/20] status: attempts=2, fallback=True, elapsed=4.03s
+
+[10/20] Processing |[10/20] Processing /[10/20] Processing -[10/20] Processing \[10/20] Processing |[10/20] Processing /[10/20] Processing -[10/20] Processing \[10/20] Processing |[10/20] Processing /[10/20] Processing -[10/20] Processing \[10/20] Processing |[10/20] Processing /[10/20] Processing -[10/20] Processing \[10/20] Processing |                        [10/20] Q: Do you provide public SLA guarantees and exact uptime commitments?
+[10/20] A: Yes. Our SLA is non-negotiable and ensures that your cloud infrastructure is built with enterprise-grade security, compliance, and scalability. We will not compromise our commitment to deliver a secure, reliable, and scalable environment.
+[10/20] status: attempts=1, fallback=False, elapsed=1.76s
+
+[11/20] Processing |[11/20] Processing /[11/20] Processing -[11/20] Processing \[11/20] Processing |[11/20] Processing /[11/20] Processing -[11/20] Processing \[11/20] Processing |[11/20] Processing /[11/20] Processing -[11/20] Processing \[11/20] Processing |[11/20] Processing /[11/20] Processing -[11/20] Processing \[11/20] Processing |[11/20] Processing /[11/20] Processing -[11/20] Processing \[11/20] Processing |[11/20] Processing /[11/20] Processing -[11/20] Processing \[11/20] Processing |[11/20] Processing /[11/20] Processing -[11/20] Processing \[11/20] Processing |[11/20] Processing /[11/20] Processing -[11/20] Processing \[11/20] Processing |[11/20] Processing /[11/20] Processing -[11/20] Processing \[11/20] Processing |                        [11/20] Q: What security certifications are explicitly confirmed in available information?
+[11/20] A: This detail is not confirmed in available information. Please verify with Synapse Tech.
+[11/20] status: attempts=2, fallback=True, elapsed=3.82s
+
+[12/20] Processing |[12/20] Processing /[12/20] Processing -[12/20] Processing \[12/20] Processing |[12/20] Processing /[12/20] Processing -[12/20] Processing \[12/20] Processing |[12/20] Processing /[12/20] Processing -[12/20] Processing \[12/20] Processing |[12/20] Processing /[12/20] Processing -[12/20] Processing \[12/20] Processing |[12/20] Processing /[12/20] Processing -[12/20] Processing \[12/20] Processing |[12/20] Processing /[12/20] Processing -[12/20] Processing \[12/20] Processing |[12/20] Processing /[12/20] Processing -[12/20] Processing \[12/20] Processing |[12/20] Processing /[12/20] Processing -[12/20] Processing \[12/20] Processing |[12/20] Processing /[12/20] Processing -[12/20] Processing \[12/20] Processing |[12/20] Processing /[12/20] Processing -[12/20] Processing \[12/20] Processing |[12/20] Processing /[12/20] Processing -[12/20] Processing \[12/20] Processing |[12/20] Processing /[12/20] Processing -[12/20] Processing \                        [12/20] Q: Can you provide confirmed roadmap release dates for upcoming features?
+[12/20] A: This detail is not confirmed in available information. Please verify with Synapse Tech.
+[12/20] status: attempts=2, fallback=True, elapsed=4.97s
+
+[13/20] Processing |[13/20] Processing /[13/20] Processing -[13/20] Processing \                        [13/20] Q: If user asks for customer logos and references, what is the safe factual response?
+[13/20] A: This detail is not confirmed in available information. Please verify with Synapse Tech.
+[13/20] status: attempts=1, fallback=True, elapsed=0.42s
+
+[14/20] Processing |[14/20] Processing /[14/20] Processing -[14/20] Processing \[14/20] Processing |[14/20] Processing /[14/20] Processing -[14/20] Processing \[14/20] Processing |[14/20] Processing /[14/20] Processing -[14/20] Processing \[14/20] Processing |[14/20] Processing /[14/20] Processing -[14/20] Processing \[14/20] Processing |[14/20] Processing /[14/20] Processing -[14/20] Processing \[14/20] Processing |[14/20] Processing /[14/20] Processing -[14/20] Processing \[14/20] Processing |[14/20] Processing /[14/20] Processing -[14/20] Processing \[14/20] Processing |[14/20] Processing /[14/20] Processing -                        [14/20] Q: How should the assistant respond when asked for unsupported legal guarantees?
+[14/20] A: No fixed ROI percentage can be guaranteed. Outcomes depend on implementation scope, execution, and adoption.
+[14/20] status: attempts=2, fallback=True, elapsed=3.20s
+
+[15/20] Processing |[15/20] Processing /[15/20] Processing -[15/20] Processing \[15/20] Processing |[15/20] Processing /[15/20] Processing -[15/20] Processing \[15/20] Processing |[15/20] Processing /[15/20] Processing -[15/20] Processing \[15/20] Processing |[15/20] Processing /[15/20] Processing -[15/20] Processing \[15/20] Processing |[15/20] Processing /[15/20] Processing -[15/20] Processing \[15/20] Processing |[15/20] Processing /[15/20] Processing -[15/20] Processing \[15/20] Processing |[15/20] Processing /[15/20] Processing -[15/20] Processing \[15/20] Processing |[15/20] Processing /[15/20] Processing -[15/20] Processing \[15/20] Processing |[15/20] Processing /                        [15/20] Q: How should the assistant respond when asked for unsupported compliance claims?
+[15/20] A: Do not invent details or claim unknowns are confirmed. Align with available information and clearly state known limitations. Final option: C
+[15/20] status: attempts=2, fallback=False, elapsed=3.51s
+
+[16/20] Processing |[16/20] Processing /[16/20] Processing -[16/20] Processing \[16/20] Processing |[16/20] Processing /[16/20] Processing -[16/20] Processing \[16/20] Processing |[16/20] Processing /[16/20] Processing -[16/20] Processing \[16/20] Processing |[16/20] Processing /[16/20] Processing -[16/20] Processing \[16/20] Processing |[16/20] Processing /[16/20] Processing -[16/20] Processing \[16/20] Processing |[16/20] Processing /[16/20] Processing -[16/20] Processing \[16/20] Processing |[16/20] Processing /[16/20] Processing -[16/20] Processing \                        [16/20] Q: In one sentence, what response style should this assistant follow by default?
+[16/20] A: Relevant material found: None
+The user asks for a neutral and factual response aligned with available information. No additional details or examples are requested. The goal is to provide a standard response that avoids fluff and focuses on the task at hand. No external sources nor specific features of other products are used in the response.
+[16/20] status: attempts=2, fallback=False, elapsed=2.89s
+
+[17/20] Processing |[17/20] Processing /[17/20] Processing -[17/20] Processing \[17/20] Processing |[17/20] Processing /[17/20] Processing -[17/20] Processing \[17/20] Processing |[17/20] Processing /[17/20] Processing -[17/20] Processing \[17/20] Processing |[17/20] Processing /[17/20] Processing -[17/20] Processing \[17/20] Processing |[17/20] Processing /[17/20] Processing -[17/20] Processing \[17/20] Processing |[17/20] Processing /[17/20] Processing -                        [17/20] Q: Should responses include template/meta phrases like "Answer:" or "According to the article"?
+[17/20] A: If a feature is not confirmed, state it as unconfirmed and do not guess.
+[17/20] status: attempts=2, fallback=True, elapsed=2.37s
+
+[18/20] Processing |[18/20] Processing /[18/20] Processing -[18/20] Processing \[18/20] Processing |[18/20] Processing /[18/20] Processing -[18/20] Processing \[18/20] Processing |[18/20] Processing /[18/20] Processing -[18/20] Processing \[18/20] Processing |[18/20] Processing /[18/20] Processing -[18/20] Processing \[18/20] Processing |[18/20] Processing /[18/20] Processing -[18/20] Processing \[18/20] Processing |[18/20] Processing /[18/20] Processing -[18/20] Processing \[18/20] Processing |[18/20] Processing /[18/20] Processing -[18/20] Processing \                        [18/20] Q: When information is missing, what are three things the assistant must avoid?
+[18/20] A: If a feature is not confirmed, state it as unconfirmed and do not guess.
+[18/20] status: attempts=2, fallback=True, elapsed=2.89s
+
+[19/20] Processing |[19/20] Processing /[19/20] Processing -[19/20] Processing \[19/20] Processing |[19/20] Processing /[19/20] Processing -[19/20] Processing \[19/20] Processing |[19/20] Processing /[19/20] Processing -[19/20] Processing \[19/20] Processing |[19/20] Processing /[19/20] Processing -[19/20] Processing \[19/20] Processing |[19/20] Processing /[19/20] Processing -[19/20] Processing \[19/20] Processing |[19/20] Processing /[19/20] Processing -[19/20] Processing \                        [19/20] Q: How should you answer “Which plan should I buy?” when pricing and plan details are not publicly confirmed?
+[19/20] A: Public pricing details are not confirmed in available information. Please request an official quote from Synapse Tech.
+[19/20] status: attempts=2, fallback=True, elapsed=2.47s
+
+[20/20] Processing |[20/20] Processing /[20/20] Processing -[20/20] Processing \[20/20] Processing |[20/20] Processing /[20/20] Processing -[20/20] Processing \[20/20] Processing |[20/20] Processing /[20/20] Processing -[20/20] Processing \[20/20] Processing |[20/20] Processing /[20/20] Processing -[20/20] Processing \[20/20] Processing |[20/20] Processing /[20/20] Processing -[20/20] Processing \[20/20] Processing |[20/20] Processing /[20/20] Processing -[20/20] Processing \                        [20/20] Q: Provide a short, factual recommendation for a company with repetitive manual workflows and low process visibility.
+[20/20] A: Share the specific features you believe will improve automation in their existing systems. Additionally, explain how these features can be customized to provide transparency and audit trails.
+Feature 1: Integration with external APIs 
+This feature allows businesses to access API's that are not currently integrated into their existing processes. By integrating with external APIs, this company can automate manual workflows and streamline communication between the different departments. With transparent logs of every request made through these APIs, auditable audits will be more accurate and up-to-date.
+[20/20] status: attempts=1, fallback=False, elapsed=2.49s
+
+============================================================
+Batch Summary
+============================================================
+Questions: 20
+Fallbacks: 12
+Average time/question: 3.09s
+
+You: 

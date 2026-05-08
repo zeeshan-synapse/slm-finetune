@@ -1,0 +1,8 @@
+{
+  "total_prompts_run": 60,
+  "prompt_set_size": 20,
+  "repeat": 3,
+  "clean_first_pass": 11,
+  "retries": 49,
+  "fallbacks": 38
+}

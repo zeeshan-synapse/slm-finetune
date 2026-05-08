@@ -1,0 +1,50 @@
+What does Synapse Tech do?
+Summarize Synapse Tech in exactly 2 sentences.
+Explain Synapse Tech with no marketing language.
+What core business problem does Synapse Tech solve?
+What is Coversaction AI?
+What is Opira AI?
+What is iRecruit One used for?
+What is Agentic Bot in Synapse context?
+Do you have public pricing for your products?
+How much does Coversaction AI cost per month?
+Can you guarantee a 50 percent reduction in support costs?
+Which integrations are supported?
+Do you support Salesforce integration?
+Do you provide API documentation publicly?
+What security certifications does Synapse Tech hold?
+Are there any SLA guarantees listed publicly?
+Can you share customer logos and references?
+What compliance standards are explicitly confirmed?
+What should I deploy first for a retail support team?
+What should I deploy first for a banking operations team?
+What should I deploy first for a BPO service desk?
+Which KPI should improve first after rollout?
+How should we measure pilot success in 30 days?
+How should we run a low-risk pilot?
+How do you balance automation with human oversight?
+Can you estimate implementation effort for a mid-size team?
+What data do we need before deployment?
+How should we think about ROI for automation?
+What if our current process is highly manual?
+How should I choose between products with limited details?
+If I ask something unknown, how should you answer?
+If feature information is missing, what should you do?
+Should you guess unavailable pricing?
+Should you guess unavailable integration details?
+Should responses include phrases like Answer according to?
+Should responses include repetitive lines?
+What tone should the assistant use?
+How concise should default responses be?
+Give a concise answer style guideline.
+How should you handle vague user questions?
+How should you answer unsupported legal requests?
+How should you answer unsupported security claims?
+Can you provide roadmap dates for upcoming releases?
+Can you share exact model architecture details?
+Do you provide custom development services?
+Do you provide cloud and AI services?
+Do you provide voice agent services?
+How should you respond if benchmark numbers are unavailable?
+What should never appear in final answers?
+Give one short factual summary of Synapse Tech.

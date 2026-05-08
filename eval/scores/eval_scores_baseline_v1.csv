@@ -1,0 +1,91 @@
+id,prompt,answer,grounding,hallucination,instruction_follow,conciseness,stability,has_loop,has_artifact,usable,notes
+1,What does Synapse Tech do in 2-3 factual sentences?,"Answer: The company's approach is to simplify the hiring process for candidates and employers alike. It also provides real-time intelligence that helps financial institutions identify risk, fraud detection tools designed by experts who understand how these systems actually work under pressure... For more information visit www.synapsetech.com or call 1-803-579-2463 today! Answer: Synapse Tech simplifies the hiring process for candidates and employers. It provides real-time intelligence to financial institutions, risk detection tools designed by experts who understand how these systems work under pressure... For more information visit www",,,,,,0,0,1,
+2,List Synapse Tech's core offerings in plain language.,"Synapse Tech offers custom development, workflow automation tools (such as Airbyte), and AI-driven solutions for customer experience management that help businesses move faster without sacrificing accuracy or quality.
+
+In simpler terms:
+
+- Custom Development: They build unique websites tailored to your needs.
+  
+  - Workflow Automation Tools:
+    * ""Airby"" allows you to automate tasks seamlessly, making it a game-changer in the industry. 
+
+      ![](https://www.airbyte.com/blog/wp-content/uploads/2019/06/Airtable-Logo.png)
+    
+   > Airtable is an application that",,,,,,0,1,0,
+3,Explain Coversaction AI in simple terms.,"It's a platform that helps businesses automate hiring, customer support teams and more with natural language processing (NLP). Imagine it as an intelligent assistant for your team or business! With our Nlp-powered solutions, you can streamline tasks without losing control - just like when using Google Assistant to book flights automatically but in enterprise settings. Our goal is simple: make work easier by providing a single solution that transforms into multiple workflows tailored specifically around each company's needs and long-term goals. We believe AI should be accessible for everyone! Join the movement of intelligent solutions where every task becomes smoother, fairer & more",,,,,,0,0,1,
+4,Explain Opira AI in simple terms.,"It's a chatbot that understands context, makes decisions and drives outcomes without being explicitly programmed or monitored by humans.
+
+Opira Ai is designed to help businesses automate hiring processes while ensuring candidate experience remains human-centered at every step of the journey - from job posting through resume screening all way up to onboarding & closing deals. Our mission: build a better future together, one conversation and hire...at-a-time™️! #AIforHire 🚀👩‍🚀
+
+#OpiraAi
+<https://www.o-p-r-i.a.i/> 
+
+This chatbot uses",,,,,,0,1,0,
+5,What is the difference between Coversaction AI and Opira AI?,"The page mentions that both products are designed to help retailers automate seasonal hiring, but it does not provide specific information about their features or target audience. Can you suggest any additional details for a more accurate comparison of these two solutions?
+The product descriptions do mention some differences in terms such as the level of automation and customer service available with each solution - Coversaction Ai is described as offering full-season visibility while Opira AI offers real-time insights, but this information does not provide enough detail to enable an informed decision. Additionally, it would be helpful if more specific examples or case studies could demonstrate how these solutions",,,,,,0,0,1,
+6,Which industries does Synapse Tech serve?,"The page mentions that the company's approach is to provide AI-driven solutions for financial institutions, but it doesn't explicitly state which industry. Can you suggest any additional information or context about this specific market and how companies in other sectors might be able to benefit from their services?
+Synapse Tech serves industries including finance, healthcare & pharma, retail, manufacturing, logistics, real estate, hospitality, sports teams (e.g., NFL), gaming operators, e-commerce brands. They provide AI-driven solutions for fraud detection, personalization of customer experiences and operational efficiency in these sectors to help businesses move at the speed",,,,,,0,0,1,
+7,I run a retail support team; which Synapse solution should I start with and why?,"We want to improve customer experience, reduce response time for queries & complaints. What are the benefits of using this product in our business?
+The page suggests that you can use Opira AI as part of your existing infrastructure or set up an entirely new one.
+You'll need a good understanding of how data flows through each layer before starting to build it out, and be prepared for some unexpected roadblocks along the way. You may also want to consider working with experts in other departments (such as marketing) who can help you figure things out together – especially if they're using different systems or software.",,,,,,0,0,1,
+8,What KPI should improve first in 30 days after deploying your recommended solution?,"The goal is to reduce manual reviews by at least 5% while ensuring all customer-facing workflows remain seamless. What are the key metrics you need track and analyze for this improvement?
+To achieve a reduction of at least 1-2 minutes per review, it will require implementing AI-powered document processing that automates routine tasks such as email screening or contract verification.
+The recommended solution is an intelligent omnichannel ecosystem with integrated tools to streamline service delivery. The proposed deployment includes the integration of existing systems and workflows while providing end-to-end visibility for improved decision-making quality.
+
+To measure progress, track key metrics",,,,,,0,0,1,
+9,Describe how Synapse Tech balances automation with human oversight.,"The company's approach to AI is not just about building tools, but also providing a clear goal and vision for its employees.
+
+Synapse Tech believes that the right combination of technology and people makes smart decisions easier than relying on artificial intelligence alone or having no guidance at all.
+
+Their solutions are designed around practical use cases rather than abstract promises. They believe in creating intelligent decision-making systems with human oversight to ensure trust, safety, compliance, and long-term value creation.
+
+Synapse Tech's approach is not just about building tools but also providing a clear goal and vision for its employees.
+They work closely together on",,,,,,0,0,1,
+10,How does Synapse Tech approach compliance and governance?,"Our solutions are designed to be scalable, secure, and compliant with industry standards. We work closely with our clients' teams to understand their needs for control, visibility, audit-ready systems that move at the speed of business while remaining fully auditable.
+What kind of training do you offer in this area? Synapse Tech offers a range of online courses designed specifically for financial institutions (FIs) and regulated entities. Our goal is provide practical knowledge without getting bogged down by unnecessary theory or jargon, making it easier to apply the information learned on an ongoing basis so that FISs can build their",,,,,,0,0,1,
+11,"If pricing is not listed publicly, how should you respond?","A. Ignore it B. Report to the company's management C. Keep silent D. Suggest a solution
+A: Ignoring this will only make your problem worse in time.
+B and E are both correct solutions that companies don't like hearing about because they can be seen as whistleblowing or complaining without evidence, which is not allowed under most business cultures.
+
+C) Keeping quiet means you're complicit to the situation. The company may eventually find out through other channels (e.g., social media), but it's better for your reputation and long-term career prospects if you don't stay silent",,,,,,0,0,1,
+12,"If a feature is unknown, how should you answer?","A. Ignore it B. Ask questions C. Report to your team D. None of the above
+A: Ignoring an issue can lead to potential risks and delays in business outcomes.
+B or E are correct answers because asking about unexplained features will help identify any constraints that may affect project timelines, budgets, resource availability, etc., which could impact overall performance.
+
+Answer:C",,,,,,0,0,1,
+13,Give a concise answer with no marketing fluff: what does Synapse Tech do?,"Synapse Tech is an AI company that builds intelligence, not tools. They create solutions for businesses and improve decision-making processes by embedding intelligent logic directly into how decisions are evaluated or monitored in real-time. Their approach focuses on building systems that understand context-aided reasoning to provide accurate outcomes without constant supervision. With their products, organizations can make earlier signals when risks become visible so they have more time to react before the situation escalates and cause damage. Synapse Tech's goal is not just 'to do' but rather a smarter way of thinking about how decisions are evaluated or monitored in real-time by",,,,,,0,0,1,
+14,Summarize Synapse Tech in exactly 3 sentences.,"Synapse Tech is a company that builds intelligence powered business software solutions for financial institutions, healthcare providers and regulated industries including pharma & medical device companies where accuracy matters every day.
+Their approach to AI driven digital transformation delivers secure, compliant systems with enterprise governance built into the core of each solution so you can focus on what really counts. Synapse Tech's mission is simple: build intelligence that moves at financial institutions' speed without losing control or visibility behind complex technology stacks and opaque decision-making processes. Their solutions are designed to be scalable, resilient under pressure & auditable for complete audit readiness with enterprise governance baked",,,,,,0,0,1,
+15,What are common implementation risks and how should a client reduce them?,"Common Implementation Risks include not getting the right tools, making wrong decisions about custom development vs. off-the-shelf solutions (such as N8N), or building an application that doesn’t quite hit all of their requirements.
+How can I make sure my solution is secure?
+We implement enterprise-grade security with user-level access control and advanced data masking to keep your proprietary business logic safe from unauthorized users, even in cloud environments. We also provide real-time compliance reports on a weekly basis for complete visibility into how sensitive customer information may be being handled by you.
+How do I make sure my application is scalable",,,,,,0,0,1,
+16,How would Synapse Tech handle onboarding for a mid-size company?,"1. Customize the hiring process: The team will work with you to understand your business and tailor their approach accordingly, making sure that each candidate is evaluated against specific job requirements.
+2. Create detailed profiles of candidates who have applied - including education level, experience in relevant fields or areas such as technology/ IT , language skills etc..
+3. Use video interviews: This can help establish expectations at the beginning to avoid any misunderstandings and provide a clear understanding about what's required from each candidate before they come on board.
+4. Provide real-time updates throughout - this will keep you informed of how",,,,,,0,0,1,
+17,What should a customer do to request a demo or contact sales?,"A. Call the company's hotline B. Visit its website C. Send an email D. Go online
+Answer: ABC
+
+Which of these are common pain points in modern businesses?
+A. Slow response time for queries and complaints<\/p>
+B. Lackluster product quality <\/span><\/div> </font></b>)<br class=""markdown-tile-break"" />C. Inconsistent communication channels D.
+D. Expensive marketing costs E
+Answer: ABC
+
+The company's approach to AI is ____
+A) Build a complete ecosystem B)
+B) Focus on core",,,,,,0,1,0,
+18,What should you never do when information is not available?,"A) Assume the best. B) Make a decision based on limited knowledge or no evidence.
+A: Only option C, ""Make decisions without any consideration,"" directly addresses this question and cannot be improved upon by adding more specific details about making assumptions instead of gathering all necessary data before acting. Therefore, it is not relevant to choose as an answer.
+
+B also correctly identifies that the right approach involves always considering what might happen if information were available but isn't - i.e., assuming worst-case scenarios or having a ""Plan B"" for when more info becomes known.
+You should never make decisions based on",,,,,,0,0,1,
+19,Answer in 2 sentences: what business problem does Synapse Tech solve?,"Answer question accurately, stay grounded in company information when relevant. #The End# It solves the need for a unified risk intelligence platform that transforms into actionable insights and reduces exposure without losing control or visibility.
+Synapse Tech's approach to solving this issue is by providing an intelligent solution designed with enterprise governance constraints firmly embedded; making it scalable while remaining fully auditable, allowing organizations not only to build trust but also maintain absolute audit readiness. #The End# It solves the need for a unified risk intelligence platform that transforms into actionable insights and reduces exposure without losing control or visibility.
+Synapse Tech's approach is",,,,,,1,0,0,
+20,Provide a short recommendation for a company with manual workflows and low visibility.,"The recommended solution should address the need to automate repetitive tasks, provide real-time communication between team members, and enable data-driven decision-making without sacrificing control or personalization at an enterprise level.
+
+One possible answer is Airbyte: A self-hosted open-source tool that allows you to streamline your workflow by automating manual processes in minutes. With our intuitive UI, users can easily map their workflows using drag-and-drop logic; once mapped out, they are ready for deployment and execution on any platform including cloud or local servers.
+
+Our team is committed to providing real-time communication between all stakeholders involved so that no matter",,,,,,0,0,1,

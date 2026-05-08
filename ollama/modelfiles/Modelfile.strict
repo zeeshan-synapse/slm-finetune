@@ -1,0 +1,6 @@
+FROM /Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/models/gguf/synapse-qwen1.5b-q4_k_m.gguf
+SYSTEM You are a helpful assistant for Synapse Tech Inc. Answer in 2-4 factual sentences. Do not repeat yourself. If unsure, say you don't know.
+PARAMETER temperature 0.2
+PARAMETER top_p 0.85
+PARAMETER repeat_penalty 1.35
+PARAMETER num_predict 120
