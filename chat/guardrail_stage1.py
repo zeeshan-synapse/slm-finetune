@@ -59,6 +59,14 @@ ARTIFACT_LEAK_PATTERNS = [
     r"\b[a-d]\)\s",
     r"\ba:\s.*\bb:\s",
     r"\bquestion:\s",
+    r"according to the page",
+    r"according to the report",
+    r"which statement is correct",
+    r"learn more here",
+    r"sign up today",
+    r"answer questions accurately",
+    r"stay grounded",
+    r"natural conversational tone",
 ]
 
 
@@ -223,7 +231,70 @@ def is_cert_compliance_question(question: str) -> bool:
 
 def is_legal_question(question: str) -> bool:
     low_q = question.lower()
-    return contains_any(low_q, ["legal", "liability", "contractual", "guarantee", "warranty"])
+    return contains_any(low_q, ["legal", "liability", "contractual", "warranty", "indemn", "terms"])
+
+
+def is_outcome_guarantee_question(question: str) -> bool:
+    low_q = question.lower()
+    guarantee_signal = contains_any(low_q, ["guarante", "promise"])
+    outcome_signal = contains_any(
+        low_q,
+        [
+            "roi",
+            "return on investment",
+            "return rate",
+            "support cost",
+            "support costs",
+            "cost reduction",
+            "productivity",
+            "percentage",
+            "percent",
+            "reduction",
+            "outcome",
+            "3 months",
+            "90 days",
+            "deadline",
+        ],
+    )
+    return guarantee_signal and outcome_signal
+
+
+def mentions_specific_integration_name(text: str) -> bool:
+    return contains_any(
+        text,
+        [
+            "salesforce",
+            "hubspot",
+            "zapier",
+            "google drive",
+            "workday",
+            "sap",
+            "crm",
+            "api endpoint",
+            "rest api",
+        ],
+    )
+
+
+def is_general_integration_list_question(question: str) -> bool:
+    low_q = question.lower()
+    return "integration" in low_q and contains_any(
+        low_q,
+        [
+            "which integrations",
+            "what integrations",
+            "integration list",
+            "integrations are explicitly supported",
+            "integrations are explicitly confirmed",
+        ],
+    )
+
+
+def is_specific_integration_question(question: str) -> bool:
+    low_q = question.lower()
+    if mentions_specific_integration_name(low_q):
+        return True
+    return "integration" in low_q and not is_general_integration_list_question(question)
 
 
 def is_small_talk_question(question: str) -> bool:
@@ -339,6 +410,185 @@ def policy_response(intent: str) -> str:
     return "If information is not confirmed, state it as unconfirmed and do not guess."
 
 
+def ops_intent(question: str) -> str | None:
+    low_q = question.strip().lower()
+    if contains_any(low_q, ["retail support team"]) and asks_for_metric(question):
+        return "retail_deploy_and_kpi"
+    if contains_any(low_q, ["retail support team"]):
+        return "retail_first_deploy"
+    if contains_any(low_q, ["bpo support center", "bpo support centre"]) and asks_for_metric(question):
+        return "bpo_deploy_and_kpi"
+    if contains_any(low_q, ["banking operations team", "banking operations"]):
+        return "banking_first_deploy"
+    if contains_any(low_q, ["bpo service desk", "bpo support center", "bpo support centre"]):
+        return "bpo_first_deploy"
+    if contains_any(low_q, ["which kpi should improve first", "which kpi should improve"]):
+        return "first_kpi"
+    if contains_any(low_q, ["pilot success in 30 days", "measure pilot success in 30 days"]):
+        return "pilot_success_30"
+    if contains_any(low_q, ["low-risk pilot", "low risk pilot"]):
+        return "low_risk_pilot"
+    if contains_any(low_q, ["balance automation with human oversight", "automation with human oversight"]):
+        return "automation_human_oversight"
+    if contains_any(low_q, ["estimate implementation effort", "implementation effort for a mid-size team", "implementation effort for a mid size team"]):
+        return "implementation_effort"
+    if contains_any(low_q, ["what data do we need before deployment", "data do we need before deployment"]):
+        return "data_before_deployment"
+    if contains_any(low_q, ["think about roi for automation", "roi for automation"]):
+        return "roi_framework"
+    if contains_any(low_q, ["current process is highly manual", "process is highly manual"]):
+        return "highly_manual_process"
+    if contains_any(low_q, ["choose between products with limited details", "products with limited details"]):
+        return "limited_product_choice"
+    return None
+
+
+def ops_response(intent: str) -> str:
+    if intent == "retail_first_deploy":
+        return "Start with support workflow automation for repetitive customer requests."
+    if intent == "retail_deploy_and_kpi":
+        return (
+            "Start with support workflow automation for repetitive customer requests. "
+            "Track first-response time as the first KPI."
+        )
+    if intent == "banking_first_deploy":
+        return "Start with a repetitive approval or document workflow where auditability matters."
+    if intent == "bpo_first_deploy":
+        return "Start with ticket triage or status-update automation for high-volume repetitive requests."
+    if intent == "bpo_deploy_and_kpi":
+        return (
+            "Start with ticket triage or status-update automation for high-volume repetitive requests. "
+            "Track first-response time first."
+        )
+    if intent == "first_kpi":
+        return (
+            "First-response time usually improves first after rollout because it reflects faster routing and less manual handling. "
+            "Then track resolution time and error rate against the baseline."
+        )
+    if intent == "pilot_success_30":
+        return (
+            "Measure pilot success against a pre-pilot baseline using first-response time, resolution time, error rate, and adoption. "
+            "Pick one workflow and set a target improvement you can verify within 30 days."
+        )
+    if intent == "low_risk_pilot":
+        return (
+            "Start with one narrow high-volume workflow, keep human review for exceptions, and compare results against a baseline. "
+            "Expand only after the first KPI trend is stable."
+        )
+    if intent == "automation_human_oversight":
+        return (
+            "Automate repetitive decisions and keep humans on exceptions, approvals, and high-impact cases. "
+            "That preserves speed while maintaining accountability."
+        )
+    if intent == "implementation_effort":
+        return (
+            "Estimate effort as a range based on scope, integrations, data readiness, and review requirements. "
+            "For a mid-size team, start with a small pilot rather than a fixed delivery promise."
+        )
+    if intent == "data_before_deployment":
+        return (
+            "Gather the current workflow steps, source documents, decision rules, exception paths, and system touchpoints. "
+            "Capture baseline metrics too so you can measure impact after deployment."
+        )
+    if intent == "roi_framework":
+        return (
+            "Think about ROI in terms of time saved, error reduction, throughput, and service quality against a baseline. "
+            "Use a measurement framework rather than assuming a fixed percentage outcome."
+        )
+    if intent == "highly_manual_process":
+        return (
+            "If the current process is highly manual, map the highest-volume repetitive steps and automate one workflow first. "
+            "Measure cycle time and error rate before expanding."
+        )
+    if intent == "limited_product_choice":
+        return (
+            "Choose based on the confirmed use case, required channels, and governance needs. "
+            "If important details are missing, treat them as unconfirmed and verify them before deciding."
+        )
+    return (
+        "Start with one narrow repetitive workflow, define a baseline, and measure the first KPI you expect to improve. "
+        "Expand only after the result is stable."
+    )
+
+
+def general_integration_response() -> str:
+    return (
+        "Public pages mention tools and platforms such as Airbyte, n8n, Airtable, Vapi, Google Dialogflow, AWS, Azure, Workday, and SAP in specific service or product contexts. "
+        "A single exhaustive public integration list is not clearly published."
+    )
+
+
+def asks_for_metric(question: str) -> bool:
+    return contains_any(question.lower(), ["kpi", "metric", "measure", "track"])
+
+
+def asks_for_recommendation(question: str) -> bool:
+    return contains_any(
+        question.lower(),
+        [
+            "deploy first",
+            "start with",
+            "choose between",
+            "run a low-risk pilot",
+            "run a low risk pilot",
+            "balance automation",
+            "what if our current process",
+        ],
+    )
+
+
+def validate_ops_response(intent: str, answer: str) -> list[str]:
+    low_a = answer.lower()
+    reasons: list[str] = []
+
+    if "?" in answer:
+        reasons.append("ops_response_contains_question")
+
+    if intent in {"retail_first_deploy", "banking_first_deploy", "bpo_first_deploy", "retail_deploy_and_kpi", "bpo_deploy_and_kpi"}:
+        if not contains_any(low_a, ["automate", "automation", "workflow", "ticket", "triage", "approval", "document"]):
+            reasons.append("missing_deployment_recommendation")
+
+    if intent in {"retail_deploy_and_kpi", "bpo_deploy_and_kpi", "first_kpi"}:
+        if not contains_any(low_a, ["first-response time", "response time", "resolution time", "cycle time", "error rate"]):
+            reasons.append("missing_kpi_recommendation")
+
+    if intent == "pilot_success_30":
+        if not contains_any(low_a, ["baseline", "30 days", "adoption", "error rate", "resolution time", "first-response time", "metric"]):
+            reasons.append("missing_pilot_success_guidance")
+
+    if intent == "low_risk_pilot":
+        if not contains_any(low_a, ["baseline", "workflow", "human review", "exceptions", "expand"]):
+            reasons.append("missing_low_risk_pilot_guidance")
+
+    if intent == "automation_human_oversight":
+        if not contains_any(low_a, ["automate", "automation"]) or not contains_any(low_a, ["human", "review", "exceptions", "approvals"]):
+            reasons.append("missing_oversight_guidance")
+
+    if intent == "implementation_effort":
+        if not contains_any(low_a, ["range", "depends", "scope", "integrations", "data readiness", "resources", "pilot"]):
+            reasons.append("missing_effort_estimation_guidance")
+
+    if intent == "data_before_deployment":
+        if not contains_any(low_a, ["workflow", "documents", "decision rules", "exception", "system", "baseline"]):
+            reasons.append("missing_deployment_data_guidance")
+
+    if intent == "roi_framework":
+        if not contains_any(low_a, ["baseline", "time saved", "error reduction", "throughput", "quality", "measurement"]):
+            reasons.append("missing_roi_framework_guidance")
+
+    if intent == "highly_manual_process":
+        if not contains_any(low_a, ["manual", "workflow", "automate", "cycle time", "error rate"]):
+            reasons.append("missing_manual_process_guidance")
+        if contains_any(low_a, ["candidate", "resume", "hiring", "ats", "job board"]):
+            reasons.append("ops_response_off_topic_domain")
+
+    if intent == "limited_product_choice":
+        if not contains_any(low_a, ["use case", "confirmed", "verify", "unconfirmed", "details", "governance", "channels"]):
+            reasons.append("missing_product_choice_guidance")
+
+    return reasons
+
+
 def run_rule_checks(question: str, answer: str) -> list[str]:
     low_q = question.lower()
     low_a = answer.lower()
@@ -353,10 +603,16 @@ def run_rule_checks(question: str, answer: str) -> list[str]:
         r"follows from:",
         r"answer below",
         r"according to the article",
+        r"according to the page",
+        r"according to the report",
         r"answer:",
         r"note:",
         r"list the names of",
+        r"which statement is correct",
+        r"learn more here",
+        r"sign up today",
         r"https?://",
+        r"www\.",
         r"#\s*\w+",
         *ARTIFACT_LEAK_PATTERNS,
     ]
@@ -376,7 +632,7 @@ def run_rule_checks(question: str, answer: str) -> list[str]:
     ):
         failures.append("possible_pricing_hallucination")
 
-    if "integration" in low_q and (
+    if is_specific_integration_question(question) and (
         "airbyte" in low_a
         or "zapier" in low_a
         or "n8n" in low_a
@@ -448,6 +704,7 @@ def detect_output_shape_issues(question: str, answer: str) -> list[str]:
     low_a = normalized.lower()
     strict_mode = is_high_risk_question(question) or is_policy_question(question)
     max_sentences = 3 if strict_mode else 6
+    first_segment = re.split(r"(?<=[.!?])\s+|\n+", normalized, maxsplit=1)[0].strip()
 
     if not normalized:
         return ["empty_answer"]
@@ -455,8 +712,14 @@ def detect_output_shape_issues(question: str, answer: str) -> list[str]:
     if any(re.search(pattern, low_a) for pattern in ARTIFACT_LEAK_PATTERNS):
         issues.append("artifact_instruction_echo")
 
+    if "```" in normalized or "|" in normalized or "table:" in low_a:
+        issues.append("structured_artifact_echo")
+
     if sentence_count(normalized) > max_sentences:
         issues.append("too_verbose_shape_gate")
+
+    if first_segment.endswith("?"):
+        issues.append("answer_starts_with_question")
 
     # Disallow follow-up questions in answers unless explicitly requested by user.
     if "?" in normalized and "?" not in question:
@@ -464,6 +727,9 @@ def detect_output_shape_issues(question: str, answer: str) -> list[str]:
 
     if any(ord(ch) > 127 for ch in normalized):
         issues.append("non_ascii_artifact")
+
+    if re.search(r"(https?://|www\.|\+\d)", normalized):
+        issues.append("contact_or_link_artifact")
 
     if not re.search(r"[.!?]$", normalized):
         issues.append("unfinished_trailing_fragment")
@@ -477,12 +743,22 @@ def fallback_for_question(question: str) -> str:
     if intent is not None:
         return policy_response(intent)
 
+    ops_reasoning_intent = ops_intent(question)
+
+    if is_outcome_guarantee_question(question):
+        return (
+            "No fixed ROI percentage can be guaranteed. "
+            "Outcomes depend on implementation scope, execution, and adoption."
+        )
+
     if contains_any(low_q, ["pricing", "price", "cost", "quote"]):
         return (
             "Public pricing details are not confirmed in available information. "
             "Please request an official quote from Synapse Tech."
         )
-    if "integration" in low_q:
+    if is_general_integration_list_question(question):
+        return general_integration_response()
+    if is_specific_integration_question(question):
         return (
             "The integration list is not explicitly confirmed in available information. "
             "Please verify supported integrations with Synapse Tech."
@@ -502,15 +778,17 @@ def fallback_for_question(question: str) -> str:
             "Security certifications or compliance approvals are not explicitly confirmed in available information. "
             "Please verify these claims with Synapse Tech."
         )
+    if ops_reasoning_intent is not None:
+        return ops_response(ops_reasoning_intent)
     if is_legal_question(question):
         return (
             "Legal liability assurances are not confirmed in available information. "
             "Please obtain official contractual terms from Synapse Tech."
         )
-    if "roi" in low_q or ("return" in low_q and "investment" in low_q) or "guarante" in low_q:
+    if "roi" in low_q or ("return" in low_q and "investment" in low_q):
         return (
-            "No fixed ROI percentage can be guaranteed. "
-            "Outcomes depend on implementation scope, execution, and adoption."
+            "Think about ROI in terms of time saved, error reduction, throughput, and service quality against a baseline. "
+            "Use a measurement framework rather than assuming a fixed percentage outcome."
         )
     if is_policy_question(question):
         return "If a feature is not confirmed, state it as unconfirmed and do not guess."
@@ -532,14 +810,16 @@ def rule_first_decision(question: str, answer: str, rule_failures: list[str]) ->
         return False, [*rule_failures]
 
     pricing_question = contains_any(low_q, ["pricing", "price", "cost", "quote"])
-    integration_question = "integration" in low_q
-    roi_question = "roi" in low_q or ("return" in low_q and "investment" in low_q)
+    general_integration_question = is_general_integration_list_question(question)
+    specific_integration_question = is_specific_integration_question(question)
+    outcome_guarantee_question = is_outcome_guarantee_question(question)
     sla_question = is_sla_question(question)
     roadmap_question = is_roadmap_question(question)
     cert_compliance_question = is_cert_compliance_question(question)
     legal_question = is_legal_question(question)
     policy_question = is_policy_question(question)
     comparison_question = is_comparison_question(question)
+    ops_reasoning_intent = ops_intent(question)
 
     unknown_safe_phrases = [
         "not confirmed",
@@ -558,13 +838,36 @@ def rule_first_decision(question: str, answer: str, rule_failures: list[str]) ->
             return False, reasons
         return True, []
 
-    if integration_question:
+    if general_integration_question:
+        has_public_examples = contains_any(
+            low_a,
+            ["airbyte", "n8n", "airtable", "vapi", "dialogflow", "aws", "azure", "workday", "sap"],
+        )
+        has_list_limitation = contains_any(
+            low_a,
+            [
+                "not clearly published",
+                "not clearly listed",
+                "not exhaustive",
+                "single exhaustive public integration list",
+                "specific service or product contexts",
+            ],
+        )
+        if not has_public_examples:
+            reasons.append("missing_public_integration_examples")
+            return False, reasons
+        if not has_list_limitation:
+            reasons.append("missing_integration_list_limitation")
+            return False, reasons
+        return True, []
+
+    if specific_integration_question:
         if not contains_any(low_a, unknown_safe_phrases):
             reasons.append("missing_safe_unknown_integration_response")
             return False, reasons
         return True, []
 
-    if roi_question:
+    if outcome_guarantee_question:
         has_no_guarantee = any(
             re.search(p, low_a)
             for p in [
@@ -572,6 +875,7 @@ def rule_first_decision(question: str, answer: str, rule_failures: list[str]) ->
                 r"\bcannot\b[^.]{0,20}\bguarante",
                 r"\bcan not\b[^.]{0,20}\bguarante",
                 r"\bcan't\b[^.]{0,20}\bguarante",
+                r"\bno fixed\b[^.]{0,20}\bguarante",
             ]
         )
         if not has_no_guarantee:
@@ -615,6 +919,16 @@ def rule_first_decision(question: str, answer: str, rule_failures: list[str]) ->
         )
         if not has_legal_guard:
             reasons.append("missing_safe_unknown_legal_response")
+            return False, reasons
+        return True, []
+
+    if ops_reasoning_intent is not None:
+        if contains_any(low_a, unknown_safe_phrases):
+            reasons.append("fallback_on_ops_prompt")
+        reasons.extend(validate_ops_response(ops_reasoning_intent, answer))
+        if sentence_count(answer) > 3:
+            reasons.append("ops_response_too_long")
+        if reasons:
             return False, reasons
         return True, []
 
@@ -718,6 +1032,21 @@ def build_repair_prompt(user_input: str, bad_answer: str, reasons: list[str]) ->
     reason_text = ", ".join(reasons) if reasons else "quality_policy_violation"
     strict_mode = is_high_risk_question(user_input) or is_policy_question(user_input)
     max_sentences = 2 if strict_mode else 5
+    extra_rules: list[str] = []
+    if is_outcome_guarantee_question(user_input):
+        extra_rules.append(
+            "- For guarantee or ROI questions, use a direct no-guarantee statement and do not offer estimated return ranges."
+        )
+    ops_reasoning_intent = ops_intent(user_input)
+    if ops_reasoning_intent is not None:
+        extra_rules.append(
+            "- For rollout or advisory questions, give concrete operational guidance rather than saying details are unknown."
+        )
+    if asks_for_metric(user_input) and asks_for_recommendation(user_input):
+        extra_rules.append(
+            "- If the question asks for both a recommendation and a KPI or metric, answer both parts explicitly."
+        )
+    extra_rule_text = "\n".join(extra_rules)
     return f"""You must rewrite the answer to satisfy policy.
 
 Rules:
@@ -728,6 +1057,7 @@ Rules:
 - No hashtags, no meta text, no "Answer:" or "Note:", no self-questions, no extra topic drift.
 - Do not ask additional questions.
 - End immediately after the final sentence.
+{extra_rule_text}
 
 Question:
 {user_input}

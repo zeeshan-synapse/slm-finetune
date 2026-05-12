@@ -1,0 +1,217 @@
+
+============================================================
+QUESTION: what is opira ai
+============================================================
+============================================================
+KB Grounded Answer
+============================================================
+Question: what is opira ai
+Generation model: synapse-3b
+Embedding model: nomic-embed-text
+
+Opira Ai is an intelligent, offline LLM platform that eliminates data leakage entirely. With our solutions, enterprises can query sensitive documents, compare models, and automate AI workflows without sending a single byte to the cloud. Our private RAG engines are designed for regulated industries, field operations, and high-security environments, providing user prompt-to-response audit trails and protected risk analysis capabilities.
+
+============================================================
+Sources
+============================================================
+[1] Opira Ai (product)
+    chunk: product-opira-ai::chunk-001
+    score: 1.1917 (raw=0.4817)
+    url:   https://synapsetechinc.com/product/opira-ai
+
+[2] Opira Ai (product)
+    chunk: product-opira-ai::chunk-004
+    score: 1.1561 (raw=0.4461)
+    url:   https://synapsetechinc.com/product/opira-ai
+
+[3] Opira Ai (product)
+    chunk: product-opira-ai::chunk-005
+    score: 1.0708 (raw=0.4508)
+    url:   https://synapsetechinc.com/product/opira-ai
+
+
+============================================================
+QUESTION: what is iRecruit One
+============================================================
+============================================================
+KB Grounded Answer
+============================================================
+Question: what is iRecruit One
+Generation model: synapse-3b
+Embedding model: nomic-embed-text
+
+iRecruit One is an end-to-end hiring automation platform designed to streamline CV screening, reduce manual labor, and provide real-time insights. Its key features include automated resume parsing, job creation, and interview scheduling, enabling recruiters to focus on high-value tasks while ensuring every candidate gets a fair shot at being selected.
+
+============================================================
+Sources
+============================================================
+[1] iRecruit One (product)
+    chunk: product-irecruit-one::chunk-006
+    score: 1.5044 (raw=0.4344)
+    url:   https://synapsetechinc.com/product/irecruit-one
+
+
+============================================================
+QUESTION: what does Agentic Bot do
+============================================================
+============================================================
+KB Grounded Answer
+============================================================
+Question: what does Agentic Bot do
+Generation model: synapse-3b
+Embedding model: nomic-embed-text
+
+Agentic Bot is an intelligent chatbot that automates service delivery, reducing complexity and improving customer experience. With our agentic bot, enterprises can streamline their processes, standardize data, and reach users on platforms they already trust.
+
+============================================================
+Sources
+============================================================
+[1] Agentic Bot (product)
+    chunk: product-agentic-bot::chunk-004
+    score: 1.3199 (raw=0.4999)
+    url:   https://synapsetechinc.com/product/agentic-bot
+
+[2] Agentic Bot (product)
+    chunk: product-agentic-bot::chunk-001
+    score: 1.2931 (raw=0.4731)
+    url:   https://synapsetechinc.com/product/agentic-bot
+
+[3] Agentic Bot (product)
+    chunk: product-agentic-bot::chunk-005
+    score: 1.1902 (raw=0.4602)
+    url:   https://synapsetechinc.com/product/agentic-bot
+
+
+============================================================
+QUESTION: how can i contact synapse tech
+============================================================
+============================================================
+KB Grounded Answer
+============================================================
+Question: how can i contact synapse tech
+Generation model: synapse-3b
+Embedding model: nomic-embed-text
+
+This detail is not confirmed in the available information. Please verify with Synapse Tech.
+
+============================================================
+Sources
+============================================================
+[1] Contact Us (contact)
+    chunk: contact-us::chunk-001
+    score: 1.3811 (raw=0.6211)
+    url:   https://synapsetechinc.com/contact-us
+
+[2] Contact Us (contact)
+    chunk: contact-us::chunk-002
+    score: 1.2256 (raw=0.5056)
+    url:   https://synapsetechinc.com/contact-us
+
+
+============================================================
+QUESTION: what services does synapse offer
+============================================================
+============================================================
+KB Grounded Answer
+============================================================
+Question: what services does synapse offer
+Generation model: synapse-3b
+Embedding model: nomic-embed-text
+
+This detail is not confirmed in the available information. Please verify with Synapse Tech.
+
+============================================================
+Sources
+============================================================
+[1] Services (index)
+    chunk: services::chunk-001
+    score: 0.8155 (raw=0.4855)
+    url:   https://synapsetechinc.com/services
+
+[2] Custom Web & Mobile App Development | AI-Driven Solutions by Synapse Tech Inc. (service)
+    chunk: services-custom-development::chunk-004
+    score: 0.8363 (raw=0.5163)
+    url:   https://synapsetechinc.com/services/custom-development
+
+[3] Sovereign Cloud Infrastructure | Azure & AWS Solutions by Synapse Tech Inc. (service)
+    chunk: services-cloud-ai::chunk-001
+    score: 0.8170 (raw=0.4970)
+    url:   https://synapsetechinc.com/services/cloud-ai
+
+[4] AI Workflow Automation & Integration | AI-Driven Solutions by Synapse Tech Inc. (service)
+    chunk: services-automation::chunk-006
+    score: 0.8063 (raw=0.4863)
+    url:   https://synapsetechinc.com/services/automation
+
+
+============================================================
+QUESTION: what products does synapse offer
+============================================================
+============================================================
+KB Grounded Answer
+============================================================
+Question: what products does synapse offer
+Generation model: synapse-3b
+Embedding model: nomic-embed-text
+
+iRecruit One Agentic Bot Coversaction Ai
+
+============================================================
+Sources
+============================================================
+[1] Product (index)
+    chunk: product::chunk-001
+    score: 0.7427 (raw=0.5227)
+    url:   https://synapsetechinc.com/product
+
+[2] Agentic Bot (product)
+    chunk: product-agentic-bot::chunk-005
+    score: 0.8637 (raw=0.5037)
+    url:   https://synapsetechinc.com/product/agentic-bot
+
+[3] iRecruit One (product)
+    chunk: product-irecruit-one::chunk-001
+    score: 0.7738 (raw=0.4138)
+    url:   https://synapsetechinc.com/product/irecruit-one
+
+[4] Coversaction Ai (product)
+    chunk: product-coversaction-ai::chunk-005
+    score: 0.7494 (raw=0.5194)
+    url:   https://synapsetechinc.com/product/coversaction-ai
+
+
+============================================================
+QUESTION: what industries does synapse serve
+============================================================
+============================================================
+KB Grounded Answer
+============================================================
+Question: what industries does synapse serve
+Generation model: synapse-3b
+Embedding model: nomic-embed-text
+
+The industries supported include financial services, retail, manufacturing, and BPO contact centers.
+
+============================================================
+Sources
+============================================================
+[1] Industries (index)
+    chunk: industries::chunk-001
+    score: 1.1184 (raw=0.5684)
+    url:   https://synapsetechinc.com/industries
+
+[2] Industries (index)
+    chunk: industries::chunk-002
+    score: 1.0473 (raw=0.5173)
+    url:   https://synapsetechinc.com/industries
+
+[3] Banking And Financial (industry)
+    chunk: industries-banking-and-financial::chunk-002
+    score: 1.0090 (raw=0.5190)
+    url:   https://synapsetechinc.com/industries/banking-and-financial
+
+[4] Bpo Contact Centers (industry)
+    chunk: industries-bpo-contact-centers::chunk-003
+    score: 0.9657 (raw=0.5257)
+    url:   https://synapsetechinc.com/industries/bpo-contact-centers
+

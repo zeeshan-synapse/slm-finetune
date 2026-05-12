@@ -1,0 +1,66 @@
+
+
+===== do you have public pricing =====
+============================================================
+KB Grounded Answer
+============================================================
+Question: do you have public pricing
+Generation model: synapse-3b
+Embedding model: nomic-embed-text
+
+This detail is not confirmed in the available information. Please verify with Synapse Tech.
+
+
+===== where are you located =====
+============================================================
+KB Grounded Answer
+============================================================
+Question: where are you located
+Generation model: synapse-3b
+Embedding model: nomic-embed-text
+
+This detail is not confirmed in the available information. Please verify with Synapse Tech.
+
+
+===== who founded synapse =====
+============================================================
+KB Grounded Answer
+============================================================
+Question: who founded synapse
+Generation model: synapse-3b
+Embedding model: nomic-embed-text
+
+This detail is not confirmed in the available information. Please verify with Synapse Tech.
+
+
+===== are you gdpr compliant =====
+============================================================
+KB Grounded Answer
+============================================================
+Question: are you gdpr compliant
+Generation model: synapse-3b
+Embedding model: nomic-embed-text
+
+This detail is not confirmed in the available information. Please verify with Synapse Tech.
+
+
+===== what is your phone number =====
+============================================================
+KB Grounded Answer
+============================================================
+Question: what is your phone number
+Generation model: synapse-3b
+Embedding model: nomic-embed-text
+
+This detail is not confirmed in the available information. Please verify with Synapse Tech.
+
+
+===== what are your slas =====
+============================================================
+KB Grounded Answer
+============================================================
+Question: what are your slas
+Generation model: synapse-3b
+Embedding model: nomic-embed-text
+
+This detail is not confirmed in the available information. Please verify with Synapse Tech.

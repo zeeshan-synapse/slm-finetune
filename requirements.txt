@@ -12,3 +12,7 @@ mlx-lm
 # Model utilities
 transformers
 huggingface-hub
+
+# Knowledge base retrieval
+numpy
+faiss-cpu

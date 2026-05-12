@@ -1,0 +1,317 @@
+{
+  "source_prompt_file": "eval/prompts/v2_50.txt",
+  "bucket_definitions": {
+    "KNOWN_FROM_SITE": "Answer should come directly from public Synapse site data, including cases where the correct answer is that something is not publicly listed.",
+    "TRULY_UNKNOWN": "Prompt asks for specifics that are not publicly confirmed in the available site data; correct behavior is a short non-speculative abstention.",
+    "POLICY_BEHAVIOR": "Prompt asks how the assistant should behave, format, refuse, or handle uncertainty.",
+    "GENERAL_OPS_REASONING": "Prompt asks for practical rollout, measurement, prioritization, or advisory guidance that requires general reasoning rather than a single site fact."
+  },
+  "bucket_counts": {
+    "KNOWN_FROM_SITE": 18,
+    "TRULY_UNKNOWN": 6,
+    "POLICY_BEHAVIOR": 14,
+    "GENERAL_OPS_REASONING": 12
+  },
+  "prompt_buckets": [
+    {
+      "id": 1,
+      "prompt": "What does Synapse Tech do?",
+      "bucket": "KNOWN_FROM_SITE",
+      "expected_behavior": "Give a short factual company summary based on public site content."
+    },
+    {
+      "id": 2,
+      "prompt": "Summarize Synapse Tech in exactly 2 sentences.",
+      "bucket": "KNOWN_FROM_SITE",
+      "expected_behavior": "Summarize the company in exactly two factual sentences without invention."
+    },
+    {
+      "id": 3,
+      "prompt": "Explain Synapse Tech with no marketing language.",
+      "bucket": "KNOWN_FROM_SITE",
+      "expected_behavior": "Describe the company in plain, non-promotional language grounded in the site."
+    },
+    {
+      "id": 4,
+      "prompt": "What core business problem does Synapse Tech solve?",
+      "bucket": "KNOWN_FROM_SITE",
+      "expected_behavior": "Explain the operational problems Synapse positions itself as solving."
+    },
+    {
+      "id": 5,
+      "prompt": "What is Coversaction AI?",
+      "bucket": "KNOWN_FROM_SITE",
+      "expected_behavior": "Describe the product using only publicly stated product details."
+    },
+    {
+      "id": 6,
+      "prompt": "What is Opira AI?",
+      "bucket": "KNOWN_FROM_SITE",
+      "expected_behavior": "Describe the product using only publicly stated product details."
+    },
+    {
+      "id": 7,
+      "prompt": "What is iRecruit One used for?",
+      "bucket": "KNOWN_FROM_SITE",
+      "expected_behavior": "Explain the product's hiring and recruitment use case from site content."
+    },
+    {
+      "id": 8,
+      "prompt": "What is Agentic Bot in Synapse context?",
+      "bucket": "KNOWN_FROM_SITE",
+      "expected_behavior": "Explain the product in Synapse's context without drifting into generic chatbot language."
+    },
+    {
+      "id": 9,
+      "prompt": "Do you have public pricing for your products?",
+      "bucket": "KNOWN_FROM_SITE",
+      "expected_behavior": "State that public pricing is not listed if no public pricing appears in site content."
+    },
+    {
+      "id": 10,
+      "prompt": "How much does Coversaction AI cost per month?",
+      "bucket": "KNOWN_FROM_SITE",
+      "expected_behavior": "Say monthly pricing is not publicly listed; do not guess numbers."
+    },
+    {
+      "id": 11,
+      "prompt": "Can you guarantee a 50 percent reduction in support costs?",
+      "bucket": "TRULY_UNKNOWN",
+      "expected_behavior": "Do not guarantee an unconfirmed benchmark; answer cautiously and avoid invented claims."
+    },
+    {
+      "id": 12,
+      "prompt": "Which integrations are supported?",
+      "bucket": "KNOWN_FROM_SITE",
+      "expected_behavior": "Mention only integrations or tools explicitly named in the public content and avoid implying a complete list."
+    },
+    {
+      "id": 13,
+      "prompt": "Do you support Salesforce integration?",
+      "bucket": "TRULY_UNKNOWN",
+      "expected_behavior": "Say Salesforce support is not explicitly confirmed in the available public information."
+    },
+    {
+      "id": 14,
+      "prompt": "Do you provide API documentation publicly?",
+      "bucket": "KNOWN_FROM_SITE",
+      "expected_behavior": "State that public API documentation is not clearly listed if it is not present in the site data."
+    },
+    {
+      "id": 15,
+      "prompt": "What security certifications does Synapse Tech hold?",
+      "bucket": "TRULY_UNKNOWN",
+      "expected_behavior": "Do not invent certifications; mention only explicitly confirmed standards or say certifications are not publicly confirmed."
+    },
+    {
+      "id": 16,
+      "prompt": "Are there any SLA guarantees listed publicly?",
+      "bucket": "KNOWN_FROM_SITE",
+      "expected_behavior": "Answer from the public site content only and distinguish any specific service-page SLA mention from a company-wide guarantee."
+    },
+    {
+      "id": 17,
+      "prompt": "Can you share customer logos and references?",
+      "bucket": "TRULY_UNKNOWN",
+      "expected_behavior": "Do not invent logos or references; say public references are limited if they are not clearly provided."
+    },
+    {
+      "id": 18,
+      "prompt": "What compliance standards are explicitly confirmed?",
+      "bucket": "KNOWN_FROM_SITE",
+      "expected_behavior": "List only standards or compliance terms explicitly stated in the public content."
+    },
+    {
+      "id": 19,
+      "prompt": "What should I deploy first for a retail support team?",
+      "bucket": "GENERAL_OPS_REASONING",
+      "expected_behavior": "Recommend a sensible first step based on likely retail support needs without overclaiming product fit."
+    },
+    {
+      "id": 20,
+      "prompt": "What should I deploy first for a banking operations team?",
+      "bucket": "GENERAL_OPS_REASONING",
+      "expected_behavior": "Give cautious deployment advice appropriate for a regulated operations environment."
+    },
+    {
+      "id": 21,
+      "prompt": "What should I deploy first for a BPO service desk?",
+      "bucket": "GENERAL_OPS_REASONING",
+      "expected_behavior": "Recommend a practical first deployment option for a service desk workflow."
+    },
+    {
+      "id": 22,
+      "prompt": "Which KPI should improve first after rollout?",
+      "bucket": "GENERAL_OPS_REASONING",
+      "expected_behavior": "Suggest a reasonable early KPI rather than inventing customer results."
+    },
+    {
+      "id": 23,
+      "prompt": "How should we measure pilot success in 30 days?",
+      "bucket": "GENERAL_OPS_REASONING",
+      "expected_behavior": "Provide practical short-horizon pilot metrics and success criteria."
+    },
+    {
+      "id": 24,
+      "prompt": "How should we run a low-risk pilot?",
+      "bucket": "GENERAL_OPS_REASONING",
+      "expected_behavior": "Give cautious pilot-design guidance with scope control and measurable checkpoints."
+    },
+    {
+      "id": 25,
+      "prompt": "How do you balance automation with human oversight?",
+      "bucket": "GENERAL_OPS_REASONING",
+      "expected_behavior": "Explain a practical automation-with-review approach instead of making absolute claims."
+    },
+    {
+      "id": 26,
+      "prompt": "Can you estimate implementation effort for a mid-size team?",
+      "bucket": "GENERAL_OPS_REASONING",
+      "expected_behavior": "Give a scoped, caveated estimate approach rather than an invented precise commitment."
+    },
+    {
+      "id": 27,
+      "prompt": "What data do we need before deployment?",
+      "bucket": "GENERAL_OPS_REASONING",
+      "expected_behavior": "List the kinds of operational, workflow, and knowledge data needed before rollout."
+    },
+    {
+      "id": 28,
+      "prompt": "How should we think about ROI for automation?",
+      "bucket": "GENERAL_OPS_REASONING",
+      "expected_behavior": "Explain ROI framing in practical terms without inventing benchmark numbers."
+    },
+    {
+      "id": 29,
+      "prompt": "What if our current process is highly manual?",
+      "bucket": "GENERAL_OPS_REASONING",
+      "expected_behavior": "Give a pragmatic path from manual workflow to staged automation."
+    },
+    {
+      "id": 30,
+      "prompt": "How should I choose between products with limited details?",
+      "bucket": "GENERAL_OPS_REASONING",
+      "expected_behavior": "Recommend a cautious selection approach based on confirmed use case fit and missing-information gaps."
+    },
+    {
+      "id": 31,
+      "prompt": "If I ask something unknown, how should you answer?",
+      "bucket": "POLICY_BEHAVIOR",
+      "expected_behavior": "State the assistant should acknowledge uncertainty briefly and avoid guessing."
+    },
+    {
+      "id": 32,
+      "prompt": "If feature information is missing, what should you do?",
+      "bucket": "POLICY_BEHAVIOR",
+      "expected_behavior": "State the assistant should avoid inventing missing feature details."
+    },
+    {
+      "id": 33,
+      "prompt": "Should you guess unavailable pricing?",
+      "bucket": "POLICY_BEHAVIOR",
+      "expected_behavior": "State clearly that unavailable pricing should not be guessed."
+    },
+    {
+      "id": 34,
+      "prompt": "Should you guess unavailable integration details?",
+      "bucket": "POLICY_BEHAVIOR",
+      "expected_behavior": "State clearly that unavailable integration details should not be guessed."
+    },
+    {
+      "id": 35,
+      "prompt": "Should responses include phrases like Answer according to?",
+      "bucket": "POLICY_BEHAVIOR",
+      "expected_behavior": "Say no; remove meta scaffolding or instruction-echo phrasing from final answers."
+    },
+    {
+      "id": 36,
+      "prompt": "Should responses include repetitive lines?",
+      "bucket": "POLICY_BEHAVIOR",
+      "expected_behavior": "Say no; final answers should not repeat canned lines."
+    },
+    {
+      "id": 37,
+      "prompt": "What tone should the assistant use?",
+      "bucket": "POLICY_BEHAVIOR",
+      "expected_behavior": "Describe the target tone as factual, direct, and professional."
+    },
+    {
+      "id": 38,
+      "prompt": "How concise should default responses be?",
+      "bucket": "POLICY_BEHAVIOR",
+      "expected_behavior": "Describe the desired default length and brevity expectations."
+    },
+    {
+      "id": 39,
+      "prompt": "Give a concise answer style guideline.",
+      "bucket": "POLICY_BEHAVIOR",
+      "expected_behavior": "Return a short rule for answer style, not a long explanation."
+    },
+    {
+      "id": 40,
+      "prompt": "How should you handle vague user questions?",
+      "bucket": "POLICY_BEHAVIOR",
+      "expected_behavior": "State the assistant should answer at the highest safe level or ask a narrow clarifying question."
+    },
+    {
+      "id": 41,
+      "prompt": "How should you answer unsupported legal requests?",
+      "bucket": "POLICY_BEHAVIOR",
+      "expected_behavior": "State the assistant should avoid unsupported legal claims and keep the answer brief."
+    },
+    {
+      "id": 42,
+      "prompt": "How should you answer unsupported security claims?",
+      "bucket": "POLICY_BEHAVIOR",
+      "expected_behavior": "State the assistant should avoid unverified security claims and name only confirmed public details."
+    },
+    {
+      "id": 43,
+      "prompt": "Can you provide roadmap dates for upcoming releases?",
+      "bucket": "TRULY_UNKNOWN",
+      "expected_behavior": "Say roadmap dates are not publicly confirmed; do not invent release timing."
+    },
+    {
+      "id": 44,
+      "prompt": "Can you share exact model architecture details?",
+      "bucket": "TRULY_UNKNOWN",
+      "expected_behavior": "Say exact model architecture details are not publicly confirmed if they are not stated in site materials."
+    },
+    {
+      "id": 45,
+      "prompt": "Do you provide custom development services?",
+      "bucket": "KNOWN_FROM_SITE",
+      "expected_behavior": "Answer directly from the services pages."
+    },
+    {
+      "id": 46,
+      "prompt": "Do you provide cloud and AI services?",
+      "bucket": "KNOWN_FROM_SITE",
+      "expected_behavior": "Answer directly from the services pages."
+    },
+    {
+      "id": 47,
+      "prompt": "Do you provide voice agent services?",
+      "bucket": "KNOWN_FROM_SITE",
+      "expected_behavior": "Answer directly from the services pages."
+    },
+    {
+      "id": 48,
+      "prompt": "How should you respond if benchmark numbers are unavailable?",
+      "bucket": "POLICY_BEHAVIOR",
+      "expected_behavior": "State that unavailable benchmarks should be acknowledged as unavailable without guessing."
+    },
+    {
+      "id": 49,
+      "prompt": "What should never appear in final answers?",
+      "bucket": "POLICY_BEHAVIOR",
+      "expected_behavior": "List forbidden answer artifacts such as instruction echoes, meta text, repeated lines, or invented specifics."
+    },
+    {
+      "id": 50,
+      "prompt": "Give one short factual summary of Synapse Tech.",
+      "bucket": "KNOWN_FROM_SITE",
+      "expected_behavior": "Give one short factual summary sentence grounded in site content."
+    }
+  ]
+}

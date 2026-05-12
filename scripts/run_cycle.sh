@@ -10,6 +10,11 @@ set -euo pipefail
 
 PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 LLAMA_CPP_DIR="${LLAMA_CPP_DIR:-$PROJECT_DIR/llama.cpp}"
+PROJECT_PYTHON="${PROJECT_PYTHON:-$PROJECT_DIR/venv/bin/python}"
+
+if [[ ! -x "$PROJECT_PYTHON" ]]; then
+  PROJECT_PYTHON="$(command -v python3)"
+fi
 
 MODEL_TAG="${1:-synapse-qwen1.5b-v3}"
 RUN_ID="${2:-v3}"
@@ -22,13 +27,15 @@ GGUF_Q4="$GGUF_DIR/synapse-qwen1.5b-q4_k_m.gguf"
 MODELF="$PROJECT_DIR/ollama/modelfiles/Modelfile.$RUN_ID"
 EVAL_DIR="$PROJECT_DIR/eval"
 EVAL_PROMPTS="$EVAL_DIR/prompts/v2_50.txt"
+EVAL_BUCKETS="$EVAL_DIR/prompts/v2_50_buckets.json"
 EVAL_OUT="$EVAL_DIR/results/eval_results_${RUN_ID}.jsonl"
+EVAL_SCORE_OUT="$EVAL_DIR/scores/eval_scored_${RUN_ID}.jsonl"
 SMOKE_OUT="$EVAL_DIR/results/eval_smoke_${RUN_ID}.jsonl"
-
 echo "=================================================="
 echo "Synapse automation cycle"
 echo "Project:   $PROJECT_DIR"
 echo "llama.cpp: $LLAMA_CPP_DIR"
+echo "python:    $PROJECT_PYTHON"
 echo "Model tag: $MODEL_TAG"
 echo "Run id:    $RUN_ID"
 echo "=================================================="
@@ -50,37 +57,43 @@ if [[ ! -f "$EVAL_PROMPTS" ]]; then
   exit 1
 fi
 
+if [[ ! -f "$EVAL_BUCKETS" ]]; then
+  echo "ERROR: missing eval bucket manifest: $EVAL_BUCKETS"
+  exit 1
+fi
+
 mkdir -p "$EVAL_DIR/results"
+mkdir -p "$EVAL_DIR/scores"
 mkdir -p "$PROJECT_DIR/ollama/modelfiles"
 
-echo "== [1/11] Cleanup stale export artifacts =="
+echo "== [1/12] Cleanup stale export artifacts =="
 rm -rf "$MERGED_DIR"
 rm -f "$GGUF_F16" "$GGUF_Q4"
 
-echo "== [2/11] Mix datasets =="
+echo "== [2/12] Mix datasets =="
 cd "$PROJECT_DIR"
-python3 dataset/mix_datasets.py
+"$PROJECT_PYTHON" dataset/mix_datasets.py
 
-echo "== [3/11] Fine-tune LoRA adapters =="
-python3 train/finetune.py
+echo "== [3/12] Fine-tune LoRA adapters =="
+"$PROJECT_PYTHON" train/finetune.py
 
-echo "== [4/11] Merge adapters + export prep =="
-python3 export/export_gguf.py
+echo "== [4/12] Merge adapters + export prep =="
+"$PROJECT_PYTHON" export/export_gguf.py
 
-echo "== [5/11] Convert merged model to GGUF (f16) =="
+echo "== [5/12] Convert merged model to GGUF (f16) =="
 cd "$LLAMA_CPP_DIR"
 python3 convert_hf_to_gguf.py \
   "$MERGED_DIR" \
   --outfile "$GGUF_F16" \
   --outtype f16
 
-echo "== [6/11] Quantize GGUF (Q4_K_M) =="
+echo "== [6/12] Quantize GGUF (Q4_K_M) =="
 "$LLAMA_CPP_DIR/build/bin/llama-quantize" \
   "$GGUF_F16" \
   "$GGUF_Q4" \
   Q4_K_M
 
-echo "== [7/11] Create run-specific Modelfile =="
+echo "== [7/12] Create run-specific Modelfile =="
 cat > "$MODELF" <<EOF
 FROM $GGUF_Q4
 PARAMETER temperature 0.1
@@ -89,12 +102,12 @@ PARAMETER repeat_penalty 1.2
 PARAMETER num_predict 60
 EOF
 
-echo "== [8/11] Create Ollama tag: $MODEL_TAG =="
+echo "== [8/12] Create Ollama tag: $MODEL_TAG =="
 ollama create "$MODEL_TAG" -f "$MODELF"
 
-echo "== [9/11] Run 50-prompt eval =="
+echo "== [9/12] Run 50-prompt eval =="
 cd "$PROJECT_DIR"
-python3 - <<PY
+"$PROJECT_PYTHON" - <<PY
 import json
 import pathlib
 import subprocess
@@ -127,12 +140,18 @@ print(f"Saved: {out_path}")
 print(f"Prompts: {len(prompts)}")
 PY
 
-echo "== [10/11] Run 5-question smoke check =="
-python3 scripts/smoke_eval.py --model "$MODEL_TAG" --output "$SMOKE_OUT"
+echo "== [10/12] Score 50-prompt eval =="
+"$PROJECT_PYTHON" scripts/score_eval.py \
+  --input "$EVAL_OUT" \
+  --buckets "$EVAL_BUCKETS" \
+  --output "$EVAL_SCORE_OUT"
 
-echo "== [11/11] Build corrective pairs from runtime failures =="
+echo "== [11/12] Run 5-question smoke check =="
+"$PROJECT_PYTHON" scripts/smoke_eval.py --model "$MODEL_TAG" --output "$SMOKE_OUT"
+
+echo "== [12/12] Build corrective pairs from runtime failures =="
 if [[ -f "$PROJECT_DIR/logs/guardrail_failures.jsonl" ]]; then
-  python3 scripts/build_corrective_from_logs.py \
+  "$PROJECT_PYTHON" scripts/build_corrective_from_logs.py \
     --input "$PROJECT_DIR/logs/guardrail_failures.jsonl" \
     --output "$PROJECT_DIR/data/corrective_pairs_from_logs.jsonl"
 else
@@ -142,8 +161,9 @@ fi
 echo "== Done =="
 echo "Model tag:  $MODEL_TAG"
 echo "Eval file:  $EVAL_OUT"
+echo "Score file: $EVAL_SCORE_OUT"
 echo "Smoke file: $SMOKE_OUT"
 echo "Modelfile:  $MODELF"
 echo
 echo "Next:"
-echo "  python3 scripts/score_eval.py --input \"$EVAL_OUT\""
+echo "  Review the bucket-aware summary above and inspect \"$EVAL_SCORE_OUT\" if needed."

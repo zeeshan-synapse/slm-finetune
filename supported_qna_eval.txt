@@ -1,0 +1,77 @@
+
+
+===== what is opira ai =====
+============================================================
+KB Grounded Answer
+============================================================
+Question: what is opira ai
+Generation model: synapse-3b
+Embedding model: nomic-embed-text
+
+Opira Ai is an offline LLM platform with private RAG engines that runs entirely on your network. Enterprises can query sensitive documents, compare models, and automate AI workflows without sending a single byte to the cloud.
+
+
+===== what is iRecruit One =====
+============================================================
+KB Grounded Answer
+============================================================
+Question: what is iRecruit One
+Generation model: synapse-3b
+Embedding model: nomic-embed-text
+
+iRecruit One is an enterprise recruitment platform that automates CV screening, AI interviews, and smart shortlisting. It is designed to help teams hire faster, fairer, and at scale.
+
+
+===== what does Agentic Bot do =====
+============================================================
+KB Grounded Answer
+============================================================
+Question: what does Agentic Bot do
+Generation model: synapse-3b
+Embedding model: nomic-embed-text
+
+Agentic Bot is a WhatsApp-centric assistant that handles service requests and automates form delivery, policy queries, and breach checks. It can retrieve verified knowledge, turn conversations into structured data, and trigger backend actions.
+
+
+===== what products does synapse offer =====
+============================================================
+KB Grounded Answer
+============================================================
+Question: what products does synapse offer
+Generation model: synapse-3b
+Embedding model: nomic-embed-text
+
+Synapse offers products including Agentic Bot, iRecruit One, Coversaction Ai, Opira Ai, and Cyber Security Automation.
+
+
+===== what services does synapse offer =====
+============================================================
+KB Grounded Answer
+============================================================
+Question: what services does synapse offer
+Generation model: synapse-3b
+Embedding model: nomic-embed-text
+
+Synapse Tech Inc. offers custom web and mobile app development, sovereign cloud infrastructure, AI workflow automation and integration, and AI voice agents and conversational automation.
+
+
+===== what industries does synapse serve =====
+============================================================
+KB Grounded Answer
+============================================================
+Question: what industries does synapse serve
+Generation model: synapse-3b
+Embedding model: nomic-embed-text
+
+Synapse Tech Inc. serves industries including banking and financial services, retail and e-commerce, cyber security, and BPO and contact centers.
+
+
+===== how can i contact synapse tech =====
+============================================================
+KB Grounded Answer
+============================================================
+Question: how can i contact synapse tech
+Generation model: synapse-3b
+Embedding model: nomic-embed-text
+
+You can contact Synapse Tech Inc. at info@synapsetechinc.com or chat with the team Monday to Saturday (8 AM – 8 PM).

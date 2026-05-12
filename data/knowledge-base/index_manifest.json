@@ -1,0 +1,11 @@
+{
+  "created_at": "2026-05-12T10:55:51.086196+00:00",
+  "embedding_model": "nomic-embed-text",
+  "ollama_url": "http://localhost:11434",
+  "source_chunks_path": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/knowledge-base/chunks.jsonl",
+  "index_path": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/knowledge-base/faiss.index",
+  "metadata_path": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/knowledge-base/index_meta.jsonl",
+  "total_vectors": 162,
+  "dimension": 768,
+  "metric": "cosine_via_normalized_inner_product"
+}
