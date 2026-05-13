@@ -107,17 +107,36 @@ ollama create qwen-base -f BaseModelfile
 ollama list
 ```
 
-### 5) Run side-by-side comparison
+### 5) Run side-by-side comparison (`chat/chat.py`)
 
-Make sure `chat/chat.py` uses:
+The chat UI compares two columns:
 
-- `FINETUNED_MODEL = "synapse-3b"`
-- `BASE_MODEL = "qwen-base"`
+- **Fine-tuned column:** for most questions, answers go through the local knowledge base (FAISS retrieval + grounded generation in `scripts/answer_with_kb.py`). Small-talk and policy shortcuts skip retrieval and use `guardrail_stage1.run_with_retry` only for that path.
+- **Base column:** a single Ollama chat completion (`BASE_MODEL` in `chat/chat.py`, default `qwen-base`) with **no** KB and **no** RAG.
 
-Then run:
+Prerequisites:
+
+- **Ollama** running, with the tags your `chat/chat.py` / `guardrail_stage1.py` expect (e.g. `qwen-base`, fine-tuned tag such as `synapse-3b` or `synapse-qwen1.5b-v5`).
+- **Embedding + generation models** pulled in Ollama (whatever `answer_with_kb` / `query_kb` use for your index, often `nomic-embed-text` plus your Synapse generator tag).
+- **KB index on disk** (defaults under `data/knowledge-base/`, see `DEFAULT_INDEX_PATH` / `DEFAULT_META_PATH` in `scripts/answer_with_kb.py`).
+
+Optional env:
+
+- **`KB_ANSWER_MODEL`** — Ollama tag used for KB-grounded answers when set; otherwise the bridge falls back to `guardrail_stage1.GENERATOR_MODEL` (see `chat/kb_answer.py`).
+- **`OLLAMA_URL`** — if your Ollama API is not the default.
+
+Run (from repo root):
 
 ```bash
-./venv/bin/python chat/chat.py
+cd chat && ../venv/bin/python chat.py
+```
+
+In the UI, type **`debug`** to print attempt metadata and a **`fine_tuned_path`** hint (`kb_rag`, `small_talk_no_kb`, etc.). Type **`batch`** to paste multiple lines (then **`END`**) and run the same pipeline for each question.
+
+Regression for the KB stack (not the full interactive UI):
+
+```bash
+./venv/bin/python scripts/run_kb_gold_eval.py
 ```
 
 ## Suggested runtime tuning for cleaner outputs

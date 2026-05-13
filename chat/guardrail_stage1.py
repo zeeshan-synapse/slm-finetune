@@ -338,6 +338,64 @@ def small_talk_response(question: str) -> str:
 
 def policy_intent(question: str) -> str | None:
     low_q = question.strip().lower()
+
+    # Meta: how the assistant should handle unsupported legal/security *claims* (not legal advice).
+    if contains_any(
+        low_q,
+        [
+            "unsupported legal requests",
+            "unsupported legal request",
+            "how should you answer unsupported legal",
+            "unsupported security claims",
+            "unsupported security claim",
+            "how should you answer unsupported security",
+        ],
+    ):
+        return "unsupported_claims_handling"
+
+    if contains_any(
+        low_q,
+        [
+            "benchmark numbers are unavailable",
+            "how should you respond if benchmark",
+            "respond if benchmark numbers",
+        ],
+    ):
+        return "benchmark_unavailable_policy"
+
+    # Meta: unknown user questions → assistant behavior (not Synapse corpus facts).
+    if contains_any(
+        low_q,
+        [
+            "if i ask something unknown",
+            "ask something unknown",
+            "something unknown, how should you answer",
+            "something unknown how should you",
+        ],
+    ):
+        return "assistant_unknown_qna"
+
+    # Rubric: tone, concision, vague users, forbidden patterns in answers.
+    if contains_any(
+        low_q,
+        [
+            "answer according to",
+            "phrases like answer",
+            "repetitive lines",
+            "should responses include repetitive",
+            "what tone should the assistant",
+            "tone should the assistant use",
+            "how concise should default responses",
+            "concise answer style guideline",
+            "give a concise answer style",
+            "how should you handle vague user questions",
+            "handle vague user questions",
+            "what should never appear in final answers",
+            "never appear in final answers",
+        ],
+    ):
+        return "assistant_rubric"
+
     if contains_any(
         low_q,
         [
@@ -347,6 +405,8 @@ def policy_intent(question: str) -> str | None:
             "if information is missing",
             "if info is missing",
             "unconfirmed feature",
+            "feature information is missing",
+            "if feature information is missing",
         ],
     ):
         return "unknown_handling"
@@ -397,6 +457,28 @@ def policy_intent(question: str) -> str | None:
 
 
 def policy_response(intent: str) -> str:
+    if intent == "unsupported_claims_handling":
+        return (
+            "Do not provide legal advice or endorse security outcomes that are not documented. "
+            "State that the request or claim cannot be confirmed from available information, "
+            "stay factual and bounded, and point users to official Synapse contacts for commitments."
+        )
+    if intent == "benchmark_unavailable_policy":
+        return (
+            "If benchmark numbers are unavailable, do not invent results. "
+            "State what is unavailable; only offer methodology or comparisons that are explicitly grounded."
+        )
+    if intent == "assistant_unknown_qna":
+        return (
+            "If a question is outside confirmed Synapse materials, say it is not confirmed in available information. "
+            "Do not invent facts, numbers, or commitments; suggest verifying with Synapse Tech for official details."
+        )
+    if intent == "assistant_rubric":
+        return (
+            "Use a neutral, professional tone. Default to concise answers. "
+            "Avoid template phrases, repeated boilerplate, and meta-instructions in final text. "
+            "For vague user questions, ask one clarifying question or restate what you can answer from confirmed information."
+        )
     if intent == "unknown_handling":
         return "If information is not confirmed, state it as unconfirmed and do not guess."
     if intent == "meta_text_policy":

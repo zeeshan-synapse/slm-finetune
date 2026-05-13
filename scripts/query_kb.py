@@ -72,6 +72,7 @@ INTENT_PAGE_TYPE_BONUS = {
     "industry": {"industry": 0.14, "index": 0.06},
     "contact": {"contact": 0.16},
     "about": {"about": 0.14},
+    "pricing": {"product": 0.06, "service": 0.06, "about": 0.05, "index": 0.04},
 }
 
 
@@ -214,6 +215,8 @@ def query_profile(query: str) -> dict[str, Any]:
         intent = "about"
     elif {"industry", "industries"} & token_set:
         intent = "industry"
+    elif {"pricing", "price", "prices", "cost", "costs", "quote", "subscription"} & token_set:
+        intent = "pricing"
     elif {"service", "services"} & token_set:
         intent = "service"
     elif {"product", "products"} & token_set:

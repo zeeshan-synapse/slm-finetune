@@ -117,6 +117,207 @@ SUPPORT_TERM_VARIANTS = {
     "slas": {"service-level", "sla", "slas"},
 }
 
+_PRICING_TERMS = (
+    "pricing",
+    "price",
+    "prices",
+    "cost",
+    "costs",
+    "quote",
+    "how much",
+    "per month",
+)
+
+
+def _contains_any(haystack: str, needles: tuple[str, ...]) -> bool:
+    return any(n in haystack for n in needles)
+
+
+def is_pricing_or_quote_question(question: str) -> bool:
+    return _contains_any(question.lower(), _PRICING_TERMS)
+
+
+def is_product_selection_question(question: str) -> bool:
+    low = question.lower()
+    has_pick = any(
+        w in low for w in ("choose", "pick", "select", "compare", "deciding", "decide")
+    )
+    has_between = "between" in low or "among" in low
+    has_products = "product" in low or "products" in low
+    return has_products and (has_pick or has_between)
+
+
+def is_deploy_priority_question(question: str) -> bool:
+    low = question.lower()
+    return ("deploy" in low or "rollout" in low) and ("first" in low or "start with" in low)
+
+
+def is_company_overview_or_synopsis_question(question: str) -> bool:
+    """
+    True for questions asking for a neutral company summary / synopsis / mission framing,
+    not product pricing or deployment advice (those use other gates).
+    """
+    if is_pricing_or_quote_question(question) or is_product_selection_question(question) or is_deploy_priority_question(question):
+        return False
+    low = question.lower()
+    if "synapse" not in low and "synapsetechinc" not in low.replace(" ", ""):
+        return False
+    triggers = (
+        "summarize",
+        "summary",
+        "short factual",
+        "factual summary",
+        "in two sentences",
+        "in 2 sentences",
+        "exactly two sentences",
+        "exactly 2 sentences",
+        "two sentences",
+        "2 sentences",
+        "explain synapse",
+        "describe synapse",
+        "overview",
+        "tell me about synapse",
+        "who is synapse tech",
+        "core business problem",
+        "business problem does synapse",
+        "no marketing",
+        "without marketing",
+        "neutral wording",
+        "plain language",
+        "not marketing",
+    )
+    if any(t in low for t in triggers):
+        return True
+    if re.search(r"\bwhat is synapse tech\??(\s|$)", low):
+        return True
+    if re.search(r"\bwhat\s+does\s+synapse", low):
+        return True
+    return False
+
+
+def allow_deterministic_summary(question: str, intent: str | None) -> bool:
+    """Only emit catalog-style summaries when the question asks for that kind of list."""
+    if intent not in SUMMARY_INTENT_CONFIG:
+        return False
+    low = question.lower()
+
+    if intent == "product":
+        if is_pricing_or_quote_question(question):
+            return False
+        if is_product_selection_question(question):
+            return False
+        if is_deploy_priority_question(question):
+            return False
+        if _contains_any(
+            low,
+            (
+                "which integration",
+                "integrations supported",
+                "salesforce",
+                "api documentation",
+            ),
+        ):
+            return False
+        return bool(
+            re.search(r"\bwhat products\b", low)
+            or re.search(r"\bwhich products\b", low)
+            or re.search(r"\bproducts does synapse\b", low)
+            or re.search(r"\bproducts do synapse\b", low)
+            or (
+                ("products" in low or "product" in low)
+                and ("offer" in low or "offers" in low or "have" in low or "include" in low or "does" in low)
+                and "synapse" in low
+            )
+        )
+
+    if intent == "service":
+        if "services" in low:
+            return True
+        return bool(
+            re.search(r"\bwhat services\b", low)
+            or re.search(r"\bservices does synapse\b", low)
+            or re.search(r"\bservices do synapse\b", low)
+        )
+
+    if intent == "industry":
+        return "industry" in low or "industries" in low
+
+    return False
+
+
+def augment_hits_with_about_us(
+    hits: list[dict[str, Any]],
+    rows: list[dict[str, Any]],
+    *,
+    max_chunks: int = 4,
+) -> list[dict[str, Any]]:
+    """Prepend early About-doc chunks with strong scores so synopsis questions pass support gates."""
+    about_rows = sorted(
+        [r for r in rows if r.get("doc_id") == "about-us"],
+        key=lambda r: int(r.get("chunk_index") or 0),
+    )
+    hit_ids = {h["chunk_id"] for h in hits}
+    score_seed = max((float(h.get("score", 0)) for h in hits), default=0.55)
+    score_seed = max(score_seed, 0.92)
+    front: list[dict[str, Any]] = []
+    for row in about_rows:
+        if len(front) >= max_chunks:
+            break
+        cid = row.get("chunk_id")
+        if not cid or cid in hit_ids:
+            continue
+        front.append(make_hit_from_row(row, score_seed))
+        hit_ids.add(cid)
+        score_seed -= 0.001
+    tail = [h for h in hits if h.get("chunk_id") not in {x["chunk_id"] for x in front}]
+    return front + tail
+
+
+def answer_shape_mismatch(question: str, answer: str) -> bool:
+    """True if the answer looks like a wrong template for the question (e.g. product menu for pricing)."""
+    low_q = question.lower()
+    low_a = answer.lower()
+    if not answer.strip():
+        return False
+
+    if is_pricing_or_quote_question(question):
+        if "synapse offers products including" in low_a:
+            return True
+        if low_a.startswith("synapse tech inc. offers") and not _contains_any(low_a, _PRICING_TERMS):
+            if "not confirmed" not in low_a and "official quote" not in low_a:
+                return True
+
+    if is_product_selection_question(question):
+        if "synapse offers products including" in low_a:
+            if "use case" not in low_a and "criteria" not in low_a and "governance" not in low_a:
+                return True
+
+    if is_deploy_priority_question(question):
+        if "synapse offers products including" in low_a:
+            return True
+        if low_a.startswith("synapse tech inc. offers") and "deploy" not in low_a and "workflow" not in low_a:
+            if "pilot" not in low_a and "baseline" not in low_a and "not confirmed" not in low_a:
+                return True
+
+    if _contains_any(
+        low_q,
+        (
+            "unsupported security",
+            "unsupported legal",
+            "how should you answer unsupported",
+        ),
+    ):
+        if "attackers scan" in low_a or "paper trail" in low_a:
+            return True
+
+    return False
+
+
+def finalize_kb_answer(question: str, answer: str) -> str:
+    if answer_shape_mismatch(question, answer):
+        return DEFAULT_FALLBACK_RESPONSE
+    return answer
+
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
@@ -403,6 +604,28 @@ def select_context_hits(
     if intent in SUMMARY_INTENT_CONFIG:
         return select_summary_hits(hits, context_k=context_k, intent=intent)
 
+    if profile.get("company_overview"):
+        about_hits = [
+            h
+            for h in hits
+            if h.get("page_type") == "about" or h.get("doc_id") == "about-us"
+        ]
+        seen: set[str] = set()
+        merged: list[dict[str, Any]] = []
+        for h in about_hits:
+            cid = h.get("chunk_id")
+            if cid and cid not in seen:
+                merged.append(h)
+                seen.add(cid)
+        for h in hits:
+            cid = h.get("chunk_id")
+            if cid and cid not in seen:
+                merged.append(h)
+                seen.add(cid)
+            if len(merged) >= context_k:
+                break
+        return merged[:context_k]
+
     if entity_terms or intent in {"contact", "about"}:
         same_doc_hits = [hit for hit in hits if hit.get("doc_id") == top_hit.get("doc_id")]
         if same_doc_hits:
@@ -417,8 +640,32 @@ def build_user_prompt(question: str, hits: list[dict[str, Any]], profile: dict[s
         for rank, hit in enumerate(hits, start=1)
     )
     intent = profile.get("intent")
-    extra_guidance = "Answer the question directly."
-    if intent in SUMMARY_INTENT_CONFIG:
+    extra_guidance = "Answer the question directly in the first sentence."
+    if is_pricing_or_quote_question(question):
+        extra_guidance = (
+            "If public pricing or exact costs are not explicitly stated in the evidence, use the not-confirmed reply "
+            "exactly as instructed above. Never answer pricing questions by listing product names only."
+        )
+    elif is_product_selection_question(question):
+        extra_guidance = (
+            "Give decision criteria grounded in the evidence. If comparisons are not in the evidence, "
+            "use the not-confirmed reply; do not answer with a bare product catalog only."
+        )
+    elif is_deploy_priority_question(question):
+        extra_guidance = (
+            "Give one concrete first-step recommendation only if the evidence supports it; otherwise "
+            "use the not-confirmed reply. Do not substitute a generic Synapse capability overview."
+        )
+    elif profile.get("company_overview"):
+        extra_guidance = (
+            "Synthesize one cohesive answer about Synapse Tech using only the evidence. "
+            "If the user requested a sentence limit or neutral/non-marketing tone, follow it. "
+            "Prefer concrete capabilities (e.g. apps, automation, security) over slogans; "
+            "omit claims not literally supported. "
+            "The excerpts below include company About content — you must answer from them; "
+            "do not use the not-confirmed reply unless none of the excerpts mention Synapse Tech."
+        )
+    elif intent in SUMMARY_INTENT_CONFIG:
         extra_guidance = (
             f"Summarize the main {SUMMARY_INTENT_CONFIG[intent]['label']} supported by the evidence. "
             "Name multiple items when the evidence supports them, using the page titles and evidence content. "
@@ -432,15 +679,31 @@ def build_user_prompt(question: str, hits: list[dict[str, Any]], profile: dict[s
         extra_guidance = (
             "Give the direct contact methods and availability details only."
         )
+
+    if profile.get("company_overview"):
+        requirements = (
+            "Answer requirements:\n"
+            "Use only the evidence above. It includes Synapse Tech company pages; produce a direct factual answer.\n"
+            f"{extra_guidance}\n"
+            "Write 2-4 concise sentences unless the user asked for fewer (then respect that count).\n"
+            "Do not mention the evidence, assumptions, or these instructions.\n"
+            'Return JSON only, using keys "answer" and "supported". Set "supported" to true when '
+            "the answer is paraphrased from the excerpts.\n"
+        )
+    else:
+        requirements = (
+            "Answer requirements:\n"
+            f'Use only the evidence above. If the evidence is insufficient, reply exactly with: "{DEFAULT_FALLBACK_RESPONSE}"\n'
+            f"{extra_guidance}\n"
+            "Write 2-4 concise sentences.\n"
+            "Do not mention the evidence, assumptions, or these instructions.\n"
+            'Return JSON only, using keys "answer" and "supported".\n'
+        )
+
     return (
         f"Question:\n{question}\n\n"
         f"Evidence:\n{evidence}\n\n"
-        "Answer requirements:\n"
-        f'Use only the evidence above. If the evidence is insufficient, reply exactly with: "{DEFAULT_FALLBACK_RESPONSE}"\n'
-        f"{extra_guidance}\n"
-        "Write 2-4 concise sentences.\n"
-        "Do not mention the evidence, assumptions, or these instructions.\n"
-        'Return JSON only, using keys "answer" and "supported".\n'
+        f"{requirements}"
     )
 
 
@@ -681,10 +944,13 @@ def retrieve_hits(
         raise ValueError("FAISS index size does not match metadata row count.")
 
     profile = query_kb.query_profile(question)
+    profile["company_overview"] = is_company_overview_or_synopsis_question(question)
     query_vector = query_kb.embed_query(ollama_url, model, question)
     retrieval_top_k = top_k
     if profile.get("intent") in SUMMARY_INTENT_CONFIG:
         retrieval_top_k = max(top_k, 16)
+    elif profile.get("company_overview"):
+        retrieval_top_k = max(top_k, 14)
     elif profile.get("entity_terms"):
         retrieval_top_k = max(top_k, 10)
     hits = query_kb.search_index(
@@ -695,6 +961,8 @@ def retrieve_hits(
         retrieval_top_k,
         profile,
     )
+    if profile.get("company_overview"):
+        hits = augment_hits_with_about_us(hits, rows, max_chunks=4)
     if profile.get("intent") in SUMMARY_INTENT_CONFIG:
         hits = augment_summary_hits_with_index_rows(
             hits,
@@ -804,6 +1072,15 @@ def has_sufficient_explicit_support(
     if not hits:
         return False
 
+    if profile.get("company_overview"):
+        blob = " ".join(f"{h.get('title', '')} {h.get('text', '')}" for h in hits[:10]).lower()
+        if "synapse" not in blob:
+            return False
+        if any(h.get("doc_id") == "about-us" for h in hits[:10]):
+            return True
+        best_score = max((float(h.get("score") or 0.0) for h in hits[:10]), default=0.0)
+        return best_score >= 0.35
+
     anchor_terms = support_anchor_terms(profile)
     if not anchor_terms:
         return True
@@ -851,19 +1128,20 @@ def generate_grounded_answer(
         if contact_answer:
             return contact_answer
 
-    if intent in SUMMARY_INTENT_CONFIG:
+    if intent in SUMMARY_INTENT_CONFIG and allow_deterministic_summary(question, intent):
         summary_answer = build_summary_answer(intent, context_hits)
         if summary_answer:
-            return summary_answer
+            return finalize_kb_answer(question, summary_answer)
 
     if not has_sufficient_explicit_support(question, context_hits, profile):
         return DEFAULT_FALLBACK_RESPONSE
 
     entity_answer = build_entity_answer(question, context_hits, profile)
     if entity_answer:
-        return clean_answer_text(entity_answer)
+        return finalize_kb_answer(question, clean_answer_text(entity_answer))
 
     user_prompt = build_user_prompt(question, context_hits, profile)
+    predict_cap = max(num_predict, 160) if profile.get("company_overview") else num_predict
     raw = ollama_chat(
         ollama_url=ollama_url,
         model=model,
@@ -872,14 +1150,43 @@ def generate_grounded_answer(
             {"role": "user", "content": user_prompt},
         ],
         temperature=temperature,
-        num_predict=num_predict,
+        num_predict=predict_cap,
     )
     payload = safe_parse_json(raw)
     answer = normalize_answer_value(payload.get("answer")) if isinstance(payload, dict) else ""
     answer = clean_answer_text(answer)
+
+    if profile.get("company_overview") and (not answer or answer == DEFAULT_FALLBACK_RESPONSE):
+        blob = " ".join(f"{h.get('title', '')} {h.get('text', '')}" for h in context_hits).lower()
+        if "synapse" in blob:
+            retry_user = (
+                user_prompt
+                + "\n\nRetry: The previous JSON was invalid or too cautious. Write 2–4 factual sentences "
+                "about Synapse Tech using only the evidence above. "
+                'Return JSON {"answer":"<text>","supported":true}. '
+                "Do not use the not-confirmed reply when the excerpts clearly describe Synapse Tech."
+            )
+            raw_retry = ollama_chat(
+                ollama_url=ollama_url,
+                model=model,
+                messages=[
+                    {"role": "system", "content": SYSTEM_PROMPT},
+                    {"role": "user", "content": retry_user},
+                ],
+                temperature=min(0.2, temperature + 0.05),
+                num_predict=predict_cap,
+            )
+            payload_retry = safe_parse_json(raw_retry)
+            answer = (
+                normalize_answer_value(payload_retry.get("answer"))
+                if isinstance(payload_retry, dict)
+                else ""
+            )
+            answer = clean_answer_text(answer)
+
     if not answer:
         return DEFAULT_FALLBACK_RESPONSE
-    return answer
+    return finalize_kb_answer(question, answer)
 
 
 def main() -> None:

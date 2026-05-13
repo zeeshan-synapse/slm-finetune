@@ -1,0 +1,102 @@
+{
+  "version": 1,
+  "name": "kb_gold_v1",
+  "description": "Public KB v1 regression set: 7 supported website Q&A + 6 unsupported refusal cases. Run with scripts/run_kb_gold_eval.py (Ollama + FAISS index required).",
+  "cases": [
+    {
+      "id": "kb-gold-001",
+      "category": "product_definition",
+      "question": "what is opira ai",
+      "expect": "answer",
+      "contains_all": ["offline", "RAG", "network"]
+    },
+    {
+      "id": "kb-gold-002",
+      "category": "product_definition",
+      "question": "what is iRecruit One",
+      "expect": "answer",
+      "contains_all": ["recruitment", "CV", "screening"]
+    },
+    {
+      "id": "kb-gold-003",
+      "category": "product_definition",
+      "question": "what does Agentic Bot do",
+      "expect": "answer",
+      "contains_all": ["WhatsApp", "service"]
+    },
+    {
+      "id": "kb-gold-004",
+      "category": "catalog_products",
+      "question": "what products does synapse offer",
+      "expect": "answer",
+      "contains_all": ["Agentic Bot", "iRecruit", "Opira", "Cyber Security"]
+    },
+    {
+      "id": "kb-gold-005",
+      "category": "catalog_services",
+      "question": "what services does synapse offer",
+      "expect": "answer",
+      "contains_all": [
+        "custom web",
+        "sovereign cloud",
+        "workflow automation",
+        "voice agents"
+      ]
+    },
+    {
+      "id": "kb-gold-006",
+      "category": "catalog_industries",
+      "question": "what industries does synapse serve",
+      "expect": "answer",
+      "contains_all": [
+        "banking",
+        "retail",
+        "cyber security",
+        "BPO"
+      ]
+    },
+    {
+      "id": "kb-gold-007",
+      "category": "contact",
+      "question": "how can i contact synapse tech",
+      "expect": "answer",
+      "contains_all": ["info@synapsetechinc.com", "Monday"]
+    },
+    {
+      "id": "kb-gold-008",
+      "category": "unsupported",
+      "question": "do you have public pricing",
+      "expect": "refuse"
+    },
+    {
+      "id": "kb-gold-009",
+      "category": "unsupported",
+      "question": "where are you located",
+      "expect": "refuse"
+    },
+    {
+      "id": "kb-gold-010",
+      "category": "unsupported",
+      "question": "who founded synapse",
+      "expect": "refuse"
+    },
+    {
+      "id": "kb-gold-011",
+      "category": "unsupported",
+      "question": "are you gdpr compliant",
+      "expect": "refuse"
+    },
+    {
+      "id": "kb-gold-012",
+      "category": "unsupported",
+      "question": "what is your phone number",
+      "expect": "refuse"
+    },
+    {
+      "id": "kb-gold-013",
+      "category": "unsupported",
+      "question": "what are your slas",
+      "expect": "refuse"
+    }
+  ]
+}

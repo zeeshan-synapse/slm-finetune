@@ -1,3 +1,8 @@
+"""
+Interactive comparison chat: fine-tuned column uses local KB + RAG for most
+questions; base column is a plain Ollama completion (no retrieval). See repo
+README for env vars (KB_ANSWER_MODEL), Ollama tags, and KB index paths.
+"""
 import json
 import threading
 import time
@@ -7,13 +12,43 @@ from guardrail_stage1 import (
     check_ollama,
     is_high_risk_question,
     is_policy_question,
+    is_small_talk_question,
     ollama_chat,
+    policy_intent,
     run_with_retry,
 )
+
+from kb_answer import kb_grounded_answer
 
 BASE_MODEL = "qwen-base"
 BASE_MODEL_FALLBACK = "qwen2.5:1.5b-instruct"
 STOP_SEQUENCES = ["\n\n", "Answer:", "Note:", "Q:", "You:"]
+
+# Printed on startup / batch so the two columns are never ambiguous.
+COLUMN_LEGEND = (
+    "Fine-tuned column = KB retrieval + grounded answer when applicable; "
+    "base column = single LLM call, no KB."
+)
+
+
+def _infer_ft_inference_label(result: dict) -> str:
+    """How the fine-tuned side was produced (for titles + debug)."""
+    reasons = (result.get("first_verdict") or {}).get("reasons") or []
+    if any(r == "kb_grounded_no_guardrail_retry" for r in reasons):
+        return "kb_rag"
+    if any(r == "small_talk_bypass" for r in reasons):
+        return "small_talk_no_kb"
+    if any(str(r).startswith("policy_bypass:") for r in reasons):
+        return "policy_no_kb"
+    return "ft_model_guardrail"
+
+
+_FT_PRIMARY_TITLES = {
+    "kb_rag": "FINE-TUNED + local KB (FAISS RAG)",
+    "small_talk_no_kb": "FINE-TUNED — small talk (no KB retrieval)",
+    "policy_no_kb": "FINE-TUNED — policy reply (no KB retrieval)",
+    "ft_model_guardrail": "FINE-TUNED — model + judge/retry (no KB RAG)",
+}
 
 
 def is_batch_instruction_line(text: str) -> bool:
@@ -55,6 +90,33 @@ def generate_base_answer(question: str) -> str:
             )
 
 
+def fine_tuned_result(question: str) -> dict:
+    """
+    Fine-tuned column: KB-grounded generation for product questions; guardrail
+    fast paths (small talk / policy) unchanged. No judge/retry on KB answers.
+    """
+    if is_small_talk_question(question) or policy_intent(question) is not None:
+        return run_with_retry(question)
+    answer = kb_grounded_answer(question)
+    ok_verdict = {
+        "pass": True,
+        "reasons": ["kb_grounded_no_guardrail_retry"],
+        "notes": "",
+        "rule_failures": [],
+        "judge_pass": True,
+    }
+    return {
+        "final_answer": answer,
+        "final_verdict": ok_verdict,
+        "attempts": 1,
+        "first_answer": answer,
+        "first_verdict": ok_verdict,
+        "retry_answer": None,
+        "retry_verdict": None,
+        "used_fallback": False,
+    }
+
+
 def run_with_loader(question: str, prefix: str = "") -> dict:
     stop_event = threading.Event()
 
@@ -72,7 +134,8 @@ def run_with_loader(question: str, prefix: str = "") -> dict:
     worker.start()
     started = time.perf_counter()
     try:
-        result = run_with_retry(question)
+        result = fine_tuned_result(question)
+        result["_ft_inference_label"] = _infer_ft_inference_label(result)
         result["base_answer"] = generate_base_answer(question)
     finally:
         stop_event.set()
@@ -91,13 +154,20 @@ def print_answer_block(title: str, answer: str) -> None:
 
 def print_comparison(result: dict, *, prefix: str = "") -> None:
     label_prefix = f"{prefix} " if prefix else ""
-    print_answer_block(f"{label_prefix}FINE-TUNED MODEL (raw)", result["first_answer"])
+    ft_label = result.get("_ft_inference_label") or _infer_ft_inference_label(result)
+    ft_title = _FT_PRIMARY_TITLES.get(ft_label, _FT_PRIMARY_TITLES["ft_model_guardrail"])
+    print_answer_block(f"{label_prefix}{ft_title}", result["first_answer"])
     if result["final_answer"] != result["first_answer"]:
-        print_answer_block(
-            f"{label_prefix}FINE-TUNED MODEL (guardrailed final)",
-            result["final_answer"],
+        final_title = (
+            f"{label_prefix}FINE-TUNED — guardrailed final (judge/retry; no extra KB pass)"
+            if ft_label == "kb_rag"
+            else f"{label_prefix}FINE-TUNED — guardrailed final (judge/retry)"
         )
-    print_answer_block(f"{label_prefix}BASE MODEL", result["base_answer"])
+        print_answer_block(final_title, result["final_answer"])
+    print_answer_block(
+        f"{label_prefix}BASE — plain LLM only (no KB, no RAG)",
+        result["base_answer"],
+    )
     print("\n" + "=" * 60)
 
 
@@ -117,10 +187,12 @@ def collect_batch_questions() -> list[str]:
 
 
 def print_debug(result: dict) -> None:
-    print("\n--- Guardrail Metadata ---")
+    ft_path = result.get("_ft_inference_label") or _infer_ft_inference_label(result)
+    print("\n--- Debug (fine-tuned path + attempts) ---")
     print(
         json.dumps(
             {
+                "fine_tuned_path": ft_path,
                 "attempts": result["attempts"],
                 "used_fallback": result["used_fallback"],
                 "attempt_1_reasons": result["first_verdict"]["reasons"],
@@ -145,6 +217,8 @@ def run_batch(debug: bool) -> None:
     fallback_count = 0
     total_time = 0.0
     print(f"\nRunning batch of {total} questions...\n")
+    print(COLUMN_LEGEND)
+    print()
 
     for i, question in enumerate(questions, start=1):
         prefix = f"[{i}/{total}]"
@@ -179,8 +253,9 @@ def run_batch(debug: bool) -> None:
 
 def chat() -> None:
     print("=" * 60)
-    print("Synapse SLM Guardrailed Chat")
+    print("Synapse SLM — fine-tuned vs base (KB on fine-tuned only)")
     print("=" * 60)
+    print(COLUMN_LEGEND)
     print("Type 'exit' to quit.")
     print("Type 'debug' to toggle attempt-level output.")
     print("Type 'batch' to paste multiple questions and run together.")
