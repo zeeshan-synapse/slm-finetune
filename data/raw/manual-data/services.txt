@@ -21,6 +21,10 @@ Most organizations don’t struggle with a lack of tools. They struggle because 
 
 Our services focus on removing that friction — designing systems that support daily work quietly, reliably, and without unnecessary complexity.
 
+In addition to our suite of pre-built AI products (like iRecruit One, Agentic Bot, Opira AI, Conversaction AI, and Cyber Security Automation), Synapse Tech Inc. offers full custom software development, engineering custom web platforms and mobile apps tailored to your workflows.
+
+Products designed for private AI deployment, such as Opira AI, can run completely offline, on-premises, or on private cloud infrastructure to protect data privacy and sovereignty.
+
 Most companies don’t actually need more tools, they’re already drowning in them. The real struggle is that nothing talks to each other, nothing scales when the pressure is on, and everything requires constant manual intervention. Synapse Tech Inc. replace that friction with intelligent platforms that just works quietly and reliably.
 Designed for today, adaptable for tomorrow.
 

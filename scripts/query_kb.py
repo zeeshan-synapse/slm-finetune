@@ -17,6 +17,7 @@ DEFAULT_META_PATH = PROJECT_DIR / "data" / "knowledge-base" / "index_meta.jsonl"
 DEFAULT_MANIFEST_PATH = PROJECT_DIR / "data" / "knowledge-base" / "index_manifest.json"
 DEFAULT_OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://localhost:11434")
 TOKEN_RE = re.compile(r"[a-z0-9]+")
+SPACING_RE = re.compile(r"\s+")
 STOPWORDS = {
     "a",
     "an",
@@ -73,6 +74,21 @@ INTENT_PAGE_TYPE_BONUS = {
     "contact": {"contact": 0.16},
     "about": {"about": 0.14},
     "pricing": {"product": 0.06, "service": 0.06, "about": 0.05, "index": 0.04},
+}
+
+PRODUCT_ALIAS_PATTERNS = [
+    ("coversaction ai", re.compile(r"\b(?:coversaction|conversaction)\s+ai\b|\bconversational\s+ai\b")),
+    ("opira ai", re.compile(r"\bopira(?:\.io)?(?:\s+ai)?\b|\bopairo\b")),
+    ("agentic bot", re.compile(r"\bagentic\s+bot\b")),
+    ("irecruit one", re.compile(r"\birecruit(?:\s+one)?\b")),
+    ("cyber security automation", re.compile(r"\bcyber\s+security\s+automation\b")),
+]
+
+CASUAL_REPLACEMENTS = {
+    " u ": " you ",
+    " ur ": " your ",
+    " pls ": " please ",
+    " plz ": " please ",
 }
 
 
@@ -203,30 +219,103 @@ def tokenize(text: str) -> list[str]:
     return TOKEN_RE.findall(text.lower())
 
 
+def normalize_query_text(query: str) -> str:
+    text = f" {query.lower()} "
+    for src, dst in CASUAL_REPLACEMENTS.items():
+        text = text.replace(src, dst)
+    text = SPACING_RE.sub(" ", text).strip()
+    return text
+
+
+def detect_product_aliases(normalized_query: str) -> list[str]:
+    aliases: list[str] = []
+    for label, pattern in PRODUCT_ALIAS_PATTERNS:
+        if pattern.search(normalized_query):
+            aliases.append(label)
+    return aliases
+
+
+def build_search_query(normalized_query: str, product_aliases: list[str]) -> str:
+    if not product_aliases:
+        return normalized_query
+    alias_text = " ".join(product_aliases)
+    return f"{normalized_query} {alias_text}"
+
+
+def infer_intent(normalized_query: str, tokens: list[str], product_aliases: list[str]) -> str | None:
+    token_set = set(tokens)
+
+    if {"contact", "email", "phone", "reach"} & token_set:
+        return "contact"
+    if {"pricing", "price", "prices", "cost", "costs", "quote", "subscription"} & token_set:
+        return "pricing"
+    if {"industry", "industries"} & token_set:
+        return "industry"
+    if {"service", "services"} & token_set:
+        return "service"
+    if {"product", "products"} & token_set:
+        return "product"
+
+    product_list_phrases = (
+        "what kind of products",
+        "what kinds of products",
+        "what products",
+        "which products",
+        "list all products",
+        "list all the products",
+        "list available products",
+        "available products",
+        "products do you have",
+        "products you have",
+        "products do you offer",
+        "products you offer",
+    )
+    if any(phrase in normalized_query for phrase in product_list_phrases):
+        return "product"
+
+    service_list_phrases = (
+        "what kind of services",
+        "what kinds of services",
+        "what services",
+        "which services",
+        "list all services",
+        "available services",
+        "services do you have",
+        "services do you offer",
+        "help choosing the right service",
+    )
+    if any(phrase in normalized_query for phrase in service_list_phrases):
+        return "service"
+
+    if product_aliases:
+        return "product"
+
+    if {"about", "mission", "company"} & token_set:
+        return "about"
+
+    return None
+
+
 def query_profile(query: str) -> dict[str, Any]:
-    tokens = tokenize(query)
+    normalized_query = normalize_query_text(query)
+    product_aliases = detect_product_aliases(normalized_query)
+    search_query = build_search_query(normalized_query, product_aliases)
+    tokens = tokenize(normalized_query)
     keywords = [token for token in tokens if len(token) >= 3 and token not in STOPWORDS]
     entity_terms = [token for token in keywords if token not in GENERIC_QUERY_TERMS]
-    intent = None
-    token_set = set(tokens)
-    if {"contact", "email", "phone", "reach"} & token_set:
-        intent = "contact"
-    elif {"about", "mission", "company"} & token_set:
-        intent = "about"
-    elif {"industry", "industries"} & token_set:
-        intent = "industry"
-    elif {"pricing", "price", "prices", "cost", "costs", "quote", "subscription"} & token_set:
-        intent = "pricing"
-    elif {"service", "services"} & token_set:
-        intent = "service"
-    elif {"product", "products"} & token_set:
-        intent = "product"
+    for alias in product_aliases:
+        for token in tokenize(alias):
+            if token not in entity_terms and token not in GENERIC_QUERY_TERMS:
+                entity_terms.append(token)
+    intent = infer_intent(normalized_query, tokens, product_aliases)
     return {
-        "query_text": query.lower(),
+        "query_text": normalized_query,
+        "search_query": search_query,
         "tokens": tokens,
         "keywords": keywords,
         "entity_terms": entity_terms,
         "intent": intent,
+        "product_aliases": product_aliases,
     }
 
 
@@ -293,6 +382,22 @@ def compute_rerank_score(
         if page_type_bonus:
             boost += page_type_bonus
             components["page_type_bias"] = page_type_bonus
+
+    product_aliases = profile.get("product_aliases") or []
+    for alias in product_aliases:
+        alias_tokens = set(tokenize(alias))
+        if not alias_tokens:
+            continue
+        title_doc_matches = len(alias_tokens & (title_tokens | doc_tokens))
+        text_matches = len(alias_tokens & text_tokens)
+        if title_doc_matches:
+            value = min(title_doc_matches * 0.28, 0.56)
+            boost += value
+            components["product_alias_title_doc_match"] = components.get("product_alias_title_doc_match", 0.0) + value
+        elif text_matches:
+            value = min(text_matches * 0.06, 0.18)
+            boost += value
+            components["product_alias_text_match"] = components.get("product_alias_text_match", 0.0) + value
 
     intent = profile.get("intent")
     if intent:

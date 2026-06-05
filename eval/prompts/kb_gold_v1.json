@@ -64,36 +64,78 @@
     },
     {
       "id": "kb-gold-008",
+      "category": "supported_capability",
+      "question": "Do you build custom software too, or only AI products?",
+      "expect": "answer",
+      "contains_all": ["custom software", "AI products", "web"]
+    },
+    {
+      "id": "kb-gold-009",
+      "category": "supported_deployment",
+      "question": "Can your tools work offline or on private infrastructure?",
+      "expect": "answer",
+      "contains_all": ["Opira", "offline", "private"]
+    },
+    {
+      "id": "kb-gold-010",
+      "category": "supported_service",
+      "question": "How do you help with workflow automation?",
+      "expect": "answer",
+      "contains_all": ["workflow automation", "APIs", "n8n"]
+    },
+    {
+      "id": "kb-gold-011",
+      "category": "supported_industry_fit",
+      "question": "Can your solutions work for industries like healthcare, retail, or BPO?",
+      "expect": "answer",
+      "contains_all": ["healthcare", "retail", "BPO"]
+    },
+    {
+      "id": "kb-gold-012",
+      "category": "product_definition",
+      "question": "What is Coversaction AI?",
+      "expect": "answer",
+      "contains_all": ["conversational AI", "customer", "appointment"]
+    },
+    {
+      "id": "kb-gold-013",
+      "category": "service_discovery",
+      "question": "I want help choosing the right service for my business. What would you ask me first?",
+      "expect": "answer",
+      "contains_all": ["business problem", "workflow automation", "private AI"]
+    },
+    {
+      "id": "kb-gold-014",
       "category": "unsupported",
       "question": "do you have public pricing",
       "expect": "refuse"
     },
     {
-      "id": "kb-gold-009",
+      "id": "kb-gold-015",
       "category": "unsupported",
       "question": "where are you located",
       "expect": "refuse"
     },
     {
-      "id": "kb-gold-010",
+      "id": "kb-gold-016",
       "category": "unsupported",
       "question": "who founded synapse",
       "expect": "refuse"
     },
     {
-      "id": "kb-gold-011",
+      "id": "kb-gold-017",
       "category": "unsupported",
       "question": "are you gdpr compliant",
       "expect": "refuse"
     },
     {
-      "id": "kb-gold-012",
+      "id": "kb-gold-018",
       "category": "unsupported",
       "question": "what is your phone number",
       "expect": "refuse"
     },
     {
-      "id": "kb-gold-013",
+      "id": "kb-gold-019",
       "category": "unsupported",
       "question": "what are your slas",
       "expect": "refuse"

@@ -142,6 +142,7 @@ def run_one(
         manifest_path=aw.DEFAULT_MANIFEST_PATH,
         embed_model=None,
         ollama_url=args.ollama_url,
+        rewrite_model=args.model,
         page_types=set(),
         top_k=args.top_k,
     )

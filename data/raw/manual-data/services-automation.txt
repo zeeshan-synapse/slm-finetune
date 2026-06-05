@@ -22,6 +22,9 @@ By treating automation as a core utility â€” private, governed, and resilient â€
 
 Get real-time autonomous workflows for always-on businesses.
 
+How Synapse Tech Helps With Workflow Automation:
+Synapse Tech Inc. helps businesses with workflow automation by building decision-making AI systems and custom automation ecosystems. We connect APIs, databases, and SaaS tools using orchestration layers like n8n and Make.com, build industrial data pipelines with Airbyte, and establish relational workflows with Airtable to eliminate repetitive manual tasks and run operations end-to-end.
+
 Build Your Automation Ecosystem
 The Next Evolution of Workflow Automation
 Move beyond simple, traditional integrations and toward intelligent automation. 

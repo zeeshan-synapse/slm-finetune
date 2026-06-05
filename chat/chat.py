@@ -4,21 +4,22 @@ questions; base column is a plain Ollama completion (no retrieval). See repo
 README for env vars (KB_ANSWER_MODEL), Ollama tags, and KB index paths.
 """
 import json
+import requests
 import threading
 import time
 
 from guardrail_stage1 import (
     GENERATOR_SYSTEM_PROMPT,
+    OLLAMA_URL,
     check_ollama,
     is_high_risk_question,
     is_policy_question,
     is_small_talk_question,
-    ollama_chat,
     policy_intent,
     run_with_retry,
 )
 
-from kb_answer import kb_grounded_answer
+from kb_answer import kb_grounded_answer_with_meta
 
 BASE_MODEL = "qwen-base"
 BASE_MODEL_FALLBACK = "qwen2.5:1.5b-instruct"
@@ -60,34 +61,69 @@ def is_batch_instruction_line(text: str) -> bool:
     )
 
 
-def generate_model_answer(model_name: str, question: str) -> str:
+def _usage_from_ollama_response(data: dict, model_name: str) -> dict:
+    input_tokens = data.get("prompt_eval_count")
+    output_tokens = data.get("eval_count")
+    return {
+        "model": model_name,
+        "input_tokens": input_tokens,
+        "output_tokens": output_tokens,
+        "total_tokens": (input_tokens or 0) + (output_tokens or 0),
+    }
+
+
+def generate_model_result(model_name: str, question: str) -> dict:
     strict_mode = is_high_risk_question(question) or is_policy_question(question)
     messages = [
         {"role": "system", "content": GENERATOR_SYSTEM_PROMPT},
         {"role": "user", "content": question},
     ]
-    return ollama_chat(
-        model_name,
-        messages,
-        temperature=0.1,
-        num_predict=80 if strict_mode else 180,
-        stop=STOP_SEQUENCES,
+    response = requests.post(
+        f"{OLLAMA_URL}/api/chat",
+        json={
+            "model": model_name,
+            "messages": messages,
+            "stream": False,
+            "options": {
+                "temperature": 0.1,
+                "num_predict": 80 if strict_mode else 180,
+                "stop": STOP_SEQUENCES,
+            },
+        },
+        timeout=120,
     )
+    response.raise_for_status()
+    data = response.json()
+    return {
+        "answer": data.get("message", {}).get("content", "").strip(),
+        "usage": _usage_from_ollama_response(data, model_name),
+    }
+
+
+def generate_model_answer(model_name: str, question: str) -> str:
+    return generate_model_result(model_name, question)["answer"]
+
+
+def generate_base_result(question: str) -> dict:
+    try:
+        return generate_model_result(BASE_MODEL, question)
+    except Exception as exc:
+        if BASE_MODEL_FALLBACK == BASE_MODEL:
+            return {"answer": f"[Base model error: {exc}]", "usage": None}
+        try:
+            return generate_model_result(BASE_MODEL_FALLBACK, question)
+        except Exception as fallback_exc:
+            return {
+                "answer": (
+                    f"[Base model error: {exc}; "
+                    f"fallback {BASE_MODEL_FALLBACK} failed: {fallback_exc}]"
+                ),
+                "usage": None,
+            }
 
 
 def generate_base_answer(question: str) -> str:
-    try:
-        return generate_model_answer(BASE_MODEL, question)
-    except Exception as exc:
-        if BASE_MODEL_FALLBACK == BASE_MODEL:
-            return f"[Base model error: {exc}]"
-        try:
-            return generate_model_answer(BASE_MODEL_FALLBACK, question)
-        except Exception as fallback_exc:
-            return (
-                f"[Base model error: {exc}; "
-                f"fallback {BASE_MODEL_FALLBACK} failed: {fallback_exc}]"
-            )
+    return generate_base_result(question)["answer"]
 
 
 def fine_tuned_result(question: str) -> dict:
@@ -97,7 +133,8 @@ def fine_tuned_result(question: str) -> dict:
     """
     if is_small_talk_question(question) or policy_intent(question) is not None:
         return run_with_retry(question)
-    answer = kb_grounded_answer(question)
+    meta = kb_grounded_answer_with_meta(question)
+    answer = meta["answer"]
     ok_verdict = {
         "pass": True,
         "reasons": ["kb_grounded_no_guardrail_retry"],
@@ -114,6 +151,8 @@ def fine_tuned_result(question: str) -> dict:
         "retry_answer": None,
         "retry_verdict": None,
         "used_fallback": False,
+        "kb_usage": meta.get("usage", {}),
+        "rewrite": meta.get("rewrite"),
     }
 
 
@@ -136,7 +175,9 @@ def run_with_loader(question: str, prefix: str = "") -> dict:
     try:
         result = fine_tuned_result(question)
         result["_ft_inference_label"] = _infer_ft_inference_label(result)
-        result["base_answer"] = generate_base_answer(question)
+        base_result = generate_base_result(question)
+        result["base_answer"] = base_result["answer"]
+        result["base_usage"] = base_result.get("usage")
     finally:
         stop_event.set()
         worker.join(timeout=1.0)
@@ -188,6 +229,17 @@ def collect_batch_questions() -> list[str]:
 
 def print_debug(result: dict) -> None:
     ft_path = result.get("_ft_inference_label") or _infer_ft_inference_label(result)
+    rewrite = result.get("rewrite") or {}
+    kb_usage = dict(result.get("kb_usage") or {})
+    if rewrite.get("usage"):
+        kb_usage = {"query_rewrite": rewrite.get("usage"), **kb_usage}
+    kb_total = sum(
+        item.get("total_tokens", 0)
+        for item in kb_usage.values()
+        if isinstance(item, dict)
+    )
+    if kb_usage:
+        kb_usage["total_tokens"] = kb_total
     print("\n--- Debug (fine-tuned path + attempts) ---")
     print(
         json.dumps(
@@ -199,6 +251,11 @@ def print_debug(result: dict) -> None:
                 "attempt_2_reasons": (
                     result["retry_verdict"]["reasons"] if result["retry_verdict"] else []
                 ),
+                "rewrite": rewrite,
+                "token_usage": {
+                    "fine_tuned_kb": kb_usage,
+                    "base": result.get("base_usage"),
+                },
                 "elapsed_s": round(result["_elapsed_s"], 2),
             },
             ensure_ascii=False,

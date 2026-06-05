@@ -50,6 +50,7 @@ def kb_grounded_answer(
     *,
     ollama_url: str | None = None,
     generation_model: str | None = None,
+    rewrite_model: str | None = None,
     embed_model: str | None = None,
     top_k: int = 5,
     context_k: int = 3,
@@ -79,6 +80,7 @@ def kb_grounded_answer(
         manifest_path=aw.DEFAULT_MANIFEST_PATH,
         embed_model=embed_model,
         ollama_url=base_url,
+        rewrite_model=rewrite_model,
         page_types=page_types or set(),
         top_k=top_k,
     )
@@ -101,6 +103,7 @@ def kb_grounded_answer_with_meta(
     *,
     ollama_url: str | None = None,
     generation_model: str | None = None,
+    rewrite_model: str | None = None,
     embed_model: str | None = None,
     top_k: int = 5,
     context_k: int = 3,
@@ -129,6 +132,7 @@ def kb_grounded_answer_with_meta(
         manifest_path=aw.DEFAULT_MANIFEST_PATH,
         embed_model=embed_model,
         ollama_url=base_url,
+        rewrite_model=rewrite_model,
         page_types=page_types or set(),
         top_k=top_k,
     )
@@ -148,6 +152,8 @@ def kb_grounded_answer_with_meta(
         "answer": answer,
         "generation_model": model,
         "embedding_model": embedding_model,
+        "rewrite": profile.get("rewrite"),
+        "usage": profile.get("usage", {}),
     }
 
 

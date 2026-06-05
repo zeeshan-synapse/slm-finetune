@@ -65,6 +65,10 @@ In short, we stay close. We think ahead. And we treat your business like our own
 
 At Synapse Tech Inc., our commitment is simple: we grow when you grow.
 
+Capabilities and Deployment Options:
+- Custom Software Development: Synapse Tech Inc. builds custom software in addition to our proprietary AI products. We offer full custom web and mobile application development services alongside our modular AI products to deliver a unified, intelligent digital ecosystem.
+- Offline and Private Infrastructure: Synapse Tech supports private infrastructure and offline deployment for products designed for that environment. For example, Opira AI is an offline LLM and private RAG platform that deploys entirely on-premises or in a private cloud environment behind your firewall with zero internet dependency.
+
 
 
 

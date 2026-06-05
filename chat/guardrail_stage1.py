@@ -297,11 +297,65 @@ def is_specific_integration_question(question: str) -> bool:
     return "integration" in low_q and not is_general_integration_list_question(question)
 
 
+def normalize_repeated_letters(text: str) -> str:
+    return re.sub(r"([a-z])\1{2,}", r"\1", text.lower())
+
+
 def is_small_talk_question(question: str) -> bool:
     low_q = question.strip().lower()
+    normalized_q = normalize_repeated_letters(low_q)
+    word_tokens = re.findall(r"[a-z]+", normalized_q)
+    token_set = set(word_tokens)
+
+    business_terms = {
+        "agentic",
+        "automation",
+        "bot",
+        "buy",
+        "contact",
+        "cost",
+        "custom",
+        "kb",
+        "opira",
+        "pricing",
+        "product",
+        "products",
+        "purchase",
+        "service",
+        "services",
+        "synapse",
+        "workflow",
+    }
+    question_terms = {
+        "can",
+        "could",
+        "do",
+        "does",
+        "how",
+        "list",
+        "tell",
+        "what",
+        "when",
+        "where",
+        "which",
+        "why",
+    }
+    if token_set & business_terms:
+        return False
+    if (token_set & question_terms) and not contains_any(
+        normalized_q,
+        [
+            "how are you",
+            "who are you",
+            "what can you do",
+        ],
+    ):
+        return False
+
     small_talk_exact = {
         "hi",
         "hello",
+        "helo",
         "hey",
         "thanks",
         "thank you",
@@ -311,10 +365,24 @@ def is_small_talk_question(question: str) -> bool:
         "good afternoon",
         "good evening",
     }
-    if low_q in small_talk_exact:
+    if normalized_q in small_talk_exact:
+        return True
+    greeting_tokens = {
+        "hi",
+        "hello",
+        "helo",
+        "hey",
+        "yo",
+        "sup",
+        "bro",
+        "there",
+        "buddy",
+        "mate",
+    }
+    if word_tokens and len(word_tokens) <= 4 and set(word_tokens) <= greeting_tokens:
         return True
     return contains_any(
-        low_q,
+        normalized_q,
         [
             "how are you",
             "who are you",
