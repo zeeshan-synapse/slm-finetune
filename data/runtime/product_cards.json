@@ -1,0 +1,32 @@
+{
+  "Agentic Bot": {
+    "type": "product",
+    "short_description": "a WhatsApp-centric assistant for service requests, forms, policy queries, breach checks, and workflow actions",
+    "aliases": ["agentic bot", "agentic chatbot"],
+    "detail_answer": "Agentic Bot is a WhatsApp-centric assistant that helps organizations handle service requests, policy questions, form delivery, breach checks, and backend workflow actions from a single conversation."
+  },
+  "iRecruit One": {
+    "type": "product",
+    "short_description": "a recruitment intelligence platform for screening, interviews, scheduling, and shortlisting",
+    "aliases": ["irecruit", "irecruit one"],
+    "detail_answer": "iRecruit One is an enterprise recruitment platform that automates CV screening, AI interviews, and smart shortlisting. It is designed to help teams hire faster, fairer, and at scale."
+  },
+  "Opira AI": {
+    "type": "product",
+    "short_description": "an offline LLM and private RAG platform for sensitive enterprise knowledge",
+    "aliases": ["opira", "opira ai", "opira.io", "opairo"],
+    "detail_answer": "Opira AI is an offline LLM platform with private RAG engines that runs entirely on your network. Enterprises can query sensitive documents, compare models, and automate AI workflows without sending data to the cloud."
+  },
+  "Coversaction AI": {
+    "type": "product",
+    "short_description": "a conversational AI product for customer resolution, appointments, lead qualification, and handoffs",
+    "aliases": ["coversaction ai", "conversaction ai", "conversational ai"],
+    "detail_answer": "Coversaction AI is a conversational AI product for customer resolution, appointments, lead qualification, and handoffs. It helps businesses handle customer interactions across multiple touchpoints with automation and human handoff support."
+  },
+  "Cyber Security Automation": {
+    "type": "product",
+    "short_description": "an automation product for security operations and digital risk workflows",
+    "aliases": ["cyber security automation", "cybersecurity automation"],
+    "detail_answer": "Cyber Security Automation helps automate security operations and digital risk workflows."
+  }
+}

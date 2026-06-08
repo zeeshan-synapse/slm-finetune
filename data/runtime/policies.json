@@ -1,0 +1,39 @@
+{
+  "service_title_cleanups": {
+    "Custom Web & Mobile App Development": "custom web and mobile app development",
+    "Sovereign Cloud Infrastructure": "sovereign cloud infrastructure",
+    "AI Workflow Automation & Integration": "AI workflow automation and integration",
+    "AI Voice Agents & Conversational Automation": "AI voice agents and conversational automation"
+  },
+  "custom_software": {
+    "answer": "Synapse Tech does both. It offers custom web and mobile app development alongside AI products like Agentic Bot, iRecruit One, Opira AI, Coversaction AI, and Cyber Security Automation."
+  },
+  "private_infrastructure": {
+    "supported_product": "Opira AI",
+    "answer": "Not all Synapse tools are confirmed to run offline. The available information specifically supports Opira AI for offline, on-premises, or private cloud deployment."
+  },
+  "workflow_automation": {
+    "answer": "Synapse Tech helps with workflow automation by connecting the tools, APIs, databases, and SaaS systems your team already uses into one coordinated workflow. It uses orchestration and data layers such as n8n, Make.com, Airbyte, and Airtable to reduce manual handoffs, copy-paste work, and repetitive operational tasks."
+  },
+  "voice_agent": {
+    "answer": "Yes. Synapse Tech provides AI voice agents and conversational automation for customer calls, call-center workflows, context-aware conversations, and handoff to human teams when needed."
+  },
+  "operational_guidance": {
+    "retail_first_deploy": "For a retail support team, start with Coversaction AI or conversational automation for repetitive customer questions, ticket triage, appointments, and human handoff. Keep agents responsible for exceptions and sensitive cases.",
+    "banking_first_deploy": "For banking operations, start with one repetitive approval or document-review workflow using AI workflow automation. Keep human approval for regulated, exceptional, or high-impact decisions.",
+    "bpo_first_deploy": "For a BPO service desk, start with conversational automation for ticket triage, status updates, repetitive requests, and escalation to human agents.",
+    "pilot_success_30": "Measure one workflow against a pre-pilot baseline. Track first-response time, resolution time, error rate, escalation rate, and adoption over 30 days before expanding scope.",
+    "low_risk_pilot": "Start with one narrow, high-volume workflow, keep human review for exceptions, and compare results against a baseline. Expand only after the first KPI trend is stable.",
+    "automation_human_oversight": "Automate repetitive work and routine routing while keeping people responsible for exceptions, approvals, sensitive cases, and high-impact decisions.",
+    "manual_approvals_first_step": "Start by mapping one high-volume approval flow, separating rule-based approvals from exceptions, and keeping human review for sensitive or high-impact decisions. Measure approval cycle time, error rate, and escalation volume before automating more flows.",
+    "implementation_effort": "Estimate implementation effort as a range based on workflow scope, integrations, data readiness, security requirements, and human-review needs. Start with a small pilot before committing to a full rollout timeline.",
+    "data_before_deployment": "Before deployment, gather the current workflow steps, source documents, decision rules, exception paths, system integrations, access requirements, and baseline performance metrics.",
+    "roi_framework": "Think about ROI as time saved, fewer errors, better throughput, and improved service quality against a baseline. Do not assume a fixed percentage unless Synapse confirms it for the specific scope.",
+    "highly_manual_process": "Map the highest-volume repetitive steps, select one workflow with clear rules, and automate that first. Measure cycle time, error rate, and manual handoffs before expanding.",
+    "limited_product_choice": "Choose based on the confirmed use case, required channels, deployment model, integration needs, and governance requirements. Treat missing details as unconfirmed and verify them before deciding."
+  },
+  "company_overview": {
+    "neutral_sentence": "Synapse Tech develops custom software, workflow automation, conversational AI, private AI, and cloud infrastructure for business operations.",
+    "neutral_two_sentences": "Synapse Tech develops custom software, workflow automation, conversational AI, private AI, and cloud infrastructure. Its products and services support areas such as customer service, recruitment, internal knowledge access, and operational automation."
+  }
+}

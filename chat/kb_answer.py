@@ -8,7 +8,7 @@ Runs the same pipeline as scripts/answer_with_kb.py:
 Generation model resolution:
   1. explicit `generation_model` argument
   2. env KB_ANSWER_MODEL
-  3. guardrail_stage1.GENERATOR_MODEL (fine-tuned tag, e.g. synapse-qwen1.5b-v5)
+  3. scripts.answer_with_kb.DEFAULT_GENERATION_MODEL
 
 Run from repo root (smoke test):
   ./venv/bin/python chat/kb_answer.py "what is opira ai"
@@ -30,8 +30,6 @@ if str(_SCRIPTS_DIR) not in sys.path:
 import answer_with_kb as aw  # noqa: E402
 import query_kb  # noqa: E402
 
-from guardrail_stage1 import GENERATOR_MODEL  # noqa: E402
-
 
 def resolve_ollama_url(ollama_url: str | None) -> str:
     if ollama_url:
@@ -42,7 +40,7 @@ def resolve_ollama_url(ollama_url: str | None) -> str:
 def resolve_generation_model(generation_model: str | None) -> str:
     if generation_model:
         return generation_model.strip()
-    return os.environ.get("KB_ANSWER_MODEL", GENERATOR_MODEL).strip()
+    return os.environ.get("KB_ANSWER_MODEL", aw.DEFAULT_GENERATION_MODEL).strip()
 
 
 def kb_grounded_answer(
@@ -51,6 +49,7 @@ def kb_grounded_answer(
     ollama_url: str | None = None,
     generation_model: str | None = None,
     rewrite_model: str | None = None,
+    classifier_model: str | None = None,
     embed_model: str | None = None,
     top_k: int = 5,
     context_k: int = 3,
@@ -81,6 +80,7 @@ def kb_grounded_answer(
         embed_model=embed_model,
         ollama_url=base_url,
         rewrite_model=rewrite_model,
+        classifier_model=classifier_model,
         page_types=page_types or set(),
         top_k=top_k,
     )
@@ -104,6 +104,7 @@ def kb_grounded_answer_with_meta(
     ollama_url: str | None = None,
     generation_model: str | None = None,
     rewrite_model: str | None = None,
+    classifier_model: str | None = None,
     embed_model: str | None = None,
     top_k: int = 5,
     context_k: int = 3,
@@ -133,6 +134,7 @@ def kb_grounded_answer_with_meta(
         embed_model=embed_model,
         ollama_url=base_url,
         rewrite_model=rewrite_model,
+        classifier_model=classifier_model,
         page_types=page_types or set(),
         top_k=top_k,
     )
@@ -153,6 +155,9 @@ def kb_grounded_answer_with_meta(
         "generation_model": model,
         "embedding_model": embedding_model,
         "rewrite": profile.get("rewrite"),
+        "classification": profile.get("model_classification"),
+        "answer_policy": profile.get("answer_policy"),
+        "observability": profile.get("observability"),
         "usage": profile.get("usage", {}),
     }
 
@@ -160,7 +165,7 @@ def kb_grounded_answer_with_meta(
 def _parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(description="Smoke test: KB grounded answer (one question).")
     p.add_argument("question", nargs="+", help="Question text")
-    p.add_argument("--model", help="Override generation model (default: KB_ANSWER_MODEL or GENERATOR_MODEL)")
+    p.add_argument("--model", help="Override generation model (default: KB_ANSWER_MODEL or answer_with_kb default)")
     p.add_argument("--ollama-url", help="Override Ollama base URL")
     p.add_argument("--json", action="store_true", help="Print JSON with answer + model metadata")
     return p.parse_args()

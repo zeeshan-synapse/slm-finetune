@@ -5,8 +5,17 @@ README for env vars (KB_ANSWER_MODEL), Ollama tags, and KB index paths.
 """
 import json
 import requests
+import sys
 import threading
 import time
+from pathlib import Path
+
+_CHAT_DIR = Path(__file__).resolve().parent
+_PROJECT_ROOT = _CHAT_DIR.parent
+_SCRIPTS_DIR = _PROJECT_ROOT / "scripts"
+for path in (_CHAT_DIR, _SCRIPTS_DIR):
+    if str(path) not in sys.path:
+        sys.path.insert(0, str(path))
 
 from guardrail_stage1 import (
     GENERATOR_SYSTEM_PROMPT,
@@ -20,6 +29,7 @@ from guardrail_stage1 import (
 )
 
 from kb_answer import kb_grounded_answer_with_meta
+import answer_with_kb as aw
 
 BASE_MODEL = "qwen-base"
 BASE_MODEL_FALLBACK = "qwen2.5:1.5b-instruct"
@@ -30,6 +40,22 @@ COLUMN_LEGEND = (
     "Fine-tuned column = KB retrieval + grounded answer when applicable; "
     "base column = single LLM call, no KB."
 )
+
+
+def quick_guardrail_observability(question: str) -> dict:
+    intent = "small_talk" if is_small_talk_question(question) else "policy"
+    event = {
+        "question": question,
+        "intent": intent,
+        "confidence": 1.0,
+        "route": "quick_guardrail",
+        "rewrite_query": "",
+        "sources": [],
+        "used_template": True,
+        "used_refusal": False,
+    }
+    aw.log_kb_debug({"stage": "answer_observability", **event})
+    return event
 
 
 def _infer_ft_inference_label(result: dict) -> str:
@@ -132,7 +158,9 @@ def fine_tuned_result(question: str) -> dict:
     fast paths (small talk / policy) unchanged. No judge/retry on KB answers.
     """
     if is_small_talk_question(question) or policy_intent(question) is not None:
-        return run_with_retry(question)
+        result = run_with_retry(question)
+        result["observability"] = quick_guardrail_observability(question)
+        return result
     meta = kb_grounded_answer_with_meta(question)
     answer = meta["answer"]
     ok_verdict = {
@@ -153,6 +181,9 @@ def fine_tuned_result(question: str) -> dict:
         "used_fallback": False,
         "kb_usage": meta.get("usage", {}),
         "rewrite": meta.get("rewrite"),
+        "classification": meta.get("classification"),
+        "answer_policy": meta.get("answer_policy"),
+        "observability": meta.get("observability"),
     }
 
 
@@ -252,6 +283,9 @@ def print_debug(result: dict) -> None:
                     result["retry_verdict"]["reasons"] if result["retry_verdict"] else []
                 ),
                 "rewrite": rewrite,
+                "classification": result.get("classification"),
+                "answer_policy": result.get("answer_policy"),
+                "observability": result.get("observability"),
                 "token_usage": {
                     "fine_tuned_kb": kb_usage,
                     "base": result.get("base_usage"),

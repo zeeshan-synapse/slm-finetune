@@ -25,12 +25,27 @@ DEFAULT_REWRITE_MODEL = (
     or os.environ.get("KB_ANSWER_MODEL")
     or DEFAULT_GENERATION_MODEL
 )
+DEFAULT_CLASSIFIER_MODEL = (
+    os.environ.get("KB_CLASSIFIER_MODEL")
+    or os.environ.get("KB_BASE_MODEL")
+    or os.environ.get("KB_REWRITE_MODEL")
+    or "qwen-base"
+)
 DEFAULT_FALLBACK_RESPONSE = (
     "This detail is not confirmed in the available information. Please verify with Synapse Tech."
 )
 KB_DEBUG_LOG_PATH = PROJECT_DIR / "logs" / "kb_answer_debug.jsonl"
 DISABLE_ROUTE_SPECIFIC_ANSWERS = False
 DISABLE_NONCRITICAL_DIRECT_ANSWERS = False
+HARD_DETERMINISTIC_POLICIES = {
+    "contact",
+    "purchase",
+    "high_risk_unknown",
+    "product_catalog",
+    "ops_guidance",
+    "company_overview",
+    "voice_agent",
+}
 SUMMARY_INTENT_CONFIG = {
     "service": {
         "index_doc_id": "services",
@@ -48,16 +63,104 @@ SUMMARY_INTENT_CONFIG = {
         "label": "industries",
     },
 }
-PRODUCT_NAME_PATTERNS = [
-    ("Agentic Bot", re.compile(r"\bagentic bot\b", re.IGNORECASE)),
-    ("iRecruit One", re.compile(r"\birecruit(?:\s+one)?\b", re.IGNORECASE)),
-    ("Opira AI", re.compile(r"\bopira(?:\.io)?\b|\bopairo\b", re.IGNORECASE)),
-    ("Coversaction AI", re.compile(r"\bcoversaction ai\b|\bconversaction ai\b", re.IGNORECASE)),
-    (
-        "Cyber Security Automation",
-        re.compile(r"\bcyber security automation\b", re.IGNORECASE),
-    ),
-]
+RUNTIME_CONFIG_DIR = PROJECT_DIR / "data" / "runtime"
+DEFAULT_PRODUCT_CARDS = {
+    "Agentic Bot": {
+        "short_description": "a WhatsApp-centric assistant for service requests, forms, policy queries, breach checks, and workflow actions",
+        "aliases": ["agentic bot", "agentic chatbot"],
+        "detail_answer": "Agentic Bot is a WhatsApp-centric assistant that helps organizations handle service requests, policy questions, form delivery, breach checks, and backend workflow actions from a single conversation.",
+    },
+    "iRecruit One": {
+        "short_description": "a recruitment intelligence platform for screening, interviews, scheduling, and shortlisting",
+        "aliases": ["irecruit", "irecruit one"],
+        "detail_answer": "iRecruit One is an enterprise recruitment platform that automates CV screening, AI interviews, and smart shortlisting. It is designed to help teams hire faster, fairer, and at scale.",
+    },
+    "Opira AI": {
+        "short_description": "an offline LLM and private RAG platform for sensitive enterprise knowledge",
+        "aliases": ["opira", "opira ai", "opira.io", "opairo"],
+        "detail_answer": "Opira AI is an offline LLM platform with private RAG engines that runs entirely on your network. Enterprises can query sensitive documents, compare models, and automate AI workflows without sending data to the cloud.",
+    },
+    "Coversaction AI": {
+        "short_description": "a conversational AI product for customer resolution, appointments, lead qualification, and handoffs",
+        "aliases": ["coversaction ai", "conversaction ai", "conversational ai"],
+        "detail_answer": "Coversaction AI is a conversational AI product built for always-on customer resolution across customer touchpoints. It can support issue resolution, appointment management, lead qualification, and handoff workflows.",
+    },
+    "Cyber Security Automation": {
+        "short_description": "an automation product for security operations and digital risk workflows",
+        "aliases": ["cyber security automation", "cybersecurity automation"],
+        "detail_answer": "Cyber Security Automation helps automate security operations and digital risk workflows.",
+    },
+}
+DEFAULT_RUNTIME_POLICIES = {
+    "service_title_cleanups": {
+        "Custom Web & Mobile App Development": "custom web and mobile app development",
+        "Sovereign Cloud Infrastructure": "sovereign cloud infrastructure",
+        "AI Workflow Automation & Integration": "AI workflow automation and integration",
+        "AI Voice Agents & Conversational Automation": "AI voice agents and conversational automation",
+    },
+    "custom_software": {
+        "answer": "Synapse Tech does both. It offers custom web and mobile app development alongside AI products like Agentic Bot, iRecruit One, Opira AI, Coversaction AI, and Cyber Security Automation.",
+    },
+    "private_infrastructure": {
+        "supported_product": "Opira AI",
+        "answer": "Not all Synapse tools are confirmed to run offline. The available information specifically supports Opira AI for offline, on-premises, or private cloud deployment.",
+    },
+    "workflow_automation": {
+        "answer": "Synapse Tech helps with workflow automation by connecting the tools, APIs, databases, and SaaS systems your team already uses into one coordinated workflow. It uses orchestration and data layers such as n8n, Make.com, Airbyte, and Airtable to reduce manual handoffs, copy-paste work, and repetitive operational tasks.",
+    },
+    "voice_agent": {
+        "answer": "Yes. Synapse Tech provides AI voice agents and conversational automation for customer calls, call-center workflows, context-aware conversations, and handoff to human teams when needed.",
+    },
+    "operational_guidance": {
+        "retail_first_deploy": "For a retail support team, start with Coversaction AI or conversational automation for repetitive customer questions, ticket triage, appointments, and human handoff. Keep agents responsible for exceptions and sensitive cases.",
+        "banking_first_deploy": "For banking operations, start with one repetitive approval or document-review workflow using AI workflow automation. Keep human approval for regulated, exceptional, or high-impact decisions.",
+        "bpo_first_deploy": "For a BPO service desk, start with conversational automation for ticket triage, status updates, repetitive requests, and escalation to human agents.",
+        "pilot_success_30": "Measure one workflow against a pre-pilot baseline. Track first-response time, resolution time, error rate, escalation rate, and adoption over 30 days before expanding scope.",
+        "low_risk_pilot": "Start with one narrow, high-volume workflow, keep human review for exceptions, and compare results against a baseline. Expand only after the first KPI trend is stable.",
+        "automation_human_oversight": "Automate repetitive work and routine routing while keeping people responsible for exceptions, approvals, sensitive cases, and high-impact decisions.",
+        "manual_approvals_first_step": "Start by mapping one high-volume approval flow, separating rule-based approvals from exceptions, and keeping human review for sensitive or high-impact decisions. Measure approval cycle time, error rate, and escalation volume before automating more flows.",
+        "implementation_effort": "Estimate implementation effort as a range based on workflow scope, integrations, data readiness, security requirements, and human-review needs. Start with a small pilot before committing to a full rollout timeline.",
+        "data_before_deployment": "Before deployment, gather the current workflow steps, source documents, decision rules, exception paths, system integrations, access requirements, and baseline performance metrics.",
+        "roi_framework": "Think about ROI as time saved, fewer errors, better throughput, and improved service quality against a baseline. Do not assume a fixed percentage unless Synapse confirms it for the specific scope.",
+        "highly_manual_process": "Map the highest-volume repetitive steps, select one workflow with clear rules, and automate that first. Measure cycle time, error rate, and manual handoffs before expanding.",
+        "limited_product_choice": "Choose based on the confirmed use case, required channels, deployment model, integration needs, and governance requirements. Treat missing details as unconfirmed and verify them before deciding."
+    },
+    "company_overview": {
+        "neutral_sentence": "Synapse Tech develops custom software, workflow automation, conversational AI, private AI, and cloud infrastructure for business operations.",
+        "neutral_two_sentences": "Synapse Tech develops custom software, workflow automation, conversational AI, private AI, and cloud infrastructure. Its products and services support areas such as customer service, recruitment, internal knowledge access, and operational automation."
+    },
+}
+
+
+def load_runtime_json(path: Path, fallback: dict[str, Any]) -> dict[str, Any]:
+    try:
+        with path.open("r", encoding="utf-8") as f:
+            data = json.load(f)
+        return data if isinstance(data, dict) else fallback
+    except Exception:
+        return fallback
+
+
+PRODUCT_CARDS = load_runtime_json(RUNTIME_CONFIG_DIR / "product_cards.json", DEFAULT_PRODUCT_CARDS)
+RUNTIME_POLICIES = load_runtime_json(RUNTIME_CONFIG_DIR / "policies.json", DEFAULT_RUNTIME_POLICIES)
+
+
+def compile_product_patterns(product_cards: dict[str, Any]) -> list[tuple[str, re.Pattern[str]]]:
+    patterns: list[tuple[str, re.Pattern[str]]] = []
+    for name, card in product_cards.items():
+        aliases = [name]
+        if isinstance(card, dict):
+            aliases.extend(str(alias) for alias in card.get("aliases", []) if alias)
+        alias_pattern = "|".join(
+            re.escape(alias).replace(r"\ ", r"\s+")
+            for alias in sorted(set(aliases), key=len, reverse=True)
+        )
+        if alias_pattern:
+            patterns.append((name, re.compile(rf"\b(?:{alias_pattern})\b", re.IGNORECASE)))
+    return patterns
+
+
+PRODUCT_NAME_PATTERNS = compile_product_patterns(PRODUCT_CARDS)
 INDUSTRY_NAME_PATTERNS = [
     ("banking and financial services", re.compile(r"\bbank(?:s|ing)?\b|\bfinancial\b|\bfintechs?\b", re.IGNORECASE)),
     ("BPO and contact centers", re.compile(r"\bbpo\b|\bcontact centers?\b", re.IGNORECASE)),
@@ -71,12 +174,7 @@ CONTACT_HOURS_RE = re.compile(
     re.IGNORECASE,
 )
 SENTENCE_SPLIT_RE = re.compile(r"(?<=[.!?])\s+")
-SERVICE_TITLE_CLEANUPS = {
-    "Custom Web & Mobile App Development": "custom web and mobile app development",
-    "Sovereign Cloud Infrastructure": "sovereign cloud infrastructure",
-    "AI Workflow Automation & Integration": "AI workflow automation and integration",
-    "AI Voice Agents & Conversational Automation": "AI voice agents and conversational automation",
-}
+SERVICE_TITLE_CLEANUPS = RUNTIME_POLICIES.get("service_title_cleanups", DEFAULT_RUNTIME_POLICIES["service_title_cleanups"])
 INDUSTRY_NAME_NORMALIZATION = {
     "banking and financial": "banking and financial services",
     "banking and financial services": "banking and financial services",
@@ -88,20 +186,14 @@ INDUSTRY_NAME_NORMALIZATION = {
     "manufacturing and logistics": "manufacturing and logistics",
 }
 PRODUCT_NAME_NORMALIZATION = {
-    "opira ai": "Opira AI",
-    "opira": "Opira AI",
-    "coversaction ai": "Coversaction AI",
-    "conversaction ai": "Coversaction AI",
-    "agentic bot": "Agentic Bot",
-    "irecruit one": "iRecruit One",
-    "cyber security automation": "Cyber Security Automation",
+    alias.lower(): name
+    for name, card in PRODUCT_CARDS.items()
+    for alias in [name, *(card.get("aliases", []) if isinstance(card, dict) else [])]
 }
 PRODUCT_SHORT_DESCRIPTIONS = {
-    "Agentic Bot": "a WhatsApp-centric assistant for service requests, forms, policy queries, and breach checks",
-    "iRecruit One": "a recruitment intelligence platform for screening, interviews, scheduling, and shortlisting",
-    "Opira AI": "an offline LLM and private RAG platform for sensitive enterprise knowledge",
-    "Coversaction AI": "a conversational AI product for customer resolution, appointments, lead qualification, and handoffs",
-    "Cyber Security Automation": "an automation product for security operations and digital risk workflows",
+    name: card.get("short_description", "")
+    for name, card in PRODUCT_CARDS.items()
+    if isinstance(card, dict) and card.get("short_description")
 }
 SYSTEM_PROMPT = (
     "You are a factual assistant for Synapse Tech Inc. "
@@ -116,6 +208,16 @@ QUERY_REWRITE_SYSTEM_PROMPT = (
     "Do not answer the question. Do not invent facts. "
     "Return ONLY valid JSON in this exact shape: "
     '{"search_query": "<short search query>", "intent_hint": "<brief intent>"}'
+)
+INTENT_CLASSIFIER_SYSTEM_PROMPT = (
+    "You classify user questions for a Synapse Tech RAG assistant. "
+    "Do not answer the question. Do not invent facts. "
+    "Choose exactly one intent from: product_catalog, product_detail, service_catalog, "
+    "service_guidance, private_infrastructure, contact, purchase, industry, company_overview, "
+    "generic, high_risk_unknown. "
+    "Use high_risk_unknown for pricing, legal, compliance, certifications, SLA, roadmap, or guarantees. "
+    "Return ONLY valid JSON in this exact shape: "
+    '{"intent": "<intent>", "entity": "<product/service/company if any>", "risk": "normal|high_risk", "confidence": 0.0}'
 )
 JSON_OBJECT_RE = re.compile(r"\{.*\}", re.DOTALL)
 LEADING_ARTIFACT_PATTERNS = [
@@ -197,6 +299,46 @@ _HIGH_RISK_TERMS = (
     "guarantee",
     "guaranteed",
 )
+_OUTCOME_TERMS = (
+    "roi",
+    "return on investment",
+    "support cost",
+    "support costs",
+    "cost reduction",
+    "productivity",
+    "percentage",
+    "percent",
+    "reduction",
+    "outcome",
+    "90 days",
+    "deadline",
+)
+_KNOWN_INTEGRATION_NAMES = (
+    "salesforce",
+    "hubspot",
+    "zapier",
+    "google drive",
+    "workday",
+    "sap",
+    "crm",
+    "api endpoint",
+    "rest api",
+)
+_CUSTOMER_REFERENCE_TERMS = (
+    "customer logo",
+    "customer logos",
+    "customer name",
+    "customer names",
+    "client logo",
+    "client logos",
+    "client name",
+    "client names",
+    "references",
+    "case study",
+    "case studies",
+    "testimonial",
+    "testimonials",
+)
 
 
 def _contains_any(haystack: str, needles: tuple[str, ...]) -> bool:
@@ -224,8 +366,206 @@ def is_purchase_or_get_started_question(question: str) -> bool:
     )
 
 
+def is_direct_contact_question(question: str) -> bool:
+    low = question.lower()
+    return _contains_any(
+        low,
+        (
+            "contact synapse",
+            "contact you",
+            "contact the team",
+            "contact sales",
+            "email",
+            "phone",
+            "call you",
+            "reach synapse",
+            "reach out",
+            "how can i contact",
+            "how do i contact",
+            "talk to sales",
+            "speak to someone",
+        ),
+    )
+
+
 def is_high_risk_question(question: str) -> bool:
-    return _contains_any(question.lower(), _HIGH_RISK_TERMS)
+    return high_risk_category(question) is not None
+
+
+def is_outcome_guarantee_question(question: str) -> bool:
+    low = question.lower()
+    return _contains_any(low, ("guarante", "promise")) and _contains_any(low, _OUTCOME_TERMS)
+
+
+def is_sla_question(question: str) -> bool:
+    return _contains_any(question.lower(), ("sla", "uptime", "service level", "response-time", "response time"))
+
+
+def is_roadmap_question(question: str) -> bool:
+    return _contains_any(question.lower(), ("roadmap", "release date", "launch date", "upcoming release", "upcoming releases"))
+
+
+def is_cert_or_compliance_question(question: str) -> bool:
+    low = question.lower()
+    return _contains_any(
+        low,
+        (
+            "soc 2",
+            "iso",
+            "certification",
+            "certifications",
+            "certificate",
+            "compliance standard",
+            "compliance standards",
+            "regulatory approval",
+        ),
+    )
+
+
+def is_legal_terms_question(question: str) -> bool:
+    return _contains_any(question.lower(), ("legal", "liability", "contract", "contractual", "warranty", "indemn", "terms"))
+
+
+def is_general_integration_list_question(question: str) -> bool:
+    low = question.lower()
+    return "integration" in low and _contains_any(
+        low,
+        (
+            "which integrations",
+            "what integrations",
+            "integration list",
+            "integrations are supported",
+            "integrations are explicitly supported",
+            "integrations are explicitly confirmed",
+        ),
+    )
+
+
+def is_specific_integration_question(question: str) -> bool:
+    low = question.lower()
+    if _contains_any(low, _KNOWN_INTEGRATION_NAMES):
+        return True
+    return "integration" in low and not is_general_integration_list_question(question)
+
+
+def is_public_api_docs_question(question: str) -> bool:
+    low = question.lower()
+    return "api" in low and _contains_any(low, ("documentation", "docs", "publicly", "public"))
+
+
+def is_model_architecture_question(question: str) -> bool:
+    low = question.lower()
+    return "model" in low and _contains_any(
+        low,
+        ("architecture", "parameters", "parameter count", "training details", "technical details"),
+    )
+
+
+def is_customer_reference_question(question: str) -> bool:
+    return _contains_any(question.lower(), _CUSTOMER_REFERENCE_TERMS)
+
+
+def is_benchmark_specific_question(question: str) -> bool:
+    low = question.lower()
+    return _contains_any(low, ("benchmark", "benchmarks", "performance number", "performance numbers")) and _contains_any(
+        low,
+        ("exact", "share", "provide", "number", "numbers", "metric", "metrics", "result", "results"),
+    )
+
+
+def high_risk_category(question: str) -> str | None:
+    if is_outcome_guarantee_question(question):
+        return "guarantee"
+    if is_pricing_or_quote_question(question):
+        return "pricing"
+    if is_sla_question(question):
+        return "sla"
+    if is_roadmap_question(question):
+        return "roadmap"
+    if is_cert_or_compliance_question(question):
+        return "certification_compliance"
+    if (
+        is_general_integration_list_question(question)
+        or is_specific_integration_question(question)
+        or is_public_api_docs_question(question)
+    ):
+        return "integration"
+    if is_model_architecture_question(question):
+        return "technical_detail"
+    if is_customer_reference_question(question):
+        return "customer_reference"
+    if is_benchmark_specific_question(question):
+        return "benchmark"
+    if is_legal_terms_question(question):
+        return "legal"
+    return None
+
+
+def ops_guidance_intent(question: str) -> str | None:
+    low = question.lower()
+    if is_deploy_priority_question(question):
+        if "retail" in low:
+            return "retail_first_deploy"
+        if "bank" in low or "financial" in low:
+            return "banking_first_deploy"
+        if "bpo" in low or "service desk" in low or "contact center" in low:
+            return "bpo_first_deploy"
+    if "which kpi should improve first" in low or "which kpi should improve" in low:
+        return "first_kpi"
+    if "pilot success in 30 days" in low or "measure pilot success in 30 days" in low:
+        return "pilot_success_30"
+    if "low-risk pilot" in low or "low risk pilot" in low:
+        return "low_risk_pilot"
+    if "automation" in low and "human oversight" in low:
+        return "automation_human_oversight"
+    if "approval" in low and (
+        "manual" in low
+        or "too many" in low
+        or "bottleneck" in low
+        or "what should we do first" in low
+    ):
+        return "manual_approvals_first_step"
+    if "implementation effort" in low:
+        return "implementation_effort"
+    if "data" in low and "before deployment" in low:
+        return "data_before_deployment"
+    if "think about roi for automation" in low or "roi for automation" in low:
+        return "roi_framework"
+    if "process" in low and "highly manual" in low:
+        return "highly_manual_process"
+    if "choose between products" in low and "limited details" in low:
+        return "limited_product_choice"
+    return None
+
+
+def build_ops_guidance_answer(intent: str | None) -> str:
+    configured = RUNTIME_POLICIES.get("operational_guidance", {})
+    if intent and isinstance(configured, dict):
+        configured_answer = configured.get(intent)
+        if configured_answer:
+            return str(configured_answer)
+
+    if intent == "first_kpi":
+        return (
+            "Track first-response time first, because it usually shows whether routing and manual handling are improving. "
+            "Then compare resolution time, error rate, and escalation volume against the baseline."
+        )
+    if intent == "pilot_success_30":
+        return (
+            "Measure one workflow against a pre-pilot baseline. Track first-response time, resolution time, error rate, "
+            "and adoption over 30 days before expanding scope."
+        )
+    if intent == "low_risk_pilot":
+        return (
+            "Start with one narrow, high-volume workflow, keep human review for exceptions, and compare results against a baseline. "
+            "Expand only after the first KPI trend is stable."
+        )
+    if intent == "roi_framework":
+        return (
+            "Think about ROI as time saved, fewer errors, better throughput, and improved service quality against a baseline. "
+            "Do not assume a fixed percentage unless Synapse confirms it for the specific scope."
+        )
+    return ""
 
 
 def is_product_selection_question(question: str) -> bool:
@@ -236,6 +576,187 @@ def is_product_selection_question(question: str) -> bool:
     has_between = "between" in low or "among" in low
     has_products = "product" in low or "products" in low
     return has_products and (has_pick or has_between)
+
+
+def product_names_in_question(question: str) -> list[str]:
+    names: list[str] = []
+    for name, pattern in PRODUCT_NAME_PATTERNS:
+        if pattern.search(question):
+            names.append(name)
+    return unique_preserve_order(names)
+
+
+def is_product_comparison_question(question: str) -> bool:
+    low = question.lower()
+    comparison_signal = _contains_any(
+        low,
+        ("compare", "comparison", " vs ", " versus ", "difference between", "choose between"),
+    )
+    return comparison_signal and len(product_names_in_question(question)) >= 2
+
+
+def requested_sentence_count(question: str) -> int | None:
+    low = question.lower()
+    match = re.search(r"\bexactly\s+(\d+)\s+sentences?\b", low)
+    if match:
+        return int(match.group(1))
+    word_counts = {
+        "one sentence": 1,
+        "two sentences": 2,
+        "three sentences": 3,
+        "four sentences": 4,
+    }
+    for phrase, count in word_counts.items():
+        if f"exactly {phrase}" in low:
+            return count
+    return None
+
+
+def answer_sentence_count(answer: str) -> int:
+    return len(
+        [
+            part
+            for part in re.split(r"(?<=[.!?])(?:\s+|$)", answer.strip())
+            if part.strip()
+        ]
+    )
+
+
+def requests_non_marketing_tone(question: str) -> bool:
+    low = question.lower()
+    return _contains_any(
+        low,
+        (
+            "no marketing",
+            "without marketing",
+            "non-marketing",
+            "neutral wording",
+            "neutral",
+            "plain factual",
+            "factual summary",
+            "short factual",
+        ),
+    )
+
+
+def contains_marketing_language(answer: str) -> bool:
+    low = answer.lower()
+    return _contains_any(
+        low,
+        (
+            "intelligent advantage",
+            "strategic advantage",
+            "empower businesses",
+            "cutting-edge",
+            "revolutionary",
+            "game-changing",
+            "best-in-class",
+            "industry-leading",
+            "seamless",
+            "transformative",
+            "move faster",
+            "operate smarter",
+            "scale confidently",
+            "provide intelligence rather than tools",
+            "eliminate complexity",
+            "unlock",
+            "future-ready",
+            "autonomously",
+            "on its own",
+            "makes decisions",
+            "make decisions",
+            "eliminating",
+            "eliminate",
+            "significant advantage",
+            "advantage over",
+            "mission is to build intelligence",
+            "intelligence-powered",
+            "decision-making processes",
+            "freeing up resources",
+            "strategic initiatives",
+            "complete resolution environment",
+            "microservices",
+            "oauth",
+            "scalable apis",
+            "single byte",
+            "proprietary data",
+            "vendor lock-ins",
+            "lock-ins",
+        ),
+    )
+
+
+def instruction_following_issues(question: str, answer: str) -> list[str]:
+    issues: list[str] = []
+    normalized = answer.strip().lower()
+    if normalized in {"<text>", "<answer>", "answer", "response"} or re.search(
+        r"<(?:text|answer|response)>",
+        normalized,
+    ):
+        issues.append("placeholder_output")
+    expected_sentences = requested_sentence_count(question)
+    if expected_sentences is not None and answer_sentence_count(answer) != expected_sentences:
+        issues.append("wrong_sentence_count")
+    if requests_non_marketing_tone(question) and contains_marketing_language(answer):
+        issues.append("marketing_language")
+    return issues
+
+
+def should_force_instruction_fallback(question: str, answer: str, profile: dict[str, Any]) -> bool:
+    if profile.get("product_aliases") and requested_sentence_count(question) is not None:
+        return bool(contains_marketing_language(answer) or product_detail_answer_needs_cleanup(question, answer, profile))
+    if requests_non_marketing_tone(question) and contains_marketing_language(answer):
+        return True
+    return False
+
+
+def comparison_answer_issues(question: str, answer: str) -> list[str]:
+    if not is_product_comparison_question(question):
+        return []
+    low = answer.lower()
+    missing = [name for name in product_names_in_question(question) if name.lower() not in low]
+    return ["missing_comparison_side"] if missing else []
+
+
+def build_product_comparison_fallback(question: str) -> str:
+    names = product_names_in_question(question)
+    if len(names) < 2 or any(not PRODUCT_SHORT_DESCRIPTIONS.get(name) for name in names[:2]):
+        return ""
+    return (
+        f"{names[0]} focuses on {PRODUCT_SHORT_DESCRIPTIONS[names[0]]}. "
+        f"{names[1]} focuses on {PRODUCT_SHORT_DESCRIPTIONS[names[1]]}."
+    )
+
+
+def build_instruction_fallback(question: str) -> str:
+    product_names = product_names_in_question(question)
+    if product_names:
+        product_name = product_names[0]
+        card = PRODUCT_CARDS.get(product_name, {})
+        if isinstance(card, dict):
+            detail_answer = str(card.get("detail_answer") or "").strip()
+            short_description = str(card.get("short_description") or "").strip()
+            expected_sentences = requested_sentence_count(question)
+            if detail_answer:
+                sentences = [s.strip() for s in SENTENCE_SPLIT_RE.split(detail_answer) if s.strip()]
+                if expected_sentences == 1 and sentences:
+                    return sentences[0]
+                if expected_sentences == 2:
+                    if len(sentences) >= 2:
+                        return " ".join(sentences[:2])
+                    if short_description:
+                        return f"{sentences[0] if sentences else detail_answer} It is {short_description}."
+                return detail_answer
+
+    overview = RUNTIME_POLICIES.get("company_overview", {})
+    if not isinstance(overview, dict):
+        return ""
+    expected_sentences = requested_sentence_count(question)
+    if expected_sentences == 2:
+        return str(overview.get("neutral_two_sentences") or "")
+    if requests_non_marketing_tone(question):
+        return str(overview.get("neutral_sentence") or "")
+    return str(overview.get("neutral_sentence") or overview.get("neutral_two_sentences") or "")
 
 
 def is_deploy_priority_question(question: str) -> bool:
@@ -485,12 +1006,63 @@ def augment_hits_with_matching_rows(
     return front + [h for h in hits if h.get("chunk_id") not in {x["chunk_id"] for x in front}]
 
 
+def augment_hits_for_product_comparison(
+    hits: list[dict[str, Any]],
+    rows: list[dict[str, Any]],
+    product_names: list[str],
+    *,
+    chunks_per_product: int = 2,
+) -> list[dict[str, Any]]:
+    hit_ids = {h["chunk_id"] for h in hits}
+    score_seed = max((float(h.get("score", 0)) for h in hits), default=0.55)
+    score_seed = max(score_seed, 0.96)
+    front: list[dict[str, Any]] = []
+
+    matching_rows: dict[str, list[dict[str, Any]]] = {name: [] for name in product_names}
+    for row in rows:
+        if row.get("page_type") != "product":
+            continue
+        row_name = normalize_product_name(title_prefix(str(row.get("title", ""))))
+        cid = row.get("chunk_id")
+        if row_name in matching_rows and cid:
+            matching_rows[row_name].append(row)
+
+    for chunk_index in range(chunks_per_product):
+        for product_name in product_names:
+            product_rows = matching_rows.get(product_name, [])
+            if chunk_index >= len(product_rows):
+                continue
+            row = product_rows[chunk_index]
+            cid = row.get("chunk_id")
+            if not cid or any(hit.get("chunk_id") == cid for hit in front):
+                continue
+            front.append(make_hit_from_row(row, score_seed))
+            score_seed -= 0.001
+
+    return front + [
+        hit
+        for hit in hits
+        if hit.get("chunk_id") not in {front_hit["chunk_id"] for front_hit in front}
+    ]
+
+
 def answer_shape_mismatch(question: str, answer: str) -> bool:
     """True if the answer looks like a wrong template for the question (e.g. product menu for pricing)."""
     low_q = question.lower()
     low_a = answer.lower()
     if not answer.strip():
         return False
+
+    contact_only = (
+        ("info@synapsetechinc.com" in low_a or "contact synapse" in low_a)
+        and len(answer.split()) <= 35
+    )
+    if contact_only and not (
+        is_direct_contact_question(question)
+        or is_purchase_or_get_started_question(question)
+        or is_pricing_or_quote_question(question)
+    ):
+        return True
 
     if is_pricing_or_quote_question(question):
         if "synapse offers products including" in low_a:
@@ -525,6 +1097,96 @@ def answer_shape_mismatch(question: str, answer: str) -> bool:
     return False
 
 
+def workflow_answer_too_shallow(question: str, answer: str) -> bool:
+    """Catch workflow answers that only name tools without explaining what Synapse does."""
+    if not is_workflow_automation_question(question) or not answer.strip():
+        return False
+
+    low = answer.lower()
+    tool_terms = ("n8n", "make.com", "airbyte", "airtable")
+    action_terms = (
+        "connect",
+        "api",
+        "database",
+        "saas",
+        "orchestration",
+        "pipeline",
+        "workflow",
+        "manual",
+        "handoff",
+        "copy-paste",
+        "repetitive",
+        "decision",
+        "automate",
+        "end-to-end",
+        "data movement",
+        "visibility",
+        "logging",
+    )
+    tool_count = sum(1 for term in tool_terms if term in low)
+    action_count = sum(1 for term in action_terms if term in low)
+
+    if action_count < 3:
+        return True
+    if "automation" not in low and "automate" not in low:
+        return True
+    if tool_count >= 2 and action_count < 3:
+        return True
+    if "each of them solves a different part of the operational puzzle" in low:
+        return True
+    if re.search(r"\b(?:our|synapse(?: tech(?: inc\.)?)?'?s?)\s+products?\s+(?:like|include|includes)\s+(n8n|make\.com|airbyte|airtable)", low):
+        return True
+    if re.search(r"\b(?:our|synapse(?: tech(?: inc\.)?)?'?s?)\s+products?\s+(?:like|include|includes)\s+", low):
+        return True
+    if re.search(r"\bsynapse tech(?: inc\.)?'?s?\s+products?\s+help with workflow automation", low):
+        return True
+    if re.search(r"\bour\s+products?\s+connect\s+(apis|tools|databases|saas)", low):
+        return True
+    if low.startswith("the product helps with workflow automation"):
+        return True
+    if "tools include" in low and tool_count >= 2:
+        return True
+    if "make.com for engineering custom web platforms" in low:
+        return True
+    if len(low.split()) < 24 and tool_count >= 1:
+        return True
+    return False
+
+
+def product_overview_answer_too_shallow(question: str, answer: str) -> bool:
+    """Product overview answers should name the actual products, not only describe themes."""
+    if not wants_product_descriptions(question) or not answer.strip():
+        return False
+
+    low = answer.lower()
+    product_hits = sum(
+        1
+        for name in PRODUCT_SHORT_DESCRIPTIONS
+        if name.lower() in low
+    )
+    return product_hits < 3
+
+
+def product_detail_answer_needs_cleanup(question: str, answer: str, profile: dict[str, Any]) -> bool:
+    if determine_answer_policy(question, profile) != "product_detail" or not answer.strip():
+        return False
+    low = answer.lower()
+    return any(
+        fragment in low
+        for fragment in (
+            "automates every form",
+            "policy query & breach check",
+            "policy query and breach check",
+            "ai chatbot solutions built for",
+            "how our ai chatbot solution works",
+            "eliminate vulnerabilities",
+            "guarantee",
+            "guaranteed",
+            "without risk",
+        )
+    )
+
+
 def finalize_kb_answer(question: str, answer: str) -> str:
     if answer_shape_mismatch(question, answer):
         return DEFAULT_FALLBACK_RESPONSE
@@ -549,6 +1211,11 @@ def parse_args() -> argparse.Namespace:
         "--rewrite-model",
         default=DEFAULT_REWRITE_MODEL,
         help="Ollama model to use for rewriting user questions into KB search queries.",
+    )
+    parser.add_argument(
+        "--classifier-model",
+        default=DEFAULT_CLASSIFIER_MODEL,
+        help="Ollama model to use for classifying user intent before answer policy selection.",
     )
     parser.add_argument(
         "--index",
@@ -728,6 +1395,190 @@ def rewrite_query_with_model(
         return fallback
 
 
+CLASSIFIER_INTENTS = {
+    "product_catalog",
+    "product_detail",
+    "service_catalog",
+    "service_guidance",
+    "private_infrastructure",
+    "contact",
+    "purchase",
+    "industry",
+    "company_overview",
+    "generic",
+    "high_risk_unknown",
+}
+CLASSIFIER_INTENT_ALIASES = {
+    "products": "product_catalog",
+    "product": "product_catalog",
+    "product_list": "product_catalog",
+    "product_listing": "product_catalog",
+    "product_overview": "product_catalog",
+    "product_summary": "product_catalog",
+    "product_information": "product_catalog",
+    "product_info": "product_catalog",
+    "product_details": "product_detail",
+    "service": "service_catalog",
+    "services": "service_catalog",
+    "service_list": "service_catalog",
+    "service_listing": "service_catalog",
+    "guidance": "service_guidance",
+    "service_selection": "service_guidance",
+    "recommendation": "service_guidance",
+    "offline": "private_infrastructure",
+    "private": "private_infrastructure",
+    "pricing": "high_risk_unknown",
+    "price": "high_risk_unknown",
+    "legal": "high_risk_unknown",
+    "compliance": "high_risk_unknown",
+    "certification": "high_risk_unknown",
+    "certifications": "high_risk_unknown",
+    "sla": "high_risk_unknown",
+    "about": "company_overview",
+    "company": "company_overview",
+    "overview": "company_overview",
+}
+
+
+def normalize_classifier_intent(value: Any) -> str:
+    raw = normalize_answer_value(value).lower().strip()
+    raw = raw.replace(" ", "_").replace("-", "_")
+    raw = CLASSIFIER_INTENT_ALIASES.get(raw, raw)
+    return raw if raw in CLASSIFIER_INTENTS else "generic"
+
+
+def normalize_classifier_entity(value: Any) -> str:
+    entity = normalize_answer_value(value)
+    if not entity:
+        return ""
+    low = entity.lower().strip()
+    return PRODUCT_NAME_NORMALIZATION.get(low, entity[:120])
+
+
+def classify_question_with_model(
+    *,
+    question: str,
+    search_query: str,
+    ollama_url: str,
+    model: str,
+) -> dict[str, Any]:
+    fallback = {
+        "intent": "generic",
+        "entity": "",
+        "risk": "normal",
+        "confidence": 0.0,
+        "source": "fallback",
+    }
+    if not question.strip():
+        return fallback
+
+    user_prompt = (
+        "Classify this user question for a Synapse Tech assistant.\n"
+        "Important examples:\n"
+        "- Product catalog: list products, what products do you offer, tell me about your products.\n"
+        "- Product detail: tell me about Opira AI, what does Agentic Bot do.\n"
+        "- Service guidance: help choosing a service, custom software vs AI products, workflow automation.\n"
+        "- Private infrastructure: offline, on-premises, private cloud, private deployment.\n"
+        "- Purchase/contact: buy, purchase, get started, contact sales.\n"
+        "- High risk: pricing, legal, compliance, certifications, SLA, roadmap, guarantees.\n\n"
+        f"Original question: {question}\n"
+        f"Search query: {search_query}"
+    )
+    usage: dict[str, Any] = {}
+    try:
+        raw = ollama_chat(
+            ollama_url=ollama_url,
+            model=model,
+            messages=[
+                {"role": "system", "content": INTENT_CLASSIFIER_SYSTEM_PROMPT},
+                {"role": "user", "content": user_prompt},
+            ],
+            temperature=0.0,
+            num_predict=90,
+            usage_sink=usage,
+            usage_label="intent_classification",
+        )
+        payload = safe_parse_json(raw)
+        raw_intent = normalize_answer_value(payload.get("intent"))
+        intent = normalize_classifier_intent(raw_intent)
+        if intent == "generic" and raw_intent and raw_intent.lower().replace(" ", "_").replace("-", "_") != "generic":
+            log_kb_debug(
+                {
+                    "question": question,
+                    "stage": "intent_classification_unrecognized_label",
+                    "raw_intent": raw_intent,
+                    "raw": raw[:500],
+                }
+            )
+        entity = normalize_classifier_entity(payload.get("entity"))
+        risk = normalize_answer_value(payload.get("risk")).lower().strip()
+        if risk not in {"normal", "high_risk"}:
+            risk = "high_risk" if intent == "high_risk_unknown" else "normal"
+        confidence_raw = payload.get("confidence", 0.0)
+        try:
+            confidence = float(confidence_raw)
+        except (TypeError, ValueError):
+            confidence = 0.0
+        confidence = max(0.0, min(confidence, 1.0))
+        return {
+            "intent": intent,
+            "entity": entity,
+            "risk": risk,
+            "confidence": confidence,
+            "usage": usage.get("intent_classification"),
+            "source": "model",
+        }
+    except Exception as exc:
+        log_kb_debug(
+            {
+                "question": question,
+                "stage": "intent_classification_failed",
+                "error": str(exc),
+            }
+        )
+        return fallback
+
+
+def classifier_intent_to_query_intent(intent: str) -> str | None:
+    if intent in {"product_catalog", "product_detail"}:
+        return "product"
+    if intent in {"service_catalog", "service_guidance", "private_infrastructure"}:
+        return "service"
+    if intent == "industry":
+        return "industry"
+    if intent == "contact" or intent == "purchase":
+        return "contact"
+    if intent == "company_overview":
+        return "about"
+    if intent == "high_risk_unknown":
+        return "pricing"
+    return None
+
+
+def apply_model_classification_to_profile(profile: dict[str, Any], classification: dict[str, Any]) -> None:
+    profile["model_classification"] = classification
+    profile["model_intent"] = classification.get("intent") or "generic"
+    profile["model_entity"] = classification.get("entity") or ""
+    profile["model_risk"] = classification.get("risk") or "normal"
+    profile["model_confidence"] = classification.get("confidence", 0.0)
+
+    query_intent = classifier_intent_to_query_intent(profile["model_intent"])
+    if query_intent and not profile.get("intent"):
+        profile["intent"] = query_intent
+
+    entity = profile.get("model_entity") or ""
+    if entity:
+        normalized_entity = PRODUCT_NAME_NORMALIZATION.get(entity.lower(), entity)
+        for token in query_kb.tokenize(normalized_entity):
+            if token not in profile.get("entity_terms", []) and token not in query_kb.GENERIC_QUERY_TERMS:
+                profile.setdefault("entity_terms", []).append(token)
+        for label, _pattern in PRODUCT_NAME_PATTERNS:
+            if normalized_entity.lower() == label.lower():
+                alias = label.lower()
+                if alias not in profile.get("product_aliases", []):
+                    profile.setdefault("product_aliases", []).append(alias)
+
+
 def format_evidence_block(hit: dict[str, Any], rank: int) -> str:
     return (
         f"[{rank}] Title: {hit['title']}\n"
@@ -889,7 +1740,10 @@ def select_context_hits(
     entity_terms = profile.get("entity_terms", [])
     intent = profile.get("intent")
 
-    if profile.get("purchase_intent"):
+    if profile.get("product_comparison"):
+        return hits[:context_k]
+
+    if profile.get("purchase_intent") or profile.get("pricing_intent"):
         contact_hits = [hit for hit in hits if hit.get("doc_id") == "contact-us"]
         merged: list[dict[str, Any]] = []
         seen: set[str] = set()
@@ -935,17 +1789,81 @@ def select_context_hits(
     return hits[:context_k]
 
 
+def product_card_for_prompt(hits: list[dict[str, Any]], profile: dict[str, Any]) -> dict[str, Any]:
+    if determine_answer_policy("", profile) != "product_detail" and not profile.get("product_aliases"):
+        return {}
+    product_name = product_name_from_hits_or_profile(hits, profile)
+    card = PRODUCT_CARDS.get(product_name)
+    if not isinstance(card, dict):
+        return {}
+    return {
+        "name": product_name,
+        "type": card.get("type", "product"),
+        "short_description": card.get("short_description", ""),
+        "aliases": card.get("aliases", []),
+    }
+
+
+def format_structured_runtime_context(
+    question: str,
+    hits: list[dict[str, Any]],
+    profile: dict[str, Any],
+) -> str:
+    if is_product_comparison_question(question):
+        cards: list[dict[str, Any]] = []
+        for product_name in product_names_in_question(question):
+            card = PRODUCT_CARDS.get(product_name)
+            if not isinstance(card, dict):
+                continue
+            cards.append(
+                {
+                    "name": product_name,
+                    "short_description": card.get("short_description", ""),
+                    "aliases": card.get("aliases", []),
+                }
+            )
+        if cards:
+            return (
+                "Structured runtime context:\n"
+                "Product cards JSON:\n"
+                f"{json.dumps(cards, ensure_ascii=False)}\n\n"
+                "Compare every named product. Use these cards to stabilize names and scope, "
+                "then ground the final comparison in the retrieved evidence."
+            )
+
+    if determine_answer_policy(question, profile) != "product_detail":
+        return ""
+    product_card = product_card_for_prompt(hits, profile)
+    if not product_card:
+        return ""
+    return (
+        "Structured runtime context:\n"
+        "Product card JSON:\n"
+        f"{json.dumps(product_card, ensure_ascii=False)}\n\n"
+        "Use this product card only to stabilize product name, aliases, and approved short wording. "
+        "Still answer from the evidence and do not add unsupported facts."
+    )
+
+
 def build_user_prompt(question: str, hits: list[dict[str, Any]], profile: dict[str, Any]) -> str:
     evidence = "\n\n".join(
         format_evidence_block(hit, rank)
         for rank, hit in enumerate(hits, start=1)
     )
+    structured_context = format_structured_runtime_context(question, hits, profile)
     intent = profile.get("intent")
     extra_guidance = "Answer the question directly in the first sentence."
     if is_pricing_or_quote_question(question):
         extra_guidance = (
             "If public pricing or exact costs are not explicitly stated in the evidence, use the not-confirmed reply "
             "exactly as instructed above. Never answer pricing questions by listing product names only."
+        )
+    elif is_product_comparison_question(question):
+        names = product_names_in_question(question)
+        extra_guidance = (
+            f"Compare both named products explicitly: {join_list(names)}. Give each product its own factual "
+            "description, then state the practical difference in use case. Do not omit either product and do "
+            "not invent capabilities that are absent from the evidence."
         )
     elif is_product_selection_question(question):
         extra_guidance = (
@@ -956,6 +1874,34 @@ def build_user_prompt(question: str, hits: list[dict[str, Any]], profile: dict[s
         extra_guidance = (
             "Give one concrete first-step recommendation only if the evidence supports it; otherwise "
             "use the not-confirmed reply. Do not substitute a generic Synapse capability overview."
+        )
+    elif is_custom_software_question(question):
+        extra_guidance = (
+            "The user is asking whether Synapse Tech only builds custom software or also offers AI products. "
+            "Answer the contrast directly from the evidence. If the evidence mentions custom web/mobile app "
+            "development and pre-built AI products, say that Synapse Tech does both. Do not answer with only "
+            "a product catalog."
+        )
+    elif is_workflow_automation_question(question):
+        extra_guidance = (
+            "The user is asking how Synapse Tech helps with workflow automation. Explain the supported "
+            "automation capabilities from the evidence, such as connecting tools, APIs, databases, SaaS "
+            "systems, orchestration, or workflow actions. Focus on what this helps the business do, not only "
+            "on listing tool names. n8n, Make.com, Airbyte, and Airtable are third-party tools/platforms "
+            "in the automation stack, not Synapse Tech products. Do not use the not-confirmed reply when "
+            "the evidence contains workflow automation details."
+        )
+    elif is_private_deployment_question(question):
+        extra_guidance = (
+            "The user is asking about offline or private infrastructure. Answer only for products where the "
+            "evidence supports private/offline deployment. If the evidence supports Opira AI running offline, "
+            "on-premises, or private cloud, mention that specifically. If the user asks about tools broadly, "
+            "say that not all Synapse tools are confirmed to run offline. Do not claim every Synapse tool works offline."
+        )
+    elif wants_product_descriptions(question):
+        extra_guidance = (
+            "The user is asking for a short explanation of Synapse Tech products. Use exact product names from "
+            "the evidence and add a brief grounded phrase for what each product does. Do not invent product names."
         )
     elif profile.get("company_overview"):
         extra_guidance = (
@@ -970,7 +1916,10 @@ def build_user_prompt(question: str, hits: list[dict[str, Any]], profile: dict[s
         if profile.get("product_aliases"):
             extra_guidance = (
                 "The question asks about a specific Synapse Tech product. Identify that product from the evidence "
-                "and explain what it is and what it helps with in plain language."
+                "and explain what it is and what it helps with in plain language. Use the structured product card "
+                "to stabilize product name and approved short wording, but generate the final answer naturally. "
+                "If the retrieved evidence has that product title or product page, treat the product as supported "
+                "and paraphrase the evidence."
             )
         else:
             extra_guidance = (
@@ -1020,6 +1969,7 @@ def build_user_prompt(question: str, hits: list[dict[str, Any]], profile: dict[s
             f'Use only the evidence above. If the evidence is insufficient, reply exactly with: "{DEFAULT_FALLBACK_RESPONSE}"\n'
             f"{extra_guidance}\n"
             "Write 2-4 concise sentences.\n"
+            "Do not invent exact timelines, percentages, guarantees, or outcomes unless they appear in the evidence.\n"
             "Do not mention the evidence, assumptions, or these instructions.\n"
             'Return JSON only, using keys "answer" and "supported".\n'
         )
@@ -1027,6 +1977,7 @@ def build_user_prompt(question: str, hits: list[dict[str, Any]], profile: dict[s
     return (
         f"Question:\n{question}\n\n"
         f"Evidence:\n{evidence}\n\n"
+        f"{structured_context + chr(10) + chr(10) if structured_context else ''}"
         f"{requirements}"
     )
 
@@ -1090,6 +2041,80 @@ def build_contact_answer(hits: list[dict[str, Any]]) -> str:
     if email_match:
         return f"You can contact Synapse Tech Inc. at {email_match.group(0)}."
     return ""
+
+
+def build_pricing_unknown_answer(hits: list[dict[str, Any]]) -> str:
+    contact_answer = build_contact_answer(hits)
+    if contact_answer:
+        return (
+            "Public pricing is not confirmed in the available information. "
+            f"For current pricing, contact Synapse Tech directly. {contact_answer}"
+        )
+    return (
+        "Public pricing is not confirmed in the available information. "
+        "Please contact Synapse Tech directly for current pricing."
+    )
+
+
+def build_high_risk_unknown_answer(question: str, hits: list[dict[str, Any]]) -> str:
+    category = high_risk_category(question)
+    contact_answer = build_contact_answer(hits)
+
+    if category == "pricing":
+        return build_pricing_unknown_answer(hits)
+    if category == "guarantee":
+        return (
+            "A fixed outcome or percentage improvement is not confirmed in the available information. "
+            "Synapse Tech can discuss expected impact for your scope, but the assistant should not guarantee results."
+        )
+    if category == "sla":
+        return (
+            "Public SLA numbers or exact uptime commitments are not confirmed in the available information. "
+            "Please verify official SLA terms with Synapse Tech."
+        )
+    if category == "roadmap":
+        return (
+            "Roadmap dates, launch dates, or release milestones are not confirmed in the available information. "
+            "Please verify timelines directly with Synapse Tech."
+        )
+    if category == "certification_compliance":
+        return (
+            "Security certifications or compliance standards are not explicitly confirmed in the available information. "
+            "Please verify official certification or compliance claims with Synapse Tech."
+        )
+    if category == "integration":
+        if is_general_integration_list_question(question):
+            return (
+                "A single exhaustive public integration list is not clearly confirmed in the available information. "
+                "Available pages mention tools or platforms in specific contexts, so please verify supported integrations with Synapse Tech."
+            )
+        return (
+            "That specific integration or public API documentation detail is not confirmed in the available information. "
+            "Please verify supported integrations or API documentation with Synapse Tech."
+        )
+    if category == "technical_detail":
+        return (
+            "Exact model architecture or internal technical implementation details are not confirmed in the available information. "
+            "Please verify technical specifications directly with Synapse Tech."
+        )
+    if category == "customer_reference":
+        return (
+            "Public customer names, logos, references, testimonials, or case studies are not confirmed in the available information. "
+            "Please verify approved customer references directly with Synapse Tech."
+        )
+    if category == "benchmark":
+        return (
+            "Exact benchmark numbers or performance results are not confirmed in the available information. "
+            "Please verify benchmark data directly with Synapse Tech."
+        )
+    if category == "legal":
+        return (
+            "Legal or contractual terms are not confirmed in the available information. "
+            "Please obtain official terms directly from Synapse Tech."
+        )
+    if contact_answer:
+        return f"{DEFAULT_FALLBACK_RESPONSE} {contact_answer}"
+    return DEFAULT_FALLBACK_RESPONSE
 
 
 def build_summary_answer(intent: str, hits: list[dict[str, Any]]) -> str:
@@ -1173,6 +2198,9 @@ def build_company_help_answer(question: str, hits: list[dict[str, Any]]) -> str:
 
 
 def build_voice_agent_answer(hits: list[dict[str, Any]]) -> str:
+    configured = RUNTIME_POLICIES.get("voice_agent", {})
+    if isinstance(configured, dict) and configured.get("answer"):
+        return str(configured["answer"])
     blob = " ".join(normalized_hit_text(hit) for hit in hits).lower()
     if "voice ai" in blob or "voice agents" in blob or "call center" in blob or "call automation" in blob:
         return (
@@ -1235,10 +2263,9 @@ def build_difference_answer(hits: list[dict[str, Any]]) -> str:
 def build_custom_software_answer(hits: list[dict[str, Any]]) -> str:
     blob = " ".join(normalized_hit_text(hit) for hit in hits).lower()
     if "custom software" in blob and ("web" in blob or "mobile" in blob):
-        return (
-            "Synapse Tech does both. It offers custom web and mobile app development alongside "
-            "AI products like Agentic Bot, iRecruit One, Opira AI, Coversaction AI, and "
-            "Cyber Security Automation."
+        return RUNTIME_POLICIES.get("custom_software", {}).get(
+            "answer",
+            DEFAULT_RUNTIME_POLICIES["custom_software"]["answer"],
         )
     return ""
 
@@ -1246,10 +2273,9 @@ def build_custom_software_answer(hits: list[dict[str, Any]]) -> str:
 def build_private_deployment_answer(hits: list[dict[str, Any]]) -> str:
     blob = " ".join(normalized_hit_text(hit) for hit in hits).lower()
     if "opira" in blob and "offline" in blob and ("private" in blob or "on-prem" in blob):
-        return (
-            "Yes, for products designed for private AI deployment. Opira AI can run offline, "
-            "on-premises, or on private cloud infrastructure so sensitive data stays under "
-            "the organization's control."
+        return RUNTIME_POLICIES.get("private_infrastructure", {}).get(
+            "answer",
+            DEFAULT_RUNTIME_POLICIES["private_infrastructure"]["answer"],
         )
     return ""
 
@@ -1257,10 +2283,9 @@ def build_private_deployment_answer(hits: list[dict[str, Any]]) -> str:
 def build_workflow_automation_answer(hits: list[dict[str, Any]]) -> str:
     blob = " ".join(normalized_hit_text(hit) for hit in hits).lower()
     if "workflow automation" in blob and all(term in blob for term in ("n8n", "airbyte", "airtable")):
-        return (
-            "Synapse Tech helps with workflow automation by building decision-making automation "
-            "systems that connect APIs, databases, and SaaS tools using orchestration and data "
-            "layers such as n8n, Make.com, Airbyte, and Airtable."
+        return RUNTIME_POLICIES.get("workflow_automation", {}).get(
+            "answer",
+            DEFAULT_RUNTIME_POLICIES["workflow_automation"]["answer"],
         )
     return ""
 
@@ -1295,16 +2320,9 @@ def build_service_discovery_answer() -> str:
 
 
 def product_name_from_hits_or_profile(hits: list[dict[str, Any]], profile: dict[str, Any]) -> str:
-    alias_names = {
-        "agentic bot": "Agentic Bot",
-        "coversaction ai": "Coversaction AI",
-        "opira ai": "Opira AI",
-        "irecruit one": "iRecruit One",
-        "cyber security automation": "Cyber Security Automation",
-    }
     aliases = profile.get("product_aliases") or []
     if aliases:
-        return alias_names.get(str(aliases[0]).lower(), title_prefix(str(aliases[0])))
+        return PRODUCT_NAME_NORMALIZATION.get(str(aliases[0]).lower(), title_prefix(str(aliases[0])))
     for hit in hits:
         if hit.get("page_type") == "product":
             return title_prefix(str(hit.get("title", "")))
@@ -1353,6 +2371,10 @@ def line_with_pattern(
 
 
 def build_known_product_answer(title: str, candidates: list[str]) -> str:
+    card = PRODUCT_CARDS.get(title)
+    if isinstance(card, dict) and card.get("detail_answer"):
+        return str(card["detail_answer"])
+
     if title == "Coversaction AI":
         ecosystem = line_with_pattern(
             candidates,
@@ -1435,16 +2457,9 @@ def build_entity_answer(question: str, hits: list[dict[str, Any]], profile: dict
     ):
         return ""
 
-    alias_names = {
-        "agentic bot": "Agentic Bot",
-        "coversaction ai": "Coversaction AI",
-        "opira ai": "Opira AI",
-        "irecruit one": "iRecruit One",
-        "cyber security automation": "Cyber Security Automation",
-    }
     title = ""
     for alias in profile.get("product_aliases") or []:
-        expected = alias_names.get(str(alias).lower())
+        expected = PRODUCT_NAME_NORMALIZATION.get(str(alias).lower())
         if expected:
             title = expected
             break
@@ -1512,15 +2527,45 @@ def determine_answer_policy(question: str, profile: dict[str, Any]) -> str:
     if is_high_risk_question(question):
         return "high_risk_unknown"
 
-    intent = profile.get("intent")
+    if ops_guidance_intent(question):
+        return "ops_guidance"
+
     if is_purchase_or_get_started_question(question):
         return "purchase"
-    if intent == "contact":
+    if is_direct_contact_question(question):
         return "contact"
     if is_private_deployment_question(question):
         return "private_infrastructure"
     if is_custom_software_question(question):
         return "service_guidance"
+    if is_workflow_automation_question(question):
+        return "service_guidance"
+    if is_voice_agent_question(question):
+        return "voice_agent"
+    if profile.get("company_overview") or is_company_overview_or_synopsis_question(question):
+        return "company_overview"
+
+    model_intent = profile.get("model_intent") or "generic"
+    model_risk = profile.get("model_risk") or "normal"
+    if model_risk == "high_risk" or model_intent == "high_risk_unknown":
+        return "high_risk_unknown"
+    if model_intent in {
+        "product_catalog",
+        "product_detail",
+        "service_catalog",
+        "service_guidance",
+        "private_infrastructure",
+        "purchase",
+        "industry",
+        "company_overview",
+    }:
+        return model_intent
+    if model_intent == "contact" and is_direct_contact_question(question):
+        return "contact"
+
+    intent = profile.get("intent")
+    if intent == "contact" and is_direct_contact_question(question):
+        return "contact"
     if profile.get("product_aliases"):
         return "product_detail"
     if intent == "product" or is_customer_support_product_question(question):
@@ -1541,7 +2586,10 @@ def build_policy_answer(
     profile: dict[str, Any],
 ) -> str:
     if policy == "high_risk_unknown":
-        return ""
+        return build_high_risk_unknown_answer(question, hits)
+
+    if policy == "ops_guidance":
+        return build_ops_guidance_answer(ops_guidance_intent(question))
 
     if policy == "contact":
         return build_contact_answer(hits)
@@ -1551,11 +2599,9 @@ def build_policy_answer(
 
     if policy == "product_catalog":
         if is_customer_support_product_question(question):
-            answer = build_product_selection_answer(question, hits)
-            if answer:
-                return answer
+            return ""
         if wants_product_descriptions(question):
-            return build_product_catalog_detail_answer(hits)
+            return ""
         return build_summary_answer("product", hits)
 
     if policy == "product_detail":
@@ -1587,6 +2633,12 @@ def build_policy_answer(
     if policy == "private_infrastructure":
         return build_private_deployment_answer(hits)
 
+    if policy == "company_overview":
+        return build_instruction_fallback(question)
+
+    if policy == "voice_agent":
+        return build_voice_agent_answer(hits)
+
     if policy == "industry":
         answer = build_industry_fit_answer(question, hits)
         if answer:
@@ -1608,9 +2660,10 @@ def retrieve_hits(
     embed_model: str | None,
     ollama_url: str,
     rewrite_model: str | None = None,
+    classifier_model: str | None = None,
     page_types: set[str],
     top_k: int,
-) -> tuple[list[dict[str, Any]], str]:
+) -> tuple[list[dict[str, Any]], str, dict[str, Any]]:
     manifest = query_kb.load_manifest(manifest_path)
     model = embed_model or manifest.get("embedding_model")
     if not model:
@@ -1631,12 +2684,25 @@ def retrieve_hits(
     )
     profile["rewrite"] = rewrite
     profile["intent_hint"] = rewrite.get("intent_hint")
-    profile["company_overview"] = is_company_overview_or_synopsis_question(question)
-    profile["purchase_intent"] = is_purchase_or_get_started_question(question)
     search_query = rewrite.get("search_query") or profile.get("search_query") or question
+    classification = classify_question_with_model(
+        question=question,
+        search_query=search_query,
+        ollama_url=ollama_url,
+        model=classifier_model or DEFAULT_CLASSIFIER_MODEL,
+    )
+    apply_model_classification_to_profile(profile, classification)
+    profile["company_overview"] = is_company_overview_or_synopsis_question(question)
+    profile["product_comparison"] = is_product_comparison_question(question)
+    profile["comparison_products"] = product_names_in_question(question)
+    profile["purchase_intent"] = is_purchase_or_get_started_question(question)
+    profile["pricing_intent"] = is_pricing_or_quote_question(question)
+    profile["answer_policy"] = determine_answer_policy(question, profile)
     query_vector = query_kb.embed_query(ollama_url, model, search_query)
     retrieval_top_k = top_k
-    if profile.get("intent") in SUMMARY_INTENT_CONFIG:
+    if profile.get("answer_policy") in {"product_catalog", "service_catalog", "industry"}:
+        retrieval_top_k = max(top_k, 16)
+    elif profile.get("intent") in SUMMARY_INTENT_CONFIG:
         retrieval_top_k = max(top_k, 16)
     elif profile.get("company_overview"):
         retrieval_top_k = max(top_k, 14)
@@ -1656,6 +2722,8 @@ def retrieve_hits(
             "stage": "retrieval",
             "search_query": search_query,
             "intent_hint": profile.get("intent_hint"),
+            "model_classification": profile.get("model_classification"),
+            "answer_policy": profile.get("answer_policy"),
             "top_hits": [
                 {
                     "title": hit.get("title"),
@@ -1669,7 +2737,14 @@ def retrieve_hits(
     )
     if profile.get("company_overview"):
         hits = augment_hits_with_about_us(hits, rows, max_chunks=4)
-    if is_purchase_or_get_started_question(question):
+    if is_product_comparison_question(question):
+        hits = augment_hits_for_product_comparison(
+            hits,
+            rows,
+            product_names_in_question(question),
+        )
+    answer_policy = profile.get("answer_policy")
+    if answer_policy in {"purchase", "contact"} or is_pricing_or_quote_question(question):
         hits = augment_hits_with_matching_rows(
             hits,
             rows,
@@ -1682,7 +2757,7 @@ def retrieve_hits(
             rows,
             matches=lambda row: "custom software" in normalized_hit_text(row).lower(),
         )
-    if is_private_deployment_question(question):
+    if answer_policy == "private_infrastructure" or is_private_deployment_question(question):
         hits = augment_hits_with_matching_rows(
             hits,
             rows,
@@ -1741,6 +2816,17 @@ def build_json_output(
             "search_query": rewrite.get("search_query") or question,
             "intent_hint": rewrite.get("intent_hint") or profile.get("intent_hint"),
         },
+        "classification": profile.get("model_classification") or {},
+        "answer_policy": profile.get("answer_policy") or determine_answer_policy(question, profile),
+        "observability": profile.get("observability") or build_answer_observability(
+            question=question,
+            answer=answer,
+            profile=profile,
+            hits=hits,
+            route="unknown",
+            used_template=False,
+            used_refusal=answer == DEFAULT_FALLBACK_RESPONSE,
+        ),
         "answer": answer,
         "generation_model": generation_model,
         "embedding_model": embedding_model,
@@ -1759,6 +2845,68 @@ def build_json_output(
     }
 
 
+def source_doc_ids(hits: list[dict[str, Any]]) -> list[str]:
+    seen: set[str] = set()
+    doc_ids: list[str] = []
+    for hit in hits:
+        doc_id = str(hit.get("doc_id") or "").strip()
+        if doc_id and doc_id not in seen:
+            doc_ids.append(doc_id)
+            seen.add(doc_id)
+    return doc_ids
+
+
+def build_answer_observability(
+    *,
+    question: str,
+    answer: str,
+    profile: dict[str, Any],
+    hits: list[dict[str, Any]],
+    route: str,
+    used_template: bool,
+    used_refusal: bool,
+) -> dict[str, Any]:
+    rewrite = profile.get("rewrite") or {}
+    classification = profile.get("model_classification") or {}
+    answer_policy = profile.get("answer_policy") or determine_answer_policy(question, profile)
+    refusal = used_refusal or answer == DEFAULT_FALLBACK_RESPONSE or "not confirmed" in answer.lower()
+    return {
+        "question": question,
+        "intent": answer_policy or classification.get("intent") or profile.get("intent") or "generic",
+        "confidence": classification.get("confidence", 0.0),
+        "route": route,
+        "rewrite_query": rewrite.get("search_query") or profile.get("search_query") or question,
+        "sources": source_doc_ids(hits),
+        "used_template": used_template,
+        "used_refusal": refusal,
+    }
+
+
+def observe_answer(
+    *,
+    question: str,
+    answer: str,
+    profile: dict[str, Any],
+    hits: list[dict[str, Any]],
+    route: str,
+    used_template: bool = False,
+    used_refusal: bool = False,
+) -> str:
+    final_answer = finalize_kb_answer(question, answer)
+    event = build_answer_observability(
+        question=question,
+        answer=final_answer,
+        profile=profile,
+        hits=hits,
+        route=route,
+        used_template=used_template,
+        used_refusal=used_refusal,
+    )
+    profile["observability"] = event
+    log_kb_debug({"stage": "answer_observability", **event})
+    return final_answer
+
+
 def normalize_answer_value(value: Any) -> str:
     if isinstance(value, str):
         return value.strip()
@@ -1774,6 +2922,33 @@ def clean_answer_text(text: str) -> str:
     cleaned = " ".join(text.split()).strip()
     for pattern in LEADING_ARTIFACT_PATTERNS:
         cleaned = pattern.sub("", cleaned)
+    replacements = {
+        "Opira Ai": "Opira AI",
+        "opira ai": "Opira AI",
+        "Coversaction Ai": "Coversaction AI",
+        "coversaction ai": "Coversaction AI",
+        "Conversaction Ai": "Coversaction AI",
+        "Conversaction AI": "Coversaction AI",
+        "coversoga AI": "Coversaction AI",
+        "coversoga ai": "Coversaction AI",
+    }
+    for old, new in replacements.items():
+        cleaned = cleaned.replace(old, new)
+    cleaned = re.sub(
+        r"\b(?:our|Synapse(?: Tech(?: Inc\.)?)?'?s?)\s+products?\s+(?:like|include|includes)\s+(n8n|Make\.com|Airbyte|Airtable)",
+        r"tools include \1",
+        cleaned,
+        flags=re.IGNORECASE,
+    )
+    cleaned = re.sub(
+        r"\bproducts?\s+(?:like|include|includes)\s+(n8n|Make\.com|Airbyte|Airtable)",
+        r"tools include \1",
+        cleaned,
+        flags=re.IGNORECASE,
+    )
+    cleaned = cleaned.replace("automates every form", "can automate forms")
+    cleaned = cleaned.replace("automate every form", "automate forms")
+    cleaned = cleaned.replace("policy query & breach check", "policy queries and breach checks")
     return cleaned.strip()
 
 
@@ -1892,7 +3067,14 @@ def generate_grounded_answer(
 ) -> str:
     if not context_hits:
         log_kb_debug({"question": question, "stage": "empty_context", "fallback": True})
-        return DEFAULT_FALLBACK_RESPONSE
+        return observe_answer(
+            question=question,
+            answer=DEFAULT_FALLBACK_RESPONSE,
+            profile=profile,
+            hits=[],
+            route="empty_kb_fallback",
+            used_refusal=True,
+        )
 
     intent = profile.get("intent")
     answer_policy = determine_answer_policy(question, profile)
@@ -1901,16 +3083,36 @@ def generate_grounded_answer(
         not DISABLE_ROUTE_SPECIFIC_ANSWERS
         and intent in SUMMARY_INTENT_CONFIG
         and answer_policy in {"product_catalog", "service_catalog", "industry"}
+        and answer_policy in HARD_DETERMINISTIC_POLICIES
         and allow_deterministic_summary(question, intent)
     ):
         summary_answer = build_summary_answer(intent, context_hits)
         if summary_answer:
-            return finalize_kb_answer(question, summary_answer)
+            return observe_answer(
+                question=question,
+                answer=summary_answer,
+                profile=profile,
+                hits=context_hits,
+                route="template_summary",
+                used_template=True,
+            )
 
-    if not DISABLE_ROUTE_SPECIFIC_ANSWERS and not DISABLE_NONCRITICAL_DIRECT_ANSWERS:
+    if (
+        not DISABLE_ROUTE_SPECIFIC_ANSWERS
+        and not DISABLE_NONCRITICAL_DIRECT_ANSWERS
+        and answer_policy in HARD_DETERMINISTIC_POLICIES
+    ):
         policy_answer = build_policy_answer(answer_policy, question, context_hits, profile)
         if policy_answer:
-            return finalize_kb_answer(question, clean_answer_text(policy_answer))
+            return observe_answer(
+                question=question,
+                answer=clean_answer_text(policy_answer),
+                profile=profile,
+                hits=context_hits,
+                route="hard_policy",
+                used_template=True,
+                used_refusal=answer_policy == "high_risk_unknown",
+            )
 
     if not has_sufficient_explicit_support(question, context_hits, profile):
         log_kb_debug(
@@ -1934,12 +3136,30 @@ def generate_grounded_answer(
                 ],
             }
         )
-        return DEFAULT_FALLBACK_RESPONSE
+        return observe_answer(
+            question=question,
+            answer=DEFAULT_FALLBACK_RESPONSE,
+            profile=profile,
+            hits=context_hits,
+            route="support_refusal",
+            used_refusal=True,
+        )
 
     if not DISABLE_ROUTE_SPECIFIC_ANSWERS:
-        entity_answer = build_entity_answer(question, context_hits, profile) if answer_policy == "product_detail" else ""
-        if entity_answer:
-            return finalize_kb_answer(question, clean_answer_text(entity_answer))
+        runtime_answer = ""
+        if answer_policy == "product_catalog" and wants_product_descriptions(question):
+            runtime_answer = build_product_catalog_detail_answer(context_hits)
+        elif is_workflow_automation_question(question):
+            runtime_answer = build_workflow_automation_answer(context_hits)
+        if runtime_answer:
+            return observe_answer(
+                question=question,
+                answer=clean_answer_text(runtime_answer),
+                profile=profile,
+                hits=context_hits,
+                route="runtime_template",
+                used_template=True,
+            )
 
     user_prompt = build_user_prompt(question, context_hits, profile)
     predict_cap = max(num_predict, 160) if profile.get("company_overview") else num_predict
@@ -1960,15 +3180,42 @@ def generate_grounded_answer(
     answer = normalize_answer_value(payload.get("answer")) if isinstance(payload, dict) else ""
     answer = clean_answer_text(answer)
 
-    if profile.get("company_overview") and (not answer or answer == DEFAULT_FALLBACK_RESPONSE):
+    answer_policy = determine_answer_policy(question, profile)
+    product_catalog_needs_model = answer_policy == "product_catalog" and (
+        wants_product_descriptions(question) or is_customer_support_product_question(question)
+    )
+    low_risk_model_answer = (
+        (answer_policy not in HARD_DETERMINISTIC_POLICIES or product_catalog_needs_model)
+        and not is_high_risk_question(question)
+    )
+    should_retry_too_cautious = (
+        not answer
+        or answer == DEFAULT_FALLBACK_RESPONSE
+    ) and (profile.get("company_overview") or low_risk_model_answer)
+
+    if should_retry_too_cautious:
         blob = " ".join(f"{h.get('title', '')} {h.get('text', '')}" for h in context_hits).lower()
-        if "synapse" in blob:
+        has_grounding = any(
+            token in blob
+            for token in (
+                "synapse",
+                "agentic bot",
+                "opira",
+                "workflow automation",
+                "custom web",
+                "mobile app",
+                "private cloud",
+                "offline",
+            )
+        )
+        if has_grounding:
             retry_user = (
                 user_prompt
-                + "\n\nRetry: The previous JSON was invalid or too cautious. Write 2–4 factual sentences "
-                "about Synapse Tech using only the evidence above. "
+                + "\n\nRetry: The previous JSON was invalid or too cautious. If the evidence contains the "
+                "named product, service, or capability, answer from that evidence instead of using the "
+                "not-confirmed reply. Write 2-4 factual sentences using only the evidence above. "
                 'Return JSON {"answer":"<text>","supported":true}. '
-                "Do not use the not-confirmed reply when the excerpts clearly describe Synapse Tech."
+                "Do not use the not-confirmed reply when the excerpts clearly describe the requested item."
             )
             raw_retry = ollama_chat(
                 ollama_url=ollama_url,
@@ -1990,6 +3237,192 @@ def generate_grounded_answer(
             )
             answer = clean_answer_text(answer)
 
+    if workflow_answer_too_shallow(question, answer):
+        workflow_retry_user = (
+            user_prompt
+            + "\n\nRetry: The previous answer was too shallow because it mostly listed tools. "
+            "Answer the user's workflow automation question by explaining what Synapse Tech does "
+            "for the business using only the evidence above. Your answer must include: "
+            "1) connecting APIs, databases, SaaS tools, or data pipelines; "
+            "2) reducing manual handoffs, copy-paste work, or repetitive tasks; "
+            "3) running workflows end-to-end with orchestration, logging, or visibility. "
+            "Mention tools like n8n, Make.com, Airbyte, or Airtable only as supporting examples, "
+            "not as the whole answer. Return JSON {\"answer\":\"<text>\",\"supported\":true}."
+        )
+        raw_workflow_retry = ollama_chat(
+            ollama_url=ollama_url,
+            model=model,
+            messages=[
+                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "user", "content": workflow_retry_user},
+            ],
+            temperature=min(0.2, temperature + 0.05),
+            num_predict=max(predict_cap, 180),
+            usage_sink=usage,
+            usage_label="workflow_answer_retry",
+        )
+        payload_workflow_retry = safe_parse_json(raw_workflow_retry)
+        retry_answer = (
+            normalize_answer_value(payload_workflow_retry.get("answer"))
+            if isinstance(payload_workflow_retry, dict)
+            else ""
+        )
+        retry_answer = clean_answer_text(retry_answer)
+        if retry_answer and not workflow_answer_too_shallow(question, retry_answer):
+            answer = retry_answer
+        else:
+            grounded_answer = build_workflow_automation_answer(context_hits)
+            if grounded_answer:
+                answer = grounded_answer
+
+    if product_overview_answer_too_shallow(question, answer):
+        product_retry_user = (
+            user_prompt
+            + "\n\nRetry: The previous answer was too generic. The user asked about Synapse Tech products, "
+            "so name the actual products from the evidence and add a short grounded phrase for each. "
+            "Include Agentic Bot, iRecruit One, Opira AI, Coversaction AI, and Cyber Security Automation "
+            "if they appear in the evidence. Return JSON {\"answer\":\"<text>\",\"supported\":true}."
+        )
+        raw_product_retry = ollama_chat(
+            ollama_url=ollama_url,
+            model=model,
+            messages=[
+                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "user", "content": product_retry_user},
+            ],
+            temperature=min(0.2, temperature + 0.05),
+            num_predict=max(predict_cap, 180),
+            usage_sink=usage,
+            usage_label="product_overview_retry",
+        )
+        payload_product_retry = safe_parse_json(raw_product_retry)
+        retry_answer = (
+            normalize_answer_value(payload_product_retry.get("answer"))
+            if isinstance(payload_product_retry, dict)
+            else ""
+        )
+        retry_answer = clean_answer_text(retry_answer)
+        if retry_answer and not product_overview_answer_too_shallow(question, retry_answer):
+            answer = retry_answer
+        else:
+            grounded_answer = build_product_catalog_detail_answer(context_hits)
+            if grounded_answer:
+                answer = grounded_answer
+
+    if product_detail_answer_needs_cleanup(question, answer, profile):
+        product_retry_user = (
+            user_prompt
+            + "\n\nRetry: The previous product-detail answer used awkward or over-broad wording. "
+            "Use the structured product card for the product name and approved short wording, then "
+            "generate a natural 1-2 sentence answer from the evidence. Do not copy raw page headings, "
+            "do not say 'automates every form', and do not mention internal evidence. "
+            "Do not use absolute claims like eliminate vulnerabilities, guarantee, or without risk. "
+            "Return JSON {\"answer\":\"<text>\",\"supported\":true}."
+        )
+        raw_product_detail_retry = ollama_chat(
+            ollama_url=ollama_url,
+            model=model,
+            messages=[
+                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "user", "content": product_retry_user},
+            ],
+            temperature=min(0.2, temperature + 0.05),
+            num_predict=max(predict_cap, 160),
+            usage_sink=usage,
+            usage_label="product_detail_retry",
+        )
+        payload_product_detail_retry = safe_parse_json(raw_product_detail_retry)
+        retry_answer = (
+            normalize_answer_value(payload_product_detail_retry.get("answer"))
+            if isinstance(payload_product_detail_retry, dict)
+            else ""
+        )
+        retry_answer = clean_answer_text(retry_answer)
+        if retry_answer and not product_detail_answer_needs_cleanup(question, retry_answer, profile):
+            answer = retry_answer
+        else:
+            grounded_answer = build_entity_answer(question, context_hits, profile)
+            if grounded_answer:
+                answer = clean_answer_text(grounded_answer)
+
+    comparison_issues = comparison_answer_issues(question, answer)
+    instruction_issues = instruction_following_issues(question, answer)
+    if comparison_issues or instruction_issues:
+        expected_sentences = requested_sentence_count(question)
+        constraints: list[str] = []
+        if comparison_issues:
+            constraints.append(
+                f"Explicitly cover both products: {join_list(product_names_in_question(question))}."
+            )
+        if expected_sentences is not None:
+            constraints.append(f"Write exactly {expected_sentences} complete sentences.")
+        if requests_non_marketing_tone(question):
+            constraints.append(
+                "Use neutral factual language and remove slogans or promotional phrases."
+            )
+        constraint_text = " ".join(constraints)
+        constraint_retry_user = (
+            user_prompt
+            + "\n\nRetry: The previous answer did not follow the user's requested answer shape. "
+            + constraint_text
+            + " Use only the evidence above. Return JSON {\"answer\":\"<text>\",\"supported\":true}."
+        )
+        raw_constraint_retry = ollama_chat(
+            ollama_url=ollama_url,
+            model=model,
+            messages=[
+                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "user", "content": constraint_retry_user},
+            ],
+            temperature=0.0,
+            num_predict=max(predict_cap, 180),
+            usage_sink=usage,
+            usage_label="constraint_retry",
+        )
+        payload_constraint_retry = safe_parse_json(raw_constraint_retry)
+        retry_answer = (
+            normalize_answer_value(payload_constraint_retry.get("answer"))
+            if isinstance(payload_constraint_retry, dict)
+            else ""
+        )
+        retry_answer = clean_answer_text(retry_answer)
+        if (
+            retry_answer
+            and not comparison_answer_issues(question, retry_answer)
+            and not instruction_following_issues(question, retry_answer)
+        ):
+            answer = retry_answer
+        elif comparison_issues:
+            fallback = build_product_comparison_fallback(question)
+            if fallback:
+                answer = fallback
+        elif instruction_issues:
+            fallback = build_instruction_fallback(question)
+            if fallback:
+                answer = fallback
+
+    if should_force_instruction_fallback(question, answer, profile):
+        fallback = build_instruction_fallback(question)
+        if fallback:
+            answer = fallback
+
+    if workflow_answer_too_shallow(question, answer):
+        grounded_answer = build_workflow_automation_answer(context_hits)
+        if grounded_answer:
+            answer = grounded_answer
+
+    if is_private_deployment_question(question) and "not all" not in answer.lower():
+        grounded_answer = build_private_deployment_answer(context_hits)
+        if grounded_answer:
+            return observe_answer(
+                question=question,
+                answer=grounded_answer,
+                profile=profile,
+                hits=context_hits,
+                route="runtime_template",
+                used_template=True,
+            )
+
     if not answer:
         log_kb_debug(
             {
@@ -2003,8 +3436,21 @@ def generate_grounded_answer(
                 },
             }
         )
-        return DEFAULT_FALLBACK_RESPONSE
-    return finalize_kb_answer(question, answer)
+        return observe_answer(
+            question=question,
+            answer=DEFAULT_FALLBACK_RESPONSE,
+            profile=profile,
+            hits=context_hits,
+            route="empty_generation_fallback",
+            used_refusal=True,
+        )
+    return observe_answer(
+        question=question,
+        answer=answer,
+        profile=profile,
+        hits=context_hits,
+        route="rag_generation",
+    )
 
 
 def main() -> None:
@@ -2028,6 +3474,7 @@ def main() -> None:
         embed_model=args.embed_model,
         ollama_url=args.ollama_url,
         rewrite_model=args.rewrite_model,
+        classifier_model=args.classifier_model,
         page_types=page_types,
         top_k=args.top_k,
     )
