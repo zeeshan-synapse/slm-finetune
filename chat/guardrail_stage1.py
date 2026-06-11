@@ -9,7 +9,7 @@ import requests
 
 OLLAMA_URL = "http://localhost:11434"
 
-GENERATOR_MODEL = "synapse-qwen1.5b-v5"
+GENERATOR_MODEL = "synapse-1.5b-v1"
 JUDGE_MODEL = "llama3:latest"
 
 GENERATOR_SYSTEM_PROMPT = (

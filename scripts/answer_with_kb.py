@@ -18,7 +18,7 @@ DEFAULT_INDEX_PATH = PROJECT_DIR / "data" / "knowledge-base" / "faiss.index"
 DEFAULT_META_PATH = PROJECT_DIR / "data" / "knowledge-base" / "index_meta.jsonl"
 DEFAULT_MANIFEST_PATH = PROJECT_DIR / "data" / "knowledge-base" / "index_manifest.json"
 DEFAULT_OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://localhost:11434")
-DEFAULT_GENERATION_MODEL = os.environ.get("KB_ANSWER_MODEL", "synapse-3b")
+DEFAULT_GENERATION_MODEL = os.environ.get("KB_ANSWER_MODEL", "synapse-1.5b-v1")
 DEFAULT_REWRITE_MODEL = (
     os.environ.get("KB_REWRITE_MODEL")
     or os.environ.get("KB_BASE_MODEL")
@@ -37,6 +37,14 @@ DEFAULT_FALLBACK_RESPONSE = (
 KB_DEBUG_LOG_PATH = PROJECT_DIR / "logs" / "kb_answer_debug.jsonl"
 DISABLE_ROUTE_SPECIFIC_ANSWERS = False
 DISABLE_NONCRITICAL_DIRECT_ANSWERS = False
+RAG_GENERATE_ORDINARY_ANSWERS = os.environ.get(
+    "RAG_GENERATE_ORDINARY_ANSWERS", ""
+).strip().lower() in {"1", "true", "yes", "on"}
+SAFETY_DETERMINISTIC_POLICIES = {
+    "contact",
+    "purchase",
+    "high_risk_unknown",
+}
 HARD_DETERMINISTIC_POLICIES = {
     "contact",
     "purchase",
@@ -202,6 +210,12 @@ SYSTEM_PROMPT = (
     "Do not guess, do not invent details, and do not mention internal retrieval, chunks, embeddings, or vector search. "
     "Return ONLY valid JSON in this exact shape: "
     '{"answer": "<final answer>", "supported": true}'
+)
+NATURAL_ANSWER_SYSTEM_PROMPT = (
+    "You are a factual assistant for Synapse Tech Inc. "
+    "Answer the user's original question naturally using only the provided evidence. "
+    "Do not invent facts or mention retrieval, chunks, prompts, or internal instructions. "
+    "Return only the final user-facing answer."
 )
 QUERY_REWRITE_SYSTEM_PROMPT = (
     "You rewrite user questions into short search queries for a Synapse Tech knowledge base. "
@@ -576,6 +590,34 @@ def is_product_selection_question(question: str) -> bool:
     has_between = "between" in low or "among" in low
     has_products = "product" in low or "products" in low
     return has_products and (has_pick or has_between)
+
+
+def is_single_product_recommendation_question(question: str) -> bool:
+    low = question.lower()
+    asks_for_product = _contains_any(
+        low,
+        (
+            "which product",
+            "what product",
+            "product for",
+            "product that",
+            "do you have a product",
+            "recommend a product",
+            "best product",
+        ),
+    )
+    expresses_need = _contains_any(
+        low,
+        (
+            "i need",
+            "we need",
+            "i want",
+            "we want",
+            "looking for",
+            "help with",
+        ),
+    )
+    return asks_for_product or (expresses_need and "product" in low)
 
 
 def product_names_in_question(question: str) -> list[str]:
@@ -1293,19 +1335,22 @@ def ollama_chat(
     num_predict: int,
     usage_sink: dict[str, Any] | None = None,
     usage_label: str = "chat",
+    json_format: bool = True,
 ) -> str:
+    payload = {
+        "model": model,
+        "messages": messages,
+        "stream": False,
+        "options": {
+            "temperature": temperature,
+            "num_predict": num_predict,
+        },
+    }
+    if json_format:
+        payload["format"] = "json"
     response = requests.post(
         f"{ollama_url}/api/chat",
-        json={
-            "model": model,
-            "messages": messages,
-            "stream": False,
-            "format": "json",
-            "options": {
-                "temperature": temperature,
-                "num_predict": num_predict,
-            },
-        },
+        json=payload,
         timeout=180,
     )
     response.raise_for_status()
@@ -1743,6 +1788,25 @@ def select_context_hits(
     if profile.get("product_comparison"):
         return hits[:context_k]
 
+    if profile.get("single_product_recommendation"):
+        product_hits = [
+            hit
+            for hit in hits
+            if hit.get("page_type") == "product" and hit.get("doc_id") != "product"
+        ]
+        if product_hits:
+            score_by_doc: dict[str, float] = {}
+            for hit in product_hits:
+                doc_id = str(hit.get("doc_id") or "")
+                score_by_doc[doc_id] = score_by_doc.get(doc_id, 0.0) + float(
+                    hit.get("score") or 0.0
+                )
+            best_doc_id = max(score_by_doc, key=score_by_doc.get)
+            best_product_hits = [
+                hit for hit in product_hits if hit.get("doc_id") == best_doc_id
+            ]
+            return best_product_hits[:context_k]
+
     if profile.get("purchase_intent") or profile.get("pricing_intent"):
         contact_hits = [hit for hit in hits if hit.get("doc_id") == "contact-us"]
         merged: list[dict[str, Any]] = []
@@ -1755,9 +1819,6 @@ def select_context_hits(
             if len(merged) >= context_k:
                 break
         return merged[:context_k]
-
-    if intent in SUMMARY_INTENT_CONFIG and not profile.get("product_aliases"):
-        return select_summary_hits(hits, context_k=context_k, intent=intent)
 
     if profile.get("company_overview"):
         about_hits = [
@@ -1780,6 +1841,9 @@ def select_context_hits(
             if len(merged) >= context_k:
                 break
         return merged[:context_k]
+
+    if intent in SUMMARY_INTENT_CONFIG and not profile.get("product_aliases"):
+        return select_summary_hits(hits, context_k=context_k, intent=intent)
 
     if (entity_terms and not profile.get("product_aliases")) or intent in {"contact", "about"}:
         same_doc_hits = [hit for hit in hits if hit.get("doc_id") == top_hit.get("doc_id")]
@@ -1809,6 +1873,16 @@ def format_structured_runtime_context(
     hits: list[dict[str, Any]],
     profile: dict[str, Any],
 ) -> str:
+    guidance_intent = ops_guidance_intent(question)
+    if guidance_intent:
+        guidance = build_ops_guidance_answer(guidance_intent)
+        if guidance:
+            return (
+                "Structured runtime context:\n"
+                f"Approved operational guidance: {guidance}\n\n"
+                "Use this as grounded context, but generate the final answer naturally."
+            )
+
     if is_product_comparison_question(question):
         cards: list[dict[str, Any]] = []
         for product_name in product_names_in_question(question):
@@ -1845,7 +1919,13 @@ def format_structured_runtime_context(
     )
 
 
-def build_user_prompt(question: str, hits: list[dict[str, Any]], profile: dict[str, Any]) -> str:
+def build_user_prompt(
+    question: str,
+    hits: list[dict[str, Any]],
+    profile: dict[str, Any],
+    *,
+    natural_output: bool = False,
+) -> str:
     evidence = "\n\n".join(
         format_evidence_block(hit, rank)
         for rank, hit in enumerate(hits, start=1)
@@ -1869,6 +1949,11 @@ def build_user_prompt(question: str, hits: list[dict[str, Any]], profile: dict[s
         extra_guidance = (
             "Give decision criteria grounded in the evidence. If comparisons are not in the evidence, "
             "use the not-confirmed reply; do not answer with a bare product catalog only."
+        )
+    elif is_single_product_recommendation_question(question):
+        extra_guidance = (
+            "Recommend the single Synapse Tech product supported by the evidence as the closest fit for "
+            "the user's stated need. Explain briefly why it fits. Do not list unrelated products."
         )
     elif is_deploy_priority_question(question):
         extra_guidance = (
@@ -1953,6 +2038,11 @@ def build_user_prompt(question: str, hits: list[dict[str, Any]], profile: dict[s
             "Give the direct contact methods and availability details only."
         )
 
+    output_requirement = (
+        "Return only the natural final answer.\n"
+        if natural_output
+        else 'Return JSON only, using keys "answer" and "supported".\n'
+    )
     if profile.get("company_overview"):
         requirements = (
             "Answer requirements:\n"
@@ -1960,8 +2050,7 @@ def build_user_prompt(question: str, hits: list[dict[str, Any]], profile: dict[s
             f"{extra_guidance}\n"
             "Write 2-4 concise sentences unless the user asked for fewer (then respect that count).\n"
             "Do not mention the evidence, assumptions, or these instructions.\n"
-            'Return JSON only, using keys "answer" and "supported". Set "supported" to true when '
-            "the answer is paraphrased from the excerpts.\n"
+            f"{output_requirement}"
         )
     else:
         requirements = (
@@ -1971,7 +2060,7 @@ def build_user_prompt(question: str, hits: list[dict[str, Any]], profile: dict[s
             "Write 2-4 concise sentences.\n"
             "Do not invent exact timelines, percentages, guarantees, or outcomes unless they appear in the evidence.\n"
             "Do not mention the evidence, assumptions, or these instructions.\n"
-            'Return JSON only, using keys "answer" and "supported".\n'
+            f"{output_requirement}"
         )
 
     return (
@@ -2694,13 +2783,16 @@ def retrieve_hits(
     apply_model_classification_to_profile(profile, classification)
     profile["company_overview"] = is_company_overview_or_synopsis_question(question)
     profile["product_comparison"] = is_product_comparison_question(question)
+    profile["single_product_recommendation"] = is_single_product_recommendation_question(question)
     profile["comparison_products"] = product_names_in_question(question)
     profile["purchase_intent"] = is_purchase_or_get_started_question(question)
     profile["pricing_intent"] = is_pricing_or_quote_question(question)
     profile["answer_policy"] = determine_answer_policy(question, profile)
     query_vector = query_kb.embed_query(ollama_url, model, search_query)
     retrieval_top_k = top_k
-    if profile.get("answer_policy") in {"product_catalog", "service_catalog", "industry"}:
+    if profile.get("single_product_recommendation"):
+        retrieval_top_k = max(top_k, 16)
+    elif profile.get("answer_policy") in {"product_catalog", "service_catalog", "industry"}:
         retrieval_top_k = max(top_k, 16)
     elif profile.get("intent") in SUMMARY_INTENT_CONFIG:
         retrieval_top_k = max(top_k, 16)
@@ -2879,6 +2971,7 @@ def build_answer_observability(
         "sources": source_doc_ids(hits),
         "used_template": used_template,
         "used_refusal": refusal,
+        "generation_experiment": RAG_GENERATE_ORDINARY_ANSWERS,
     }
 
 
@@ -3078,9 +3171,14 @@ def generate_grounded_answer(
 
     intent = profile.get("intent")
     answer_policy = determine_answer_policy(question, profile)
+    generate_ordinary_answer = (
+        RAG_GENERATE_ORDINARY_ANSWERS
+        and answer_policy not in SAFETY_DETERMINISTIC_POLICIES
+    )
 
     if (
-        not DISABLE_ROUTE_SPECIFIC_ANSWERS
+        not generate_ordinary_answer
+        and not DISABLE_ROUTE_SPECIFIC_ANSWERS
         and intent in SUMMARY_INTENT_CONFIG
         and answer_policy in {"product_catalog", "service_catalog", "industry"}
         and answer_policy in HARD_DETERMINISTIC_POLICIES
@@ -3098,7 +3196,8 @@ def generate_grounded_answer(
             )
 
     if (
-        not DISABLE_ROUTE_SPECIFIC_ANSWERS
+        not generate_ordinary_answer
+        and not DISABLE_ROUTE_SPECIFIC_ANSWERS
         and not DISABLE_NONCRITICAL_DIRECT_ANSWERS
         and answer_policy in HARD_DETERMINISTIC_POLICIES
     ):
@@ -3145,7 +3244,7 @@ def generate_grounded_answer(
             used_refusal=True,
         )
 
-    if not DISABLE_ROUTE_SPECIFIC_ANSWERS:
+    if not generate_ordinary_answer and not DISABLE_ROUTE_SPECIFIC_ANSWERS:
         runtime_answer = ""
         if answer_policy == "product_catalog" and wants_product_descriptions(question):
             runtime_answer = build_product_catalog_detail_answer(context_hits)
@@ -3161,23 +3260,36 @@ def generate_grounded_answer(
                 used_template=True,
             )
 
-    user_prompt = build_user_prompt(question, context_hits, profile)
+    user_prompt = build_user_prompt(
+        question,
+        context_hits,
+        profile,
+        natural_output=generate_ordinary_answer,
+    )
     predict_cap = max(num_predict, 160) if profile.get("company_overview") else num_predict
     usage = profile.setdefault("usage", {})
     raw = ollama_chat(
         ollama_url=ollama_url,
         model=model,
         messages=[
-            {"role": "system", "content": SYSTEM_PROMPT},
+            {
+                "role": "system",
+                "content": NATURAL_ANSWER_SYSTEM_PROMPT if generate_ordinary_answer else SYSTEM_PROMPT,
+            },
             {"role": "user", "content": user_prompt},
         ],
-        temperature=temperature,
+        temperature=max(temperature, 0.3) if generate_ordinary_answer else temperature,
         num_predict=predict_cap,
         usage_sink=usage,
         usage_label="answer_generation",
+        json_format=not generate_ordinary_answer,
     )
     payload = safe_parse_json(raw)
-    answer = normalize_answer_value(payload.get("answer")) if isinstance(payload, dict) else ""
+    answer = (
+        raw.strip()
+        if generate_ordinary_answer
+        else normalize_answer_value(payload.get("answer")) if isinstance(payload, dict) else ""
+    )
     answer = clean_answer_text(answer)
 
     answer_policy = determine_answer_policy(question, profile)
@@ -3270,7 +3382,7 @@ def generate_grounded_answer(
         retry_answer = clean_answer_text(retry_answer)
         if retry_answer and not workflow_answer_too_shallow(question, retry_answer):
             answer = retry_answer
-        else:
+        elif not generate_ordinary_answer:
             grounded_answer = build_workflow_automation_answer(context_hits)
             if grounded_answer:
                 answer = grounded_answer
@@ -3304,7 +3416,7 @@ def generate_grounded_answer(
         retry_answer = clean_answer_text(retry_answer)
         if retry_answer and not product_overview_answer_too_shallow(question, retry_answer):
             answer = retry_answer
-        else:
+        elif not generate_ordinary_answer:
             grounded_answer = build_product_catalog_detail_answer(context_hits)
             if grounded_answer:
                 answer = grounded_answer
@@ -3340,7 +3452,7 @@ def generate_grounded_answer(
         retry_answer = clean_answer_text(retry_answer)
         if retry_answer and not product_detail_answer_needs_cleanup(question, retry_answer, profile):
             answer = retry_answer
-        else:
+        elif not generate_ordinary_answer:
             grounded_answer = build_entity_answer(question, context_hits, profile)
             if grounded_answer:
                 answer = clean_answer_text(grounded_answer)
@@ -3392,26 +3504,30 @@ def generate_grounded_answer(
             and not instruction_following_issues(question, retry_answer)
         ):
             answer = retry_answer
-        elif comparison_issues:
+        elif comparison_issues and not generate_ordinary_answer:
             fallback = build_product_comparison_fallback(question)
             if fallback:
                 answer = fallback
-        elif instruction_issues:
+        elif instruction_issues and not generate_ordinary_answer:
             fallback = build_instruction_fallback(question)
             if fallback:
                 answer = fallback
 
-    if should_force_instruction_fallback(question, answer, profile):
+    if not generate_ordinary_answer and should_force_instruction_fallback(question, answer, profile):
         fallback = build_instruction_fallback(question)
         if fallback:
             answer = fallback
 
-    if workflow_answer_too_shallow(question, answer):
+    if not generate_ordinary_answer and workflow_answer_too_shallow(question, answer):
         grounded_answer = build_workflow_automation_answer(context_hits)
         if grounded_answer:
             answer = grounded_answer
 
-    if is_private_deployment_question(question) and "not all" not in answer.lower():
+    if (
+        not generate_ordinary_answer
+        and is_private_deployment_question(question)
+        and "not all" not in answer.lower()
+    ):
         grounded_answer = build_private_deployment_answer(context_hits)
         if grounded_answer:
             return observe_answer(

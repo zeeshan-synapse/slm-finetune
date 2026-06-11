@@ -1,7 +1,11 @@
 """
-Interactive comparison chat: fine-tuned column uses local KB + RAG for most
-questions; base column is a plain Ollama completion (no retrieval). See repo
-README for env vars (KB_ANSWER_MODEL), Ollama tags, and KB index paths.
+Interactive comparison chat:
+  1. Synapse V1 fine-tune + local KB/RAG
+  2. Synapse V2 fine-tune + local KB/RAG
+  3. untrained base model + the same local KB/RAG
+  4. untrained base model without retrieval
+
+See the repo README for model and KB configuration.
 """
 import json
 import requests
@@ -33,13 +37,23 @@ import answer_with_kb as aw
 
 BASE_MODEL = "qwen-base"
 BASE_MODEL_FALLBACK = "qwen2.5:1.5b-instruct"
+FINE_TUNED_V1_MODEL = "synapse-1.5b-v1"
+FINE_TUNED_V2_MODEL = "synapse-1.5b-v2"
 STOP_SEQUENCES = ["\n\n", "Answer:", "Note:", "Q:", "You:"]
 
-# Printed on startup / batch so the two columns are never ambiguous.
+# Printed on startup / batch so the three columns are never ambiguous.
 COLUMN_LEGEND = (
-    "Fine-tuned column = KB retrieval + grounded answer when applicable; "
-    "base column = single LLM call, no KB."
+    "V1/V2 fine-tuned = selected Synapse model + KB/RAG; "
+    "base + RAG = untrained base model + the same KB/RAG; "
+    "base plain = untrained base model without KB."
 )
+DISPLAY_MODES = {
+    "1": "fine_tuned_v1_rag",
+    "2": "fine_tuned_v2_rag",
+    "3": "base_rag",
+    "4": "base_plain",
+    "5": "all",
+}
 
 
 def quick_guardrail_observability(question: str) -> dict:
@@ -152,16 +166,41 @@ def generate_base_answer(question: str) -> str:
     return generate_base_result(question)["answer"]
 
 
-def fine_tuned_result(question: str) -> dict:
+def fine_tuned_result(question: str, model_name: str) -> dict:
     """
     Fine-tuned column: KB-grounded generation for product questions; guardrail
     fast paths (small talk / policy) unchanged. No judge/retry on KB answers.
     """
-    if is_small_talk_question(question) or policy_intent(question) is not None:
+    if is_small_talk_question(question):
+        generated = generate_model_result(model_name, question)
+        answer = generated["answer"]
+        verdict = {
+            "pass": True,
+            "reasons": ["small_talk_no_kb"],
+            "notes": "",
+            "rule_failures": [],
+            "judge_pass": True,
+        }
+        return {
+            "final_answer": answer,
+            "final_verdict": verdict,
+            "attempts": 1,
+            "first_answer": answer,
+            "first_verdict": verdict,
+            "retry_answer": None,
+            "retry_verdict": None,
+            "used_fallback": False,
+            "kb_usage": {"small_talk_generation": generated.get("usage")},
+            "observability": quick_guardrail_observability(question),
+        }
+    if policy_intent(question) is not None:
         result = run_with_retry(question)
         result["observability"] = quick_guardrail_observability(question)
         return result
-    meta = kb_grounded_answer_with_meta(question)
+    meta = kb_grounded_answer_with_meta(
+        question,
+        generation_model=model_name,
+    )
     answer = meta["answer"]
     ok_verdict = {
         "pass": True,
@@ -187,7 +226,15 @@ def fine_tuned_result(question: str) -> dict:
     }
 
 
-def run_with_loader(question: str, prefix: str = "") -> dict:
+def base_rag_result(question: str) -> dict:
+    """Run the same KB/RAG pipeline with only the generation model changed."""
+    return kb_grounded_answer_with_meta(
+        question,
+        generation_model=BASE_MODEL,
+    )
+
+
+def run_with_loader(question: str, prefix: str = "", mode: str = "all") -> dict:
     stop_event = threading.Event()
 
     def spinner() -> None:
@@ -204,11 +251,22 @@ def run_with_loader(question: str, prefix: str = "") -> dict:
     worker.start()
     started = time.perf_counter()
     try:
-        result = fine_tuned_result(question)
-        result["_ft_inference_label"] = _infer_ft_inference_label(result)
-        base_result = generate_base_result(question)
-        result["base_answer"] = base_result["answer"]
-        result["base_usage"] = base_result.get("usage")
+        result = {"attempts": 1, "used_fallback": False}
+        if mode in {"fine_tuned_v1_rag", "all"}:
+            v1_result = fine_tuned_result(question, FINE_TUNED_V1_MODEL)
+            result["fine_tuned_v1"] = v1_result
+        if mode in {"fine_tuned_v2_rag", "all"}:
+            v2_result = fine_tuned_result(question, FINE_TUNED_V2_MODEL)
+            result["fine_tuned_v2"] = v2_result
+        if mode in {"base_rag", "all"}:
+            base_rag = base_rag_result(question)
+            result["base_rag_answer"] = base_rag["answer"]
+            result["base_rag_usage"] = base_rag.get("usage", {})
+            result["base_rag_observability"] = base_rag.get("observability")
+        if mode in {"base_plain", "all"}:
+            base_result = generate_base_result(question)
+            result["base_answer"] = base_result["answer"]
+            result["base_usage"] = base_result.get("usage")
     finally:
         stop_event.set()
         worker.join(timeout=1.0)
@@ -224,22 +282,28 @@ def print_answer_block(title: str, answer: str) -> None:
     print(answer)
 
 
-def print_comparison(result: dict, *, prefix: str = "") -> None:
+def print_comparison(result: dict, *, prefix: str = "", mode: str = "all") -> None:
     label_prefix = f"{prefix} " if prefix else ""
-    ft_label = result.get("_ft_inference_label") or _infer_ft_inference_label(result)
-    ft_title = _FT_PRIMARY_TITLES.get(ft_label, _FT_PRIMARY_TITLES["ft_model_guardrail"])
-    print_answer_block(f"{label_prefix}{ft_title}", result["first_answer"])
-    if result["final_answer"] != result["first_answer"]:
-        final_title = (
-            f"{label_prefix}FINE-TUNED — guardrailed final (judge/retry; no extra KB pass)"
-            if ft_label == "kb_rag"
-            else f"{label_prefix}FINE-TUNED — guardrailed final (judge/retry)"
+    if mode in {"fine_tuned_v1_rag", "all"}:
+        print_answer_block(
+            f"{label_prefix}SYNAPSE 1.5B V1 + local KB (FAISS RAG)",
+            result["fine_tuned_v1"]["final_answer"],
         )
-        print_answer_block(final_title, result["final_answer"])
-    print_answer_block(
-        f"{label_prefix}BASE — plain LLM only (no KB, no RAG)",
-        result["base_answer"],
-    )
+    if mode in {"fine_tuned_v2_rag", "all"}:
+        print_answer_block(
+            f"{label_prefix}SYNAPSE 1.5B V2 + local KB (FAISS RAG)",
+            result["fine_tuned_v2"]["final_answer"],
+        )
+    if mode in {"base_rag", "all"}:
+        print_answer_block(
+            f"{label_prefix}BASE + local KB (same FAISS RAG)",
+            result["base_rag_answer"],
+        )
+    if mode in {"base_plain", "all"}:
+        print_answer_block(
+            f"{label_prefix}BASE — plain LLM only (no KB)",
+            result["base_answer"],
+        )
     print("\n" + "=" * 60)
 
 
@@ -258,38 +322,29 @@ def collect_batch_questions() -> list[str]:
     return questions
 
 
-def print_debug(result: dict) -> None:
-    ft_path = result.get("_ft_inference_label") or _infer_ft_inference_label(result)
-    rewrite = result.get("rewrite") or {}
-    kb_usage = dict(result.get("kb_usage") or {})
-    if rewrite.get("usage"):
-        kb_usage = {"query_rewrite": rewrite.get("usage"), **kb_usage}
-    kb_total = sum(
-        item.get("total_tokens", 0)
-        for item in kb_usage.values()
-        if isinstance(item, dict)
-    )
-    if kb_usage:
-        kb_usage["total_tokens"] = kb_total
-    print("\n--- Debug (fine-tuned path + attempts) ---")
+def print_debug(result: dict, mode: str) -> None:
+    v1 = result.get("fine_tuned_v1") or {}
+    v2 = result.get("fine_tuned_v2") or {}
+    print("\n--- Debug ---")
     print(
         json.dumps(
             {
-                "fine_tuned_path": ft_path,
-                "attempts": result["attempts"],
-                "used_fallback": result["used_fallback"],
-                "attempt_1_reasons": result["first_verdict"]["reasons"],
-                "attempt_2_reasons": (
-                    result["retry_verdict"]["reasons"] if result["retry_verdict"] else []
-                ),
-                "rewrite": rewrite,
-                "classification": result.get("classification"),
-                "answer_policy": result.get("answer_policy"),
-                "observability": result.get("observability"),
-                "token_usage": {
-                    "fine_tuned_kb": kb_usage,
-                    "base": result.get("base_usage"),
+                "mode": mode,
+                "fine_tuned_v1": {
+                    "model": FINE_TUNED_V1_MODEL,
+                    "observability": v1.get("observability"),
+                    "usage": v1.get("kb_usage"),
                 },
+                "fine_tuned_v2": {
+                    "model": FINE_TUNED_V2_MODEL,
+                    "observability": v2.get("observability"),
+                    "usage": v2.get("kb_usage"),
+                },
+                "token_usage": {
+                    "base_rag": result.get("base_rag_usage"),
+                    "base_plain": result.get("base_usage"),
+                },
+                "base_rag_observability": result.get("base_rag_observability"),
                 "elapsed_s": round(result["_elapsed_s"], 2),
             },
             ensure_ascii=False,
@@ -298,7 +353,7 @@ def print_debug(result: dict) -> None:
     )
 
 
-def run_batch(debug: bool) -> None:
+def run_batch(debug: bool, mode: str) -> None:
     questions = collect_batch_questions()
     if not questions:
         print("No questions provided.")
@@ -314,7 +369,7 @@ def run_batch(debug: bool) -> None:
     for i, question in enumerate(questions, start=1):
         prefix = f"[{i}/{total}]"
         try:
-            result = run_with_loader(question, prefix=prefix)
+            result = run_with_loader(question, prefix=prefix, mode=mode)
         except Exception as exc:
             print(f"[{i}/{total}] Error: {exc}")
             continue
@@ -324,13 +379,13 @@ def run_batch(debug: bool) -> None:
             fallback_count += 1
 
         print(f"[{i}/{total}] Q: {question}")
-        print_comparison(result, prefix=prefix)
+        print_comparison(result, prefix=prefix, mode=mode)
         print(
             f"[{i}/{total}] status: attempts={result['attempts']}, "
             f"fallback={result['used_fallback']}, elapsed={result['_elapsed_s']:.2f}s\n"
         )
         if debug:
-            print_debug(result)
+            print_debug(result, mode)
             print()
 
     avg = total_time / total if total else 0.0
@@ -342,11 +397,40 @@ def run_batch(debug: bool) -> None:
     print(f"Average time/question: {avg:.2f}s")
 
 
+def choose_display_mode() -> str:
+    print("Choose answer mode:")
+    print("1. Synapse 1.5B V1 + RAG")
+    print("2. Synapse 1.5B V2 + RAG")
+    print("3. Base + RAG")
+    print("4. Plain base")
+    print("5. All answers")
+    while True:
+        choice = input("Mode [1-5]: ").strip()
+        if choice in DISPLAY_MODES:
+            return DISPLAY_MODES[choice]
+        print("Enter 1, 2, 3, 4, or 5.")
+
+
+def choose_rag_behavior() -> bool:
+    print("Choose RAG behavior:")
+    print("1. Deterministic/template RAG")
+    print("2. Model-generated RAG")
+    while True:
+        choice = input("RAG mode [1-2]: ").strip()
+        if choice == "1":
+            return False
+        if choice == "2":
+            return True
+        print("Enter 1 or 2.")
+
+
 def chat() -> None:
     print("=" * 60)
-    print("Synapse SLM — fine-tuned vs base (KB on fine-tuned only)")
+    print("Synapse SLM — V1 RAG vs V2 RAG vs base RAG vs plain base")
     print("=" * 60)
     print(COLUMN_LEGEND)
+    aw.RAG_GENERATE_ORDINARY_ANSWERS = choose_rag_behavior()
+    mode = choose_display_mode()
     print("Type 'exit' to quit.")
     print("Type 'debug' to toggle attempt-level output.")
     print("Type 'batch' to paste multiple questions and run together.")
@@ -369,19 +453,19 @@ def chat() -> None:
             print(f"Debug mode: {'ON' if debug else 'OFF'}")
             continue
         if user_input.lower() == "batch":
-            run_batch(debug)
+            run_batch(debug, mode)
             continue
 
         try:
-            result = run_with_loader(user_input)
+            result = run_with_loader(user_input, mode=mode)
         except Exception as exc:
             print(f"[Error] {exc}")
             continue
 
-        print_comparison(result)
+        print_comparison(result, mode=mode)
 
         if debug:
-            print_debug(result)
+            print_debug(result, mode)
 
 
 if __name__ == "__main__":

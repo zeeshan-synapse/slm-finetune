@@ -7,7 +7,8 @@ This project fine-tunes a local model for Synapse Tech website/domain Q&A and co
 - Working base family: `Qwen2.5-1.5B-Instruct`
 - Working fine-tuned output: `synapse-qwen1.5b-q4_k_m.gguf`
 - Working Ollama tags:
-  - Fine-tuned: `synapse-3b` (tag name kept for compatibility with `chat/chat.py`)
+  - Existing fine-tune: `synapse-1.5b-v1`
+  - New dataset fine-tune: `synapse-1.5b-v2`
   - Base: `qwen-base`
 
 ## Important notes from experiments
@@ -102,7 +103,7 @@ Build tags:
 
 ```bash
 ollama pull qwen2.5:1.5b-instruct
-ollama create synapse-3b -f Modelfile
+ollama create synapse-1.5b-v1 -f Modelfile
 ollama create qwen-base -f BaseModelfile
 ollama list
 ```
@@ -116,7 +117,7 @@ The chat UI compares two columns:
 
 Prerequisites:
 
-- **Ollama** running, with the tags your `chat/chat.py` / `guardrail_stage1.py` expect (e.g. `qwen-base`, fine-tuned tag such as `synapse-3b` or `synapse-qwen1.5b-v5`).
+- **Ollama** running with `qwen-base`, `synapse-1.5b-v1`, and, after the new training/export, `synapse-1.5b-v2`.
 - **Embedding + generation models** pulled in Ollama (whatever `answer_with_kb` / `query_kb` use for your index, often `nomic-embed-text` plus your Synapse generator tag).
 - **KB index on disk** (defaults under `data/knowledge-base/`, see `DEFAULT_INDEX_PATH` / `DEFAULT_META_PATH` in `scripts/answer_with_kb.py`).
 
@@ -155,4 +156,3 @@ Primary file for on-device usage:
 Reference high-precision file:
 
 - `models/gguf/synapse-qwen1.5b-f16.gguf`
-

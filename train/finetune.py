@@ -5,7 +5,7 @@ import subprocess
 import sys
 
 # ── Config ──────────────────────────────────────────────────────────────────
-MODEL_NAME = "./models/qwen2.5-1.5b-instruct"                   # HuggingFace model ID
+MODEL_NAME = "./models/qwen25-1.5b-instruct"                   # HuggingFace model ID
 DATASET_PATH = "data/mixed_dataset.jsonl"           # blended website + chat pairs
 OUTPUT_DIR = "models/qwen1.5b-finetuned"                # where adapters are saved
 TRAIN_PATH = "data/train.jsonl"                     # MLX expects JSONL format
