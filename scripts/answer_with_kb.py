@@ -22,14 +22,13 @@ DEFAULT_GENERATION_MODEL = os.environ.get("KB_ANSWER_MODEL", "synapse-1.5b-v1")
 DEFAULT_REWRITE_MODEL = (
     os.environ.get("KB_REWRITE_MODEL")
     or os.environ.get("KB_BASE_MODEL")
-    or os.environ.get("KB_ANSWER_MODEL")
-    or DEFAULT_GENERATION_MODEL
+    or "qwen2.5:1.5b-instruct"
 )
 DEFAULT_CLASSIFIER_MODEL = (
     os.environ.get("KB_CLASSIFIER_MODEL")
     or os.environ.get("KB_BASE_MODEL")
     or os.environ.get("KB_REWRITE_MODEL")
-    or "qwen-base"
+    or "qwen2.5:1.5b-instruct"
 )
 DEFAULT_FALLBACK_RESPONSE = (
     "This detail is not confirmed in the available information. Please verify with Synapse Tech."

@@ -35,11 +35,17 @@ from guardrail_stage1 import (
 from kb_answer import kb_grounded_answer_with_meta
 import answer_with_kb as aw
 
-BASE_MODEL = "qwen-base"
+BASE_MODEL = "qwen2.5:1.5b-instruct"
 BASE_MODEL_FALLBACK = "qwen2.5:1.5b-instruct"
 FINE_TUNED_V1_MODEL = "synapse-1.5b-v1"
 FINE_TUNED_V2_MODEL = "synapse-1.5b-v2"
 STOP_SEQUENCES = ["\n\n", "Answer:", "Note:", "Q:", "You:"]
+BASE_MODEL_CHOICES = {
+    "1": "qwen2.5:1.5b-instruct",
+    "2": "qwen2.5:3b",
+    "3": "qwen2.5:7b",
+    "4": "llama3:latest",
+}
 
 # Printed on startup / batch so the three columns are never ambiguous.
 COLUMN_LEGEND = (
@@ -200,6 +206,8 @@ def fine_tuned_result(question: str, model_name: str) -> dict:
     meta = kb_grounded_answer_with_meta(
         question,
         generation_model=model_name,
+        rewrite_model=BASE_MODEL,
+        classifier_model=BASE_MODEL,
     )
     answer = meta["answer"]
     ok_verdict = {
@@ -231,6 +239,8 @@ def base_rag_result(question: str) -> dict:
     return kb_grounded_answer_with_meta(
         question,
         generation_model=BASE_MODEL,
+        rewrite_model=BASE_MODEL,
+        classifier_model=BASE_MODEL,
     )
 
 
@@ -296,12 +306,12 @@ def print_comparison(result: dict, *, prefix: str = "", mode: str = "all") -> No
         )
     if mode in {"base_rag", "all"}:
         print_answer_block(
-            f"{label_prefix}BASE + local KB (same FAISS RAG)",
+            f"{label_prefix}BASE {BASE_MODEL} + local KB (same FAISS RAG)",
             result["base_rag_answer"],
         )
     if mode in {"base_plain", "all"}:
         print_answer_block(
-            f"{label_prefix}BASE — plain LLM only (no KB)",
+            f"{label_prefix}BASE {BASE_MODEL} — plain LLM only (no KB)",
             result["base_answer"],
         )
     print("\n" + "=" * 60)
@@ -411,6 +421,19 @@ def choose_display_mode() -> str:
         print("Enter 1, 2, 3, 4, or 5.")
 
 
+def choose_base_model() -> str:
+    print("Choose pipeline model:")
+    print("1. Qwen2.5 1.5B Instruct")
+    print("2. Qwen2.5 3B")
+    print("3. Qwen2.5 7B")
+    print("4. Llama 3 latest")
+    while True:
+        choice = input("Model [1-4]: ").strip()
+        if choice in BASE_MODEL_CHOICES:
+            return BASE_MODEL_CHOICES[choice]
+        print("Enter 1, 2, 3, or 4.")
+
+
 def choose_rag_behavior() -> bool:
     print("Choose RAG behavior:")
     print("1. Deterministic/template RAG")
@@ -425,10 +448,17 @@ def choose_rag_behavior() -> bool:
 
 
 def chat() -> None:
+    global BASE_MODEL, BASE_MODEL_FALLBACK
+
     print("=" * 60)
     print("Synapse SLM — V1 RAG vs V2 RAG vs base RAG vs plain base")
     print("=" * 60)
     print(COLUMN_LEGEND)
+    BASE_MODEL = choose_base_model()
+    BASE_MODEL_FALLBACK = BASE_MODEL
+    aw.DEFAULT_REWRITE_MODEL = BASE_MODEL
+    aw.DEFAULT_CLASSIFIER_MODEL = BASE_MODEL
+    print(f"Selected base model: {BASE_MODEL}")
     aw.RAG_GENERATE_ORDINARY_ANSWERS = choose_rag_behavior()
     mode = choose_display_mode()
     print("Type 'exit' to quit.")
