@@ -51,10 +51,10 @@ def kb_grounded_answer(
     rewrite_model: str | None = None,
     classifier_model: str | None = None,
     embed_model: str | None = None,
-    top_k: int = 5,
-    context_k: int = 3,
-    temperature: float = 0.1,
-    num_predict: int = 120,
+    top_k: int | None = None,
+    context_k: int | None = None,
+    temperature: float | None = None,
+    num_predict: int | None = None,
     page_types: set[str] | None = None,
 ) -> str:
     """
@@ -69,6 +69,15 @@ def kb_grounded_answer(
 
     base_url = resolve_ollama_url(ollama_url)
     model = resolve_generation_model(generation_model)
+    model_profile = aw.get_model_profile(model)
+    effective_top_k = top_k if top_k is not None else int(model_profile["top_k"])
+    effective_context_k = context_k if context_k is not None else int(model_profile["context_k"])
+    effective_temperature = (
+        temperature if temperature is not None else float(model_profile["temperature"])
+    )
+    effective_num_predict = (
+        num_predict if num_predict is not None else int(model_profile["num_predict"])
+    )
 
     query_kb.check_ollama(base_url)
 
@@ -82,9 +91,13 @@ def kb_grounded_answer(
         rewrite_model=rewrite_model,
         classifier_model=classifier_model,
         page_types=page_types or set(),
-        top_k=top_k,
+        top_k=effective_top_k,
     )
-    eff_context_k = max(context_k, 4) if profile.get("company_overview") else context_k
+    eff_context_k = (
+        max(effective_context_k, 4)
+        if profile.get("company_overview")
+        else effective_context_k
+    )
     eff_context_k = min(eff_context_k, len(hits)) if hits else eff_context_k
     context_hits = aw.select_context_hits(hits, context_k=eff_context_k, profile=profile)
     return aw.generate_grounded_answer(
@@ -93,8 +106,8 @@ def kb_grounded_answer(
         profile=profile,
         ollama_url=base_url,
         model=model,
-        temperature=temperature,
-        num_predict=num_predict,
+        temperature=effective_temperature,
+        num_predict=effective_num_predict,
     )
 
 
@@ -106,16 +119,25 @@ def kb_grounded_answer_with_meta(
     rewrite_model: str | None = None,
     classifier_model: str | None = None,
     embed_model: str | None = None,
-    top_k: int = 5,
-    context_k: int = 3,
-    temperature: float = 0.1,
-    num_predict: int = 120,
+    top_k: int | None = None,
+    context_k: int | None = None,
+    temperature: float | None = None,
+    num_predict: int | None = None,
     page_types: set[str] | None = None,
 ) -> dict[str, Any]:
     """Same as kb_grounded_answer but includes embedding model name and resolved generator tag."""
     q = question.strip()
     base_url = resolve_ollama_url(ollama_url)
     model = resolve_generation_model(generation_model)
+    model_profile = aw.get_model_profile(model)
+    effective_top_k = top_k if top_k is not None else int(model_profile["top_k"])
+    effective_context_k = context_k if context_k is not None else int(model_profile["context_k"])
+    effective_temperature = (
+        temperature if temperature is not None else float(model_profile["temperature"])
+    )
+    effective_num_predict = (
+        num_predict if num_predict is not None else int(model_profile["num_predict"])
+    )
 
     if not q:
         return {
@@ -136,9 +158,13 @@ def kb_grounded_answer_with_meta(
         rewrite_model=rewrite_model,
         classifier_model=classifier_model,
         page_types=page_types or set(),
-        top_k=top_k,
+        top_k=effective_top_k,
     )
-    eff_context_k = max(context_k, 4) if profile.get("company_overview") else context_k
+    eff_context_k = (
+        max(effective_context_k, 4)
+        if profile.get("company_overview")
+        else effective_context_k
+    )
     eff_context_k = min(eff_context_k, len(hits)) if hits else eff_context_k
     context_hits = aw.select_context_hits(hits, context_k=eff_context_k, profile=profile)
     answer = aw.generate_grounded_answer(
@@ -147,8 +173,8 @@ def kb_grounded_answer_with_meta(
         profile=profile,
         ollama_url=base_url,
         model=model,
-        temperature=temperature,
-        num_predict=num_predict,
+        temperature=effective_temperature,
+        num_predict=effective_num_predict,
     )
     return {
         "answer": answer,

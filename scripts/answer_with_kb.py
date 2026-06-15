@@ -232,6 +232,120 @@ INTENT_CLASSIFIER_SYSTEM_PROMPT = (
     "Return ONLY valid JSON in this exact shape: "
     '{"intent": "<intent>", "entity": "<product/service/company if any>", "risk": "normal|high_risk", "confidence": 0.0}'
 )
+BASELINE_MODEL_PROFILE = {
+    "name": "baseline",
+    "top_k": 5,
+    "context_k": 3,
+    "temperature": 0.1,
+    "num_predict": 120,
+    "plain_temperature": 0.1,
+    "plain_num_predict": 180,
+    "rewrite_instructions": "",
+    "classifier_instructions": "",
+    "answer_instructions": "",
+    "plain_answer_instructions": "",
+}
+MODEL_PROFILES = {
+    "qwen2.5:3b": {
+        "name": "qwen2.5-3b-grounded",
+        "top_k": 7,
+        "context_k": 4,
+        "temperature": 0.05,
+        "num_predict": 140,
+        "plain_temperature": 0.1,
+        "plain_num_predict": 180,
+        "rewrite_instructions": (
+            "Use a short, literal query. Preserve exact company, product, and service names. "
+            "Do not add inferred industries, capabilities, products, or explanatory wording."
+        ),
+        "classifier_instructions": (
+            "Classify the user's goal literally. For recommendations, retain the requested use case and entity. "
+            "Use service_guidance for 'which product fits this need' questions. Set entity to an empty string unless "
+            "the user explicitly names a product or service. Never guess the recommended product during classification. "
+            "Do not convert customer support into cyber security or private infrastructure."
+        ),
+        "answer_instructions": (
+            "Answer concisely and directly. Ignore unrelated products in the context. "
+            "For a recommendation, select one closest product unless the user asks for alternatives. "
+            "Do not combine capabilities from different products."
+        ),
+        "plain_answer_instructions": "Answer directly and concisely without adding unrelated alternatives.",
+    },
+    "qwen2.5:7b": {
+        "name": "qwen2.5-7b-grounded",
+        "top_k": 8,
+        "context_k": 4,
+        "temperature": 0.0,
+        "num_predict": 150,
+        "plain_temperature": 0.05,
+        "plain_num_predict": 180,
+        "rewrite_instructions": (
+            "Produce a compact literal search query containing only terms present in the question or canonical "
+            "Synapse product names. Do not expand the question with inferred use cases or conclusions."
+        ),
+        "classifier_instructions": (
+            "Choose the narrowest supported intent and preserve only explicitly named entities. Use service_guidance "
+            "for 'which product fits this need' questions and set entity to an empty string when no product is named. "
+            "Never choose or guess the recommended product during classification."
+        ),
+        "answer_instructions": (
+            "Every factual claim must be supported by the supplied context. Compare evidence internally, but for "
+            "a recommendation output only the best-supported product. Ignore weak or unrelated chunks and never "
+            "merge capabilities belonging to different products."
+        ),
+        "plain_answer_instructions": "Stay focused on the exact question and avoid speculative elaboration.",
+    },
+    "llama3:latest": {
+        "name": "llama3-grounded",
+        "top_k": 7,
+        "context_k": 4,
+        "temperature": 0.1,
+        "num_predict": 150,
+        "plain_temperature": 0.1,
+        "plain_num_predict": 180,
+        "rewrite_instructions": (
+            "Preserve product terminology exactly and keep the query literal. Do not reinterpret acronyms, "
+            "expand product meanings, or add technologies and industries absent from the question."
+        ),
+        "classifier_instructions": (
+            "Classify only the requested goal. Preserve exact product names and distinguish product catalog, "
+            "product detail, recommendation, private deployment, and high-risk unknown requests. Use service_guidance "
+            "for recommendations, and set entity to an empty string unless the user explicitly names it."
+        ),
+        "answer_instructions": (
+            "Use natural factual language without copying marketing slogans. Preserve terminology exactly: LLM "
+            "means large language model, never language learning model. Do not introduce integrations, industries, "
+            "technologies, guarantees, or capabilities unless the context explicitly supports them."
+        ),
+        "plain_answer_instructions": "Use precise terminology and avoid unsupported reinterpretation or marketing language.",
+    },
+}
+
+
+def get_model_profile(model: str | None) -> dict[str, Any]:
+    """Return a complete profile while preserving baseline behavior for unknown models."""
+    selected = MODEL_PROFILES.get((model or "").strip(), {})
+    return {**BASELINE_MODEL_PROFILE, **selected}
+
+
+def profile_system_prompt(base_prompt: str, model: str, instruction_key: str) -> str:
+    instructions = str(get_model_profile(model).get(instruction_key) or "").strip()
+    if not instructions:
+        return base_prompt
+    return f"{base_prompt}\n\nModel-specific instructions:\n{instructions}"
+
+
+def shared_grounded_answer_instructions() -> str:
+    return (
+        "For product-catalog questions, cover every product supported by the supplied context rather than only "
+        "the highest-ranked product. For a single-product recommendation, choose only the closest supported fit: "
+        "iRecruit One for recruitment automation, Coversaction AI for customer-support conversations, and Opira AI "
+        "for offline or private infrastructure when those facts are supported by the context. For multi-part "
+        "high-risk questions, address pricing, SLA, certifications, legal, compliance, roadmap, and guarantees "
+        "separately without guessing."
+    )
+
+
 JSON_OBJECT_RE = re.compile(r"\{.*\}", re.DOTALL)
 LEADING_ARTIFACT_PATTERNS = [
     re.compile(r"^the (?:page|evidence|sources?) (?:mentions|shows?|indicates?) that\s+", re.IGNORECASE),
@@ -593,6 +707,17 @@ def is_product_selection_question(question: str) -> bool:
 
 def is_single_product_recommendation_question(question: str) -> bool:
     low = question.lower()
+    if re.search(r"\b(?:what|which)\s+products\b", low) or _contains_any(
+        low,
+        (
+            "list products",
+            "list all products",
+            "products do you offer",
+            "products does synapse",
+            "tell me about your products",
+        ),
+    ):
+        return False
     asks_for_product = _contains_any(
         low,
         (
@@ -1389,11 +1514,14 @@ def rewrite_query_with_model(
     if not question.strip():
         return fallback
 
+    model_profile = get_model_profile(model)
+    rewrite_guidance = str(model_profile.get("rewrite_instructions") or "").strip()
     user_prompt = (
         "Rewrite this user question into a short search query for a Synapse Tech knowledge base.\n"
         "Keep product names, service names, and company names. Expand casual wording like u/ur. "
         "If the user asks about Synapse offerings, include 'Synapse Tech'. "
-        "Do not answer the question.\n\n"
+        "Do not answer the question.\n"
+        f"{rewrite_guidance + chr(10) if rewrite_guidance else ''}\n"
         f"User question: {question}"
     )
     usage: dict[str, Any] = {}
@@ -1402,7 +1530,14 @@ def rewrite_query_with_model(
             ollama_url=ollama_url,
             model=model,
             messages=[
-                {"role": "system", "content": QUERY_REWRITE_SYSTEM_PROMPT},
+                {
+                    "role": "system",
+                    "content": profile_system_prompt(
+                        QUERY_REWRITE_SYSTEM_PROMPT,
+                        model,
+                        "rewrite_instructions",
+                    ),
+                },
                 {"role": "user", "content": user_prompt},
             ],
             temperature=0.0,
@@ -1516,6 +1651,8 @@ def classify_question_with_model(
     if not question.strip():
         return fallback
 
+    model_profile = get_model_profile(model)
+    classifier_guidance = str(model_profile.get("classifier_instructions") or "").strip()
     user_prompt = (
         "Classify this user question for a Synapse Tech assistant.\n"
         "Important examples:\n"
@@ -1524,7 +1661,8 @@ def classify_question_with_model(
         "- Service guidance: help choosing a service, custom software vs AI products, workflow automation.\n"
         "- Private infrastructure: offline, on-premises, private cloud, private deployment.\n"
         "- Purchase/contact: buy, purchase, get started, contact sales.\n"
-        "- High risk: pricing, legal, compliance, certifications, SLA, roadmap, guarantees.\n\n"
+        "- High risk: pricing, legal, compliance, certifications, SLA, roadmap, guarantees.\n"
+        f"{classifier_guidance + chr(10) if classifier_guidance else ''}\n"
         f"Original question: {question}\n"
         f"Search query: {search_query}"
     )
@@ -1534,7 +1672,14 @@ def classify_question_with_model(
             ollama_url=ollama_url,
             model=model,
             messages=[
-                {"role": "system", "content": INTENT_CLASSIFIER_SYSTEM_PROMPT},
+                {
+                    "role": "system",
+                    "content": profile_system_prompt(
+                        INTENT_CLASSIFIER_SYSTEM_PROMPT,
+                        model,
+                        "classifier_instructions",
+                    ),
+                },
                 {"role": "user", "content": user_prompt},
             ],
             temperature=0.0,
@@ -1924,6 +2069,7 @@ def build_user_prompt(
     profile: dict[str, Any],
     *,
     natural_output: bool = False,
+    model: str = "",
 ) -> str:
     evidence = "\n\n".join(
         format_evidence_block(hit, rank)
@@ -2035,6 +2181,15 @@ def build_user_prompt(
     elif intent == "contact":
         extra_guidance = (
             "Give the direct contact methods and availability details only."
+        )
+
+    model_profile = get_model_profile(model)
+    model_answer_guidance = str(model_profile.get("answer_instructions") or "").strip()
+    if model_answer_guidance:
+        extra_guidance = (
+            f"{extra_guidance}\n"
+            f"{shared_grounded_answer_instructions()}\n"
+            f"{model_answer_guidance}"
         )
 
     output_requirement = (
@@ -2971,6 +3126,7 @@ def build_answer_observability(
         "used_template": used_template,
         "used_refusal": refusal,
         "generation_experiment": RAG_GENERATE_ORDINARY_ANSWERS,
+        "model_profile": profile.get("runtime_model_profile"),
     }
 
 
@@ -3157,6 +3313,15 @@ def generate_grounded_answer(
     temperature: float,
     num_predict: int,
 ) -> str:
+    model_profile = get_model_profile(model)
+    profile["runtime_model_profile"] = {
+        "model": model,
+        "name": model_profile["name"],
+        "top_k": model_profile["top_k"],
+        "context_k": model_profile["context_k"],
+        "temperature": model_profile["temperature"],
+        "num_predict": model_profile["num_predict"],
+    }
     if not context_hits:
         log_kb_debug({"question": question, "stage": "empty_context", "fallback": True})
         return observe_answer(
@@ -3264,16 +3429,27 @@ def generate_grounded_answer(
         context_hits,
         profile,
         natural_output=generate_ordinary_answer,
+        model=model,
     )
     predict_cap = max(num_predict, 160) if profile.get("company_overview") else num_predict
     usage = profile.setdefault("usage", {})
+    answer_system_prompt = profile_system_prompt(
+        NATURAL_ANSWER_SYSTEM_PROMPT if generate_ordinary_answer else SYSTEM_PROMPT,
+        model,
+        "answer_instructions",
+    )
+    retry_system_prompt = profile_system_prompt(
+        SYSTEM_PROMPT,
+        model,
+        "answer_instructions",
+    )
     raw = ollama_chat(
         ollama_url=ollama_url,
         model=model,
         messages=[
             {
                 "role": "system",
-                "content": NATURAL_ANSWER_SYSTEM_PROMPT if generate_ordinary_answer else SYSTEM_PROMPT,
+                "content": answer_system_prompt,
             },
             {"role": "user", "content": user_prompt},
         ],
@@ -3332,7 +3508,7 @@ def generate_grounded_answer(
                 ollama_url=ollama_url,
                 model=model,
                 messages=[
-                    {"role": "system", "content": SYSTEM_PROMPT},
+                    {"role": "system", "content": retry_system_prompt},
                     {"role": "user", "content": retry_user},
                 ],
                 temperature=min(0.2, temperature + 0.05),
@@ -3364,7 +3540,7 @@ def generate_grounded_answer(
             ollama_url=ollama_url,
             model=model,
             messages=[
-                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "system", "content": retry_system_prompt},
                 {"role": "user", "content": workflow_retry_user},
             ],
             temperature=min(0.2, temperature + 0.05),
@@ -3398,7 +3574,7 @@ def generate_grounded_answer(
             ollama_url=ollama_url,
             model=model,
             messages=[
-                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "system", "content": retry_system_prompt},
                 {"role": "user", "content": product_retry_user},
             ],
             temperature=min(0.2, temperature + 0.05),
@@ -3434,7 +3610,7 @@ def generate_grounded_answer(
             ollama_url=ollama_url,
             model=model,
             messages=[
-                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "system", "content": retry_system_prompt},
                 {"role": "user", "content": product_retry_user},
             ],
             temperature=min(0.2, temperature + 0.05),
@@ -3482,7 +3658,7 @@ def generate_grounded_answer(
             ollama_url=ollama_url,
             model=model,
             messages=[
-                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "system", "content": retry_system_prompt},
                 {"role": "user", "content": constraint_retry_user},
             ],
             temperature=0.0,

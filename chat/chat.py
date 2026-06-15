@@ -120,8 +120,15 @@ def _usage_from_ollama_response(data: dict, model_name: str) -> dict:
 
 def generate_model_result(model_name: str, question: str) -> dict:
     strict_mode = is_high_risk_question(question) or is_policy_question(question)
+    model_profile = aw.get_model_profile(model_name)
+    plain_instructions = str(model_profile.get("plain_answer_instructions") or "").strip()
+    system_prompt = GENERATOR_SYSTEM_PROMPT
+    if plain_instructions:
+        system_prompt = f"{system_prompt}\n\nModel-specific instructions:\n{plain_instructions}"
+    temperature = float(model_profile["plain_temperature"])
+    num_predict = 80 if strict_mode else int(model_profile["plain_num_predict"])
     messages = [
-        {"role": "system", "content": GENERATOR_SYSTEM_PROMPT},
+        {"role": "system", "content": system_prompt},
         {"role": "user", "content": question},
     ]
     response = requests.post(
@@ -131,8 +138,8 @@ def generate_model_result(model_name: str, question: str) -> dict:
             "messages": messages,
             "stream": False,
             "options": {
-                "temperature": 0.1,
-                "num_predict": 80 if strict_mode else 180,
+                "temperature": temperature,
+                "num_predict": num_predict,
                 "stop": STOP_SEQUENCES,
             },
         },
@@ -354,6 +361,8 @@ def print_debug(result: dict, mode: str) -> None:
                     "base_rag": result.get("base_rag_usage"),
                     "base_plain": result.get("base_usage"),
                 },
+                "selected_pipeline_model": BASE_MODEL,
+                "selected_model_profile": aw.get_model_profile(BASE_MODEL),
                 "base_rag_observability": result.get("base_rag_observability"),
                 "elapsed_s": round(result["_elapsed_s"], 2),
             },
