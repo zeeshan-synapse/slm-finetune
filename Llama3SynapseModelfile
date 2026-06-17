@@ -1,0 +1,13 @@
+FROM /Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/models/gguf/synapse-llama3-v1-q4_k_m.gguf
+
+TEMPLATE """{{ if .System }}<|start_header_id|>system<|end_header_id|>
+
+{{ .System }}<|eot_id|>{{ end }}{{ if .Prompt }}<|start_header_id|>user<|end_header_id|>
+
+{{ .Prompt }}<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+{{ end }}{{ .Response }}<|eot_id|>"""
+
+PARAMETER stop "<|eot_id|>"
+PARAMETER temperature 0.4
+PARAMETER top_p 0.9

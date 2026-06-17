@@ -30,6 +30,9 @@ DEFAULT_CLASSIFIER_MODEL = (
     or os.environ.get("KB_REWRITE_MODEL")
     or "qwen2.5:1.5b-instruct"
 )
+RAG_COMBINED_PLANNING = os.environ.get(
+    "RAG_COMBINED_PLANNING", "1"
+).strip().lower() not in {"0", "false", "no", "off"}
 DEFAULT_FALLBACK_RESPONSE = (
     "This detail is not confirmed in the available information. Please verify with Synapse Tech."
 )
@@ -150,6 +153,28 @@ def load_runtime_json(path: Path, fallback: dict[str, Any]) -> dict[str, Any]:
 
 PRODUCT_CARDS = load_runtime_json(RUNTIME_CONFIG_DIR / "product_cards.json", DEFAULT_PRODUCT_CARDS)
 RUNTIME_POLICIES = load_runtime_json(RUNTIME_CONFIG_DIR / "policies.json", DEFAULT_RUNTIME_POLICIES)
+_KB_RESOURCE_CACHE: dict[tuple[str, str, str], tuple[Any, list[dict[str, Any]], dict[str, Any]]] = {}
+
+
+def load_kb_resources(
+    index_path: Path,
+    metadata_path: Path,
+    manifest_path: Path,
+) -> tuple[Any, list[dict[str, Any]], dict[str, Any]]:
+    key = (str(index_path.resolve()), str(metadata_path.resolve()), str(manifest_path.resolve()))
+    cached = _KB_RESOURCE_CACHE.get(key)
+    if cached is not None:
+        return cached
+
+    manifest = query_kb.load_manifest(manifest_path)
+    index = faiss.read_index(str(index_path))
+    rows = query_kb.load_rows(metadata_path)
+    if index.ntotal != len(rows):
+        raise ValueError("FAISS index size does not match metadata row count.")
+
+    resources = (index, rows, manifest)
+    _KB_RESOURCE_CACHE[key] = resources
+    return resources
 
 
 def compile_product_patterns(product_cards: dict[str, Any]) -> list[tuple[str, re.Pattern[str]]]:
@@ -231,6 +256,19 @@ INTENT_CLASSIFIER_SYSTEM_PROMPT = (
     "Use high_risk_unknown for pricing, legal, compliance, certifications, SLA, roadmap, or guarantees. "
     "Return ONLY valid JSON in this exact shape: "
     '{"intent": "<intent>", "entity": "<product/service/company if any>", "risk": "normal|high_risk", "confidence": 0.0}'
+)
+QUERY_PLANNER_SYSTEM_PROMPT = (
+    "You prepare KB retrieval for a Synapse Tech RAG assistant. "
+    "Do not answer the question. Do not invent facts. "
+    "Rewrite the user question into a short search query and classify the intent. "
+    "Choose exactly one intent from: product_catalog, product_detail, service_catalog, "
+    "service_guidance, private_infrastructure, contact, purchase, industry, company_overview, "
+    "generic, high_risk_unknown. "
+    "Use high_risk_unknown for pricing, legal, compliance, certifications, SLA, roadmap, or guarantees. "
+    "Return ONLY valid JSON in this exact shape: "
+    '{"search_query": "<short search query>", "intent_hint": "<brief intent>", '
+    '"intent": "<intent>", "entity": "<product/service/company if any>", '
+    '"risk": "normal|high_risk", "confidence": 0.0}'
 )
 BASELINE_MODEL_PROFILE = {
     "name": "baseline",
@@ -1728,6 +1766,117 @@ def classify_question_with_model(
         return fallback
 
 
+def plan_query_with_model(
+    *,
+    question: str,
+    ollama_url: str,
+    model: str,
+) -> tuple[dict[str, str], dict[str, Any]]:
+    rewrite_fallback = {"search_query": question.strip(), "intent_hint": "fallback_original"}
+    classification_fallback = {
+        "intent": "generic",
+        "entity": "",
+        "risk": "normal",
+        "confidence": 0.0,
+        "source": "fallback",
+    }
+    if not question.strip():
+        return rewrite_fallback, classification_fallback
+
+    model_profile = get_model_profile(model)
+    rewrite_guidance = str(model_profile.get("rewrite_instructions") or "").strip()
+    classifier_guidance = str(model_profile.get("classifier_instructions") or "").strip()
+    extra_guidance = "\n".join(
+        part for part in (rewrite_guidance, classifier_guidance) if part
+    )
+    user_prompt = (
+        "Prepare this user question for Synapse Tech KB retrieval.\n"
+        "Important examples:\n"
+        "- Product catalog: list products, what products do you offer, tell me about your products.\n"
+        "- Product detail: tell me about Opira AI, what does Agentic Bot do.\n"
+        "- Service guidance: help choosing a service, custom software vs AI products, workflow automation.\n"
+        "- Private infrastructure: offline, on-premises, private cloud, private deployment.\n"
+        "- Purchase/contact: buy, purchase, get started, contact sales.\n"
+        "- High risk: pricing, legal, compliance, certifications, SLA, roadmap, guarantees.\n"
+        "Keep the search query short and literal. Preserve exact company, product, and service names. "
+        "Do not answer the question.\n"
+        f"{extra_guidance + chr(10) if extra_guidance else ''}\n"
+        f"Original question: {question}"
+    )
+    usage: dict[str, Any] = {}
+    try:
+        raw = ollama_chat(
+            ollama_url=ollama_url,
+            model=model,
+            messages=[
+                {
+                    "role": "system",
+                    "content": profile_system_prompt(
+                        QUERY_PLANNER_SYSTEM_PROMPT,
+                        model,
+                        "classifier_instructions",
+                    ),
+                },
+                {"role": "user", "content": user_prompt},
+            ],
+            temperature=0.0,
+            num_predict=120,
+            usage_sink=usage,
+            usage_label="query_planning",
+        )
+        payload = safe_parse_json(raw)
+        search_query = normalize_answer_value(payload.get("search_query"))
+        if not search_query:
+            log_kb_debug(
+                {
+                    "question": question,
+                    "stage": "query_planning_unparseable",
+                    "model": model,
+                    "raw": raw[:500],
+                }
+            )
+            return rewrite_fallback, classification_fallback
+
+        intent_hint = normalize_answer_value(payload.get("intent_hint"))
+        raw_intent = normalize_answer_value(payload.get("intent"))
+        intent = normalize_classifier_intent(raw_intent)
+        entity = normalize_classifier_entity(payload.get("entity"))
+        risk = normalize_answer_value(payload.get("risk")).lower().strip()
+        if risk not in {"normal", "high_risk"}:
+            risk = "high_risk" if intent == "high_risk_unknown" else "normal"
+        try:
+            confidence = float(payload.get("confidence", 0.0))
+        except (TypeError, ValueError):
+            confidence = 0.0
+        confidence = max(0.0, min(confidence, 1.0))
+
+        usage_item = usage.get("query_planning")
+        return (
+            {
+                "search_query": search_query[:240],
+                "intent_hint": intent_hint[:80] if intent_hint else "model_planning",
+                "usage": usage_item,
+            },
+            {
+                "intent": intent,
+                "entity": entity,
+                "risk": risk,
+                "confidence": confidence,
+                "usage": usage_item,
+                "source": "combined_model",
+            },
+        )
+    except Exception as exc:
+        log_kb_debug(
+            {
+                "question": question,
+                "stage": "query_planning_failed",
+                "error": str(exc),
+            }
+        )
+        return rewrite_fallback, classification_fallback
+
+
 def classifier_intent_to_query_intent(intent: str) -> str | None:
     if intent in {"product_catalog", "product_detail"}:
         return "product"
@@ -2907,33 +3056,39 @@ def retrieve_hits(
     page_types: set[str],
     top_k: int,
 ) -> tuple[list[dict[str, Any]], str, dict[str, Any]]:
-    manifest = query_kb.load_manifest(manifest_path)
+    index, rows, manifest = load_kb_resources(index_path, metadata_path, manifest_path)
     model = embed_model or manifest.get("embedding_model")
     if not model:
         raise ValueError(
             "No embedding model available. Use --embed-model or ensure the manifest exists."
         )
 
-    index = faiss.read_index(str(index_path))
-    rows = query_kb.load_rows(metadata_path)
-    if index.ntotal != len(rows):
-        raise ValueError("FAISS index size does not match metadata row count.")
-
     profile = query_kb.query_profile(question)
-    rewrite = rewrite_query_with_model(
-        question=question,
-        ollama_url=ollama_url,
-        model=rewrite_model or DEFAULT_REWRITE_MODEL,
-    )
+    planner_model = rewrite_model or classifier_model or DEFAULT_REWRITE_MODEL
+    if RAG_COMBINED_PLANNING:
+        rewrite, classification = plan_query_with_model(
+            question=question,
+            ollama_url=ollama_url,
+            model=planner_model,
+        )
+    else:
+        rewrite = rewrite_query_with_model(
+            question=question,
+            ollama_url=ollama_url,
+            model=rewrite_model or DEFAULT_REWRITE_MODEL,
+        )
+        search_query_for_classification = (
+            rewrite.get("search_query") or profile.get("search_query") or question
+        )
+        classification = classify_question_with_model(
+            question=question,
+            search_query=search_query_for_classification,
+            ollama_url=ollama_url,
+            model=classifier_model or DEFAULT_CLASSIFIER_MODEL,
+        )
     profile["rewrite"] = rewrite
     profile["intent_hint"] = rewrite.get("intent_hint")
     search_query = rewrite.get("search_query") or profile.get("search_query") or question
-    classification = classify_question_with_model(
-        question=question,
-        search_query=search_query,
-        ollama_url=ollama_url,
-        model=classifier_model or DEFAULT_CLASSIFIER_MODEL,
-    )
     apply_model_classification_to_profile(profile, classification)
     profile["company_overview"] = is_company_overview_or_synopsis_question(question)
     profile["product_comparison"] = is_product_comparison_question(question)

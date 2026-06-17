@@ -39,7 +39,6 @@ def convert_dataset():
             role = msg["role"]  # user / assistant
             content = msg["content"].strip()
             parts.append(f"<|im_start|>{role}\n{content}<|im_end|>\n")
-        parts.append("<|im_start|>assistant\n")
         return {"text": "".join(parts)}
 
     formatted = [format_pair(p) for p in pairs]

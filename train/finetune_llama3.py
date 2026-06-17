@@ -1,0 +1,171 @@
+"""Train a fresh Synapse LoRA on the local Llama-family base model.
+
+This script intentionally stays separate from the Qwen training scripts because
+Llama 3 uses a different chat template.
+"""
+
+import json
+import os
+import random
+import subprocess
+import sys
+from pathlib import Path
+
+
+MODEL_NAME = "models/llama-base"
+DATASET_PATH = "data/mixed_dataset_v2.jsonl"
+OUTPUT_DIR = "models/llama3-synapse-finetuned-v1"
+DATA_DIR = Path("data/llama3")
+TRAIN_PATH = DATA_DIR / "train.jsonl"
+VALID_PATH = DATA_DIR / "valid.jsonl"
+
+LORA_RANK = 16
+LORA_LAYERS = 8
+LEARNING_RATE = 2e-5
+ITERATIONS = 800
+BATCH_SIZE = 1
+STEPS_PER_EVAL = 200
+STEPS_PER_SAVE = 200
+TRAIN_SPLIT = 0.9
+SPLIT_SEED = 42
+
+SYSTEM_PROMPT = (
+    "You are a helpful AI assistant for Synapse Tech Inc. Answer naturally, "
+    "accurately, and stay grounded in company information when relevant."
+)
+
+
+def format_llama_chat(pair: dict) -> dict:
+    parts = ["<|begin_of_text|>"]
+    parts.append(
+        "<|start_header_id|>system<|end_header_id|>\n\n"
+        f"{SYSTEM_PROMPT}<|eot_id|>"
+    )
+
+    for msg in pair["messages"]:
+        role = msg["role"]
+        content = msg["content"].strip()
+        parts.append(
+            f"<|start_header_id|>{role}<|end_header_id|>\n\n"
+            f"{content}<|eot_id|>"
+        )
+
+    return {"text": "".join(parts)}
+
+
+def convert_dataset() -> None:
+    print("Converting dataset to Llama chat format...")
+    with open(DATASET_PATH, encoding="utf-8") as dataset_file:
+        pairs = [json.loads(line) for line in dataset_file if line.strip()]
+
+    formatted = [format_llama_chat(pair) for pair in pairs]
+
+    random.seed(SPLIT_SEED)
+    random.shuffle(formatted)
+
+    split_index = int(len(formatted) * TRAIN_SPLIT)
+    train_data = formatted[:split_index]
+    valid_data = formatted[split_index:]
+
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+
+    with open(TRAIN_PATH, "w", encoding="utf-8") as train_file:
+        for item in train_data:
+            train_file.write(json.dumps(item) + "\n")
+
+    with open(VALID_PATH, "w", encoding="utf-8") as valid_file:
+        for item in valid_data:
+            valid_file.write(json.dumps(item) + "\n")
+
+    print(f"  Train samples: {len(train_data)}")
+    print(f"  Valid samples: {len(valid_data)}")
+    print(f"  Saved to: {DATA_DIR}")
+
+
+def find_checkpoint() -> str | None:
+    if not os.path.exists(OUTPUT_DIR):
+        return None
+
+    adapter_files = [
+        filename
+        for filename in os.listdir(OUTPUT_DIR)
+        if filename.endswith(".safetensors") or filename.endswith(".npz")
+    ]
+    if not adapter_files:
+        return None
+
+    numbered = sorted(filename for filename in adapter_files if filename[:6].isdigit())
+    latest = numbered[-1] if numbered else sorted(adapter_files)[-1]
+    return os.path.join(OUTPUT_DIR, latest)
+
+
+def finetune() -> None:
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+    cmd = [
+        sys.executable,
+        "-m",
+        "mlx_lm",
+        "lora",
+        "--model",
+        MODEL_NAME,
+        "--train",
+        "--data",
+        str(DATA_DIR),
+        "--adapter-path",
+        OUTPUT_DIR,
+        "--num-layers",
+        str(LORA_LAYERS),
+        "--batch-size",
+        str(BATCH_SIZE),
+        "--iters",
+        str(ITERATIONS),
+        "--learning-rate",
+        str(LEARNING_RATE),
+        "--steps-per-eval",
+        str(STEPS_PER_EVAL),
+        "--save-every",
+        str(STEPS_PER_SAVE),
+        "--val-batches",
+        "10",
+    ]
+
+    checkpoint = find_checkpoint()
+    if checkpoint:
+        print(f"Resuming from checkpoint: {checkpoint}")
+        cmd.extend(["--resume-adapter-file", checkpoint])
+    else:
+        print("Starting fresh Llama LoRA training")
+
+    print(f"Model: {MODEL_NAME}")
+    print(f"Dataset: {DATASET_PATH}")
+    print(f"Output: {OUTPUT_DIR}")
+    print("Running command:")
+    print(" ".join(cmd))
+    print("-" * 50)
+
+    result = subprocess.run(cmd, capture_output=False)
+    if result.returncode != 0:
+        print("Training failed. Check errors above.")
+        raise SystemExit(result.returncode)
+
+    print("-" * 50)
+    print("Llama fine-tuning complete.")
+    print(f"Adapters saved to: {OUTPUT_DIR}")
+
+
+def main() -> None:
+    if not os.path.exists(MODEL_NAME):
+        print(f"Base model not found: {MODEL_NAME}")
+        raise SystemExit(1)
+
+    if not os.path.exists(DATASET_PATH):
+        print(f"Dataset not found: {DATASET_PATH}")
+        raise SystemExit(1)
+
+    convert_dataset()
+    finetune()
+
+
+if __name__ == "__main__":
+    main()

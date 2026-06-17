@@ -1,0 +1,15 @@
+FROM /Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/models/gguf/synapse-gemma3-4b-v1-q4_k_m.gguf
+
+TEMPLATE """<bos>{{ if .System }}<start_of_turn>user
+{{ .System }}
+
+{{ .Prompt }}<end_of_turn>
+<start_of_turn>model
+{{ else }}<start_of_turn>user
+{{ .Prompt }}<end_of_turn>
+<start_of_turn>model
+{{ end }}{{ .Response }}<end_of_turn>"""
+
+PARAMETER stop "<end_of_turn>"
+PARAMETER temperature 0.4
+PARAMETER top_p 0.9

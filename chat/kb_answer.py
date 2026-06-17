@@ -30,6 +30,8 @@ if str(_SCRIPTS_DIR) not in sys.path:
 import answer_with_kb as aw  # noqa: E402
 import query_kb  # noqa: E402
 
+_CHECKED_OLLAMA_URLS: set[str] = set()
+
 
 def resolve_ollama_url(ollama_url: str | None) -> str:
     if ollama_url:
@@ -41,6 +43,13 @@ def resolve_generation_model(generation_model: str | None) -> str:
     if generation_model:
         return generation_model.strip()
     return os.environ.get("KB_ANSWER_MODEL", aw.DEFAULT_GENERATION_MODEL).strip()
+
+
+def check_ollama_once(base_url: str) -> None:
+    if base_url in _CHECKED_OLLAMA_URLS:
+        return
+    query_kb.check_ollama(base_url)
+    _CHECKED_OLLAMA_URLS.add(base_url)
 
 
 def kb_grounded_answer(
@@ -79,7 +88,7 @@ def kb_grounded_answer(
         num_predict if num_predict is not None else int(model_profile["num_predict"])
     )
 
-    query_kb.check_ollama(base_url)
+    check_ollama_once(base_url)
 
     hits, _embedding_model, profile = aw.retrieve_hits(
         question=q,
@@ -146,7 +155,7 @@ def kb_grounded_answer_with_meta(
             "embedding_model": None,
         }
 
-    query_kb.check_ollama(base_url)
+    check_ollama_once(base_url)
 
     hits, embedding_model, profile = aw.retrieve_hits(
         question=q,

@@ -16,3 +16,6 @@ huggingface-hub
 # Knowledge base retrieval
 numpy
 faiss-cpu
+
+# Local testing UI
+streamlit

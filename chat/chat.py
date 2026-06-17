@@ -29,6 +29,7 @@ from guardrail_stage1 import (
     is_policy_question,
     is_small_talk_question,
     policy_intent,
+    small_talk_response,
     run_with_retry,
 )
 
@@ -39,26 +40,66 @@ BASE_MODEL = "qwen2.5:1.5b-instruct"
 BASE_MODEL_FALLBACK = "qwen2.5:1.5b-instruct"
 FINE_TUNED_V1_MODEL = "synapse-1.5b-v1"
 FINE_TUNED_V2_MODEL = "synapse-1.5b-v2"
+FINE_TUNED_LLAMA_MODEL = "synapse-llama3-v1"
+FINE_TUNED_GEMMA_MODEL = "synapse-gemma3-4b-v1"
+FINE_TUNED_MODEL = FINE_TUNED_V2_MODEL
+SELECTED_FINE_TUNE_EXISTS = True
 STOP_SEQUENCES = ["\n\n", "Answer:", "Note:", "Q:", "You:"]
-BASE_MODEL_CHOICES = {
-    "1": "qwen2.5:1.5b-instruct",
-    "2": "qwen2.5:3b",
-    "3": "qwen2.5:7b",
-    "4": "llama3:latest",
+FINE_TUNED_MODEL_CHOICES = {
+    "1": {
+        "label": "Synapse 1.5B V1",
+        "fine_tuned_model": FINE_TUNED_V1_MODEL,
+        "base_model": "qwen2.5:1.5b-instruct",
+    },
+    "2": {
+        "label": "Synapse 1.5B V2",
+        "fine_tuned_model": FINE_TUNED_V2_MODEL,
+        "base_model": "qwen2.5:1.5b-instruct",
+    },
+    "3": {
+        "label": "Synapse Llama V1",
+        "fine_tuned_model": FINE_TUNED_LLAMA_MODEL,
+        "base_model": "llama3:latest",
+    },
+    "4": {
+        "label": "Synapse Gemma 3 4B V1",
+        "fine_tuned_model": FINE_TUNED_GEMMA_MODEL,
+        "base_model": "gemma3:4b",
+    },
+    "5": {
+        "label": "Qwen2.5 3B",
+        "fine_tuned_model": None,
+        "base_model": "qwen2.5:3b",
+        "fine_tune_exists": False,
+    },
+    "6": {
+        "label": "Qwen2.5 7B",
+        "fine_tuned_model": None,
+        "base_model": "qwen2.5:7b",
+        "fine_tune_exists": False,
+    },
 }
 
 # Printed on startup / batch so the three columns are never ambiguous.
 COLUMN_LEGEND = (
-    "V1/V2 fine-tuned = selected Synapse model + KB/RAG; "
-    "base + RAG = untrained base model + the same KB/RAG; "
-    "base plain = untrained base model without KB."
+    "Base + Fine-Tuned = selected Synapse model; "
+    "Base = original model the Synapse model was trained from; "
+    "RAG = local FAISS knowledge-base retrieval."
 )
 DISPLAY_MODES = {
-    "1": "fine_tuned_v1_rag",
-    "2": "fine_tuned_v2_rag",
+    "1": "fine_tuned_rag",
+    "2": "fine_tuned_plain",
     "3": "base_rag",
     "4": "base_plain",
     "5": "all",
+}
+FOLLOW_UP_CONFIRMATIONS = {
+    "are you sure",
+    "are u sure",
+    "u sure",
+    "you sure",
+    "sure",
+    "really",
 }
 
 
@@ -76,6 +117,28 @@ def quick_guardrail_observability(question: str) -> dict:
     }
     aw.log_kb_debug({"stage": "answer_observability", **event})
     return event
+
+
+def quick_bypass_result(question: str) -> dict | None:
+    if is_small_talk_question(question):
+        return {
+            "answer": small_talk_response(question),
+            "usage": {"quick_bypass": None},
+            "observability": quick_guardrail_observability(question),
+        }
+    if policy_intent(question) is not None:
+        result = run_with_retry(question)
+        return {
+            "answer": result["final_answer"],
+            "usage": {"quick_bypass": None},
+            "observability": quick_guardrail_observability(question),
+        }
+    return None
+
+
+def is_confirmation_follow_up(question: str) -> bool:
+    normalized = " ".join(question.strip().lower().replace("?", "").split())
+    return normalized in FOLLOW_UP_CONFIRMATIONS
 
 
 def _infer_ft_inference_label(result: dict) -> str:
@@ -243,6 +306,9 @@ def fine_tuned_result(question: str, model_name: str) -> dict:
 
 def base_rag_result(question: str) -> dict:
     """Run the same KB/RAG pipeline with only the generation model changed."""
+    bypass = quick_bypass_result(question)
+    if bypass is not None:
+        return bypass
     return kb_grounded_answer_with_meta(
         question,
         generation_model=BASE_MODEL,
@@ -269,12 +335,19 @@ def run_with_loader(question: str, prefix: str = "", mode: str = "all") -> dict:
     started = time.perf_counter()
     try:
         result = {"attempts": 1, "used_fallback": False}
-        if mode in {"fine_tuned_v1_rag", "all"}:
-            v1_result = fine_tuned_result(question, FINE_TUNED_V1_MODEL)
-            result["fine_tuned_v1"] = v1_result
-        if mode in {"fine_tuned_v2_rag", "all"}:
-            v2_result = fine_tuned_result(question, FINE_TUNED_V2_MODEL)
-            result["fine_tuned_v2"] = v2_result
+        if mode in {"fine_tuned_rag", "all"}:
+            if SELECTED_FINE_TUNE_EXISTS:
+                ft_rag = fine_tuned_result(question, FINE_TUNED_MODEL)
+                result["fine_tuned_rag"] = ft_rag
+            else:
+                result["fine_tuned_rag_unavailable"] = True
+        if mode in {"fine_tuned_plain", "all"}:
+            if SELECTED_FINE_TUNE_EXISTS:
+                ft_plain = generate_model_result(FINE_TUNED_MODEL, question)
+                result["fine_tuned_plain_answer"] = ft_plain["answer"]
+                result["fine_tuned_plain_usage"] = ft_plain.get("usage")
+            else:
+                result["fine_tuned_plain_unavailable"] = True
         if mode in {"base_rag", "all"}:
             base_rag = base_rag_result(question)
             result["base_rag_answer"] = base_rag["answer"]
@@ -301,16 +374,28 @@ def print_answer_block(title: str, answer: str) -> None:
 
 def print_comparison(result: dict, *, prefix: str = "", mode: str = "all") -> None:
     label_prefix = f"{prefix} " if prefix else ""
-    if mode in {"fine_tuned_v1_rag", "all"}:
-        print_answer_block(
-            f"{label_prefix}SYNAPSE 1.5B V1 + local KB (FAISS RAG)",
-            result["fine_tuned_v1"]["final_answer"],
-        )
-    if mode in {"fine_tuned_v2_rag", "all"}:
-        print_answer_block(
-            f"{label_prefix}SYNAPSE 1.5B V2 + local KB (FAISS RAG)",
-            result["fine_tuned_v2"]["final_answer"],
-        )
+    if mode in {"fine_tuned_rag", "all"}:
+        if SELECTED_FINE_TUNE_EXISTS:
+            print_answer_block(
+                f"{label_prefix}BASE + FINE-TUNED {FINE_TUNED_MODEL} + local KB (FAISS RAG)",
+                result["fine_tuned_rag"]["final_answer"],
+            )
+        else:
+            print_answer_block(
+                f"{label_prefix}BASE + FINE-TUNED + local KB (FAISS RAG)",
+                f"Fine-tuned version for {BASE_MODEL} does not exist in this project.",
+            )
+    if mode in {"fine_tuned_plain", "all"}:
+        if SELECTED_FINE_TUNE_EXISTS:
+            print_answer_block(
+                f"{label_prefix}BASE + FINE-TUNED {FINE_TUNED_MODEL} — plain model only (no KB)",
+                result["fine_tuned_plain_answer"],
+            )
+        else:
+            print_answer_block(
+                f"{label_prefix}BASE + FINE-TUNED — plain model only (no KB)",
+                f"Fine-tuned version for {BASE_MODEL} does not exist in this project.",
+            )
     if mode in {"base_rag", "all"}:
         print_answer_block(
             f"{label_prefix}BASE {BASE_MODEL} + local KB (same FAISS RAG)",
@@ -340,27 +425,24 @@ def collect_batch_questions() -> list[str]:
 
 
 def print_debug(result: dict, mode: str) -> None:
-    v1 = result.get("fine_tuned_v1") or {}
-    v2 = result.get("fine_tuned_v2") or {}
+    ft_rag = result.get("fine_tuned_rag") or {}
     print("\n--- Debug ---")
     print(
         json.dumps(
             {
                 "mode": mode,
-                "fine_tuned_v1": {
-                    "model": FINE_TUNED_V1_MODEL,
-                    "observability": v1.get("observability"),
-                    "usage": v1.get("kb_usage"),
-                },
-                "fine_tuned_v2": {
-                    "model": FINE_TUNED_V2_MODEL,
-                    "observability": v2.get("observability"),
-                    "usage": v2.get("kb_usage"),
+                "fine_tuned_rag": {
+                    "model": FINE_TUNED_MODEL,
+                    "observability": ft_rag.get("observability"),
+                    "usage": ft_rag.get("kb_usage"),
                 },
                 "token_usage": {
+                    "fine_tuned_plain": result.get("fine_tuned_plain_usage"),
                     "base_rag": result.get("base_rag_usage"),
                     "base_plain": result.get("base_usage"),
                 },
+                "selected_fine_tuned_model": FINE_TUNED_MODEL,
+                "selected_fine_tune_exists": SELECTED_FINE_TUNE_EXISTS,
                 "selected_pipeline_model": BASE_MODEL,
                 "selected_model_profile": aw.get_model_profile(BASE_MODEL),
                 "base_rag_observability": result.get("base_rag_observability"),
@@ -418,11 +500,11 @@ def run_batch(debug: bool, mode: str) -> None:
 
 def choose_display_mode() -> str:
     print("Choose answer mode:")
-    print("1. Synapse 1.5B V1 + RAG")
-    print("2. Synapse 1.5B V2 + RAG")
+    print("1. Base + Fine-Tuned + RAG")
+    print("2. Base + Fine-Tuned")
     print("3. Base + RAG")
-    print("4. Plain base")
-    print("5. All answers")
+    print("4. Base")
+    print("5. All Answers / Ground Truth")
     while True:
         choice = input("Mode [1-5]: ").strip()
         if choice in DISPLAY_MODES:
@@ -430,17 +512,19 @@ def choose_display_mode() -> str:
         print("Enter 1, 2, 3, 4, or 5.")
 
 
-def choose_base_model() -> str:
-    print("Choose pipeline model:")
-    print("1. Qwen2.5 1.5B Instruct")
-    print("2. Qwen2.5 3B")
-    print("3. Qwen2.5 7B")
-    print("4. Llama 3 latest")
+def choose_fine_tuned_model() -> dict:
+    print("Choose model:")
+    print("1. Synapse 1.5B V1")
+    print("2. Synapse 1.5B V2")
+    print("3. Synapse Llama V1")
+    print("4. Synapse Gemma 3 4B V1")
+    print("5. Qwen2.5 3B")
+    print("6. Qwen2.5 7B")
     while True:
-        choice = input("Model [1-4]: ").strip()
-        if choice in BASE_MODEL_CHOICES:
-            return BASE_MODEL_CHOICES[choice]
-        print("Enter 1, 2, 3, or 4.")
+        choice = input("Model [1-6]: ").strip()
+        if choice in FINE_TUNED_MODEL_CHOICES:
+            return FINE_TUNED_MODEL_CHOICES[choice]
+        print("Enter 1, 2, 3, 4, 5, or 6.")
 
 
 def choose_rag_behavior() -> bool:
@@ -457,17 +541,25 @@ def choose_rag_behavior() -> bool:
 
 
 def chat() -> None:
-    global BASE_MODEL, BASE_MODEL_FALLBACK
+    global BASE_MODEL, BASE_MODEL_FALLBACK, FINE_TUNED_MODEL, SELECTED_FINE_TUNE_EXISTS
 
     print("=" * 60)
-    print("Synapse SLM — V1 RAG vs V2 RAG vs base RAG vs plain base")
+    print("Synapse SLM — fine-tuned vs base comparison")
     print("=" * 60)
     print(COLUMN_LEGEND)
-    BASE_MODEL = choose_base_model()
+    model_choice = choose_fine_tuned_model()
+    FINE_TUNED_MODEL = model_choice["fine_tuned_model"]
+    BASE_MODEL = model_choice["base_model"]
+    SELECTED_FINE_TUNE_EXISTS = bool(model_choice.get("fine_tune_exists", True))
     BASE_MODEL_FALLBACK = BASE_MODEL
     aw.DEFAULT_REWRITE_MODEL = BASE_MODEL
     aw.DEFAULT_CLASSIFIER_MODEL = BASE_MODEL
-    print(f"Selected base model: {BASE_MODEL}")
+    if SELECTED_FINE_TUNE_EXISTS:
+        print(f"Selected fine-tuned model: {FINE_TUNED_MODEL}")
+        print(f"Matched base model: {BASE_MODEL}")
+    else:
+        print(f"Selected base model: {BASE_MODEL}")
+        print(f"Fine-tuned version: not available in this project")
     aw.RAG_GENERATE_ORDINARY_ANSWERS = choose_rag_behavior()
     mode = choose_display_mode()
     print("Type 'exit' to quit.")
@@ -475,6 +567,7 @@ def chat() -> None:
     print("Type 'batch' to paste multiple questions and run together.")
 
     debug = False
+    last_context_question = ""
 
     while True:
         try:
@@ -495,13 +588,22 @@ def chat() -> None:
             run_batch(debug, mode)
             continue
 
+        effective_input = user_input
+        if is_confirmation_follow_up(user_input) and last_context_question:
+            effective_input = (
+                f"The user is asking whether your previous answer to this question was correct: "
+                f"{last_context_question}. Verify it from the KB and correct it if needed."
+            )
+
         try:
-            result = run_with_loader(user_input, mode=mode)
+            result = run_with_loader(effective_input, mode=mode)
         except Exception as exc:
             print(f"[Error] {exc}")
             continue
 
         print_comparison(result, mode=mode)
+        if not is_small_talk_question(user_input) and not is_confirmation_follow_up(user_input):
+            last_context_question = user_input
 
         if debug:
             print_debug(result, mode)
