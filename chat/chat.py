@@ -276,8 +276,8 @@ def fine_tuned_result(question: str, model_name: str) -> dict:
     meta = kb_grounded_answer_with_meta(
         question,
         generation_model=model_name,
-        rewrite_model=BASE_MODEL,
-        classifier_model=BASE_MODEL,
+        rewrite_model=model_name,
+        classifier_model=model_name,
     )
     answer = meta["answer"]
     ok_verdict = {
@@ -540,6 +540,19 @@ def choose_rag_behavior() -> bool:
         print("Enter 1 or 2.")
 
 
+def choose_fast_rag() -> bool:
+    print("Fast RAG:")
+    print("1. Off — allow retry/correction calls")
+    print("2. On — skip retry/correction calls")
+    while True:
+        choice = input("Fast RAG [1-2]: ").strip()
+        if choice == "1":
+            return False
+        if choice == "2":
+            return True
+        print("Enter 1 or 2.")
+
+
 def chat() -> None:
     global BASE_MODEL, BASE_MODEL_FALLBACK, FINE_TUNED_MODEL, SELECTED_FINE_TUNE_EXISTS
 
@@ -561,6 +574,7 @@ def chat() -> None:
         print(f"Selected base model: {BASE_MODEL}")
         print(f"Fine-tuned version: not available in this project")
     aw.RAG_GENERATE_ORDINARY_ANSWERS = choose_rag_behavior()
+    aw.RAG_FAST_MODE = choose_fast_rag()
     mode = choose_display_mode()
     print("Type 'exit' to quit.")
     print("Type 'debug' to toggle attempt-level output.")

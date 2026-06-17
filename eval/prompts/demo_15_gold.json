@@ -1,0 +1,129 @@
+{
+  "version": 1,
+  "name": "demo_15_gold",
+  "description": "Strict gold checks for the 15-question Synapse demo/regression batch.",
+  "cases": [
+    {
+      "id": "demo-001",
+      "question": "What does Synapse Tech do?",
+      "expected_behavior": "Give a concise factual company summary covering custom software, workflow automation, conversational AI, private AI, or cloud infrastructure.",
+      "must_include_any": ["custom software", "workflow automation", "conversational AI", "private AI", "cloud infrastructure", "business software"],
+      "must_not_include": ["public pricing", "certified", "guarantee"],
+      "allowed_refusal": false
+    },
+    {
+      "id": "demo-002",
+      "question": "What products does Synapse Tech offer?",
+      "expected_behavior": "List the supported Synapse products.",
+      "must_include": ["Agentic Bot", "iRecruit", "Opira", "Cyber Security"],
+      "must_include_any": ["Coversaction", "Conversaction"],
+      "allowed_refusal": false
+    },
+    {
+      "id": "demo-003",
+      "question": "Which Synapse product is best for recruitment automation?",
+      "expected_behavior": "Recommend iRecruit One directly for recruitment automation.",
+      "must_include": ["iRecruit"],
+      "must_not_include": ["Cyber Security Automation", "Opira AI", "Coversaction AI", "Conversaction AI"],
+      "allowed_refusal": false
+    },
+    {
+      "id": "demo-004",
+      "question": "How does iRecruit One improve the hiring process?",
+      "expected_behavior": "Explain iRecruit One using hiring/recruitment capabilities such as CV screening, AI interviews, shortlisting, scheduling, auditability, or high-volume hiring.",
+      "must_include": ["iRecruit"],
+      "must_include_any": ["CV", "resume", "screening", "interview", "shortlisting", "scheduling", "hiring", "recruitment"],
+      "must_not_include": ["customer support", "cyber security"],
+      "allowed_refusal": false
+    },
+    {
+      "id": "demo-005",
+      "question": "Tell me about Agentic Bot and its main capabilities.",
+      "expected_behavior": "Describe Agentic Bot as a WhatsApp/service workflow assistant and mention grounded capabilities.",
+      "must_include": ["Agentic Bot"],
+      "must_include_any": ["WhatsApp", "service request", "forms", "policy", "workflow", "backend"],
+      "must_not_include": ["iRecruit", "Opira"],
+      "allowed_refusal": false
+    },
+    {
+      "id": "demo-006",
+      "question": "Which product would help automate customer support conversations?",
+      "expected_behavior": "Recommend Coversaction AI / Conversaction AI for customer support conversations.",
+      "must_include_any": ["Coversaction", "Conversaction"],
+      "must_not_include": ["Cyber Security Automation", "Opira AI", "iRecruit"],
+      "allowed_refusal": false
+    },
+    {
+      "id": "demo-007",
+      "question": "What is Coversaction AI used for?",
+      "expected_behavior": "Describe Coversaction AI as conversational/customer resolution AI for support, appointments, lead qualification, handoff, or customer touchpoints.",
+      "must_include_any": ["Coversaction", "Conversaction"],
+      "must_include_any_group_2": ["customer", "support", "appointment", "lead", "handoff", "conversation"],
+      "must_not_include": ["recruitment", "cyber security"],
+      "allowed_refusal": false
+    },
+    {
+      "id": "demo-008",
+      "question": "Can Opira AI operate offline or on private infrastructure?",
+      "expected_behavior": "Confirm Opira AI specifically supports offline/on-prem/private infrastructure deployment.",
+      "must_include": ["Opira"],
+      "must_include_any": ["offline", "on-prem", "on premises", "private cloud", "private infrastructure", "behind your firewall"],
+      "must_not_include": ["all tools", "every product"],
+      "allowed_refusal": false
+    },
+    {
+      "id": "demo-009",
+      "question": "How does Synapse Tech help businesses automate workflows?",
+      "expected_behavior": "Explain workflow automation using APIs, SaaS/database integrations, orchestration, reduced manual work, or tools like n8n/Make/Airbyte/Airtable.",
+      "must_include_any": ["workflow automation", "APIs", "databases", "SaaS", "orchestration", "n8n", "Make.com", "Airbyte", "Airtable", "manual"],
+      "must_not_include": ["only provides consulting"],
+      "allowed_refusal": false
+    },
+    {
+      "id": "demo-010",
+      "question": "Do you build custom web and mobile applications?",
+      "expected_behavior": "Confirm Synapse builds custom web and mobile applications.",
+      "must_include_any": ["custom web", "mobile", "applications", "apps", "custom software"],
+      "allowed_refusal": false
+    },
+    {
+      "id": "demo-011",
+      "question": "What voice agent and call automation services do you provide?",
+      "expected_behavior": "Mention AI voice agents/call automation/conversational automation without dumping unrelated products.",
+      "must_include_any": ["voice agent", "voice agents", "call automation", "conversational automation", "call-center", "customer calls"],
+      "must_not_include": ["iRecruit", "Cyber Security Automation"],
+      "allowed_refusal": false
+    },
+    {
+      "id": "demo-012",
+      "question": "Which industries does Synapse Tech serve?",
+      "expected_behavior": "List supported industries from the KB such as banking/financial services, retail/e-commerce, BPO/contact centers, cyber security, manufacturing/logistics, or healthcare if grounded.",
+      "must_include_any": ["banking", "financial", "retail", "e-commerce", "BPO", "contact center", "cyber security", "manufacturing", "logistics", "healthcare"],
+      "allowed_refusal": false
+    },
+    {
+      "id": "demo-013",
+      "question": "How can I choose the right Synapse solution for my business?",
+      "expected_behavior": "Give practical guidance by asking about the business problem/use case and mapping it to product/service areas.",
+      "must_include_any": ["business problem", "use case", "workflow", "customer support", "recruitment", "private AI", "cloud", "voice"],
+      "allowed_refusal": false
+    },
+    {
+      "id": "demo-014",
+      "question": "How can I purchase a Synapse Tech product or contact your team?",
+      "expected_behavior": "Give verified contact/get-started guidance only.",
+      "must_include": ["info@synapsetechinc.com"],
+      "must_include_any": ["Monday", "Saturday", "contact Synapse", "chat with the team"],
+      "must_not_include": ["add to cart", "checkout", "sales@synapse-tech.com", "1-800"],
+      "allowed_refusal": false
+    },
+    {
+      "id": "demo-015",
+      "question": "Do you publish pricing, SLA guarantees, or security certifications?",
+      "expected_behavior": "State that public pricing, SLA guarantees, and security certifications are not confirmed/listed; do not invent specifics.",
+      "must_include_any": ["not confirmed", "not publicly listed", "not listed", "not publicly confirmed", "not available"],
+      "must_not_include": ["SOC 2", "ISO 27001", "$", "99.9%", "guaranteed"],
+      "allowed_refusal": true
+    }
+  ]
+}

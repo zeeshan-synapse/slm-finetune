@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 import argparse
+import copy
 import json
 import os
 import re
+import time
 from pathlib import Path
 from typing import Any
 from datetime import datetime, timezone
@@ -42,6 +44,12 @@ DISABLE_NONCRITICAL_DIRECT_ANSWERS = False
 RAG_GENERATE_ORDINARY_ANSWERS = os.environ.get(
     "RAG_GENERATE_ORDINARY_ANSWERS", ""
 ).strip().lower() in {"1", "true", "yes", "on"}
+RAG_FAST_MODE = os.environ.get("RAG_FAST_MODE", "").strip().lower() in {
+    "1",
+    "true",
+    "yes",
+    "on",
+}
 SAFETY_DETERMINISTIC_POLICIES = {
     "contact",
     "purchase",
@@ -154,6 +162,9 @@ def load_runtime_json(path: Path, fallback: dict[str, Any]) -> dict[str, Any]:
 PRODUCT_CARDS = load_runtime_json(RUNTIME_CONFIG_DIR / "product_cards.json", DEFAULT_PRODUCT_CARDS)
 RUNTIME_POLICIES = load_runtime_json(RUNTIME_CONFIG_DIR / "policies.json", DEFAULT_RUNTIME_POLICIES)
 _KB_RESOURCE_CACHE: dict[tuple[str, str, str], tuple[Any, list[dict[str, Any]], dict[str, Any]]] = {}
+_QUERY_PLAN_CACHE: dict[tuple[str, str, bool], tuple[dict[str, str], dict[str, Any]]] = {}
+_EMBEDDING_CACHE: dict[tuple[str, str, str], Any] = {}
+_RETRIEVAL_CACHE: dict[tuple[Any, ...], tuple[list[dict[str, Any]], str, dict[str, Any]]] = {}
 
 
 def load_kb_resources(
@@ -193,6 +204,103 @@ def compile_product_patterns(product_cards: dict[str, Any]) -> list[tuple[str, r
 
 
 PRODUCT_NAME_PATTERNS = compile_product_patterns(PRODUCT_CARDS)
+USE_CASE_METADATA_ROUTES = [
+    {
+        "route": "customer_support_conversations",
+        "doc_ids": ["product-coversaction-ai"],
+        "need_terms": (
+            "customer service",
+            "customer support",
+            "support conversations",
+            "support chatbot",
+            "chatbot for customer",
+            "chatbot",
+            "appointments",
+            "lead qualification",
+            "handoff",
+        ),
+        "avoid_terms": (),
+    },
+    {
+        "route": "recruitment_automation",
+        "doc_ids": ["product-irecruit-one"],
+        "need_terms": (
+            "recruitment automation",
+            "hiring automation",
+            "recruiting automation",
+            "resume screening",
+            "cv screening",
+            "candidate matching",
+            "ai interviews",
+            "shortlisting",
+            "hire faster",
+            "applicant tracking",
+        ),
+        "avoid_terms": (
+            "customer service",
+            "customer support",
+            "support chatbot",
+            "customer conversations",
+        ),
+    },
+    {
+        "route": "private_infrastructure",
+        "doc_ids": ["product-opira-ai"],
+        "need_terms": (
+            "offline",
+            "on-prem",
+            "on premises",
+            "private infrastructure",
+            "private cloud",
+            "behind firewall",
+            "data sovereignty",
+            "sensitive documents",
+        ),
+        "avoid_terms": (),
+    },
+    {
+        "route": "voice_agents",
+        "doc_ids": ["services-voice-agent"],
+        "need_terms": (
+            "voice agent",
+            "voice agents",
+            "call automation",
+            "call center",
+            "phone calls",
+            "inbound calls",
+            "outbound calls",
+        ),
+        "avoid_terms": (),
+    },
+    {
+        "route": "workflow_automation",
+        "doc_ids": ["services-automation"],
+        "need_terms": (
+            "workflow automation",
+            "automate workflows",
+            "manual handoffs",
+            "copy paste",
+            "connect apis",
+            "connect databases",
+            "saas tools",
+        ),
+        "avoid_terms": (),
+    },
+    {
+        "route": "custom_development",
+        "doc_ids": ["services-custom-development"],
+        "need_terms": (
+            "custom software",
+            "custom app",
+            "custom application",
+            "web application",
+            "mobile app",
+            "mobile application",
+            "custom development",
+        ),
+        "avoid_terms": (),
+    },
+]
 INDUSTRY_NAME_PATTERNS = [
     ("banking and financial services", re.compile(r"\bbank(?:s|ing)?\b|\bfinancial\b|\bfintechs?\b", re.IGNORECASE)),
     ("BPO and contact centers", re.compile(r"\bbpo\b|\bcontact centers?\b", re.IGNORECASE)),
@@ -286,8 +394,8 @@ BASELINE_MODEL_PROFILE = {
 MODEL_PROFILES = {
     "qwen2.5:3b": {
         "name": "qwen2.5-3b-grounded",
-        "top_k": 7,
-        "context_k": 4,
+        "top_k": 6,
+        "context_k": 3,
         "temperature": 0.05,
         "num_predict": 140,
         "plain_temperature": 0.1,
@@ -311,8 +419,8 @@ MODEL_PROFILES = {
     },
     "qwen2.5:7b": {
         "name": "qwen2.5-7b-grounded",
-        "top_k": 8,
-        "context_k": 4,
+        "top_k": 6,
+        "context_k": 3,
         "temperature": 0.0,
         "num_predict": 150,
         "plain_temperature": 0.05,
@@ -335,8 +443,8 @@ MODEL_PROFILES = {
     },
     "llama3:latest": {
         "name": "llama3-grounded",
-        "top_k": 7,
-        "context_k": 4,
+        "top_k": 6,
+        "context_k": 3,
         "temperature": 0.1,
         "num_predict": 150,
         "plain_temperature": 0.1,
@@ -780,6 +888,33 @@ def is_single_product_recommendation_question(question: str) -> bool:
         ),
     )
     return asks_for_product or (expresses_need and "product" in low)
+
+
+def metadata_routes_for_question(question: str) -> list[dict[str, Any]]:
+    """Return retrieval routes based on the user's requested job-to-be-done.
+
+    Business context words are intentionally weaker than need words. For example,
+    "recruitment agency needing customer service" should route to Coversaction AI,
+    not iRecruit One.
+    """
+    low = question.lower()
+    routes: list[dict[str, Any]] = []
+    for route in USE_CASE_METADATA_ROUTES:
+        need_terms = route.get("need_terms", ())
+        avoid_terms = route.get("avoid_terms", ())
+        if any(term in low for term in avoid_terms):
+            continue
+        matched_terms = [term for term in need_terms if term in low]
+        if not matched_terms:
+            continue
+        routes.append(
+            {
+                "route": route["route"],
+                "doc_ids": list(route["doc_ids"]),
+                "matched_terms": matched_terms,
+            }
+        )
+    return routes
 
 
 def product_names_in_question(question: str) -> list[str]:
@@ -1510,11 +1645,13 @@ def ollama_chat(
     }
     if json_format:
         payload["format"] = "json"
+    started = time.perf_counter()
     response = requests.post(
         f"{ollama_url}/api/chat",
         json=payload,
         timeout=180,
     )
+    elapsed_s = time.perf_counter() - started
     response.raise_for_status()
     data = response.json()
     if usage_sink is not None:
@@ -1525,6 +1662,7 @@ def ollama_chat(
             "input_tokens": prompt_tokens,
             "output_tokens": output_tokens,
             "total_tokens": (prompt_tokens or 0) + (output_tokens or 0),
+            "elapsed_s": round(elapsed_s, 4),
         }
     return data.get("message", {}).get("content", "").strip()
 
@@ -2029,7 +2167,7 @@ def select_summary_hits(
         if hit.get("page_type") == config["detail_page_type"]
         and hit.get("doc_id") != config["index_doc_id"]
     }
-    summary_context_k = max(context_k, min(len(detail_doc_ids) + 1, 8))
+    summary_context_k = max(context_k, min(len(detail_doc_ids) + 1, 6))
 
     index_hits = [
         hit
@@ -2087,6 +2225,16 @@ def select_context_hits(
             for hit in hits
             if hit.get("page_type") == "product" and hit.get("doc_id") != "product"
         ]
+        metadata_doc_ids = [
+            doc_id
+            for route in profile.get("metadata_routes", [])
+            for doc_id in route.get("doc_ids", [])
+        ]
+        preferred_product_hits = [
+            hit for hit in product_hits if hit.get("doc_id") in metadata_doc_ids
+        ]
+        if preferred_product_hits:
+            return preferred_product_hits[:context_k]
         if product_hits:
             score_by_doc: dict[str, float] = {}
             for hit in product_hits:
@@ -3056,36 +3204,72 @@ def retrieve_hits(
     page_types: set[str],
     top_k: int,
 ) -> tuple[list[dict[str, Any]], str, dict[str, Any]]:
+    total_started = time.perf_counter()
+    timings: dict[str, float] = {}
+    stage_started = time.perf_counter()
     index, rows, manifest = load_kb_resources(index_path, metadata_path, manifest_path)
+    timings["kb_load_s"] = round(time.perf_counter() - stage_started, 4)
     model = embed_model or manifest.get("embedding_model")
     if not model:
         raise ValueError(
             "No embedding model available. Use --embed-model or ensure the manifest exists."
         )
 
-    profile = query_kb.query_profile(question)
     planner_model = rewrite_model or classifier_model or DEFAULT_REWRITE_MODEL
-    if RAG_COMBINED_PLANNING:
-        rewrite, classification = plan_query_with_model(
-            question=question,
-            ollama_url=ollama_url,
-            model=planner_model,
-        )
+    cache_key = (
+        question.strip(),
+        str(index_path.resolve()),
+        str(metadata_path.resolve()),
+        str(manifest_path.resolve()),
+        model,
+        planner_model,
+        rewrite_model or "",
+        classifier_model or "",
+        RAG_COMBINED_PLANNING,
+        tuple(sorted(page_types)),
+        top_k,
+    )
+    cached_retrieval = _RETRIEVAL_CACHE.get(cache_key)
+    if cached_retrieval is not None:
+        hits, cached_model, cached_profile = cached_retrieval
+        profile = copy.deepcopy(cached_profile)
+        cached_timings = dict(profile.get("timings") or {})
+        cached_timings["cache_hit"] = True
+        cached_timings["retrieval_total_s"] = round(time.perf_counter() - total_started, 4)
+        profile["timings"] = cached_timings
+        return copy.deepcopy(hits), cached_model, profile
+
+    profile = query_kb.query_profile(question)
+    stage_started = time.perf_counter()
+    plan_cache_key = (question.strip(), planner_model, RAG_COMBINED_PLANNING)
+    cached_plan = _QUERY_PLAN_CACHE.get(plan_cache_key)
+    if cached_plan is not None:
+        rewrite, classification = copy.deepcopy(cached_plan)
+        timings["planning_cache_hit"] = True
     else:
-        rewrite = rewrite_query_with_model(
-            question=question,
-            ollama_url=ollama_url,
-            model=rewrite_model or DEFAULT_REWRITE_MODEL,
-        )
-        search_query_for_classification = (
-            rewrite.get("search_query") or profile.get("search_query") or question
-        )
-        classification = classify_question_with_model(
-            question=question,
-            search_query=search_query_for_classification,
-            ollama_url=ollama_url,
-            model=classifier_model or DEFAULT_CLASSIFIER_MODEL,
-        )
+        if RAG_COMBINED_PLANNING:
+            rewrite, classification = plan_query_with_model(
+                question=question,
+                ollama_url=ollama_url,
+                model=planner_model,
+            )
+        else:
+            rewrite = rewrite_query_with_model(
+                question=question,
+                ollama_url=ollama_url,
+                model=rewrite_model or DEFAULT_REWRITE_MODEL,
+            )
+            search_query_for_classification = (
+                rewrite.get("search_query") or profile.get("search_query") or question
+            )
+            classification = classify_question_with_model(
+                question=question,
+                search_query=search_query_for_classification,
+                ollama_url=ollama_url,
+                model=classifier_model or DEFAULT_CLASSIFIER_MODEL,
+            )
+        _QUERY_PLAN_CACHE[plan_cache_key] = (copy.deepcopy(rewrite), copy.deepcopy(classification))
+    timings["planning_s"] = round(time.perf_counter() - stage_started, 4)
     profile["rewrite"] = rewrite
     profile["intent_hint"] = rewrite.get("intent_hint")
     search_query = rewrite.get("search_query") or profile.get("search_query") or question
@@ -3096,19 +3280,30 @@ def retrieve_hits(
     profile["comparison_products"] = product_names_in_question(question)
     profile["purchase_intent"] = is_purchase_or_get_started_question(question)
     profile["pricing_intent"] = is_pricing_or_quote_question(question)
+    profile["metadata_routes"] = metadata_routes_for_question(question)
     profile["answer_policy"] = determine_answer_policy(question, profile)
-    query_vector = query_kb.embed_query(ollama_url, model, search_query)
+    stage_started = time.perf_counter()
+    embedding_cache_key = (ollama_url, model, search_query)
+    cached_query_vector = _EMBEDDING_CACHE.get(embedding_cache_key)
+    if cached_query_vector is not None:
+        query_vector = cached_query_vector.copy()
+        timings["embedding_cache_hit"] = True
+    else:
+        query_vector = query_kb.embed_query(ollama_url, model, search_query)
+        _EMBEDDING_CACHE[embedding_cache_key] = query_vector.copy()
+    timings["embedding_s"] = round(time.perf_counter() - stage_started, 4)
     retrieval_top_k = top_k
     if profile.get("single_product_recommendation"):
-        retrieval_top_k = max(top_k, 16)
-    elif profile.get("answer_policy") in {"product_catalog", "service_catalog", "industry"}:
-        retrieval_top_k = max(top_k, 16)
-    elif profile.get("intent") in SUMMARY_INTENT_CONFIG:
-        retrieval_top_k = max(top_k, 16)
-    elif profile.get("company_overview"):
-        retrieval_top_k = max(top_k, 14)
-    elif profile.get("entity_terms"):
         retrieval_top_k = max(top_k, 10)
+    elif profile.get("answer_policy") in {"product_catalog", "service_catalog", "industry"}:
+        retrieval_top_k = max(top_k, 10)
+    elif profile.get("intent") in SUMMARY_INTENT_CONFIG:
+        retrieval_top_k = max(top_k, 10)
+    elif profile.get("company_overview"):
+        retrieval_top_k = max(top_k, 8)
+    elif profile.get("entity_terms"):
+        retrieval_top_k = max(top_k, 8)
+    stage_started = time.perf_counter()
     hits = query_kb.search_index(
         index,
         query_vector,
@@ -3117,6 +3312,7 @@ def retrieve_hits(
         retrieval_top_k,
         profile,
     )
+    timings["faiss_search_s"] = round(time.perf_counter() - stage_started, 4)
     log_kb_debug(
         {
             "question": question,
@@ -3125,6 +3321,7 @@ def retrieve_hits(
             "intent_hint": profile.get("intent_hint"),
             "model_classification": profile.get("model_classification"),
             "answer_policy": profile.get("answer_policy"),
+            "metadata_routes": profile.get("metadata_routes", []),
             "top_hits": [
                 {
                     "title": hit.get("title"),
@@ -3136,6 +3333,7 @@ def retrieve_hits(
             ],
         }
     )
+    stage_started = time.perf_counter()
     if profile.get("company_overview"):
         hits = augment_hits_with_about_us(hits, rows, max_chunks=4)
     if is_product_comparison_question(question):
@@ -3174,6 +3372,18 @@ def retrieve_hits(
             rows,
             matches=lambda row: row.get("doc_id") == "services-automation",
         )
+    metadata_doc_ids = {
+        doc_id
+        for route in profile.get("metadata_routes", [])
+        for doc_id in route.get("doc_ids", [])
+    }
+    if metadata_doc_ids:
+        hits = augment_hits_with_matching_rows(
+            hits,
+            rows,
+            matches=lambda row: row.get("doc_id") in metadata_doc_ids,
+            max_chunks=4,
+        )
     if is_industry_fit_question(question):
         hits = augment_hits_with_matching_rows(
             hits,
@@ -3198,6 +3408,10 @@ def retrieve_hits(
             detail_page_type=SUMMARY_INTENT_CONFIG[profile["intent"]]["detail_page_type"],
             index_doc_id=SUMMARY_INTENT_CONFIG[profile["intent"]]["index_doc_id"],
         )
+    timings["retrieval_postprocess_s"] = round(time.perf_counter() - stage_started, 4)
+    timings["retrieval_total_s"] = round(time.perf_counter() - total_started, 4)
+    profile["timings"] = timings
+    _RETRIEVAL_CACHE[cache_key] = (copy.deepcopy(hits), model, copy.deepcopy(profile))
     return hits, model, profile
 
 
@@ -3219,6 +3433,7 @@ def build_json_output(
         },
         "classification": profile.get("model_classification") or {},
         "answer_policy": profile.get("answer_policy") or determine_answer_policy(question, profile),
+        "timings": profile.get("timings", {}),
         "observability": profile.get("observability") or build_answer_observability(
             question=question,
             answer=answer,
@@ -3278,10 +3493,13 @@ def build_answer_observability(
         "route": route,
         "rewrite_query": rewrite.get("search_query") or profile.get("search_query") or question,
         "sources": source_doc_ids(hits),
+        "metadata_routes": profile.get("metadata_routes", []),
         "used_template": used_template,
         "used_refusal": refusal,
         "generation_experiment": RAG_GENERATE_ORDINARY_ANSWERS,
+        "fast_rag": RAG_FAST_MODE,
         "model_profile": profile.get("runtime_model_profile"),
+        "timings": profile.get("timings", {}),
     }
 
 
@@ -3635,7 +3853,7 @@ def generate_grounded_answer(
         or answer == DEFAULT_FALLBACK_RESPONSE
     ) and (profile.get("company_overview") or low_risk_model_answer)
 
-    if should_retry_too_cautious:
+    if not RAG_FAST_MODE and should_retry_too_cautious:
         blob = " ".join(f"{h.get('title', '')} {h.get('text', '')}" for h in context_hits).lower()
         has_grounding = any(
             token in blob
@@ -3679,7 +3897,7 @@ def generate_grounded_answer(
             )
             answer = clean_answer_text(answer)
 
-    if workflow_answer_too_shallow(question, answer):
+    if not RAG_FAST_MODE and workflow_answer_too_shallow(question, answer):
         workflow_retry_user = (
             user_prompt
             + "\n\nRetry: The previous answer was too shallow because it mostly listed tools. "
@@ -3717,7 +3935,7 @@ def generate_grounded_answer(
             if grounded_answer:
                 answer = grounded_answer
 
-    if product_overview_answer_too_shallow(question, answer):
+    if not RAG_FAST_MODE and product_overview_answer_too_shallow(question, answer):
         product_retry_user = (
             user_prompt
             + "\n\nRetry: The previous answer was too generic. The user asked about Synapse Tech products, "
@@ -3751,7 +3969,7 @@ def generate_grounded_answer(
             if grounded_answer:
                 answer = grounded_answer
 
-    if product_detail_answer_needs_cleanup(question, answer, profile):
+    if not RAG_FAST_MODE and product_detail_answer_needs_cleanup(question, answer, profile):
         product_retry_user = (
             user_prompt
             + "\n\nRetry: The previous product-detail answer used awkward or over-broad wording. "
@@ -3789,7 +4007,7 @@ def generate_grounded_answer(
 
     comparison_issues = comparison_answer_issues(question, answer)
     instruction_issues = instruction_following_issues(question, answer)
-    if comparison_issues or instruction_issues:
+    if not RAG_FAST_MODE and (comparison_issues or instruction_issues):
         expected_sentences = requested_sentence_count(question)
         constraints: list[str] = []
         if comparison_issues:

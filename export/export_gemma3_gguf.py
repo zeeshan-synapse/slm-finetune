@@ -1,6 +1,7 @@
 """Merge and export the Synapse Gemma 3 LoRA to a quantized GGUF."""
 
 import os
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -17,6 +18,10 @@ LLAMA_CPP_DIR = PROJECT_DIR / "llama.cpp"
 CONVERTER_PATH = LLAMA_CPP_DIR / "convert_hf_to_gguf.py"
 GGUF_PY_PATH = LLAMA_CPP_DIR / "gguf-py"
 QUANTIZER_PATH = LLAMA_CPP_DIR / "build" / "bin" / "llama-quantize"
+
+
+def should_reuse_existing() -> bool:
+    return os.environ.get("GEMMA_EXPORT_REUSE", "").strip().lower() in {"1", "true", "yes", "on"}
 
 
 def run(command: list[str], label: str, *, env: dict[str, str] | None = None) -> None:
@@ -49,6 +54,17 @@ def converter_env() -> dict[str, str]:
 def main() -> None:
     validate()
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    reuse_existing = should_reuse_existing()
+
+    if not reuse_existing and MERGED_PATH.exists():
+        print(f"\nRemoving stale merged Gemma model: {MERGED_PATH}")
+        shutil.rmtree(MERGED_PATH)
+    if not reuse_existing and F16_GGUF_PATH.exists():
+        print(f"Removing stale F16 GGUF: {F16_GGUF_PATH}")
+        F16_GGUF_PATH.unlink()
+    if not reuse_existing and Q4_GGUF_PATH.exists():
+        print(f"Removing stale quantized GGUF: {Q4_GGUF_PATH}")
+        Q4_GGUF_PATH.unlink()
 
     if not (MERGED_PATH / "config.json").exists():
         run(

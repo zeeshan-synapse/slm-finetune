@@ -18,6 +18,7 @@ from __future__ import annotations
 import argparse
 import os
 import sys
+import time
 from pathlib import Path
 from typing import Any
 
@@ -103,7 +104,7 @@ def kb_grounded_answer(
         top_k=effective_top_k,
     )
     eff_context_k = (
-        max(effective_context_k, 4)
+        max(effective_context_k, 3)
         if profile.get("company_overview")
         else effective_context_k
     )
@@ -157,6 +158,7 @@ def kb_grounded_answer_with_meta(
 
     check_ollama_once(base_url)
 
+    total_started = time.perf_counter()
     hits, embedding_model, profile = aw.retrieve_hits(
         question=q,
         index_path=aw.DEFAULT_INDEX_PATH,
@@ -169,13 +171,17 @@ def kb_grounded_answer_with_meta(
         page_types=page_types or set(),
         top_k=effective_top_k,
     )
+    timings = profile.setdefault("timings", {})
     eff_context_k = (
-        max(effective_context_k, 4)
+        max(effective_context_k, 3)
         if profile.get("company_overview")
         else effective_context_k
     )
     eff_context_k = min(eff_context_k, len(hits)) if hits else eff_context_k
+    stage_started = time.perf_counter()
     context_hits = aw.select_context_hits(hits, context_k=eff_context_k, profile=profile)
+    timings["context_select_s"] = round(time.perf_counter() - stage_started, 4)
+    stage_started = time.perf_counter()
     answer = aw.generate_grounded_answer(
         question=q,
         context_hits=context_hits,
@@ -185,6 +191,10 @@ def kb_grounded_answer_with_meta(
         temperature=effective_temperature,
         num_predict=effective_num_predict,
     )
+    timings["answer_total_s"] = round(time.perf_counter() - stage_started, 4)
+    timings["rag_total_s"] = round(time.perf_counter() - total_started, 4)
+    if profile.get("observability") is not None:
+        profile["observability"]["timings"] = timings
     return {
         "answer": answer,
         "generation_model": model,
@@ -194,6 +204,7 @@ def kb_grounded_answer_with_meta(
         "answer_policy": profile.get("answer_policy"),
         "observability": profile.get("observability"),
         "usage": profile.get("usage", {}),
+        "timings": timings,
     }
 
 

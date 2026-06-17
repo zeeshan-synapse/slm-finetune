@@ -57,6 +57,10 @@ def convert_dataset() -> None:
 
     tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
     formatted = [format_gemma_chat(pair, tokenizer) for pair in pairs]
+    if formatted:
+        first_text = formatted[0]["text"]
+        print(f"  Gemma template starts with <bos>: {first_text.startswith('<bos>')}")
+        print(f"  Dangling generation prompt: {first_text.rstrip().endswith('<start_of_turn>model')}")
 
     random.seed(SPLIT_SEED)
     random.shuffle(formatted)
@@ -97,6 +101,10 @@ def find_checkpoint() -> str | None:
     return os.path.join(OUTPUT_DIR, latest)
 
 
+def should_resume() -> bool:
+    return os.environ.get("GEMMA_RESUME", "").strip().lower() in {"1", "true", "yes", "on"}
+
+
 def finetune() -> None:
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
@@ -129,9 +137,17 @@ def finetune() -> None:
     ]
 
     checkpoint = find_checkpoint()
-    if checkpoint:
+    if checkpoint and should_resume():
         print(f"Resuming from checkpoint: {checkpoint}")
         cmd.extend(["--resume-adapter-file", checkpoint])
+    elif checkpoint:
+        print(f"Existing Gemma adapter found: {checkpoint}")
+        print("Refusing to auto-resume because stale bad-template adapters can corrupt Gemma output.")
+        print("Delete or rename the adapter folder for a fresh run:")
+        print(f"  rm -rf {OUTPUT_DIR}")
+        print("Or explicitly resume with:")
+        print("  GEMMA_RESUME=1 python train/finetune_gemma3.py")
+        raise SystemExit(1)
     else:
         print("Starting fresh Gemma LoRA training")
 
