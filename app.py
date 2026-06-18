@@ -7,6 +7,7 @@ Run:
 from __future__ import annotations
 
 import json
+import html
 import re
 import sys
 import threading
@@ -28,6 +29,7 @@ for path in (CHAT_DIR, SCRIPTS_DIR):
 
 from guardrail_stage1 import (  # noqa: E402
     GENERATOR_SYSTEM_PROMPT,
+    OLLAMA_KEEP_ALIVE,
     OLLAMA_URL,
     is_small_talk_question,
     policy_intent,
@@ -49,7 +51,7 @@ MODEL_OPTIONS: dict[str, dict[str, Any]] = {
         "base_model": "qwen2.5:1.5b-instruct",
         "fine_tune_exists": True,
     },
-    "Synapse Llama V1": {
+    "Synapse Llama 3B V1": {
         "fine_tuned_model": "synapse-llama3-v1",
         "base_model": "llama3:latest",
         "fine_tune_exists": True,
@@ -77,6 +79,53 @@ ANSWER_MODES = {
     "Fine-tuned": "fine_tuned_plain",
     "Fine-tuned + RAG": "fine_tuned_rag",
 }
+MODEL_PARAMETER_SIZES = {
+    "qwen2.5:1.5b-instruct": "1.5B",
+    "qwen-base:latest": "1.5B",
+    "synapse-1.5b-v1": "1.5B",
+    "synapse-1.5b-v2": "1.5B",
+    "synapse-llama3-v1-base": "3B",
+    "synapse-llama3-v1": "3B",
+    "llama3:latest": "8B",
+    "gemma3:4b": "4B",
+    "synapse-gemma3-4b-v1": "4B",
+    "qwen2.5:3b": "3B",
+    "qwen2.5:7b": "7B",
+}
+MODEL_OPTION_DISPLAY_NAMES = {
+    "Synapse Llama 3B V1": "Synapse Llama V1 3B",
+}
+MODEL_TAG_DISPLAY_NAMES = {
+    "synapse-llama3-v1-base": "Synapse Llama V1 3B (llama3:latest)",
+    "synapse-llama3-v1": "Synapse Llama V1 3B",
+    "llama3:latest": "Synapse Llama V1 8B (llama3:latest)",
+}
+
+
+def resolved_model_display(
+    model_label: str,
+    mode_label: str,
+    generation_model: str | None,
+) -> str:
+    if generation_model in MODEL_TAG_DISPLAY_NAMES:
+        return MODEL_TAG_DISPLAY_NAMES[generation_model]
+    display_label = model_label.replace("Synapse Llama 3B V1", "Synapse Llama V1")
+    size = MODEL_PARAMETER_SIZES.get(generation_model or "", "")
+    size_suffix = f" {size}" if size and size.lower() not in display_label.lower() else ""
+    if "fine-tuned" in mode_label.lower():
+        return f"{display_label}{size_suffix}"
+    return f"{display_label}{size_suffix} ({generation_model or 'unknown'})"
+
+
+def model_family(model_key: str, display_name: str) -> str:
+    searchable = f"{model_key} {display_name}".lower()
+    if "llama" in searchable:
+        return "Llama"
+    if "gemma" in searchable:
+        return "Gemma"
+    return "Qwen"
+
+
 V2_BUCKETS_PATH = PROJECT_ROOT / "eval" / "prompts" / "v2_50_buckets.json"
 DEMO_15_GOLD_PATH = PROJECT_ROOT / "eval" / "prompts" / "demo_15_gold.json"
 BATCH_HISTORY_PATH = PROJECT_ROOT / "eval" / "results" / "batch_eval_history.json"
@@ -111,6 +160,7 @@ def ollama_plain_answer(
         f"{OLLAMA_URL}/api/chat",
         json={
             "model": model,
+            "keep_alive": OLLAMA_KEEP_ALIVE,
             "messages": [
                 {"role": "system", "content": GENERATOR_SYSTEM_PROMPT},
                 {"role": "user", "content": question},
@@ -249,23 +299,61 @@ def source_rows(result: dict[str, Any]) -> list[str]:
     return [str(source) for source in sources if source]
 
 
+def retrieval_confidence(result: dict[str, Any]) -> dict[str, Any]:
+    observability = result.get("observability") or {}
+    confidence = observability.get("retrieval_confidence") or {}
+    return confidence if isinstance(confidence, dict) else {}
+
+
+def expected_source_ids(question: str) -> list[str]:
+    low = question.lower()
+    if "agentic" in low:
+        return ["product-agentic-bot"]
+    if contains_any(low, ("irecruit", "recruit", "hiring", "resume", "candidate", "cv")):
+        return ["product-irecruit-one"]
+    if contains_any(low, ("coversaction", "conversaction", "customer support", "support conversation", "chatbot")):
+        return ["product-coversaction-ai"]
+    if contains_any(low, ("opira", "offline", "private infrastructure", "on-prem", "private cloud")):
+        return ["product-opira-ai"]
+    if "workflow" in low and "automat" in low:
+        return ["services-automation"]
+    if contains_any(low, ("custom web", "custom mobile", "custom software", "web and mobile")):
+        return ["services-custom-development"]
+    if contains_any(low, ("voice agent", "call automation")):
+        return ["services-voice-agent"]
+    if contains_any(low, ("contact", "purchase", "buy", "get started")):
+        return ["contact-us"]
+    if "industr" in low:
+        return ["industries"]
+    if contains_any(low, ("what products", "list products", "products does synapse")):
+        return ["product"]
+    if contains_any(low, ("what does synapse", "summarize synapse", "explain synapse")):
+        return ["about-us"]
+    return []
+
+
 def render_message(item: dict[str, Any], *, debug_enabled: bool, show_sources: bool) -> None:
     with st.chat_message("user"):
         st.write(item["question"])
 
     with st.chat_message("assistant"):
         st.write(item["answer"])
+        generator_display = resolved_model_display(
+            item["model_label"],
+            item["mode_label"],
+            item.get("generation_model"),
+        )
         st.caption(
             f"Mode: {item['mode_label']} | Model: {item['model_label']} | "
-            f"Generator: {item.get('generation_model') or 'quick bypass'} | "
+            f"Generator: {generator_display if item.get('generation_model') else 'quick bypass'} | "
             f"Time: {item.get('elapsed_s', 0.0):.2f}s"
         )
 
         sources = source_rows(item.get("raw", {}))
         if show_sources and sources:
-            st.markdown("**Sources**")
-            for source in sources:
-                st.code(source, language=None)
+            with st.expander(f"Sources ({len(sources)})"):
+                for source in sources:
+                    st.code(source, language=None)
 
         if debug_enabled:
             with st.expander("Debug metadata"):
@@ -604,6 +692,17 @@ def run_batch_eval(
         raw["elapsed_s"] = round(elapsed_s, 3)
         answer = raw.get("answer", "")
         evaluation = evaluate_answer(question, answer, raw)
+        confidence = retrieval_confidence(raw)
+        top_doc_ids = [str(doc_id) for doc_id in confidence.get("top_doc_ids") or []]
+        expected_docs = expected_source_ids(question)
+        expected_top1 = (
+            top_doc_ids[0] in expected_docs
+            if expected_docs and top_doc_ids else None
+        )
+        expected_top3 = (
+            any(doc_id in expected_docs for doc_id in top_doc_ids[:3])
+            if expected_docs and top_doc_ids else None
+        )
         rows.append(
             {
                 "question": question,
@@ -614,7 +713,19 @@ def run_batch_eval(
                 "expected_behavior": evaluation["expected_behavior"],
                 "latency_s": round(elapsed_s, 2),
                 "generation_model": raw.get("generation_model"),
+                "generation_model_display": resolved_model_display(
+                    model_label,
+                    mode_label,
+                    raw.get("generation_model"),
+                ) if raw.get("generation_model") else "quick bypass",
                 "sources": ", ".join(source_rows(raw)),
+                "top_similarity": confidence.get("top_similarity"),
+                "second_similarity": confidence.get("second_similarity"),
+                "score_gap": confidence.get("score_gap"),
+                "top_retrieved_docs": ", ".join(top_doc_ids),
+                "expected_sources": ", ".join(expected_docs),
+                "expected_source_top1": expected_top1,
+                "expected_source_top3": expected_top3,
                 "is_refusal": evaluation["is_refusal"],
                 "debug": raw,
             }
@@ -636,6 +747,36 @@ def summarize_batch(rows: list[dict[str, Any]]) -> dict[str, Any]:
             issue_counts[issue] = issue_counts.get(issue, 0) + 1
     avg_latency = sum(float(row["latency_s"]) for row in rows) / total if total else 0.0
     score = ((pass_count + (partial_count * 0.5)) / total * 100) if total else 0.0
+    confidence_rows = [row for row in rows if row.get("top_similarity") is not None]
+    avg_top_similarity = (
+        sum(float(row["top_similarity"]) for row in confidence_rows) / len(confidence_rows)
+        if confidence_rows else 0.0
+    )
+    avg_score_gap = (
+        sum(float(row.get("score_gap") or 0.0) for row in confidence_rows) / len(confidence_rows)
+        if confidence_rows else 0.0
+    )
+    pass_confidence = [
+        float(row["top_similarity"])
+        for row in confidence_rows
+        if row["verdict"].startswith("✅")
+    ]
+    fail_confidence = [
+        float(row["top_similarity"])
+        for row in confidence_rows
+        if row["verdict"].startswith("❌")
+    ]
+    expected_rows = [row for row in rows if row.get("expected_source_top1") is not None]
+    expected_top1_count = sum(1 for row in expected_rows if row.get("expected_source_top1"))
+    expected_top3_count = sum(1 for row in expected_rows if row.get("expected_source_top3"))
+    high_confidence_failures = sum(
+        1
+        for row in confidence_rows
+        if row["verdict"].startswith("❌") and float(row["top_similarity"]) >= 0.75
+    )
+    low_confidence_questions = sum(
+        1 for row in confidence_rows if float(row["top_similarity"]) < 0.55
+    )
     return {
         "total": total,
         "pass": pass_count,
@@ -645,6 +786,20 @@ def summarize_batch(rows: list[dict[str, Any]]) -> dict[str, Any]:
         "refusal_count": refusal_count,
         "score": round(score, 1),
         "issue_counts": issue_counts,
+        "retrieval_confidence": {
+            "question_count": len(confidence_rows),
+            "avg_top_similarity": round(avg_top_similarity, 4),
+            "avg_score_gap": round(avg_score_gap, 4),
+            "pass_avg_similarity": round(sum(pass_confidence) / len(pass_confidence), 4) if pass_confidence else None,
+            "fail_avg_similarity": round(sum(fail_confidence) / len(fail_confidence), 4) if fail_confidence else None,
+            "expected_source_questions": len(expected_rows),
+            "expected_source_top1_count": expected_top1_count,
+            "expected_source_top1_pct": round(expected_top1_count / len(expected_rows) * 100, 1) if expected_rows else None,
+            "expected_source_top3_count": expected_top3_count,
+            "expected_source_top3_pct": round(expected_top3_count / len(expected_rows) * 100, 1) if expected_rows else None,
+            "high_confidence_failures_075": high_confidence_failures,
+            "low_confidence_questions_055": low_confidence_questions,
+        },
     }
 
 
@@ -728,7 +883,15 @@ def rows_to_csv(rows: list[dict[str, Any]]) -> str:
         "expected_behavior",
         "latency_s",
         "generation_model",
+        "generation_model_display",
         "sources",
+        "top_similarity",
+        "second_similarity",
+        "score_gap",
+        "top_retrieved_docs",
+        "expected_sources",
+        "expected_source_top1",
+        "expected_source_top3",
         "is_refusal",
     ]
     writer = csv.DictWriter(output, fieldnames=fields)
@@ -740,15 +903,19 @@ def rows_to_csv(rows: list[dict[str, Any]]) -> str:
 
 def render_history_card(entry: dict[str, Any]) -> None:
     summary = entry.get("summary") or {}
+    confidence = summary.get("retrieval_confidence") or {}
     score = float(summary.get("score") or 0.0)
     color, label = score_style(score)
     entry_id = str(entry.get("id") or "")
     rag_label = str(entry.get("rag_style") or "Unknown RAG")
-    title = (
-        f"{entry.get('model_label', 'Unknown model')} | "
-        f"{entry.get('mode_label', 'Unknown mode')} | "
-        f"{rag_label}"
+    model_key = history_model_key(entry)
+    generation_model = None if " | " in model_key else model_key
+    model_display = resolved_model_display(
+        str(entry.get("model_label") or "Unknown model"),
+        str(entry.get("mode_label") or "Unknown mode"),
+        generation_model,
     )
+    title = f"{model_display} | {rag_label}"
     config_line = (
         f"Combined planning: {'on' if entry.get('combined_planning') else 'off'} | "
         f"Fast RAG: {'on' if entry.get('fast_rag') else 'off'} | "
@@ -758,6 +925,16 @@ def render_history_card(entry: dict[str, Any]) -> None:
         left, right = st.columns([5, 1.5])
         with left:
             st.markdown(f"**{title}**")
+            if entry.get("_overall_model_rank"):
+                overall = entry.get("_overall_model_metrics") or {}
+                consistency = overall.get("consistency")
+                st.caption(
+                    f"Overall model rank #{entry['_overall_model_rank']} · "
+                    f"composite {entry.get('_overall_model_score', 0):.1f} · "
+                    f"avg quality {overall.get('average_quality', 0):.1f} · "
+                    f"strict accuracy {overall.get('strict_accuracy', 0):.1f}% · "
+                    f"consistency {f'{consistency:.1f}' if consistency is not None else 'insufficient'}"
+                )
             st.caption(entry.get("created_at", ""))
             st.caption(config_line)
             st.markdown(
@@ -765,6 +942,12 @@ def render_history_card(entry: dict[str, Any]) -> None:
                 f"Partial `{summary.get('partial', 0)}` · Fail `{summary.get('fail', 0)}` · "
                 f"Avg `{summary.get('avg_latency_s', 0)}s` · Refusals `{summary.get('refusal_count', 0)}`"
             )
+            if confidence.get("question_count"):
+                st.caption(
+                    f"Retrieval: avg similarity {confidence.get('avg_top_similarity')} · "
+                    f"avg gap {confidence.get('avg_score_gap')} · "
+                    f"expected source top-3 {confidence.get('expected_source_top3_pct')}%"
+                )
         with right:
             st.markdown(
                 f"""
@@ -817,6 +1000,7 @@ def history_report_rows(history: list[dict[str, Any]]) -> list[dict[str, Any]]:
         partial = int(summary.get("partial") or 0)
         wrong = int(summary.get("fail") or 0)
         issue_counts = summary.get("issue_counts") or {}
+        confidence = summary.get("retrieval_confidence") or {}
         rows.append(
             {
                 "created_at": entry.get("created_at", ""),
@@ -824,6 +1008,7 @@ def history_report_rows(history: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 "mode": entry.get("mode_label", ""),
                 "rag_behavior": entry.get("rag_style", ""),
                 "combined_planning": "on" if entry.get("combined_planning") else "off",
+                "fast_rag": "on" if entry.get("fast_rag") else "off",
                 "temperature": entry.get("temperature"),
                 "max_tokens": entry.get("max_tokens"),
                 "score": float(summary.get("score") or 0.0),
@@ -835,6 +1020,14 @@ def history_report_rows(history: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 "non_fail_pct": round((correct + partial) / total * 100, 1) if total else 0.0,
                 "avg_latency_s": float(summary.get("avg_latency_s") or 0.0),
                 "refusals": int(summary.get("refusal_count") or 0),
+                "avg_top_similarity": confidence.get("avg_top_similarity"),
+                "avg_score_gap": confidence.get("avg_score_gap"),
+                "pass_avg_similarity": confidence.get("pass_avg_similarity"),
+                "fail_avg_similarity": confidence.get("fail_avg_similarity"),
+                "expected_source_top1_pct": confidence.get("expected_source_top1_pct"),
+                "expected_source_top3_pct": confidence.get("expected_source_top3_pct"),
+                "high_confidence_failures_075": confidence.get("high_confidence_failures_075", 0),
+                "low_confidence_questions_055": confidence.get("low_confidence_questions_055", 0),
                 "top_issues": ", ".join(
                     f"{issue}:{count}"
                     for issue, count in sorted(
@@ -859,7 +1052,39 @@ def report_metric(label: str, row: dict[str, Any] | None, key: str, suffix: str 
         st.metric(label, "N/A")
         return
     st.metric(label, f"{row.get(key)}{suffix}")
-    st.caption(f"{row.get('model')} | {row.get('mode')} | {row.get('rag_behavior')}")
+    model_col, info_col = st.columns([0.86, 0.14], vertical_alignment="center")
+    with model_col:
+        st.caption(f"{row.get('model')} | {row.get('mode')} | {row.get('rag_behavior')}")
+    with info_col:
+        with st.popover("ⓘ", help="Show the complete metrics for this evaluation run"):
+            st.markdown(f"**{row.get('model') or 'Unknown model'}**")
+            st.caption(
+                f"{row.get('mode') or 'Unknown mode'} | "
+                f"{row.get('rag_behavior') or 'Unknown RAG behavior'}"
+            )
+            st.markdown(
+                f"""
+- **Score:** {row.get('score', 0)}%
+- **Strict accuracy:** {row.get('accuracy_pct', 0)}%
+- **Non-fail rate:** {row.get('non_fail_pct', 0)}%
+- **Average time:** {row.get('avg_latency_s', 0)}s
+- **Results:** {row.get('correct', 0)} pass, {row.get('partial', 0)} partial, {row.get('wrong', 0)} fail
+- **Refusals:** {row.get('refusals', 0)}
+- **Questions:** {row.get('total', 0)}
+- **Average retrieval similarity:** {row.get('avg_top_similarity')}
+- **Average retrieval gap:** {row.get('avg_score_gap')}
+- **Expected source top-1:** {row.get('expected_source_top1_pct')}%
+- **Expected source top-3:** {row.get('expected_source_top3_pct')}%
+- **High-confidence failures (≥0.75):** {row.get('high_confidence_failures_075', 0)}
+- **Low-confidence questions (<0.55):** {row.get('low_confidence_questions_055', 0)}
+- **Combined planning:** {row.get('combined_planning', 'off')}
+- **Fast RAG:** {row.get('fast_rag', 'off')}
+- **Temperature:** {row.get('temperature')}
+- **Max tokens:** {row.get('max_tokens')}
+                """
+            )
+            if row.get("top_issues"):
+                st.caption(f"Top issues: {row['top_issues']}")
 
 
 def rows_to_csv_report(rows: list[dict[str, Any]]) -> str:
@@ -873,6 +1098,7 @@ def rows_to_csv_report(rows: list[dict[str, Any]]) -> str:
         "mode",
         "rag_behavior",
         "combined_planning",
+        "fast_rag",
         "temperature",
         "max_tokens",
         "score",
@@ -884,6 +1110,14 @@ def rows_to_csv_report(rows: list[dict[str, Any]]) -> str:
         "non_fail_pct",
         "avg_latency_s",
         "refusals",
+        "avg_top_similarity",
+        "avg_score_gap",
+        "pass_avg_similarity",
+        "fail_avg_similarity",
+        "expected_source_top1_pct",
+        "expected_source_top3_pct",
+        "high_confidence_failures_075",
+        "low_confidence_questions_055",
         "top_issues",
     ]
     writer = csv.DictWriter(output, fieldnames=fields)
@@ -920,6 +1154,40 @@ def render_history_report(history: list[dict[str, Any]]) -> None:
     with c8:
         report_metric("Most refusals", pick_report_row(rows, "refusals"), "refusals")
 
+    confidence_rows = [row for row in rows if row.get("avg_top_similarity") is not None]
+    if confidence_rows:
+        source_accuracy_rows = [
+            row for row in confidence_rows
+            if row.get("expected_source_top1_pct") is not None
+        ]
+        c9, c10, c11, c12 = st.columns(4)
+        with c9:
+            report_metric(
+                "Highest avg similarity",
+                pick_report_row(confidence_rows, "avg_top_similarity"),
+                "avg_top_similarity",
+            )
+        with c10:
+            report_metric(
+                "Best source top-1",
+                pick_report_row(source_accuracy_rows, "expected_source_top1_pct"),
+                "expected_source_top1_pct",
+                "%",
+            )
+        with c11:
+            report_metric(
+                "Best source top-3",
+                pick_report_row(source_accuracy_rows, "expected_source_top3_pct"),
+                "expected_source_top3_pct",
+                "%",
+            )
+        with c12:
+            report_metric(
+                "Fewest confident failures",
+                pick_report_row(confidence_rows, "high_confidence_failures_075", highest=False),
+                "high_confidence_failures_075",
+            )
+
     st.dataframe(rows, use_container_width=True, hide_index=True)
 
     payload = {
@@ -941,16 +1209,420 @@ def render_history_report(history: list[dict[str, Any]]) -> None:
     )
 
 
-def render_batch_history() -> None:
-    history = load_batch_history()
-    if not history:
-        st.info("No saved batch eval runs yet.")
+def history_model_key(entry: dict[str, Any]) -> str:
+    counts: dict[str, int] = {}
+    for row in entry.get("results") or []:
+        model = str(row.get("generation_model") or "").strip()
+        if model:
+            counts[model] = counts.get(model, 0) + 1
+    if counts:
+        return max(counts, key=counts.get)
+    return f"{entry.get('model_label', 'Unknown model')} | {entry.get('mode_label', 'Unknown mode')}"
+
+
+def rank_history_by_overall_model(
+    history: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    grouped: dict[str, list[dict[str, Any]]] = {}
+    for entry in history:
+        grouped.setdefault(history_model_key(entry), []).append(entry)
+
+    aggregates: dict[str, dict[str, Any]] = {}
+    for model_key, entries in grouped.items():
+        run_scores: list[float] = []
+        latencies: list[float] = []
+        all_rows: list[dict[str, Any]] = []
+        source_top3_count = 0
+        source_question_count = 0
+        comparable_runs: dict[tuple[str, ...], list[float]] = {}
+        for entry in entries:
+            summary = entry.get("summary") or {}
+            confidence = summary.get("retrieval_confidence") or {}
+            score = float(summary.get("score") or 0.0)
+            run_scores.append(score)
+            rows = list(entry.get("results") or [])
+            all_rows.extend(rows)
+            signature = tuple(normalize_text(str(row.get("question") or "")) for row in rows)
+            if signature:
+                comparable_runs.setdefault(signature, []).append(score)
+            source_top3_count += int(confidence.get("expected_source_top3_count") or 0)
+            source_question_count += int(confidence.get("expected_source_questions") or 0)
+            latency = float(summary.get("avg_latency_s") or 0.0)
+            if latency > 0:
+                latencies.append(latency)
+
+        total_questions = len(all_rows)
+        passed_questions = sum(
+            1 for row in all_rows if str(row.get("verdict") or "").startswith("✅")
+        )
+        refusal_markers = (
+            "over_refusal",
+            "missing_required_refusal",
+            "under_refusal",
+            "possible_over_refusal",
+            "missing_unknown_caveat",
+        )
+        safety_markers = (
+            "prompt_leak",
+            "unsupported_specific_claim",
+            "bad_contact_claim",
+            "repetition",
+            "empty_answer",
+        )
+        refusal_errors = sum(
+            1
+            for row in all_rows
+            if any(marker in str(row.get("issue") or "") for marker in refusal_markers)
+        )
+        safety_errors = sum(
+            1
+            for row in all_rows
+            if any(marker in str(row.get("issue") or "") for marker in safety_markers)
+        )
+        repeated_scores = max(comparable_runs.values(), key=len, default=[])
+        consistency_score: float | None = None
+        if len(repeated_scores) >= 2:
+            cohort_mean = sum(repeated_scores) / len(repeated_scores)
+            variance = sum((score - cohort_mean) ** 2 for score in repeated_scores) / len(repeated_scores)
+            consistency_score = max(0.0, 100.0 - (variance ** 0.5 * 2.0))
+
+        aggregates[model_key] = {
+            "average_quality": sum(run_scores) / len(run_scores) if run_scores else 0.0,
+            "strict_accuracy": passed_questions / total_questions * 100.0 if total_questions else 0.0,
+            "source_top3_accuracy": (
+                source_top3_count / source_question_count * 100.0
+                if source_question_count else None
+            ),
+            "consistency": consistency_score,
+            "consistency_runs": len(repeated_scores),
+            "average_latency": sum(latencies) / len(latencies) if latencies else 0.0,
+            "refusal_correctness": (
+                (1.0 - refusal_errors / total_questions) * 100.0 if total_questions else 0.0
+            ),
+            "safety_error_control": (
+                (1.0 - safety_errors / total_questions) * 100.0 if total_questions else 0.0
+            ),
+            "run_count": len(entries),
+        }
+
+    valid_latencies = [
+        metrics["average_latency"]
+        for metrics in aggregates.values()
+        if metrics["average_latency"] > 0
+    ]
+    fastest_overall = min(valid_latencies) if valid_latencies else 0.0
+    for metrics in aggregates.values():
+        latency = metrics["average_latency"]
+        speed_score = min(100.0, fastest_overall / latency * 100.0) if latency else 0.0
+        metrics["speed_score"] = speed_score
+        source_score = metrics["source_top3_accuracy"]
+        consistency_score = metrics["consistency"]
+        # Unknown metrics receive a neutral score instead of a free perfect score.
+        metrics["overall_score"] = (
+            metrics["average_quality"] * 0.35
+            + metrics["strict_accuracy"] * 0.20
+            + (source_score if source_score is not None else 50.0) * 0.15
+            + (consistency_score if consistency_score is not None else 50.0) * 0.10
+            + speed_score * 0.10
+            + metrics["refusal_correctness"] * 0.05
+            + metrics["safety_error_control"] * 0.05
+        )
+
+    ordered_models = sorted(
+        aggregates,
+        key=lambda key: (
+            aggregates[key]["overall_score"],
+            aggregates[key]["average_quality"],
+            -aggregates[key]["average_latency"],
+        ),
+        reverse=True,
+    )
+    ranks = {model_key: index for index, model_key in enumerate(ordered_models, start=1)}
+    ranked_history: list[dict[str, Any]] = []
+    for entry in history:
+        copied = dict(entry)
+        model_key = history_model_key(entry)
+        copied["_overall_model_rank"] = ranks[model_key]
+        copied["_overall_model_score"] = aggregates[model_key]["overall_score"]
+        copied["_overall_model_metrics"] = aggregates[model_key]
+        ranked_history.append(copied)
+    ranked_history.sort(
+        key=lambda entry: (
+            int(entry["_overall_model_rank"]),
+            -float((entry.get("summary") or {}).get("score") or 0.0),
+        )
+    )
+    return ranked_history
+
+
+def overall_model_metrics(history: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
+    metrics: dict[str, dict[str, Any]] = {}
+    for entry in rank_history_by_overall_model(history):
+        model_key = history_model_key(entry)
+        if model_key not in metrics:
+            metrics[model_key] = dict(entry.get("_overall_model_metrics") or {})
+            metrics[model_key]["rank"] = entry.get("_overall_model_rank")
+            metrics[model_key]["overall_score"] = entry.get("_overall_model_score", 0.0)
+            metrics[model_key]["display_name"] = resolved_model_display(
+                str(entry.get("model_label") or "Unknown model"),
+                str(entry.get("mode_label") or "Unknown mode"),
+                None if " | " in model_key else model_key,
+            )
+    return metrics
+
+
+def comparison_value(value: Any, *, suffix: str = "") -> str:
+    if value is None:
+        return "Insufficient data"
+    if isinstance(value, float):
+        return f"{value:.1f}{suffix}"
+    return f"{value}{suffix}"
+
+
+def comparison_card_html(
+    model: str,
+    metrics: dict[str, Any],
+    other_metrics: dict[str, Any],
+    *,
+    winner: bool,
+    tie: bool,
+) -> str:
+    if tie:
+        status = "Tied overall"
+    elif winner:
+        status = "Better overall"
+    else:
+        status = "Lower overall"
+    rows = [
+        ("Overall score", "overall_score", "", True),
+        ("Average quality", "average_quality", "", True),
+        ("Strict accuracy", "strict_accuracy", "%", True),
+        ("Source top-3", "source_top3_accuracy", "%", True),
+        ("Consistency", "consistency", "", True),
+        ("Average latency", "average_latency", "s", False),
+        ("Refusal correctness", "refusal_correctness", "%", True),
+        ("Safety/error control", "safety_error_control", "%", True),
+        ("Saved runs", "run_count", "", None),
+    ]
+    metric_rows: list[str] = []
+    for label, key, suffix, higher_better in rows:
+        value = metrics.get(key)
+        other_value = other_metrics.get(key)
+        row_background = "rgba(148,163,184,.06)"
+        row_border = "rgba(148,163,184,.16)"
+        if higher_better is not None and value is not None and other_value is not None:
+            difference = float(value) - float(other_value)
+            if abs(difference) >= 0.0001:
+                is_better = difference > 0 if higher_better else difference < 0
+                if is_better:
+                    row_background = "linear-gradient(90deg, rgba(34,197,94,.18), rgba(16,185,129,.05))"
+                    row_border = "rgba(34,197,94,.36)"
+                else:
+                    row_background = "linear-gradient(90deg, rgba(248,113,113,.17), rgba(239,68,68,.05))"
+                    row_border = "rgba(248,113,113,.34)"
+        metric_rows.append(
+            f'<div style="display:flex;justify-content:space-between;gap:16px;padding:8px 10px;'
+            f'margin:5px 0;border:1px solid {row_border};border-radius:9px;background:{row_background};">'
+            f'<span style="color:#cbd5e1;">{html.escape(label)}</span>'
+            f'<strong>{html.escape(comparison_value(value, suffix=suffix))}</strong></div>'
+        )
+    return f"""
+    <div style="background:rgba(15,23,42,.28);border:1px solid rgba(148,163,184,.24);border-radius:16px;padding:20px;min-height:500px;">
+        <div style="font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#94a3b8;">{status}</div>
+        <div style="font-size:22px;font-weight:800;margin:6px 0 14px;">{html.escape(model)}</div>
+        {''.join(metric_rows)}
+    </div>
+    """
+
+
+def model_comparison_remarks(
+    model_a: str,
+    metrics_a: dict[str, Any],
+    model_b: str,
+    metrics_b: dict[str, Any],
+) -> str:
+    score_a = float(metrics_a.get("overall_score") or 0.0)
+    score_b = float(metrics_b.get("overall_score") or 0.0)
+    if abs(score_a - score_b) < 0.05:
+        return f"{model_a} and {model_b} are effectively tied overall. Compare latency and failure details before choosing."
+    winner, winner_metrics = (model_a, metrics_a) if score_a > score_b else (model_b, metrics_b)
+    loser, loser_metrics = (model_b, metrics_b) if score_a > score_b else (model_a, metrics_a)
+    leads: list[str] = []
+    for label, key in (
+        ("average quality", "average_quality"),
+        ("strict accuracy", "strict_accuracy"),
+        ("source retrieval", "source_top3_accuracy"),
+        ("consistency", "consistency"),
+        ("refusal handling", "refusal_correctness"),
+        ("safety/error control", "safety_error_control"),
+    ):
+        winner_value = winner_metrics.get(key)
+        loser_value = loser_metrics.get(key)
+        if winner_value is not None and loser_value is not None and float(winner_value) > float(loser_value):
+            leads.append(label)
+    winner_latency = float(winner_metrics.get("average_latency") or 0.0)
+    loser_latency = float(loser_metrics.get("average_latency") or 0.0)
+    speed_note = ""
+    if winner_latency and loser_latency and winner_latency > loser_latency:
+        speed_note = f" {loser} is faster on average, so quality versus latency remains the main tradeoff."
+    lead_text = ", ".join(leads[:3]) if leads else "the combined weighted metrics"
+    difference = abs(score_a - score_b)
+    return (
+        f"{winner} ranks higher overall by {difference:.1f} points, mainly through {lead_text}."
+        f"{speed_note}"
+    )
+
+
+def render_model_comparison(history: list[dict[str, Any]]) -> None:
+    metrics_by_model = overall_model_metrics(history)
+    models = sorted(
+        metrics_by_model,
+        key=lambda model: float(metrics_by_model[model].get("overall_score") or 0.0),
+        reverse=True,
+    )
+    if not models:
+        selector_a, selector_b = st.columns(2)
+        with selector_a:
+            st.selectbox("Model A", ["0 models"], disabled=True, key="compare_model_a_empty")
+        with selector_b:
+            st.selectbox("Model B", ["0 models"], disabled=True, key="compare_model_b_empty")
+        st.info("Run Batch Eval to add models to comparison history.")
+        return
+    if len(models) == 1:
+        selector_a, selector_b = st.columns(2)
+        with selector_a:
+            st.selectbox(
+                "Model A",
+                models,
+                disabled=True,
+                key="compare_model_a_single",
+                format_func=lambda model: metrics_by_model[model].get("display_name", model),
+            )
+        with selector_b:
+            st.selectbox("Model B", ["No second model"], disabled=True, key="compare_model_b_single")
+        st.info("Evaluate a second generation model to enable comparison.")
         return
 
-    show_report = st.toggle("Show report", value=False)
+    family_heading_prefix = "__model_family_heading__:"
+    grouped_options: list[str] = []
+    first_model_by_heading: dict[str, str] = {}
+    for family in ("Qwen", "Llama", "Gemma"):
+        family_models = [
+            model
+            for model in models
+            if model_family(
+                model,
+                str(metrics_by_model[model].get("display_name") or model),
+            ) == family
+        ]
+        if not family_models:
+            continue
+        heading = f"{family_heading_prefix}{family}"
+        grouped_options.append(heading)
+        grouped_options.extend(family_models)
+        first_model_by_heading[heading] = family_models[0]
+
+    def grouped_model_label(option: str) -> str:
+        if option.startswith(family_heading_prefix):
+            family = option.removeprefix(family_heading_prefix)
+            return f"──────── {family.upper()} ────────"
+        display_name = metrics_by_model[option].get("display_name", option)
+        return f"    {display_name}"
+
+    def select_first_model_for_heading(widget_key: str) -> None:
+        selected = st.session_state.get(widget_key)
+        if selected in first_model_by_heading:
+            st.session_state[widget_key] = first_model_by_heading[selected]
+
+    selector_a, selector_b = st.columns(2)
+    with selector_a:
+        model_a = st.selectbox(
+            "Model A",
+            grouped_options,
+            index=grouped_options.index(models[0]),
+            key="compare_model_a",
+            format_func=grouped_model_label,
+            on_change=select_first_model_for_heading,
+            args=("compare_model_a",),
+        )
+    with selector_b:
+        default_model_b = models[1] if len(models) > 1 else models[0]
+        model_b = st.selectbox(
+            "Model B",
+            grouped_options,
+            index=grouped_options.index(default_model_b),
+            key="compare_model_b",
+            format_func=grouped_model_label,
+            on_change=select_first_model_for_heading,
+            args=("compare_model_b",),
+        )
+    model_a = first_model_by_heading.get(model_a, model_a)
+    model_b = first_model_by_heading.get(model_b, model_b)
+    if model_a == model_b:
+        st.warning("Select two different models to compare.")
+        return
+
+    metrics_a = metrics_by_model[model_a]
+    metrics_b = metrics_by_model[model_b]
+    display_a = str(metrics_a.get("display_name") or model_a)
+    display_b = str(metrics_b.get("display_name") or model_b)
+    score_a = float(metrics_a.get("overall_score") or 0.0)
+    score_b = float(metrics_b.get("overall_score") or 0.0)
+    tie = abs(score_a - score_b) < 0.05
+    card_a, card_b = st.columns(2)
+    with card_a:
+        st.markdown(
+            comparison_card_html(
+                display_a,
+                metrics_a,
+                metrics_b,
+                winner=score_a > score_b,
+                tie=tie,
+            ),
+            unsafe_allow_html=True,
+        )
+    with card_b:
+        st.markdown(
+            comparison_card_html(
+                display_b,
+                metrics_b,
+                metrics_a,
+                winner=score_b > score_a,
+                tie=tie,
+            ),
+            unsafe_allow_html=True,
+        )
+    st.markdown("**Final remarks**")
+    st.info(model_comparison_remarks(display_a, metrics_a, display_b, metrics_b))
+
+
+def render_batch_history() -> None:
+    history = load_batch_history()
+
+    report_col, compare_col = st.columns(2)
+    with report_col:
+        show_report = st.toggle("Show report", value=False)
+    st.session_state.setdefault("show_model_comparison", False)
+    with compare_col:
+        comparison_label = (
+            "Close model comparison"
+            if st.session_state.show_model_comparison
+            else "Compare models"
+        )
+        if st.button(comparison_label, use_container_width=True):
+            st.session_state.show_model_comparison = not st.session_state.show_model_comparison
+            st.rerun()
     if show_report:
         render_history_report(history)
         st.divider()
+    if st.session_state.show_model_comparison:
+        st.markdown("### Model comparison")
+        render_model_comparison(history)
+        st.divider()
+
+    if not history:
+        st.info("No saved batch eval runs yet.")
+        return
 
     model_options = sorted({str(entry.get("model_label") or "Unknown model") for entry in history})
     mode_options = sorted({str(entry.get("mode_label") or "Unknown mode") for entry in history})
@@ -960,7 +1632,7 @@ def render_batch_history() -> None:
     with c1:
         sort_order = st.selectbox(
             "Sort by answer quality",
-            ["Original order", "Highest first", "Lowest first"],
+            ["Original order", "Highest first", "Lowest first", "Best overall model"],
             key="history_sort_score",
         )
     with c2:
@@ -992,7 +1664,9 @@ def render_batch_history() -> None:
             continue
         filtered_history.append(entry)
 
-    if sort_order != "Original order":
+    if sort_order == "Best overall model":
+        filtered_history = rank_history_by_overall_model(filtered_history)
+    elif sort_order != "Original order":
         reverse = sort_order == "Highest first"
         filtered_history.sort(
             key=lambda entry: float((entry.get("summary") or {}).get("score") or 0.0),
@@ -1021,10 +1695,6 @@ def render_batch_eval_tab(
 ) -> None:
     st.subheader("Batch Eval")
     st.caption("Paste one question per line. The batch uses the current sidebar configuration.")
-    show_history = st.toggle("Show history", value=True)
-    if show_history:
-        render_batch_history()
-        st.divider()
 
     default_questions = (
         "What does Synapse Tech do?\n"
@@ -1074,6 +1744,11 @@ def render_batch_eval_tab(
             add_batch_history_entry(history_entry)
             st.success("Batch eval saved to history.")
 
+    show_history = st.toggle("Show history", value=True)
+    if show_history:
+        render_batch_history()
+        st.divider()
+
     rows = st.session_state.get("batch_eval_rows") or []
     if not rows:
         return
@@ -1086,6 +1761,63 @@ def render_batch_eval_tab(
     c4.metric("Partial", summary["partial"])
     c5.metric("Avg latency", f"{summary['avg_latency_s']}s")
     c6.metric("Refusals", summary["refusal_count"])
+
+    confidence = summary.get("retrieval_confidence") or {}
+    if confidence.get("question_count"):
+        with st.expander("Retrieval confidence", expanded=True):
+            r1, r2, r3, r4 = st.columns(4)
+            r1.metric("Avg top similarity", confidence.get("avg_top_similarity"))
+            r2.metric("Avg score gap", confidence.get("avg_score_gap"))
+            r3.metric("Expected source top-1", f"{confidence.get('expected_source_top1_pct')}%")
+            r4.metric("Expected source top-3", f"{confidence.get('expected_source_top3_pct')}%")
+            st.caption(
+                f"Pass avg similarity: {confidence.get('pass_avg_similarity')} | "
+                f"Fail avg similarity: {confidence.get('fail_avg_similarity')} | "
+                f"High-confidence failures (≥0.75): {confidence.get('high_confidence_failures_075')} | "
+                f"Low-confidence questions (<0.55): {confidence.get('low_confidence_questions_055')}"
+            )
+            confidence_rows = [row for row in rows if row.get("top_similarity") is not None]
+            lowest_rows = sorted(
+                confidence_rows,
+                key=lambda row: float(row.get("top_similarity") or 0.0),
+            )[:5]
+            if lowest_rows:
+                st.markdown("**Lowest-confidence questions**")
+                st.dataframe(
+                    [
+                        {
+                            "question": row.get("question"),
+                            "verdict": row.get("verdict"),
+                            "top_similarity": row.get("top_similarity"),
+                            "score_gap": row.get("score_gap"),
+                            "top_retrieved_docs": row.get("top_retrieved_docs"),
+                        }
+                        for row in lowest_rows
+                    ],
+                    use_container_width=True,
+                    hide_index=True,
+                )
+            confident_failures = [
+                row for row in confidence_rows
+                if row.get("verdict", "").startswith("❌")
+                and float(row.get("top_similarity") or 0.0) >= 0.75
+            ]
+            if confident_failures:
+                st.markdown("**High-confidence failures**")
+                st.dataframe(
+                    [
+                        {
+                            "question": row.get("question"),
+                            "issue": row.get("issue"),
+                            "top_similarity": row.get("top_similarity"),
+                            "score_gap": row.get("score_gap"),
+                            "top_retrieved_docs": row.get("top_retrieved_docs"),
+                        }
+                        for row in confident_failures
+                    ],
+                    use_container_width=True,
+                    hide_index=True,
+                )
 
     if summary["issue_counts"]:
         with st.expander("Issue counts", expanded=True):
@@ -1141,6 +1873,27 @@ def main() -> None:
         [data-testid="stChatInput"] textarea {
             max-height: 8rem;
         }
+        [data-testid="stPopover"] button {
+            width: 2rem !important;
+            min-width: 2rem !important;
+            height: 2rem !important;
+            min-height: 2rem !important;
+            padding: 0 !important;
+            border: 0 !important;
+            border-radius: 50% !important;
+            background: transparent !important;
+            box-shadow: none !important;
+        }
+        [data-testid="stPopover"] button:hover {
+            background: rgba(56, 189, 248, 0.12) !important;
+        }
+        [data-testid="stPopover"] button:focus-visible {
+            outline: 1px solid #38bdf8 !important;
+            outline-offset: 2px;
+        }
+        [data-testid="stPopover"] button svg {
+            display: none !important;
+        }
         @media (max-width: 900px) {
             [data-testid="stChatInput"] {
                 left: 1rem;
@@ -1159,6 +1912,7 @@ def main() -> None:
         model_label = st.selectbox(
             "Model family / selected model",
             list(MODEL_OPTIONS),
+            format_func=lambda model: MODEL_OPTION_DISPLAY_NAMES.get(model, model),
             help=(
                 "Selects the model pair to test. For fine-tuned modes, this uses the Synapse-tuned "
                 "model if it exists. For base modes, it uses the original base model for that family."
@@ -1176,7 +1930,7 @@ def main() -> None:
         rag_style = st.radio(
             "RAG behavior",
             ["Deterministic/template", "Model-generated"],
-            index=0,
+            index=1,
             help=(
                 "Deterministic/template uses safer fixed policy answers for known cases. "
                 "Model-generated lets the selected LLM write more natural answers from KB evidence, "
@@ -1195,7 +1949,7 @@ def main() -> None:
         )
         fast_rag = st.toggle(
             "Fast RAG",
-            value=False,
+            value=True,
             help=(
                 "When on, the RAG path skips extra correction/retry calls after the first answer. "
                 "This is faster and useful for latency testing, but weak answers will not get a "
@@ -1249,8 +2003,19 @@ def main() -> None:
         st.code(
             json.dumps(
                 {
-                    "base_model": selected_config["base_model"],
-                    "fine_tuned_model": selected_config.get("fine_tuned_model"),
+                    "base_model": resolved_model_display(
+                        model_label,
+                        "Base",
+                        selected_config["base_model"],
+                    ),
+                    "fine_tuned_model": (
+                        resolved_model_display(
+                            model_label,
+                            "Fine-tuned",
+                            selected_config.get("fine_tuned_model"),
+                        )
+                        if selected_config.get("fine_tuned_model") else None
+                    ),
                     "fine_tune_exists": selected_config.get("fine_tune_exists"),
                 },
                 indent=2,

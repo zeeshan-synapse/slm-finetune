@@ -1,4 +1,5 @@
 import json
+import os
 import re
 import sys
 from datetime import datetime, timezone
@@ -8,6 +9,7 @@ from typing import Any
 import requests
 
 OLLAMA_URL = "http://localhost:11434"
+OLLAMA_KEEP_ALIVE = os.environ.get("OLLAMA_KEEP_ALIVE", "30m")
 
 GENERATOR_MODEL = "synapse-1.5b-v1"
 JUDGE_MODEL = "llama3:latest"
@@ -90,6 +92,7 @@ def ollama_chat(
         f"{OLLAMA_URL}/api/chat",
         json={
             "model": model,
+            "keep_alive": OLLAMA_KEEP_ALIVE,
             "messages": messages,
             "stream": False,
             "options": {

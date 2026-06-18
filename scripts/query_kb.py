@@ -16,6 +16,7 @@ DEFAULT_INDEX_PATH = PROJECT_DIR / "data" / "knowledge-base" / "faiss.index"
 DEFAULT_META_PATH = PROJECT_DIR / "data" / "knowledge-base" / "index_meta.jsonl"
 DEFAULT_MANIFEST_PATH = PROJECT_DIR / "data" / "knowledge-base" / "index_manifest.json"
 DEFAULT_OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://localhost:11434")
+OLLAMA_KEEP_ALIVE = os.environ.get("OLLAMA_KEEP_ALIVE", "30m")
 TOKEN_RE = re.compile(r"[a-z0-9]+")
 SPACING_RE = re.compile(r"\s+")
 STOPWORDS = {
@@ -172,6 +173,7 @@ def embed_query_via_api_embed(ollama_url: str, model: str, query: str) -> list[f
         f"{ollama_url}/api/embed",
         json={
             "model": model,
+            "keep_alive": OLLAMA_KEEP_ALIVE,
             "input": [query],
         },
         timeout=180,
@@ -189,6 +191,7 @@ def embed_query_via_legacy_api(ollama_url: str, model: str, query: str) -> list[
         f"{ollama_url}/api/embeddings",
         json={
             "model": model,
+            "keep_alive": OLLAMA_KEEP_ALIVE,
             "prompt": query,
         },
         timeout=180,

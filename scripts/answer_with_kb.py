@@ -20,6 +20,7 @@ DEFAULT_INDEX_PATH = PROJECT_DIR / "data" / "knowledge-base" / "faiss.index"
 DEFAULT_META_PATH = PROJECT_DIR / "data" / "knowledge-base" / "index_meta.jsonl"
 DEFAULT_MANIFEST_PATH = PROJECT_DIR / "data" / "knowledge-base" / "index_manifest.json"
 DEFAULT_OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://localhost:11434")
+OLLAMA_KEEP_ALIVE = os.environ.get("OLLAMA_KEEP_ALIVE", "30m")
 DEFAULT_GENERATION_MODEL = os.environ.get("KB_ANSWER_MODEL", "synapse-1.5b-v1")
 DEFAULT_REWRITE_MODEL = (
     os.environ.get("KB_REWRITE_MODEL")
@@ -50,6 +51,15 @@ RAG_FAST_MODE = os.environ.get("RAG_FAST_MODE", "").strip().lower() in {
     "yes",
     "on",
 }
+RAG_TRIM_EVIDENCE = os.environ.get(
+    "RAG_TRIM_EVIDENCE", "1"
+).strip().lower() not in {"0", "false", "no", "off"}
+RAG_EVIDENCE_SENTENCES_PER_CHUNK = max(
+    1, int(os.environ.get("RAG_EVIDENCE_SENTENCES_PER_CHUNK", "3"))
+)
+RAG_EVIDENCE_CHARS_PER_CHUNK = max(
+    200, int(os.environ.get("RAG_EVIDENCE_CHARS_PER_CHUNK", "750"))
+)
 SAFETY_DETERMINISTIC_POLICIES = {
     "contact",
     "purchase",
@@ -1636,6 +1646,7 @@ def ollama_chat(
 ) -> str:
     payload = {
         "model": model,
+        "keep_alive": OLLAMA_KEEP_ALIVE,
         "messages": messages,
         "stream": False,
         "options": {
@@ -2055,13 +2066,132 @@ def apply_model_classification_to_profile(profile: dict[str, Any], classificatio
                     profile.setdefault("product_aliases", []).append(alias)
 
 
-def format_evidence_block(hit: dict[str, Any], rank: int) -> str:
+def split_evidence_units(text: str) -> list[str]:
+    units: list[str] = []
+    for raw_line in re.split(r"\n+", text):
+        line = " ".join(raw_line.split()).strip()
+        if not line:
+            continue
+        parts = re.split(r"(?<=[.!?])\s+(?=[A-Z0-9\"'“])", line)
+        units.extend(part.strip() for part in parts if part.strip())
+    return units
+
+
+def evidence_policy_anchors(question: str, profile: dict[str, Any]) -> set[str]:
+    anchors: set[str] = set()
+    policy = profile.get("answer_policy") or determine_answer_policy(question, profile)
+    if policy == "company_overview":
+        anchors.update({"software", "automation", "conversational", "cloud", "infrastructure", "business"})
+    elif policy == "private_infrastructure":
+        anchors.update({
+            "offline", "private", "on-premise", "on-premises", "cloud", "opira",
+            "data", "network", "internet", "security", "sovereignty",
+        })
+    elif policy == "service_guidance":
+        anchors.update({"workflow", "automation", "custom", "web", "mobile", "api", "database", "saas"})
+    elif policy in {"product_catalog", "product_detail"}:
+        anchors.update({"agentic", "irecruit", "opira", "coversaction", "conversaction", "cyber"})
+    elif policy == "voice_agent":
+        anchors.update({"voice", "call", "conversation", "handoff", "customer"})
+    elif policy in {"contact", "purchase"}:
+        anchors.update({"contact", "email", "chat", "monday", "saturday", "info"})
+    elif policy == "high_risk_unknown":
+        anchors.update({"pricing", "price", "sla", "certification", "compliance", "guarantee"})
+    return anchors
+
+
+def trim_evidence_text(
+    question: str,
+    hit: dict[str, Any],
+    profile: dict[str, Any],
+) -> str:
+    text = str(hit.get("text") or "").strip()
+    if not RAG_TRIM_EVIDENCE or len(text) <= RAG_EVIDENCE_CHARS_PER_CHUNK:
+        return text
+
+    units = split_evidence_units(text)
+    if not units:
+        return text[:RAG_EVIDENCE_CHARS_PER_CHUNK].rstrip() + "..."
+
+    keywords = {
+        token
+        for token in profile.get("keywords", [])
+        if token not in query_kb.GENERIC_QUERY_TERMS
+    }
+    entity_terms = set(profile.get("entity_terms", []))
+    title_tokens = set(query_kb.tokenize(str(hit.get("title") or "")))
+    anchors = evidence_policy_anchors(question, profile)
+    aliases = [str(alias).lower() for alias in profile.get("product_aliases", [])]
+
+    scored: list[tuple[float, int, str]] = []
+    for index, unit in enumerate(units):
+        lowered = unit.lower()
+        tokens = set(query_kb.tokenize(lowered))
+        score = 0.0
+        score += len(tokens & entity_terms) * 4.0
+        score += len(tokens & keywords) * 1.5
+        score += len(tokens & title_tokens) * 1.0
+        score += len(tokens & anchors) * 1.5
+        score += sum(2.0 for alias in aliases if alias and alias in lowered)
+        if index == 0:
+            score += 0.25
+        if len(tokens) < 8 and profile.get("answer_policy") not in {"contact", "purchase"}:
+            score -= 3.0
+        scored.append((score, index, unit))
+
+    selected = sorted(
+        sorted(scored, key=lambda item: (item[0], -item[1]), reverse=True)[
+            :RAG_EVIDENCE_SENTENCES_PER_CHUNK
+        ],
+        key=lambda item: item[1],
+    )
+    excerpts: list[str] = []
+    used_chars = 0
+    for _score, _index, unit in selected:
+        separator = 1 if excerpts else 0
+        remaining = RAG_EVIDENCE_CHARS_PER_CHUNK - used_chars - separator
+        if remaining <= 0:
+            break
+        if len(unit) > remaining:
+            unit = unit[: max(1, remaining - 3)].rstrip() + "..."
+        excerpts.append(unit)
+        used_chars += len(unit) + separator
+    return "\n".join(excerpts) if excerpts else text[:RAG_EVIDENCE_CHARS_PER_CHUNK]
+
+
+def format_evidence_block(
+    hit: dict[str, Any],
+    rank: int,
+    content: str,
+) -> str:
     return (
         f"[{rank}] Title: {hit['title']}\n"
-        f"URL: {hit['url']}\n"
         f"Page Type: {hit['page_type']}\n"
-        f"Chunk ID: {hit['chunk_id']}\n"
-        f"Content:\n{hit['text']}"
+        f"Content:\n{content}"
+    )
+
+
+def build_evidence_prompt(
+    question: str,
+    hits: list[dict[str, Any]],
+    profile: dict[str, Any],
+) -> str:
+    original_chars = sum(len(str(hit.get("text") or "")) for hit in hits)
+    trimmed_contents = [trim_evidence_text(question, hit, profile) for hit in hits]
+    prompt_chars = sum(len(content) for content in trimmed_contents)
+    profile["context_compression"] = {
+        "enabled": RAG_TRIM_EVIDENCE,
+        "chunks": len(hits),
+        "original_chars": original_chars,
+        "prompt_chars": prompt_chars,
+        "reduction_pct": round(
+            (1.0 - prompt_chars / original_chars) * 100.0,
+            1,
+        ) if original_chars else 0.0,
+    }
+    return "\n\n".join(
+        format_evidence_block(hit, rank, content)
+        for rank, (hit, content) in enumerate(zip(hits, trimmed_contents, strict=False), start=1)
     )
 
 
@@ -2368,10 +2498,7 @@ def build_user_prompt(
     natural_output: bool = False,
     model: str = "",
 ) -> str:
-    evidence = "\n\n".join(
-        format_evidence_block(hit, rank)
-        for rank, hit in enumerate(hits, start=1)
-    )
+    evidence = build_evidence_prompt(question, hits, profile)
     structured_context = format_structured_runtime_context(question, hits, profile)
     intent = profile.get("intent")
     extra_guidance = "Answer the question directly in the first sentence."
@@ -3268,7 +3395,10 @@ def retrieve_hits(
                 ollama_url=ollama_url,
                 model=classifier_model or DEFAULT_CLASSIFIER_MODEL,
             )
-        _QUERY_PLAN_CACHE[plan_cache_key] = (copy.deepcopy(rewrite), copy.deepcopy(classification))
+        _QUERY_PLAN_CACHE[plan_cache_key] = (
+            copy.deepcopy(rewrite),
+            copy.deepcopy(classification),
+        )
     timings["planning_s"] = round(time.perf_counter() - stage_started, 4)
     profile["rewrite"] = rewrite
     profile["intent_hint"] = rewrite.get("intent_hint")
@@ -3313,6 +3443,27 @@ def retrieve_hits(
         profile,
     )
     timings["faiss_search_s"] = round(time.perf_counter() - stage_started, 4)
+    raw_ranked_hits = sorted(
+        hits,
+        key=lambda hit: float(hit.get("raw_score") or 0.0),
+        reverse=True,
+    )
+    top_similarity = (
+        float(raw_ranked_hits[0].get("raw_score") or 0.0)
+        if raw_ranked_hits else 0.0
+    )
+    second_similarity = (
+        float(raw_ranked_hits[1].get("raw_score") or 0.0)
+        if len(raw_ranked_hits) > 1 else 0.0
+    )
+    profile["retrieval_confidence"] = {
+        "top_similarity": round(top_similarity, 4),
+        "second_similarity": round(second_similarity, 4),
+        "score_gap": round(top_similarity - second_similarity, 4),
+        "top_rerank_score": round(float(hits[0].get("score") or 0.0), 4) if hits else 0.0,
+        "top_doc_ids": [str(hit.get("doc_id") or "") for hit in hits[:3]],
+        "top_chunk_ids": [str(hit.get("chunk_id") or "") for hit in hits[:3]],
+    }
     log_kb_debug(
         {
             "question": question,
@@ -3321,6 +3472,7 @@ def retrieve_hits(
             "intent_hint": profile.get("intent_hint"),
             "model_classification": profile.get("model_classification"),
             "answer_policy": profile.get("answer_policy"),
+            "retrieval_confidence": profile.get("retrieval_confidence"),
             "metadata_routes": profile.get("metadata_routes", []),
             "top_hits": [
                 {
@@ -3494,10 +3646,13 @@ def build_answer_observability(
         "rewrite_query": rewrite.get("search_query") or profile.get("search_query") or question,
         "sources": source_doc_ids(hits),
         "metadata_routes": profile.get("metadata_routes", []),
+        "retrieval_confidence": profile.get("retrieval_confidence"),
         "used_template": used_template,
         "used_refusal": refusal,
         "generation_experiment": RAG_GENERATE_ORDINARY_ANSWERS,
         "fast_rag": RAG_FAST_MODE,
+        "ollama_keep_alive": OLLAMA_KEEP_ALIVE,
+        "context_compression": profile.get("context_compression"),
         "model_profile": profile.get("runtime_model_profile"),
         "timings": profile.get("timings", {}),
     }

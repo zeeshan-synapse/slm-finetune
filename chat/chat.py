@@ -23,6 +23,7 @@ for path in (_CHAT_DIR, _SCRIPTS_DIR):
 
 from guardrail_stage1 import (
     GENERATOR_SYSTEM_PROMPT,
+    OLLAMA_KEEP_ALIVE,
     OLLAMA_URL,
     check_ollama,
     is_high_risk_question,
@@ -57,7 +58,7 @@ FINE_TUNED_MODEL_CHOICES = {
         "base_model": "qwen2.5:1.5b-instruct",
     },
     "3": {
-        "label": "Synapse Llama V1",
+        "label": "Synapse Llama 3B V1",
         "fine_tuned_model": FINE_TUNED_LLAMA_MODEL,
         "base_model": "llama3:latest",
     },
@@ -198,6 +199,7 @@ def generate_model_result(model_name: str, question: str) -> dict:
         f"{OLLAMA_URL}/api/chat",
         json={
             "model": model_name,
+            "keep_alive": OLLAMA_KEEP_ALIVE,
             "messages": messages,
             "stream": False,
             "options": {
@@ -516,7 +518,7 @@ def choose_fine_tuned_model() -> dict:
     print("Choose model:")
     print("1. Synapse 1.5B V1")
     print("2. Synapse 1.5B V2")
-    print("3. Synapse Llama V1")
+    print("3. Synapse Llama 3B V1")
     print("4. Synapse Gemma 3 4B V1")
     print("5. Qwen2.5 3B")
     print("6. Qwen2.5 7B")
