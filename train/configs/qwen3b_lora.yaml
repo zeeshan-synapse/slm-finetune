@@ -1,0 +1,23 @@
+model: models/qwen2.5-3b-instruct-4bit
+train: true
+data: data/qwen3b
+adapter_path: models/qwen2.5-3b-synapse-lora-v1
+fine_tune_type: lora
+optimizer: adam
+batch_size: 1
+iters: 800
+learning_rate: 1.0e-4
+num_layers: 8
+max_seq_length: 1024
+grad_checkpoint: true
+grad_accumulation_steps: 1
+steps_per_report: 10
+steps_per_eval: 200
+save_every: 200
+val_batches: 10
+seed: 42
+mask_prompt: false
+lora_parameters:
+  rank: 8
+  dropout: 0.0
+  scale: 20.0

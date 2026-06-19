@@ -41,30 +41,35 @@ import answer_with_kb as aw  # noqa: E402
 
 
 MODEL_OPTIONS: dict[str, dict[str, Any]] = {
-    "Synapse 1.5B V1": {
+    "Synapse Qwen 2.5 1.5B V1": {
         "fine_tuned_model": "synapse-1.5b-v1",
         "base_model": "qwen2.5:1.5b-instruct",
         "fine_tune_exists": True,
     },
-    "Synapse 1.5B V2": {
+    "Synapse Qwen 2.5 1.5B V2": {
         "fine_tuned_model": "synapse-1.5b-v2",
         "base_model": "qwen2.5:1.5b-instruct",
         "fine_tune_exists": True,
     },
-    "Synapse Llama 3B V1": {
-        "fine_tuned_model": "synapse-llama3-v1",
-        "base_model": "llama3:latest",
+    "Synapse Qwen 2.5 3B": {
+        "fine_tuned_model": "synapse-qwen2.5-3b-v1",
+        "base_model": "qwen2.5:3b",
         "fine_tune_exists": True,
+    },
+    "Synapse Llama V1 3B": {
+        "fine_tuned_model": "synapse-llama3-v1",
+        "base_model": "synapse-llama3-v1-base",
+        "fine_tune_exists": True,
+    },
+    "Synapse Llama V1 8B": {
+        "fine_tuned_model": None,
+        "base_model": "llama3:latest",
+        "fine_tune_exists": False,
     },
     "Synapse Gemma 3 4B V1": {
         "fine_tuned_model": "synapse-gemma3-4b-v1",
         "base_model": "gemma3:4b",
         "fine_tune_exists": True,
-    },
-    "Qwen2.5 3B": {
-        "fine_tuned_model": None,
-        "base_model": "qwen2.5:3b",
-        "fine_tune_exists": False,
     },
     "Qwen2.5 7B": {
         "fine_tuned_model": None,
@@ -93,12 +98,20 @@ MODEL_PARAMETER_SIZES = {
     "qwen2.5:7b": "7B",
 }
 MODEL_OPTION_DISPLAY_NAMES = {
+    "Synapse 1.5B V1": "Synapse Qwen 2.5 1.5B V1",
+    "Synapse 1.5B V2": "Synapse Qwen 2.5 1.5B V2",
     "Synapse Llama 3B V1": "Synapse Llama V1 3B",
+    "Qwen2.5 3B": "Synapse Qwen 2.5 3B",
 }
 MODEL_TAG_DISPLAY_NAMES = {
-    "synapse-llama3-v1-base": "Synapse Llama V1 3B (llama3:latest)",
+    "synapse-llama3-v1-base": "Synapse Llama V1 3B (base)",
     "synapse-llama3-v1": "Synapse Llama V1 3B",
     "llama3:latest": "Synapse Llama V1 8B (llama3:latest)",
+    "qwen2.5:1.5b-instruct": "Synapse Qwen 2.5 1.5B",
+    "synapse-1.5b-v1": "Synapse Qwen 2.5 1.5B V1",
+    "synapse-1.5b-v2": "Synapse Qwen 2.5 1.5B V2",
+    "qwen2.5:3b": "Synapse Qwen 2.5 3B (base)",
+    "synapse-qwen2.5-3b-v1": "Synapse Qwen 2.5 3B",
 }
 
 
@@ -303,6 +316,12 @@ def retrieval_confidence(result: dict[str, Any]) -> dict[str, Any]:
     observability = result.get("observability") or {}
     confidence = observability.get("retrieval_confidence") or {}
     return confidence if isinstance(confidence, dict) else {}
+
+
+def prompt_metrics(result: dict[str, Any]) -> dict[str, Any]:
+    observability = result.get("observability") or {}
+    metrics = observability.get("prompt_metrics") or {}
+    return metrics if isinstance(metrics, dict) else {}
 
 
 def expected_source_ids(question: str) -> list[str]:
@@ -663,13 +682,57 @@ def run_batch_eval(
     fast_rag: bool,
     temperature: float,
     max_tokens: int,
+    progress_slot: Any | None = None,
+    status_slot: Any | None = None,
+    status_prefix: str = "",
 ) -> list[dict[str, Any]]:
+    def progress_callback(index: int, total: int, question: str) -> None:
+        prefix = f"{status_prefix} " if status_prefix else ""
+        status.write(f"{prefix}Running {index}/{total}: {question}")
+        progress.progress(index / total)
+
     rows: list[dict[str, Any]] = []
-    progress = st.progress(0)
-    status = st.empty()
+    progress = progress_slot or st.progress(0)
+    status = status_slot or st.empty()
+    rows, _ = run_batch_eval_core(
+        questions=questions,
+        model_config=model_config,
+        mode_label=mode_label,
+        model_label=model_label,
+        rag_generated=rag_generated,
+        combined_planning=combined_planning,
+        fast_rag=fast_rag,
+        temperature=temperature,
+        max_tokens=max_tokens,
+        progress_callback=progress_callback,
+    )
+    status.empty()
+    return rows
+
+
+def run_batch_eval_core(
+    *,
+    questions: list[str],
+    model_config: dict[str, Any],
+    mode_label: str,
+    model_label: str,
+    rag_generated: bool,
+    combined_planning: bool,
+    fast_rag: bool,
+    temperature: float,
+    max_tokens: int,
+    progress_callback: Any | None = None,
+    should_stop: Any | None = None,
+) -> tuple[list[dict[str, Any]], bool]:
+    rows: list[dict[str, Any]] = []
     total = len(questions)
+    stopped_early = False
     for index, question in enumerate(questions, start=1):
-        status.write(f"Running {index}/{total}: {question}")
+        if should_stop and should_stop():
+            stopped_early = True
+            break
+        if progress_callback is not None:
+            progress_callback(index, total, question)
         started = time.perf_counter()
         try:
             raw = answer_question(
@@ -693,6 +756,9 @@ def run_batch_eval(
         answer = raw.get("answer", "")
         evaluation = evaluate_answer(question, answer, raw)
         confidence = retrieval_confidence(raw)
+        prompt = prompt_metrics(raw)
+        usage = raw.get("usage") or {}
+        answer_usage = usage.get("answer_generation") or usage.get("answer_retry") or {}
         top_doc_ids = [str(doc_id) for doc_id in confidence.get("top_doc_ids") or []]
         expected_docs = expected_source_ids(question)
         expected_top1 = (
@@ -719,6 +785,12 @@ def run_batch_eval(
                     raw.get("generation_model"),
                 ) if raw.get("generation_model") else "quick bypass",
                 "sources": ", ".join(source_rows(raw)),
+                "selected_context_chunks": prompt.get("selected_context_chunks"),
+                "user_prompt_chars": prompt.get("user_prompt_chars"),
+                "evidence_chars": prompt.get("evidence_chars"),
+                "structured_context_chars": prompt.get("structured_context_chars"),
+                "prompt_input_tokens": answer_usage.get("input_tokens"),
+                "prompt_output_tokens": answer_usage.get("output_tokens"),
                 "top_similarity": confidence.get("top_similarity"),
                 "second_similarity": confidence.get("second_similarity"),
                 "score_gap": confidence.get("score_gap"),
@@ -730,9 +802,207 @@ def run_batch_eval(
                 "debug": raw,
             }
         )
-        progress.progress(index / total)
-    status.empty()
-    return rows
+    return rows, stopped_early
+
+
+def selected_plan_runs(
+    *,
+    model_labels: list[str],
+    mode_labels: list[str],
+) -> tuple[list[tuple[str, dict[str, Any], str]], list[str]]:
+    runs: list[tuple[str, dict[str, Any], str]] = []
+    skipped: list[str] = []
+    for current_model_label in model_labels:
+        model_config = MODEL_OPTIONS[current_model_label]
+        for current_mode_label in mode_labels:
+            if current_mode_label.startswith("Fine-tuned") and not model_config.get("fine_tune_exists"):
+                skipped.append(f"{current_model_label} + {current_mode_label}")
+                continue
+            runs.append((current_model_label, model_config, current_mode_label))
+    return runs, skipped
+
+
+def run_automation_job(job: dict[str, Any]) -> None:
+    try:
+        total_runs = len(job["planned_runs"])
+        for run_index, (queued_model_label, queued_config, queued_mode_label) in enumerate(job["planned_runs"], start=1):
+            if job.get("stop_requested"):
+                break
+            job["current_run_index"] = run_index
+            job["current_model_label"] = queued_model_label
+            job["current_mode_label"] = queued_mode_label
+            job["current_question_index"] = 0
+            job["rows"] = []
+
+            def progress_callback(index: int, total: int, question: str) -> None:
+                job["current_question_index"] = index
+                job["question_total"] = total
+                job["current_question"] = question
+
+            rows, stopped_early = run_batch_eval_core(
+                questions=job["questions"],
+                model_config=queued_config,
+                mode_label=queued_mode_label,
+                model_label=queued_model_label,
+                rag_generated=job["rag_generated"],
+                combined_planning=job["combined_planning"],
+                fast_rag=job["fast_rag"],
+                temperature=job["temperature"],
+                max_tokens=job["max_tokens"],
+                progress_callback=progress_callback,
+                should_stop=lambda: bool(job.get("stop_requested")),
+            )
+            job["rows"] = rows
+            if rows:
+                summary = summarize_batch(rows)
+                history_entry = build_batch_history_entry(
+                    rows=rows,
+                    summary=summary,
+                    model_label=queued_model_label,
+                    mode_label=queued_mode_label,
+                    rag_style=job["rag_style"],
+                    combined_planning=job["combined_planning"],
+                    fast_rag=job["fast_rag"],
+                    temperature=job["temperature"],
+                    max_tokens=job["max_tokens"],
+                    retrieval_change_label=str(job.get("retrieval_change_label") or ""),
+                )
+                add_batch_history_entry(history_entry)
+                job["suite_rows"].append(
+                    {
+                        "model": MODEL_OPTION_DISPLAY_NAMES.get(queued_model_label, queued_model_label),
+                        "mode": queued_mode_label,
+                        "score": summary["score"],
+                        "pass": summary["pass"],
+                        "fail": summary["fail"],
+                        "partial": summary["partial"],
+                        "avg_latency_s": summary["avg_latency_s"],
+                        "history_id": history_entry["id"],
+                    }
+                )
+            job["completed_runs"] = len(job["suite_rows"])
+            if stopped_early:
+                break
+        job["done"] = True
+        job["stopped"] = bool(job.get("stop_requested"))
+    except Exception as exc:
+        job["error"] = str(exc)
+        job["done"] = True
+
+
+def start_automation_job(
+    *,
+    planned_runs: list[tuple[str, dict[str, Any], str]],
+    skipped_runs: list[str],
+    questions: list[str],
+    rag_style: str,
+    combined_planning: bool,
+    fast_rag: bool,
+    temperature: float,
+    max_tokens: int,
+    retrieval_change_label: str,
+) -> dict[str, Any]:
+    job = {
+        "id": str(time.time_ns()),
+        "planned_runs": [(label, dict(config), mode) for label, config, mode in planned_runs],
+        "skipped_runs": list(skipped_runs),
+        "questions": list(questions),
+        "rag_style": rag_style,
+        "rag_generated": rag_style == "Model-generated",
+        "combined_planning": combined_planning,
+        "fast_rag": fast_rag,
+        "temperature": temperature,
+        "max_tokens": max_tokens,
+        "retrieval_change_label": retrieval_change_label.strip(),
+        "started_at": time.perf_counter(),
+        "current_run_index": 0,
+        "current_model_label": None,
+        "current_mode_label": None,
+        "current_question_index": 0,
+        "question_total": len(questions),
+        "current_question": "",
+        "rows": [],
+        "suite_rows": [],
+        "completed_runs": 0,
+        "stop_requested": False,
+        "stopped": False,
+        "done": False,
+        "error": None,
+    }
+    thread = threading.Thread(target=run_automation_job, args=(job,), daemon=True)
+    job["thread"] = thread
+    thread.start()
+    return job
+
+
+def run_manual_batch_job(job: dict[str, Any]) -> None:
+    try:
+        def progress_callback(index: int, total: int, question: str) -> None:
+            job["current_question_index"] = index
+            job["question_total"] = total
+            job["current_question"] = question
+
+        rows, stopped_early = run_batch_eval_core(
+            questions=job["questions"],
+            model_config=job["model_config"],
+            mode_label=job["mode_label"],
+            model_label=job["model_label"],
+            rag_generated=job["rag_generated"],
+            combined_planning=job["combined_planning"],
+            fast_rag=job["fast_rag"],
+            temperature=job["temperature"],
+            max_tokens=job["max_tokens"],
+            progress_callback=progress_callback,
+            should_stop=lambda: bool(job.get("stop_requested")),
+        )
+        job["rows"] = rows
+        job["done"] = True
+        job["stopped"] = stopped_early or bool(job.get("stop_requested"))
+    except Exception as exc:
+        job["error"] = str(exc)
+        job["done"] = True
+
+
+def start_manual_batch_job(
+    *,
+    questions: list[str],
+    model_config: dict[str, Any],
+    mode_label: str,
+    model_label: str,
+    rag_style: str,
+    combined_planning: bool,
+    fast_rag: bool,
+    temperature: float,
+    max_tokens: int,
+    retrieval_change_label: str,
+) -> dict[str, Any]:
+    job = {
+        "id": str(time.time_ns()),
+        "questions": list(questions),
+        "model_config": dict(model_config),
+        "mode_label": mode_label,
+        "model_label": model_label,
+        "rag_style": rag_style,
+        "rag_generated": rag_style == "Model-generated",
+        "combined_planning": combined_planning,
+        "fast_rag": fast_rag,
+        "temperature": temperature,
+        "max_tokens": max_tokens,
+        "retrieval_change_label": retrieval_change_label.strip(),
+        "started_at": time.perf_counter(),
+        "current_question_index": 0,
+        "question_total": len(questions),
+        "current_question": "",
+        "rows": [],
+        "stop_requested": False,
+        "stopped": False,
+        "done": False,
+        "error": None,
+    }
+    thread = threading.Thread(target=run_manual_batch_job, args=(job,), daemon=True)
+    job["thread"] = thread
+    thread.start()
+    return job
 
 
 def summarize_batch(rows: list[dict[str, Any]]) -> dict[str, Any]:
@@ -746,6 +1016,9 @@ def summarize_batch(rows: list[dict[str, Any]]) -> dict[str, Any]:
         for issue in [part.strip() for part in row.get("issue", "").split(",") if part.strip()]:
             issue_counts[issue] = issue_counts.get(issue, 0) + 1
     avg_latency = sum(float(row["latency_s"]) for row in rows) / total if total else 0.0
+    prompt_token_rows = [row for row in rows if row.get("prompt_input_tokens") is not None]
+    prompt_char_rows = [row for row in rows if row.get("user_prompt_chars") is not None]
+    prompt_chunk_rows = [row for row in rows if row.get("selected_context_chunks") is not None]
     score = ((pass_count + (partial_count * 0.5)) / total * 100) if total else 0.0
     confidence_rows = [row for row in rows if row.get("top_similarity") is not None]
     avg_top_similarity = (
@@ -786,6 +1059,29 @@ def summarize_batch(rows: list[dict[str, Any]]) -> dict[str, Any]:
         "refusal_count": refusal_count,
         "score": round(score, 1),
         "issue_counts": issue_counts,
+        "prompt_metrics": {
+            "avg_prompt_input_tokens": (
+                round(
+                    sum(float(row["prompt_input_tokens"]) for row in prompt_token_rows) / len(prompt_token_rows),
+                    1,
+                )
+                if prompt_token_rows else None
+            ),
+            "avg_prompt_chars": (
+                round(
+                    sum(float(row["user_prompt_chars"]) for row in prompt_char_rows) / len(prompt_char_rows),
+                    1,
+                )
+                if prompt_char_rows else None
+            ),
+            "avg_selected_context_chunks": (
+                round(
+                    sum(float(row["selected_context_chunks"]) for row in prompt_chunk_rows) / len(prompt_chunk_rows),
+                    2,
+                )
+                if prompt_chunk_rows else None
+            ),
+        },
         "retrieval_confidence": {
             "question_count": len(confidence_rows),
             "avg_top_similarity": round(avg_top_similarity, 4),
@@ -842,6 +1138,41 @@ def delete_batch_history_entry(entry_id: str) -> None:
     save_batch_history(history)
 
 
+def history_day_key(entry: dict[str, Any]) -> str:
+    created_at = str(entry.get("created_at") or "").strip()
+    if len(created_at) >= 10:
+        return created_at[:10]
+    return "Unknown date"
+
+
+def group_history_by_day(history: list[dict[str, Any]]) -> list[tuple[str, list[dict[str, Any]]]]:
+    grouped: dict[str, list[dict[str, Any]]] = {}
+    for entry in history:
+        grouped.setdefault(history_day_key(entry), []).append(entry)
+    ordered_keys = sorted(grouped.keys(), reverse=True)
+    return [(day_key, grouped[day_key]) for day_key in ordered_keys]
+
+
+def history_day_label(day_key: str) -> str:
+    if day_key == "Unknown date":
+        return day_key
+    try:
+        day_value = datetime.strptime(day_key, "%Y-%m-%d").date()
+    except ValueError:
+        return day_key
+    today = datetime.now().date()
+    if day_value == today:
+        return f"Today ({day_key})"
+    if day_value == today.fromordinal(today.toordinal() - 1):
+        return f"Yesterday ({day_key})"
+    return day_value.strftime("%b %d, %Y")
+
+
+def delete_batch_history_day(day_key: str) -> None:
+    history = [entry for entry in load_batch_history() if history_day_key(entry) != day_key]
+    save_batch_history(history)
+
+
 def build_batch_history_entry(
     *,
     rows: list[dict[str, Any]],
@@ -853,6 +1184,7 @@ def build_batch_history_entry(
     fast_rag: bool,
     temperature: float,
     max_tokens: int,
+    retrieval_change_label: str = "",
 ) -> dict[str, Any]:
     return {
         "id": str(time.time_ns()),
@@ -864,6 +1196,7 @@ def build_batch_history_entry(
         "fast_rag": fast_rag,
         "temperature": temperature,
         "max_tokens": max_tokens,
+        "retrieval_change_label": retrieval_change_label.strip(),
         "summary": summary,
         "results": rows,
     }
@@ -893,6 +1226,12 @@ def rows_to_csv(rows: list[dict[str, Any]]) -> str:
         "expected_source_top1",
         "expected_source_top3",
         "is_refusal",
+        "selected_context_chunks",
+        "user_prompt_chars",
+        "evidence_chars",
+        "structured_context_chars",
+        "prompt_input_tokens",
+        "prompt_output_tokens",
     ]
     writer = csv.DictWriter(output, fieldnames=fields)
     writer.writeheader()
@@ -921,6 +1260,8 @@ def render_history_card(entry: dict[str, Any]) -> None:
         f"Fast RAG: {'on' if entry.get('fast_rag') else 'off'} | "
         f"Temp: {entry.get('temperature')} | Max tokens: {entry.get('max_tokens')}"
     )
+    retrieval_change_label = str(entry.get("retrieval_change_label") or "").strip()
+    prompt_summary = summary.get("prompt_metrics") or {}
     with st.container(border=True):
         left, right = st.columns([5, 1.5])
         with left:
@@ -937,6 +1278,8 @@ def render_history_card(entry: dict[str, Any]) -> None:
                 )
             st.caption(entry.get("created_at", ""))
             st.caption(config_line)
+            if retrieval_change_label:
+                st.caption(f"Retrieval change: {retrieval_change_label}")
             st.markdown(
                 f"Total `{summary.get('total', 0)}` · Pass `{summary.get('pass', 0)}` · "
                 f"Partial `{summary.get('partial', 0)}` · Fail `{summary.get('fail', 0)}` · "
@@ -947,6 +1290,12 @@ def render_history_card(entry: dict[str, Any]) -> None:
                     f"Retrieval: avg similarity {confidence.get('avg_top_similarity')} · "
                     f"avg gap {confidence.get('avg_score_gap')} · "
                     f"expected source top-3 {confidence.get('expected_source_top3_pct')}%"
+                )
+            if prompt_summary:
+                st.caption(
+                    f"Prompt: avg input tokens {prompt_summary.get('avg_prompt_input_tokens')} · "
+                    f"avg prompt chars {prompt_summary.get('avg_prompt_chars')} · "
+                    f"avg context chunks {prompt_summary.get('avg_selected_context_chunks')}"
                 )
         with right:
             st.markdown(
@@ -1001,11 +1350,13 @@ def history_report_rows(history: list[dict[str, Any]]) -> list[dict[str, Any]]:
         wrong = int(summary.get("fail") or 0)
         issue_counts = summary.get("issue_counts") or {}
         confidence = summary.get("retrieval_confidence") or {}
+        prompt_summary = summary.get("prompt_metrics") or {}
         rows.append(
             {
                 "created_at": entry.get("created_at", ""),
                 "model": entry.get("model_label", ""),
                 "mode": entry.get("mode_label", ""),
+                "retrieval_change_label": entry.get("retrieval_change_label", ""),
                 "rag_behavior": entry.get("rag_style", ""),
                 "combined_planning": "on" if entry.get("combined_planning") else "off",
                 "fast_rag": "on" if entry.get("fast_rag") else "off",
@@ -1028,6 +1379,9 @@ def history_report_rows(history: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 "expected_source_top3_pct": confidence.get("expected_source_top3_pct"),
                 "high_confidence_failures_075": confidence.get("high_confidence_failures_075", 0),
                 "low_confidence_questions_055": confidence.get("low_confidence_questions_055", 0),
+                "avg_prompt_input_tokens": prompt_summary.get("avg_prompt_input_tokens"),
+                "avg_prompt_chars": prompt_summary.get("avg_prompt_chars"),
+                "avg_selected_context_chunks": prompt_summary.get("avg_selected_context_chunks"),
                 "top_issues": ", ".join(
                     f"{issue}:{count}"
                     for issue, count in sorted(
@@ -1055,6 +1409,8 @@ def report_metric(label: str, row: dict[str, Any] | None, key: str, suffix: str 
     model_col, info_col = st.columns([0.86, 0.14], vertical_alignment="center")
     with model_col:
         st.caption(f"{row.get('model')} | {row.get('mode')} | {row.get('rag_behavior')}")
+        if row.get("retrieval_change_label"):
+            st.caption(f"Retrieval change: {row.get('retrieval_change_label')}")
     with info_col:
         with st.popover("ⓘ", help="Show the complete metrics for this evaluation run"):
             st.markdown(f"**{row.get('model') or 'Unknown model'}**")
@@ -1096,6 +1452,7 @@ def rows_to_csv_report(rows: list[dict[str, Any]]) -> str:
         "created_at",
         "model",
         "mode",
+        "retrieval_change_label",
         "rag_behavior",
         "combined_planning",
         "fast_rag",
@@ -1118,6 +1475,9 @@ def rows_to_csv_report(rows: list[dict[str, Any]]) -> str:
         "expected_source_top3_pct",
         "high_confidence_failures_075",
         "low_confidence_questions_055",
+        "avg_prompt_input_tokens",
+        "avg_prompt_chars",
+        "avg_selected_context_chunks",
         "top_issues",
     ]
     writer = csv.DictWriter(output, fieldnames=fields)
@@ -1218,6 +1578,23 @@ def history_model_key(entry: dict[str, Any]) -> str:
     if counts:
         return max(counts, key=counts.get)
     return f"{entry.get('model_label', 'Unknown model')} | {entry.get('mode_label', 'Unknown mode')}"
+
+
+def history_model_filter_label(entry: dict[str, Any]) -> str:
+    model_key = history_model_key(entry)
+    if model_key in {"synapse-llama3-v1", "synapse-llama3-v1-base"}:
+        return "Synapse Llama V1 3B"
+    if model_key == "llama3:latest":
+        return "Synapse Llama V1 8B"
+    if model_key == "synapse-1.5b-v1":
+        return "Synapse Qwen 2.5 1.5B V1"
+    if model_key == "synapse-1.5b-v2":
+        return "Synapse Qwen 2.5 1.5B V2"
+    if model_key in {"qwen2.5:3b", "synapse-qwen2.5-3b-v1"}:
+        return "Synapse Qwen 2.5 3B"
+
+    saved_label = str(entry.get("model_label") or "Unknown model")
+    return MODEL_OPTION_DISPLAY_NAMES.get(saved_label, saved_label)
 
 
 def rank_history_by_overall_model(
@@ -1371,6 +1748,77 @@ def overall_model_metrics(history: list[dict[str, Any]]) -> dict[str, dict[str, 
     return metrics
 
 
+def history_entry_metrics(entry: dict[str, Any]) -> dict[str, Any]:
+    summary = entry.get("summary") or {}
+    confidence = summary.get("retrieval_confidence") or {}
+    rows = list(entry.get("results") or [])
+    total_questions = len(rows)
+    refusal_markers = (
+        "over_refusal",
+        "missing_required_refusal",
+        "under_refusal",
+        "possible_over_refusal",
+        "missing_unknown_caveat",
+    )
+    safety_markers = (
+        "prompt_leak",
+        "unsupported_specific_claim",
+        "bad_contact_claim",
+        "repetition",
+        "empty_answer",
+    )
+    refusal_errors = sum(
+        1
+        for row in rows
+        if any(marker in str(row.get("issue") or "") for marker in refusal_markers)
+    )
+    safety_errors = sum(
+        1
+        for row in rows
+        if any(marker in str(row.get("issue") or "") for marker in safety_markers)
+    )
+    model_key = history_model_key(entry)
+    display_name = resolved_model_display(
+        str(entry.get("model_label") or "Unknown model"),
+        str(entry.get("mode_label") or "Unknown mode"),
+        None if " | " in model_key else model_key,
+    )
+    return {
+        "overall_score": float(summary.get("score") or 0.0),
+        "average_quality": float(summary.get("score") or 0.0),
+        "strict_accuracy": (
+            float(summary.get("pass") or 0.0) / float(summary.get("total") or 1.0) * 100.0
+            if summary.get("total") else 0.0
+        ),
+        "source_top3_accuracy": confidence.get("expected_source_top3_pct"),
+        "consistency": None,
+        "average_latency": float(summary.get("avg_latency_s") or 0.0),
+        "refusal_correctness": (
+            (1.0 - refusal_errors / total_questions) * 100.0 if total_questions else 0.0
+        ),
+        "safety_error_control": (
+            (1.0 - safety_errors / total_questions) * 100.0 if total_questions else 0.0
+        ),
+        "run_count": 1,
+        "display_name": display_name,
+        "created_at": str(entry.get("created_at") or ""),
+        "mode_label": str(entry.get("mode_label") or ""),
+        "rag_style": str(entry.get("rag_style") or ""),
+        "retrieval_change_label": str(entry.get("retrieval_change_label") or ""),
+    }
+
+
+def history_entry_option_label(entry: dict[str, Any]) -> str:
+    summary = entry.get("summary") or {}
+    metrics = history_entry_metrics(entry)
+    retrieval_change_label = metrics.get("retrieval_change_label") or ""
+    suffix = f" | {retrieval_change_label}" if retrieval_change_label else ""
+    return (
+        f"{metrics['display_name']} | {metrics['mode_label']} | "
+        f"{metrics['created_at']} | {float(summary.get('score') or 0.0):.1f}%{suffix}"
+    )
+
+
 def comparison_value(value: Any, *, suffix: str = "") -> str:
     if value is None:
         return "Insufficient data"
@@ -1474,6 +1922,90 @@ def model_comparison_remarks(
 
 
 def render_model_comparison(history: list[dict[str, Any]]) -> None:
+    comparison_mode = st.segmented_control(
+        "Comparison scope",
+        ["Family aggregate", "Saved runs"],
+        default="Family aggregate",
+        key="comparison_scope_mode",
+        width="stretch",
+    )
+    if comparison_mode == "Saved runs":
+        if not history:
+            st.info("Run Batch Eval to add saved runs for comparison.")
+            return
+        if len(history) == 1:
+            selector_a, selector_b = st.columns(2)
+            with selector_a:
+                st.selectbox(
+                    "Run A",
+                    [str(history[0].get("id") or "only-run")],
+                    disabled=True,
+                    format_func=lambda _: history_entry_option_label(history[0]),
+                    key="compare_run_a_single",
+                )
+            with selector_b:
+                st.selectbox("Run B", ["No second run"], disabled=True, key="compare_run_b_single")
+            st.info("Save a second run in this day block to compare run instances.")
+            return
+        run_by_id = {str(entry.get("id") or ""): entry for entry in history if entry.get("id")}
+        run_ids = list(run_by_id)
+        selector_a, selector_b = st.columns(2)
+        with selector_a:
+            run_a_id = st.selectbox(
+                "Run A",
+                run_ids,
+                index=0,
+                key="compare_run_a",
+                format_func=lambda run_id: history_entry_option_label(run_by_id[run_id]),
+            )
+        with selector_b:
+            default_run_b_index = 1 if len(run_ids) > 1 else 0
+            run_b_id = st.selectbox(
+                "Run B",
+                run_ids,
+                index=default_run_b_index,
+                key="compare_run_b",
+                format_func=lambda run_id: history_entry_option_label(run_by_id[run_id]),
+            )
+        if run_a_id == run_b_id:
+            st.warning("Select two different saved runs to compare.")
+            return
+        entry_a = run_by_id[run_a_id]
+        entry_b = run_by_id[run_b_id]
+        metrics_a = history_entry_metrics(entry_a)
+        metrics_b = history_entry_metrics(entry_b)
+        display_a = history_entry_option_label(entry_a)
+        display_b = history_entry_option_label(entry_b)
+        score_a = float(metrics_a.get("overall_score") or 0.0)
+        score_b = float(metrics_b.get("overall_score") or 0.0)
+        tie = abs(score_a - score_b) < 0.05
+        card_a, card_b = st.columns(2)
+        with card_a:
+            st.markdown(
+                comparison_card_html(
+                    display_a,
+                    metrics_a,
+                    metrics_b,
+                    winner=score_a > score_b,
+                    tie=tie,
+                ),
+                unsafe_allow_html=True,
+            )
+        with card_b:
+            st.markdown(
+                comparison_card_html(
+                    display_b,
+                    metrics_b,
+                    metrics_a,
+                    winner=score_b > score_a,
+                    tie=tie,
+                ),
+                unsafe_allow_html=True,
+            )
+        st.markdown("**Final remarks**")
+        st.info(model_comparison_remarks(display_a, metrics_a, display_b, metrics_b))
+        return
+
     metrics_by_model = overall_model_metrics(history)
     models = sorted(
         metrics_by_model,
@@ -1598,6 +2130,37 @@ def render_model_comparison(history: list[dict[str, Any]]) -> None:
 
 def render_batch_history() -> None:
     history = load_batch_history()
+    if not history:
+        st.info("No saved batch eval runs yet.")
+        return
+
+    grouped_days = group_history_by_day(history)
+    day_keys = [day_key for day_key, _ in grouped_days]
+    default_day_key = next((day_key for day_key in day_keys if day_key == datetime.now().strftime("%Y-%m-%d")), day_keys[0])
+    pending_day_key = st.session_state.pop("history_selected_day_pending", None)
+    if pending_day_key in day_keys:
+        st.session_state.history_selected_day = pending_day_key
+    elif pending_day_key is None and "history_selected_day" not in st.session_state:
+        st.session_state.history_selected_day = default_day_key
+    st.session_state.setdefault("history_selected_day", default_day_key)
+    if st.session_state.history_selected_day not in day_keys:
+        st.session_state.history_selected_day = default_day_key
+
+    st.markdown("### History by Day")
+    selected_day = st.pills(
+        "History day",
+        day_keys,
+        selection_mode="single",
+        default=st.session_state.history_selected_day,
+        format_func=history_day_label,
+        key="history_selected_day",
+        width="stretch",
+    )
+    selected_day_key = selected_day or st.session_state.history_selected_day or default_day_key
+    selected_history = next(
+        (entries for day_key, entries in grouped_days if day_key == selected_day_key),
+        [],
+    )
 
     report_col, compare_col = st.columns(2)
     with report_col:
@@ -1612,21 +2175,35 @@ def render_batch_history() -> None:
         if st.button(comparison_label, use_container_width=True):
             st.session_state.show_model_comparison = not st.session_state.show_model_comparison
             st.rerun()
+    delete_col, summary_col = st.columns([1.2, 3.8])
+    with delete_col:
+        if st.button("Delete selected day", use_container_width=True, key=f"delete_history_day_{selected_day_key}"):
+            delete_batch_history_day(selected_day_key)
+            remaining_history = load_batch_history()
+            remaining_days = [day_key for day_key, _ in group_history_by_day(remaining_history)]
+            st.session_state.history_selected_day_pending = remaining_days[0] if remaining_days else None
+            st.rerun()
+    with summary_col:
+        st.caption(
+            f"{history_day_label(selected_day_key)} · {len(selected_history)} saved runs"
+        )
     if show_report:
-        render_history_report(history)
+        render_history_report(selected_history)
         st.divider()
     if st.session_state.show_model_comparison:
         st.markdown("### Model comparison")
-        render_model_comparison(history)
+        render_model_comparison(selected_history)
         st.divider()
 
-    if not history:
-        st.info("No saved batch eval runs yet.")
+    if not selected_history:
+        st.info("No saved runs in the selected day block.")
         return
 
-    model_options = sorted({str(entry.get("model_label") or "Unknown model") for entry in history})
-    mode_options = sorted({str(entry.get("mode_label") or "Unknown mode") for entry in history})
-    rag_options = sorted({str(entry.get("rag_style") or "Unknown RAG") for entry in history})
+    history_model_labels = {history_model_filter_label(entry) for entry in selected_history}
+    model_options = list(MODEL_OPTIONS)
+    model_options.extend(sorted(history_model_labels.difference(model_options)))
+    mode_options = sorted({str(entry.get("mode_label") or "Unknown mode") for entry in selected_history})
+    rag_options = sorted({str(entry.get("rag_style") or "Unknown RAG") for entry in selected_history})
 
     c1, c2, c3, c4 = st.columns(4)
     with c1:
@@ -1655,8 +2232,8 @@ def render_batch_history() -> None:
         )
 
     filtered_history = []
-    for entry in history:
-        if model_filter != "All" and entry.get("model_label") != model_filter:
+    for entry in selected_history:
+        if model_filter != "All" and history_model_filter_label(entry) != model_filter:
             continue
         if mode_filter != "All" and entry.get("mode_label") != mode_filter:
             continue
@@ -1673,7 +2250,9 @@ def render_batch_history() -> None:
             reverse=reverse,
         )
 
-    st.caption(f"Showing {len(filtered_history)} of {len(history)} saved runs.")
+    st.caption(
+        f"Showing {len(filtered_history)} of {len(selected_history)} saved runs in {history_day_label(selected_day_key)}."
+    )
     if not filtered_history:
         st.info("No history cards match the selected filters.")
         return
@@ -1692,9 +2271,20 @@ def render_batch_eval_tab(
     fast_rag: bool,
     temperature: float,
     max_tokens: int,
+    batch_view: str,
+    auto_model_labels: list[str],
+    auto_mode_labels: list[str],
+    start_automation: bool,
 ) -> None:
     st.subheader("Batch Eval")
     st.caption("Paste one question per line. The batch uses the current sidebar configuration.")
+    retrieval_change_label = st.text_input(
+        "Retrieval change label",
+        value=st.session_state.get("retrieval_change_label", ""),
+        key="retrieval_change_label",
+        help="Label the current retrieval tweak batch so report/history comparisons stay attributable.",
+        placeholder="Example: phase-2 top_k=6 -> context_k=3",
+    )
 
     default_questions = (
         "What does Synapse Tech do?\n"
@@ -1716,33 +2306,155 @@ def render_batch_eval_tab(
     batch_text = st.text_area("Questions", value=default_questions, height=180)
     questions = [line.strip() for line in batch_text.splitlines() if line.strip()]
 
-    if st.button("Run Batch Eval", type="primary", disabled=not questions):
-        with st.spinner(f"Running {len(questions)} questions..."):
-            st.session_state.batch_eval_rows = run_batch_eval(
-                questions=questions,
-                model_config=selected_config,
-                mode_label=mode_label,
-                model_label=model_label,
-                rag_generated=rag_style == "Model-generated",
-                combined_planning=combined_planning,
-                fast_rag=fast_rag,
-                temperature=temperature,
-                max_tokens=max_tokens,
+    planned_runs, skipped_runs = selected_plan_runs(
+        model_labels=auto_model_labels,
+        mode_labels=auto_mode_labels,
+    )
+
+    if batch_view == "Manual":
+        st.markdown("#### Current config")
+        st.session_state.setdefault("manual_batch_job", None)
+        manual_batch_job = st.session_state.get("manual_batch_job")
+        is_running_manual_batch = bool(manual_batch_job and not manual_batch_job.get("done"))
+        action_col, stop_col = st.columns(2)
+        with action_col:
+            if st.button(
+                "Run Batch Eval",
+                type="primary",
+                disabled=not questions or is_running_manual_batch,
+            ):
+                st.session_state.manual_batch_job = start_manual_batch_job(
+                    questions=questions,
+                    model_config=selected_config,
+                    mode_label=mode_label,
+                    model_label=model_label,
+                    rag_style=rag_style,
+                    combined_planning=combined_planning,
+                    fast_rag=fast_rag,
+                    temperature=temperature,
+                    max_tokens=max_tokens,
+                    retrieval_change_label=retrieval_change_label,
+                )
+                st.rerun()
+        with stop_col:
+            if is_running_manual_batch and st.button(
+                "Stop Batch Eval",
+                type="secondary",
+                use_container_width=True,
+            ):
+                manual_batch_job["stop_requested"] = True
+                st.rerun()
+
+        manual_batch_job = st.session_state.get("manual_batch_job")
+        if manual_batch_job:
+            question_total = int(manual_batch_job.get("question_total") or 0)
+            current_question_index = int(manual_batch_job.get("current_question_index") or 0)
+            st.progress(current_question_index / question_total if question_total else 0.0)
+            current_question = manual_batch_job.get("current_question")
+            if current_question and not manual_batch_job.get("done"):
+                st.caption(
+                    f"Current question {current_question_index}/{question_total}: {current_question}"
+                )
+            if manual_batch_job.get("stop_requested") and not manual_batch_job.get("done"):
+                st.warning("Stopping after the current in-flight question finishes.")
+            if manual_batch_job.get("error"):
+                st.error(f"Batch eval failed: {manual_batch_job['error']}")
+            if manual_batch_job.get("done"):
+                st.session_state.batch_eval_rows = manual_batch_job.get("rows") or []
+                if st.session_state.batch_eval_rows:
+                    summary = summarize_batch(st.session_state.batch_eval_rows)
+                    history_entry = build_batch_history_entry(
+                        rows=st.session_state.batch_eval_rows,
+                        summary=summary,
+                        model_label=model_label,
+                        mode_label=mode_label,
+                        rag_style=rag_style,
+                        combined_planning=combined_planning,
+                        fast_rag=fast_rag,
+                        temperature=temperature,
+                        max_tokens=max_tokens,
+                        retrieval_change_label=str(manual_batch_job.get("retrieval_change_label") or ""),
+                    )
+                    add_batch_history_entry(history_entry)
+                if manual_batch_job.get("stopped"):
+                    st.warning("Batch eval stopped.")
+                elif st.session_state.batch_eval_rows:
+                    st.success("Batch eval saved to history.")
+                st.session_state.manual_batch_job = None
+                st.rerun()
+            time.sleep(0.5)
+            st.rerun()
+    else:
+        st.markdown("#### Automation")
+        st.caption("Configure the queue from the sidebar, then start or stop it there.")
+        if planned_runs:
+            st.caption(f"Planned runs: {len(planned_runs)}")
+        if skipped_runs:
+            st.warning(
+                "Skipping unsupported fine-tuned combinations: "
+                + ", ".join(skipped_runs)
             )
-            summary = summarize_batch(st.session_state.batch_eval_rows)
-            history_entry = build_batch_history_entry(
-                rows=st.session_state.batch_eval_rows,
-                summary=summary,
-                model_label=model_label,
-                mode_label=mode_label,
+        automation_job = st.session_state.get("automation_job")
+        if start_automation and questions and planned_runs and not automation_job:
+            st.session_state.automation_job = start_automation_job(
+                planned_runs=planned_runs,
+                skipped_runs=skipped_runs,
+                questions=questions,
                 rag_style=rag_style,
                 combined_planning=combined_planning,
                 fast_rag=fast_rag,
                 temperature=temperature,
                 max_tokens=max_tokens,
+                retrieval_change_label=retrieval_change_label,
             )
-            add_batch_history_entry(history_entry)
-            st.success("Batch eval saved to history.")
+            st.rerun()
+
+        automation_job = st.session_state.get("automation_job")
+        if automation_job:
+            total_runs = len(automation_job.get("planned_runs") or [])
+            completed_runs = int(automation_job.get("completed_runs") or 0)
+            current_run_index = int(automation_job.get("current_run_index") or 0)
+            question_total = int(automation_job.get("question_total") or 0)
+            current_question_index = int(automation_job.get("current_question_index") or 0)
+            outer_progress = st.progress(
+                completed_runs / total_runs if total_runs else 0.0
+            )
+            inner_progress = st.progress(
+                current_question_index / question_total if question_total else 0.0
+            )
+            current_model_label = automation_job.get("current_model_label")
+            current_mode_label = automation_job.get("current_mode_label")
+            if current_model_label and current_mode_label and not automation_job.get("done"):
+                st.caption(
+                    f"Current run {current_run_index}/{total_runs}: "
+                    f"{MODEL_OPTION_DISPLAY_NAMES.get(current_model_label, current_model_label)} | "
+                    f"{current_mode_label}"
+                )
+            current_question = automation_job.get("current_question")
+            if current_question and not automation_job.get("done"):
+                st.caption(f"Current question {current_question_index}/{question_total}: {current_question}")
+            if automation_job.get("stop_requested") and not automation_job.get("done"):
+                st.warning("Stopping after the current in-flight question finishes.")
+            if automation_job.get("error"):
+                st.error(f"Automation failed: {automation_job['error']}")
+            if automation_job.get("done"):
+                st.session_state.batch_eval_rows = automation_job.get("rows") or []
+                st.session_state.batch_eval_suite_runs = automation_job.get("suite_rows") or []
+                if automation_job.get("stopped"):
+                    st.warning("Automation stopped.")
+                else:
+                    st.success(
+                        f"Saved {len(st.session_state.batch_eval_suite_runs)} batch eval runs to history."
+                    )
+                st.session_state.automation_job = None
+                st.rerun()
+            time.sleep(0.5)
+            st.rerun()
+
+    suite_runs = st.session_state.get("batch_eval_suite_runs") or []
+    if suite_runs:
+        st.markdown("#### Latest automated run")
+        st.dataframe(suite_runs, use_container_width=True, hide_index=True)
 
     show_history = st.toggle("Show history", value=True)
     if show_history:
@@ -1761,6 +2473,12 @@ def render_batch_eval_tab(
     c4.metric("Partial", summary["partial"])
     c5.metric("Avg latency", f"{summary['avg_latency_s']}s")
     c6.metric("Refusals", summary["refusal_count"])
+    prompt_summary = summary.get("prompt_metrics") or {}
+    if any(value is not None for value in prompt_summary.values()):
+        p1, p2, p3 = st.columns(3)
+        p1.metric("Avg prompt tokens", prompt_summary.get("avg_prompt_input_tokens"))
+        p2.metric("Avg prompt chars", prompt_summary.get("avg_prompt_chars"))
+        p3.metric("Avg context chunks", prompt_summary.get("avg_selected_context_chunks"))
 
     confidence = summary.get("retrieval_confidence") or {}
     if confidence.get("question_count"):
@@ -1909,24 +2627,92 @@ def main() -> None:
 
     with st.sidebar:
         st.header("Runtime Config")
-        model_label = st.selectbox(
-            "Model family / selected model",
-            list(MODEL_OPTIONS),
-            format_func=lambda model: MODEL_OPTION_DISPLAY_NAMES.get(model, model),
-            help=(
-                "Selects the model pair to test. For fine-tuned modes, this uses the Synapse-tuned "
-                "model if it exists. For base modes, it uses the original base model for that family."
-            ),
+        batch_view = st.segmented_control(
+            "Batch mode",
+            ["Manual", "Automation"],
+            default="Manual",
+            key="sidebar_batch_view_mode",
+            width="stretch",
         )
-        mode_label = st.selectbox(
-            "Answer mode",
-            list(ANSWER_MODES),
-            index=1,
-            help=(
-                "Base = original model only. Base + RAG = original model with KB retrieval. "
-                "Fine-tuned = Synapse model only. Fine-tuned + RAG = Synapse model with KB retrieval."
-            ),
-        )
+        st.session_state.setdefault("automation_job", None)
+        auto_model_labels: list[str] = []
+        auto_mode_labels: list[str] = []
+        start_automation = False
+        if batch_view == "Automation":
+            st.header("Batch Automation")
+            st.caption("Pick multiple models and answer modes for queued batch runs.")
+            auto_model_labels = st.pills(
+                "Models to run",
+                list(MODEL_OPTIONS),
+                selection_mode="multi",
+                default=[st.session_state.get("manual_model_label", list(MODEL_OPTIONS)[0])],
+                format_func=lambda current_model: MODEL_OPTION_DISPLAY_NAMES.get(current_model, current_model),
+                key="batch_eval_auto_models",
+                help="These model families will run one after another in Batch Eval automation.",
+                width="stretch",
+            ) or []
+            auto_mode_labels = st.pills(
+                "Answer modes to run",
+                list(ANSWER_MODES),
+                selection_mode="multi",
+                default=[st.session_state.get("manual_mode_label", "Base + RAG")],
+                key="batch_eval_auto_modes",
+                help="Each selected model will run once for each selected answer mode.",
+                width="stretch",
+            ) or []
+            planned_runs, skipped_runs = selected_plan_runs(
+                model_labels=auto_model_labels,
+                mode_labels=auto_mode_labels,
+            )
+            if planned_runs:
+                st.caption(f"Queued runs: {len(planned_runs)}")
+            if skipped_runs:
+                st.caption(f"Skipped unsupported combos: {len(skipped_runs)}")
+            active_automation = st.session_state.get("automation_job")
+            is_running_automation = bool(active_automation and not active_automation.get("done"))
+            if is_running_automation:
+                if st.button(
+                    "Stop Automation",
+                    type="secondary",
+                    key="sidebar_stop_automation",
+                    use_container_width=True,
+                ):
+                    active_automation["stop_requested"] = True
+                    st.rerun()
+            else:
+                start_automation = st.button(
+                    "Start Automation",
+                    type="primary",
+                    disabled=not planned_runs,
+                    key="sidebar_start_automation",
+                    use_container_width=True,
+                )
+            st.divider()
+
+        model_label = st.session_state.get("manual_model_label", list(MODEL_OPTIONS)[0])
+        mode_label = st.session_state.get("manual_mode_label", "Base + RAG")
+        if batch_view == "Manual":
+            model_label = st.selectbox(
+                "Model family / selected model",
+                list(MODEL_OPTIONS),
+                index=list(MODEL_OPTIONS).index(model_label) if model_label in MODEL_OPTIONS else 0,
+                format_func=lambda model: MODEL_OPTION_DISPLAY_NAMES.get(model, model),
+                key="manual_model_label",
+                help=(
+                    "Selects the model pair to test. For fine-tuned modes, this uses the Synapse-tuned "
+                    "model if it exists. For base modes, it uses the original base model for that family."
+                ),
+            )
+            mode_label = st.selectbox(
+                "Answer mode",
+                list(ANSWER_MODES),
+                index=list(ANSWER_MODES).index(mode_label) if mode_label in ANSWER_MODES else 1,
+                key="manual_mode_label",
+                help=(
+                    "Base = original model only. Base + RAG = original model with KB retrieval. "
+                    "Fine-tuned = Synapse model only. Fine-tuned + RAG = Synapse model with KB retrieval."
+                ),
+            )
         rag_style = st.radio(
             "RAG behavior",
             ["Deterministic/template", "Model-generated"],
@@ -1997,35 +2783,53 @@ def main() -> None:
             ),
         )
 
-        st.divider()
-        st.markdown("**Resolved models**")
         selected_config = MODEL_OPTIONS[model_label]
-        st.code(
-            json.dumps(
-                {
-                    "base_model": resolved_model_display(
-                        model_label,
-                        "Base",
-                        selected_config["base_model"],
-                    ),
-                    "fine_tuned_model": (
-                        resolved_model_display(
+        if batch_view == "Manual":
+            st.divider()
+            st.markdown("**Resolved models**")
+            st.code(
+                json.dumps(
+                    {
+                        "base_model": resolved_model_display(
                             model_label,
-                            "Fine-tuned",
-                            selected_config.get("fine_tuned_model"),
-                        )
-                        if selected_config.get("fine_tuned_model") else None
-                    ),
-                    "fine_tune_exists": selected_config.get("fine_tune_exists"),
-                },
-                indent=2,
-            ),
-            language="json",
-        )
+                            "Base",
+                            selected_config["base_model"],
+                        ),
+                        "fine_tuned_model": (
+                            resolved_model_display(
+                                model_label,
+                                "Fine-tuned",
+                                selected_config.get("fine_tuned_model"),
+                            )
+                            if selected_config.get("fine_tuned_model") else None
+                        ),
+                        "fine_tune_exists": selected_config.get("fine_tune_exists"),
+                    },
+                    indent=2,
+                ),
+                language="json",
+            )
 
         if st.button("Clear chat"):
             st.session_state.messages = []
             st.rerun()
+
+    if batch_view == "Automation":
+        render_batch_eval_tab(
+            selected_config=selected_config,
+            mode_label=mode_label,
+            model_label=model_label,
+            rag_style=rag_style,
+            combined_planning=combined_planning,
+            fast_rag=fast_rag,
+            temperature=temperature,
+            max_tokens=max_tokens,
+            batch_view=batch_view,
+            auto_model_labels=auto_model_labels,
+            auto_mode_labels=auto_mode_labels,
+            start_automation=start_automation,
+        )
+        return
 
     chat_tab, batch_tab = st.tabs(["Chat", "Batch Eval"])
 
@@ -2066,6 +2870,10 @@ def main() -> None:
             fast_rag=fast_rag,
             temperature=temperature,
             max_tokens=max_tokens,
+            batch_view=batch_view,
+            auto_model_labels=auto_model_labels,
+            auto_mode_labels=auto_mode_labels,
+            start_automation=start_automation,
         )
 
 

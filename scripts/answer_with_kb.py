@@ -2641,12 +2641,21 @@ def build_user_prompt(
             f"{output_requirement}"
         )
 
-    return (
+    prompt = (
         f"Question:\n{question}\n\n"
         f"Evidence:\n{evidence}\n\n"
         f"{structured_context + chr(10) + chr(10) if structured_context else ''}"
         f"{requirements}"
     )
+    profile["prompt_metrics"] = {
+        "question_chars": len(question),
+        "evidence_chars": len(evidence),
+        "structured_context_chars": len(structured_context),
+        "requirements_chars": len(requirements),
+        "user_prompt_chars": len(prompt),
+        "selected_context_chunks": len(hits),
+    }
+    return prompt
 
 
 def title_prefix(title: str) -> str:
@@ -3653,6 +3662,7 @@ def build_answer_observability(
         "fast_rag": RAG_FAST_MODE,
         "ollama_keep_alive": OLLAMA_KEEP_ALIVE,
         "context_compression": profile.get("context_compression"),
+        "prompt_metrics": profile.get("prompt_metrics"),
         "model_profile": profile.get("runtime_model_profile"),
         "timings": profile.get("timings", {}),
     }

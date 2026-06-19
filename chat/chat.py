@@ -58,9 +58,9 @@ FINE_TUNED_MODEL_CHOICES = {
         "base_model": "qwen2.5:1.5b-instruct",
     },
     "3": {
-        "label": "Synapse Llama 3B V1",
+        "label": "Synapse Llama V1 3B",
         "fine_tuned_model": FINE_TUNED_LLAMA_MODEL,
-        "base_model": "llama3:latest",
+        "base_model": "synapse-llama3-v1-base",
     },
     "4": {
         "label": "Synapse Gemma 3 4B V1",
@@ -77,6 +77,12 @@ FINE_TUNED_MODEL_CHOICES = {
         "label": "Qwen2.5 7B",
         "fine_tuned_model": None,
         "base_model": "qwen2.5:7b",
+        "fine_tune_exists": False,
+    },
+    "7": {
+        "label": "Synapse Llama V1 8B",
+        "fine_tuned_model": None,
+        "base_model": "llama3:latest",
         "fine_tune_exists": False,
     },
 }
@@ -518,15 +524,16 @@ def choose_fine_tuned_model() -> dict:
     print("Choose model:")
     print("1. Synapse 1.5B V1")
     print("2. Synapse 1.5B V2")
-    print("3. Synapse Llama 3B V1")
+    print("3. Synapse Llama V1 3B")
     print("4. Synapse Gemma 3 4B V1")
     print("5. Qwen2.5 3B")
     print("6. Qwen2.5 7B")
+    print("7. Synapse Llama V1 8B")
     while True:
-        choice = input("Model [1-6]: ").strip()
+        choice = input("Model [1-7]: ").strip()
         if choice in FINE_TUNED_MODEL_CHOICES:
             return FINE_TUNED_MODEL_CHOICES[choice]
-        print("Enter 1, 2, 3, 4, 5, or 6.")
+        print("Enter 1, 2, 3, 4, 5, 6, or 7.")
 
 
 def choose_rag_behavior() -> bool:

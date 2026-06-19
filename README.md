@@ -19,6 +19,42 @@ This project fine-tunes a local model for Synapse Tech website/domain Q&A and co
 
 ## End-to-end workflow
 
+### Qwen2.5 3B QLoRA pipeline
+
+The 3B pipeline is isolated from the existing 1.5B V1/V2 artifacts. Run these
+commands from the project root in a normal macOS Terminal so MLX can access
+Metal:
+
+```bash
+./venv/bin/python scripts/prepare_qwen3b_mlx.py
+./venv/bin/python train/finetune_qwen3b.py
+./venv/bin/python export/export_qwen3b_gguf.py
+ollama create synapse-qwen2.5-3b-v1 -f Qwen3BSynapseModelfile
+```
+
+Training reads `data/mixed_dataset_v2.jsonl`, creates the MLX-required files at
+`data/qwen3b/train.jsonl` and `data/qwen3b/valid.jsonl`, and saves adapters to
+`models/qwen2.5-3b-synapse-lora-v1`. The explicit configuration is in
+`train/configs/qwen3b_lora.yaml`.
+
+### Qwen2.5 7B QLoRA pipeline
+
+The 7B pipeline is also isolated, but it is significantly heavier than the 3B
+setup. The files are ready if you want to try it on this machine with a more
+conservative LoRA config:
+
+```bash
+./venv/bin/python scripts/prepare_qwen7b_mlx.py
+./venv/bin/python train/finetune_qwen7b.py
+./venv/bin/python export/export_qwen7b_gguf.py
+ollama create synapse-qwen2.5-7b-v1 -f Qwen7BSynapseModelfile
+```
+
+Training reads `data/mixed_dataset_v2.jsonl`, creates `data/qwen7b/train.jsonl`
+and `data/qwen7b/valid.jsonl`, and saves adapters to
+`models/qwen2.5-7b-synapse-lora-v1`. The explicit configuration is in
+`train/configs/qwen7b_lora.yaml`.
+
 Run from:
 
 `/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune`
