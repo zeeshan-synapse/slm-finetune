@@ -175,40 +175,6 @@ _KB_RESOURCE_CACHE: dict[tuple[str, str, str], tuple[Any, list[dict[str, Any]], 
 _QUERY_PLAN_CACHE: dict[tuple[str, str, bool], tuple[dict[str, str], dict[str, Any]]] = {}
 _EMBEDDING_CACHE: dict[tuple[str, str, str], Any] = {}
 _RETRIEVAL_CACHE: dict[tuple[Any, ...], tuple[list[dict[str, Any]], str, dict[str, Any]]] = {}
-_CONTEXT_SELECTION_CACHE: dict[tuple[Any, ...], list[dict[str, Any]]] = {}
-
-CONTEXT_PACKS = {
-    "product_catalog": [
-        "product",
-        "product-agentic-bot",
-        "product-irecruit-one",
-        "product-opira-ai",
-        "product-coversaction-ai",
-        "product-cyber-security-automation",
-    ],
-    "service_catalog": [
-        "services",
-        "services-custom-development",
-        "services-automation",
-        "services-voice-agent",
-        "services-cloud-ai",
-    ],
-    "company_overview": ["about-us", "services", "product"],
-    "private_infrastructure": ["product-opira-ai", "services-cloud-ai"],
-    "voice_agent": ["services-voice-agent", "product-coversaction-ai"],
-    "contact": ["contact-us"],
-    "purchase": ["contact-us"],
-    "high_risk_unknown": ["contact-us"],
-}
-
-ROUTE_QUERY_EXPANSIONS = {
-    "recruitment_automation": "iRecruit One recruitment automation cv screening ai interviews",
-    "customer_support_conversations": "Coversaction AI customer support conversations chatbot handoff",
-    "private_infrastructure": "Opira AI offline on-premises private cloud sensitive documents",
-    "voice_agents": "AI voice agents call automation conversational automation",
-    "workflow_automation": "AI workflow automation integration APIs databases SaaS tools",
-    "custom_development": "custom web mobile app development business workflows",
-}
 
 
 def load_kb_resources(
@@ -912,16 +878,14 @@ def is_single_product_recommendation_question(question: str) -> bool:
         low,
         (
             "which product",
-            "which synapse product",
             "what product",
-            "what synapse product",
             "product for",
             "product that",
             "do you have a product",
             "recommend a product",
             "best product",
         ),
-    ) or bool(re.search(r"\b(?:which|what)\s+\w+\s+product\b", low))
+    )
     expresses_need = _contains_any(
         low,
         (
@@ -2267,210 +2231,6 @@ def make_hit_from_row(row: dict[str, Any], score: float) -> dict[str, Any]:
     }
 
 
-def normalized_text_fingerprint(text: str) -> str:
-    words = query_kb.tokenize(text)
-    return " ".join(words[:80])
-
-
-def token_jaccard(a: str, b: str) -> float:
-    a_tokens = set(query_kb.tokenize(a))
-    b_tokens = set(query_kb.tokenize(b))
-    if not a_tokens or not b_tokens:
-        return 0.0
-    return len(a_tokens & b_tokens) / len(a_tokens | b_tokens)
-
-
-def dedupe_similar_hits(
-    hits: list[dict[str, Any]],
-    *,
-    similarity_threshold: float = 0.88,
-) -> list[dict[str, Any]]:
-    """Remove repeated or near-identical retrieved chunks while preserving rank order."""
-    deduped: list[dict[str, Any]] = []
-    seen_chunk_ids: set[str] = set()
-    seen_fingerprints: set[str] = set()
-    removed = 0
-
-    for hit in hits:
-        chunk_id = str(hit.get("chunk_id") or "")
-        if chunk_id and chunk_id in seen_chunk_ids:
-            removed += 1
-            continue
-
-        text = str(hit.get("text") or "")
-        fingerprint = normalized_text_fingerprint(text)
-        if fingerprint and fingerprint in seen_fingerprints:
-            removed += 1
-            continue
-
-        if any(token_jaccard(text, str(existing.get("text") or "")) >= similarity_threshold for existing in deduped):
-            removed += 1
-            continue
-
-        deduped.append(hit)
-        if chunk_id:
-            seen_chunk_ids.add(chunk_id)
-        if fingerprint:
-            seen_fingerprints.add(fingerprint)
-
-    return deduped
-
-
-def route_query_expansion(profile: dict[str, Any]) -> str:
-    additions: list[str] = []
-    for route in profile.get("metadata_routes", []):
-        expansion = ROUTE_QUERY_EXPANSIONS.get(str(route.get("route") or ""))
-        if expansion:
-            additions.append(expansion)
-    return " ".join(dict.fromkeys(" ".join(additions).split()))
-
-
-def context_pack_doc_ids(question: str, profile: dict[str, Any]) -> list[str]:
-    policy = profile.get("answer_policy") or determine_answer_policy(question, profile)
-    doc_ids = list(CONTEXT_PACKS.get(policy, []))
-
-    for route in profile.get("metadata_routes", []):
-        for doc_id in route.get("doc_ids", []):
-            if doc_id not in doc_ids:
-                doc_ids.insert(0, doc_id)
-
-    if profile.get("intent") in SUMMARY_INTENT_CONFIG:
-        index_doc_id = SUMMARY_INTENT_CONFIG[profile["intent"]]["index_doc_id"]
-        if index_doc_id not in doc_ids:
-            doc_ids.insert(0, index_doc_id)
-
-    return doc_ids
-
-
-def augment_hits_with_context_pack(
-    hits: list[dict[str, Any]],
-    rows: list[dict[str, Any]],
-    *,
-    question: str,
-    profile: dict[str, Any],
-    chunks_per_doc: int = 1,
-) -> list[dict[str, Any]]:
-    """Prepend small, known-good context packs for common question families."""
-    doc_ids = context_pack_doc_ids(question, profile)
-    if not doc_ids:
-        return hits
-
-    existing_chunk_ids = {hit.get("chunk_id") for hit in hits}
-    score_seed = max((float(hit.get("score", 0)) for hit in hits), default=0.55)
-    score_seed = max(score_seed, 0.965)
-    front: list[dict[str, Any]] = []
-
-    for doc_id in doc_ids:
-        doc_rows = sorted(
-            [row for row in rows if row.get("doc_id") == doc_id],
-            key=lambda row: int(row.get("chunk_index") or 0),
-        )
-        added_for_doc = 0
-        for row in doc_rows:
-            cid = row.get("chunk_id")
-            if not cid or cid in existing_chunk_ids:
-                continue
-            front.append(make_hit_from_row(row, score_seed))
-            existing_chunk_ids.add(cid)
-            score_seed -= 0.001
-            added_for_doc += 1
-            if added_for_doc >= chunks_per_doc:
-                break
-
-    profile["context_pack"] = {
-        "doc_ids": doc_ids,
-        "added_chunks": len(front),
-    }
-    return front + [hit for hit in hits if hit.get("chunk_id") not in {item.get("chunk_id") for item in front}]
-
-
-def generation_rerank_score(question: str, hit: dict[str, Any], profile: dict[str, Any]) -> float:
-    score = float(hit.get("score") or 0.0)
-    text = normalized_hit_text(hit).lower()
-    title = str(hit.get("title") or "").lower()
-    doc_id = str(hit.get("doc_id") or "")
-    page_type = str(hit.get("page_type") or "")
-    question_tokens = {
-        token for token in query_kb.tokenize(question) if token not in query_kb.STOPWORDS
-    }
-    text_tokens = set(query_kb.tokenize(text))
-
-    if question_tokens:
-        score += min(len(question_tokens & text_tokens) / len(question_tokens), 1.0) * 0.08
-
-    metadata_doc_ids = {
-        route_doc_id
-        for route in profile.get("metadata_routes", [])
-        for route_doc_id in route.get("doc_ids", [])
-    }
-    if doc_id in metadata_doc_ids:
-        score += 0.42
-
-    pack_doc_ids = set(context_pack_doc_ids(question, profile))
-    if doc_id in pack_doc_ids:
-        score += 0.18
-
-    policy = profile.get("answer_policy") or determine_answer_policy(question, profile)
-    if policy in {"product_catalog", "product_detail", "service_guidance"} and page_type == "product":
-        score += 0.06
-    if policy in {"service_catalog", "voice_agent"} and page_type == "service":
-        score += 0.06
-    if policy in {"contact", "purchase", "high_risk_unknown"} and doc_id == "contact-us":
-        score += 0.25
-    if profile.get("company_overview") and (page_type == "about" or doc_id == "about-us"):
-        score += 0.16
-    if title and any(alias in title for alias in profile.get("product_aliases", [])):
-        score += 0.2
-
-    return score
-
-
-def rerank_hits_for_generation(
-    question: str,
-    hits: list[dict[str, Any]],
-    profile: dict[str, Any],
-) -> list[dict[str, Any]]:
-    reranked: list[dict[str, Any]] = []
-    for hit in hits:
-        updated = dict(hit)
-        updated["generation_score"] = generation_rerank_score(question, updated, profile)
-        reranked.append(updated)
-    reranked.sort(
-        key=lambda item: (
-            float(item.get("generation_score") or 0.0),
-            float(item.get("score") or 0.0),
-            float(item.get("raw_score") or 0.0),
-        ),
-        reverse=True,
-    )
-    return reranked
-
-
-def dynamic_context_k(base_context_k: int, hits: list[dict[str, Any]], profile: dict[str, Any]) -> int:
-    if not hits:
-        return base_context_k
-
-    policy = profile.get("answer_policy") or "generic"
-    intent = profile.get("intent")
-    confidence = profile.get("retrieval_confidence") or {}
-    score_gap = float(confidence.get("score_gap") or 0.0)
-    top_similarity = float(confidence.get("top_similarity") or 0.0)
-
-    selected = base_context_k
-    if policy == "product_catalog" or intent in SUMMARY_INTENT_CONFIG:
-        selected = max(selected, min(6, len(hits)))
-    elif policy in {"service_catalog", "industry"}:
-        selected = max(selected, min(5, len(hits)))
-    elif policy in {"contact", "purchase", "high_risk_unknown"}:
-        selected = min(selected, 2)
-    elif policy in {"product_detail", "private_infrastructure", "voice_agent"}:
-        selected = min(max(selected, 2), 3)
-    elif score_gap < 0.03 or top_similarity < 0.42:
-        selected = min(max(selected + 1, 4), 5)
-
-    return max(1, min(selected, len(hits)))
-
-
 def augment_summary_hits_with_index_rows(
     hits: list[dict[str, Any]],
     rows: list[dict[str, Any]],
@@ -2582,37 +2342,12 @@ def select_context_hits(
     if not hits:
         return []
 
-    resolved_context_k = dynamic_context_k(context_k, hits, profile)
-    profile["dynamic_context"] = {
-        "requested_context_k": context_k,
-        "selected_context_k": resolved_context_k,
-        "reason": profile.get("answer_policy") or profile.get("intent") or "generic",
-    }
-    context_cache_key = (
-        tuple(str(hit.get("chunk_id") or "") for hit in hits[:12]),
-        resolved_context_k,
-        profile.get("answer_policy"),
-        profile.get("intent"),
-        tuple(
-            (route.get("route"), tuple(route.get("doc_ids", [])))
-            for route in profile.get("metadata_routes", [])
-        ),
-    )
-    cached_context = _CONTEXT_SELECTION_CACHE.get(context_cache_key)
-    if cached_context is not None:
-        profile["context_selection_cache_hit"] = True
-        return copy.deepcopy(cached_context)
-
-    context_k = resolved_context_k
     top_hit = hits[0]
     entity_terms = profile.get("entity_terms", [])
     intent = profile.get("intent")
-    selected: list[dict[str, Any]]
 
     if profile.get("product_comparison"):
-        selected = hits[:context_k]
-        _CONTEXT_SELECTION_CACHE[context_cache_key] = copy.deepcopy(selected)
-        return selected
+        return hits[:context_k]
 
     if profile.get("single_product_recommendation"):
         product_hits = [
@@ -2629,9 +2364,7 @@ def select_context_hits(
             hit for hit in product_hits if hit.get("doc_id") in metadata_doc_ids
         ]
         if preferred_product_hits:
-            selected = preferred_product_hits[:context_k]
-            _CONTEXT_SELECTION_CACHE[context_cache_key] = copy.deepcopy(selected)
-            return selected
+            return preferred_product_hits[:context_k]
         if product_hits:
             score_by_doc: dict[str, float] = {}
             for hit in product_hits:
@@ -2643,9 +2376,7 @@ def select_context_hits(
             best_product_hits = [
                 hit for hit in product_hits if hit.get("doc_id") == best_doc_id
             ]
-            selected = best_product_hits[:context_k]
-            _CONTEXT_SELECTION_CACHE[context_cache_key] = copy.deepcopy(selected)
-            return selected
+            return best_product_hits[:context_k]
 
     if profile.get("purchase_intent") or profile.get("pricing_intent"):
         contact_hits = [hit for hit in hits if hit.get("doc_id") == "contact-us"]
@@ -2658,9 +2389,7 @@ def select_context_hits(
                 seen.add(cid)
             if len(merged) >= context_k:
                 break
-        selected = merged[:context_k]
-        _CONTEXT_SELECTION_CACHE[context_cache_key] = copy.deepcopy(selected)
-        return selected
+        return merged[:context_k]
 
     if profile.get("company_overview"):
         about_hits = [
@@ -2682,25 +2411,17 @@ def select_context_hits(
                 seen.add(cid)
             if len(merged) >= context_k:
                 break
-        selected = merged[:context_k]
-        _CONTEXT_SELECTION_CACHE[context_cache_key] = copy.deepcopy(selected)
-        return selected
+        return merged[:context_k]
 
     if intent in SUMMARY_INTENT_CONFIG and not profile.get("product_aliases"):
-        selected = select_summary_hits(hits, context_k=context_k, intent=intent)
-        _CONTEXT_SELECTION_CACHE[context_cache_key] = copy.deepcopy(selected)
-        return selected
+        return select_summary_hits(hits, context_k=context_k, intent=intent)
 
     if (entity_terms and not profile.get("product_aliases")) or intent in {"contact", "about"}:
         same_doc_hits = [hit for hit in hits if hit.get("doc_id") == top_hit.get("doc_id")]
         if same_doc_hits:
-            selected = same_doc_hits[:context_k]
-            _CONTEXT_SELECTION_CACHE[context_cache_key] = copy.deepcopy(selected)
-            return selected
+            return same_doc_hits[:context_k]
 
-    selected = hits[:context_k]
-    _CONTEXT_SELECTION_CACHE[context_cache_key] = copy.deepcopy(selected)
-    return selected
+    return hits[:context_k]
 
 
 def product_card_for_prompt(hits: list[dict[str, Any]], profile: dict[str, Any]) -> dict[str, Any]:
@@ -3491,11 +3212,6 @@ def determine_answer_policy(question: str, profile: dict[str, Any]) -> str:
         return "contact"
     if is_private_deployment_question(question):
         return "private_infrastructure"
-    if profile.get("single_product_recommendation") or (
-        is_single_product_recommendation_question(question)
-        and profile.get("metadata_routes")
-    ):
-        return "service_guidance"
     if is_custom_software_question(question):
         return "service_guidance"
     if is_workflow_automation_question(question):
@@ -3705,15 +3421,6 @@ def retrieve_hits(
     profile["pricing_intent"] = is_pricing_or_quote_question(question)
     profile["metadata_routes"] = metadata_routes_for_question(question)
     profile["answer_policy"] = determine_answer_policy(question, profile)
-    expansion = route_query_expansion(profile)
-    if expansion:
-        existing_tokens = set(query_kb.tokenize(search_query))
-        expansion_tokens = [
-            token for token in expansion.split() if token.lower() not in existing_tokens
-        ]
-        if expansion_tokens:
-            search_query = f"{search_query} {' '.join(expansion_tokens)}"
-    profile["routed_search_query"] = search_query
     stage_started = time.perf_counter()
     embedding_cache_key = (ollama_url, model, search_query)
     cached_query_vector = _EMBEDDING_CACHE.get(embedding_cache_key)
@@ -3771,7 +3478,6 @@ def retrieve_hits(
             "question": question,
             "stage": "retrieval",
             "search_query": search_query,
-            "routed_search_query": profile.get("routed_search_query"),
             "intent_hint": profile.get("intent_hint"),
             "model_classification": profile.get("model_classification"),
             "answer_policy": profile.get("answer_policy"),
@@ -3863,21 +3569,6 @@ def retrieve_hits(
             detail_page_type=SUMMARY_INTENT_CONFIG[profile["intent"]]["detail_page_type"],
             index_doc_id=SUMMARY_INTENT_CONFIG[profile["intent"]]["index_doc_id"],
         )
-    hits = augment_hits_with_context_pack(
-        hits,
-        rows,
-        question=question,
-        profile=profile,
-    )
-    pre_cleanup_count = len(hits)
-    hits = rerank_hits_for_generation(question, hits, profile)
-    hits = dedupe_similar_hits(hits)
-    profile["retrieval_cleanup"] = {
-        "pre_cleanup_hits": pre_cleanup_count,
-        "post_cleanup_hits": len(hits),
-        "dedupe_removed": max(0, pre_cleanup_count - len(hits)),
-        "top_generation_doc_ids": [str(hit.get("doc_id") or "") for hit in hits[:5]],
-    }
     timings["retrieval_postprocess_s"] = round(time.perf_counter() - stage_started, 4)
     timings["retrieval_total_s"] = round(time.perf_counter() - total_started, 4)
     profile["timings"] = timings
