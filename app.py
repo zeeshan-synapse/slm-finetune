@@ -77,6 +77,7 @@ MODEL_OPTIONS: dict[str, dict[str, Any]] = {
         "fine_tune_exists": False,
     },
 }
+DEFAULT_MODEL_LABEL = "Synapse Llama V1 3B"
 
 ANSWER_MODES = {
     "Base": "base_plain",
@@ -2645,7 +2646,7 @@ def main() -> None:
                 "Models to run",
                 list(MODEL_OPTIONS),
                 selection_mode="multi",
-                default=[st.session_state.get("manual_model_label", list(MODEL_OPTIONS)[0])],
+                default=[st.session_state.get("manual_model_label", DEFAULT_MODEL_LABEL)],
                 format_func=lambda current_model: MODEL_OPTION_DISPLAY_NAMES.get(current_model, current_model),
                 key="batch_eval_auto_models",
                 help="These model families will run one after another in Batch Eval automation.",
@@ -2689,7 +2690,7 @@ def main() -> None:
                 )
             st.divider()
 
-        model_label = st.session_state.get("manual_model_label", list(MODEL_OPTIONS)[0])
+        model_label = st.session_state.get("manual_model_label", DEFAULT_MODEL_LABEL)
         mode_label = st.session_state.get("manual_mode_label", "Base + RAG")
         if batch_view == "Manual":
             model_label = st.selectbox(
