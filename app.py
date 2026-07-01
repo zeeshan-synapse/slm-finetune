@@ -32,8 +32,10 @@ from guardrail_stage1 import (  # noqa: E402
     OLLAMA_KEEP_ALIVE,
     OLLAMA_URL,
     is_small_talk_question,
+    ollama_chat,
     policy_intent,
     policy_response,
+    safe_parse_json,
     small_talk_response,
 )
 from kb_answer import kb_grounded_answer_with_meta  # noqa: E402
@@ -77,7 +79,7 @@ MODEL_OPTIONS: dict[str, dict[str, Any]] = {
         "fine_tune_exists": False,
     },
 }
-DEFAULT_MODEL_LABEL = "Synapse Llama V1 3B"
+DEFAULT_MODEL_LABEL = "Synapse Qwen 2.5 1.5B V2"
 
 ANSWER_MODES = {
     "Base": "base_plain",
@@ -161,6 +163,82 @@ PROMPT_LEAK_PATTERNS = (
     "rewrite query",
     "according to the prompt",
 )
+ROUTER_SYSTEM_PROMPT = """You are a scope router for the Synapse Tech chatbot.
+
+Your job is to classify the user's message by both scope and intent validity.
+
+The chatbot may answer:
+- questions directly about Synapse Tech Inc. and its offerings
+- questions closely related to Synapse Tech's business domain
+
+The chatbot must refuse unrelated general questions.
+
+Scope categories:
+
+1. direct_synapse
+Use this when the user's message is primarily about Synapse Tech Inc., its website content, company information, products, services, industries served, deployment options, capabilities, contact paths, quote/pricing availability, integrations if publicly confirmed, security/compliance if publicly confirmed, or choosing which Synapse offering fits a business need.
+
+2. adjacent_in_scope
+Use this when the user's message is not primarily about Synapse Tech itself, but is clearly within the surrounding domain of AI business software, enterprise automation, workflow automation, recruitment automation, customer support automation, AI voice agents, business chatbots, private AI deployment, offline LLMs, RAG systems, cloud AI infrastructure, operational intelligence, or selecting AI/automation approaches for a business use case.
+
+3. out_of_scope
+Use this when the user's message is unrelated to Synapse Tech and unrelated to the surrounding AI/business automation domain. This includes coding help, debugging, script explanation, homework, medicine, health advice, restaurants, food recommendations, fashion, hair dye, sports, entertainment, personal advice, travel, and general facts outside the allowed domain.
+
+Decision rules:
+
+- Classify by meaning, not by exact keywords.
+- If the user is asking about Synapse Tech directly, classify as direct_synapse.
+- If the user refers to "your service", "your product", "you", "you guys", or similar language and the message is about AI, automation, enterprise software, customer support, recruitment, deployment, or business workflows, classify as direct_synapse.
+- If the user is asking which Synapse product or service fits a business need, classify as direct_synapse even if no product name is mentioned.
+- If the user is asking a general domain question about AI, automation, enterprise workflows, customer support automation, recruitment automation, RAG, private AI, or similar business-tech topics without primarily asking about Synapse itself, classify as adjacent_in_scope.
+- If the user asks whether a named Synapse product can run offline, on-premises, behind a firewall, on private infrastructure, or in a private cloud, classify it as direct_synapse with valid intent.
+- If the user is asking for programming help, code explanation, debugging, medical information, restaurant advice, fashion advice, sports, travel, or other unrelated topics, classify as out_of_scope.
+- Judge whether the requested action or intent is valid and meaningful in the detected domain.
+- If the message mentions a Synapse product or domain topic but the requested action is nonsensical, impossible, or incoherent for that product/topic, mark intent_validity as invalid.
+- Examples of invalid intent: asking to eat a software product, wear a cloud service, or perform some other request that does not make sense for the referenced business software/topic.
+- If the message mixes topics, classify based on the main user intent.
+- If unsure between direct_synapse and adjacent_in_scope, choose adjacent_in_scope.
+- If unsure whether the topic belongs to the Synapse / AI business automation domain at all, choose out_of_scope.
+- Do not answer the user's question.
+- Return only valid JSON.
+- Do not include markdown.
+- Do not include any text before or after the JSON.
+
+Return exactly this JSON schema:
+{"scope":"direct_synapse|adjacent_in_scope|out_of_scope","intent_validity":"valid|invalid","entity":"","confidence":0.0,"reason":"short explanation"}"""
+VALID_SCOPE_LABELS = {"direct_synapse", "adjacent_in_scope", "out_of_scope"}
+VALID_INTENT_LABELS = {"valid", "invalid"}
+PRODUCT_NAME_ALIASES = {
+    "irecruit one": "iRecruit One",
+    "irecruit": "iRecruit One",
+    "agentic bot": "Agentic Bot",
+    "opira ai": "Opira AI",
+    "opira": "Opira AI",
+    "coversaction ai": "Coversaction AI",
+    "coversaction": "Coversaction AI",
+    "conversaction ai": "Coversaction AI",
+    "conversaction": "Coversaction AI",
+    "cyber security automation": "Cyber Security Automation",
+}
+CONTACT_CALL_TO_ACTION = (
+    "contact Synapse Tech directly at info@synapsetechinc.com or chat with the team "
+    "Monday to Saturday (8 AM - 8 PM)"
+)
+DEPLOYMENT_TERMS = (
+    "offline",
+    "on-prem",
+    "on prem",
+    "on-premise",
+    "on premise",
+    "on-premises",
+    "on premises",
+    "private infrastructure",
+    "private cloud",
+    "behind your firewall",
+    "behind the firewall",
+    "air-gapped",
+    "air gapped",
+)
 
 
 def ollama_plain_answer(
@@ -233,9 +311,176 @@ def quick_bypass(question: str) -> dict[str, Any] | None:
     return None
 
 
+def canonical_product_name(text: str) -> str | None:
+    low = normalize_text(text)
+    for alias, canonical in PRODUCT_NAME_ALIASES.items():
+        if alias in low:
+            return canonical
+    return None
+
+
+def has_follow_up_reference(question: str) -> bool:
+    low = normalize_text(question)
+    return bool(re.search(r"\b(that|this|it|that product|this product)\b", low))
+
+
+def is_purchase_question(question: str) -> bool:
+    low = normalize_text(question)
+    return contains_any(
+        low,
+        (
+            "purchase",
+            "buy",
+            "acquire",
+            "get started",
+            "contact",
+            "reach out",
+            "share details",
+            "more details",
+            "details please",
+            "interested in",
+            "want that product",
+            "want this product",
+        ),
+    )
+
+
+def referenced_product_from_messages(messages: list[dict[str, Any]]) -> str | None:
+    for item in reversed(messages):
+        for field in ("question", "answer"):
+            value = str(item.get(field) or "")
+            product = canonical_product_name(value)
+            if product:
+                return product
+    return None
+
+
+def purchase_response(question: str, messages: list[dict[str, Any]]) -> dict[str, Any] | None:
+    if not is_purchase_question(question):
+        return None
+
+    product = canonical_product_name(question)
+    if not product and has_follow_up_reference(question):
+        product = referenced_product_from_messages(messages)
+
+    if product:
+        answer = (
+            f"To get started with {product}, {CONTACT_CALL_TO_ACTION}. "
+            f"Tell them you're interested in {product} and share what you want it to handle."
+        )
+    else:
+        answer = (
+            f"To get started, {CONTACT_CALL_TO_ACTION}. "
+            "If you already know which product you want, mention it when you reach out."
+        )
+
+    return {
+        "answer": answer,
+        "generation_model": None,
+        "usage": {"quick_bypass": True},
+        "observability": {
+            "intent": "purchase",
+            "route": "purchase_bypass",
+            "sources": ["contact-us"] if product is None else ["contact-us", product],
+            "used_refusal": False,
+        },
+    }
+
+
+def selected_model_for_mode(model_config: dict[str, Any], answer_mode: str) -> str | None:
+    if answer_mode.startswith("fine_tuned"):
+        if not model_config.get("fine_tune_exists"):
+            return None
+        return model_config.get("fine_tuned_model")
+    return model_config["base_model"]
+
+
+def is_valid_product_deployment_question(question: str) -> bool:
+    product = canonical_product_name(question)
+    if not product:
+        return False
+    return contains_any(normalize_text(question), DEPLOYMENT_TERMS)
+
+
+def classify_scope(question: str, classifier_model: str) -> dict[str, Any]:
+    raw = ollama_chat(
+        classifier_model,
+        [
+            {"role": "system", "content": ROUTER_SYSTEM_PROMPT},
+            {"role": "user", "content": question},
+        ],
+        temperature=0.0,
+        num_predict=180,
+    )
+    payload = safe_parse_json(raw)
+    scope = str(payload.get("scope") or "").strip()
+    if scope not in VALID_SCOPE_LABELS:
+        return {
+            "scope": "out_of_scope",
+            "intent_validity": "invalid",
+            "entity": "",
+            "confidence": 0.0,
+            "reason": "The classifier output was invalid, so the request is treated as out of scope.",
+        }
+    intent_validity = str(payload.get("intent_validity") or "").strip().lower()
+    if intent_validity not in VALID_INTENT_LABELS:
+        intent_validity = "invalid" if scope == "out_of_scope" else "valid"
+    confidence = payload.get("confidence", 0.0)
+    try:
+        confidence_value = float(confidence)
+    except (TypeError, ValueError):
+        confidence_value = 0.0
+    return {
+        "scope": scope,
+        "intent_validity": intent_validity,
+        "entity": str(payload.get("entity") or "").strip(),
+        "confidence": max(0.0, min(confidence_value, 1.0)),
+        "reason": str(payload.get("reason") or "").strip(),
+    }
+
+
+def out_of_scope_response(question: str, scope_result: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "answer": (
+            "I don't know about that topic. I'm a Synapse chatbot assistant. "
+            "I can help with Synapse Tech's products, services, capabilities, deployment options, "
+            "and related AI and business automation questions."
+        ),
+        "generation_model": None,
+        "usage": {"scope_router": scope_result},
+        "observability": {
+            "intent": "out_of_scope",
+            "route": "scope_router_refusal",
+            "sources": [],
+            "used_refusal": True,
+            "scope_router": scope_result,
+        },
+    }
+
+
+def invalid_intent_response(scope_result: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "answer": (
+            "I don't know about this topic. I'm a Synapse chatbot assistant. "
+            "I can help with Synapse Tech's products, services, capabilities, deployment options, "
+            "and related AI and business automation questions."
+        ),
+        "generation_model": None,
+        "usage": {"scope_router": scope_result},
+        "observability": {
+            "intent": "invalid_intent",
+            "route": "scope_router_invalid_intent",
+            "sources": [],
+            "used_refusal": True,
+            "scope_router": scope_result,
+        },
+    }
+
+
 def answer_question(
     *,
     question: str,
+    messages: list[dict[str, Any]],
     model_config: dict[str, Any],
     answer_mode: str,
     rag_generated: bool,
@@ -247,14 +492,36 @@ def answer_question(
     aw.RAG_GENERATE_ORDINARY_ANSWERS = rag_generated
     aw.RAG_COMBINED_PLANNING = combined_planning
     aw.RAG_FAST_MODE = fast_rag
-
-    if answer_mode.endswith("_rag"):
-        bypass = quick_bypass(question)
-        if bypass is not None:
-            return bypass
-
     base_model = model_config["base_model"]
     fine_tuned_model = model_config.get("fine_tuned_model")
+    selected_model = selected_model_for_mode(model_config, answer_mode)
+
+    bypass = quick_bypass(question)
+    if bypass is not None:
+        return bypass
+
+    purchase_bypass = purchase_response(question, messages)
+    if purchase_bypass is not None:
+        return purchase_bypass
+
+    if is_valid_product_deployment_question(question):
+        scope_result = {
+            "scope": "direct_synapse",
+            "intent_validity": "valid",
+            "entity": canonical_product_name(question) or "",
+            "confidence": 1.0,
+            "reason": "This is a valid deployment question about a named Synapse product.",
+        }
+    elif selected_model is not None:
+        scope_result = classify_scope(question, selected_model)
+    else:
+        scope_result = None
+
+    if scope_result is not None:
+        if scope_result["intent_validity"] == "invalid":
+            return invalid_intent_response(scope_result)
+        if scope_result["scope"] == "out_of_scope":
+            return out_of_scope_response(question, scope_result)
 
     if answer_mode == "base_plain":
         return ollama_plain_answer(
@@ -385,6 +652,7 @@ def run_generation_job(job: dict[str, Any]) -> None:
     try:
         result = answer_question(
             question=job["question"],
+            messages=job["messages"],
             model_config=job["model_config"],
             answer_mode=job["answer_mode"],
             rag_generated=job["rag_generated"],
@@ -409,6 +677,7 @@ def run_generation_job(job: dict[str, Any]) -> None:
 def start_generation_job(
     *,
     question: str,
+    messages: list[dict[str, Any]],
     model_config: dict[str, Any],
     mode_label: str,
     answer_mode: str,
@@ -422,6 +691,7 @@ def start_generation_job(
     job = {
         "id": str(time.time_ns()),
         "question": question,
+        "messages": [dict(item) for item in messages],
         "model_config": dict(model_config),
         "mode_label": mode_label,
         "answer_mode": answer_mode,
@@ -738,6 +1008,7 @@ def run_batch_eval_core(
         try:
             raw = answer_question(
                 question=question,
+                messages=[],
                 model_config=model_config,
                 answer_mode=ANSWER_MODES[mode_label],
                 rag_generated=rag_generated,
@@ -2849,6 +3120,7 @@ def main() -> None:
         if question:
             st.session_state.active_job = start_generation_job(
                 question=question,
+                messages=st.session_state.messages,
                 model_config=selected_config,
                 mode_label=mode_label,
                 answer_mode=ANSWER_MODES[mode_label],

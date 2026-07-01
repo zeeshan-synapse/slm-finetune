@@ -1555,7 +1555,19 @@ def product_overview_answer_too_shallow(question: str, answer: str) -> bool:
 def product_detail_answer_needs_cleanup(question: str, answer: str, profile: dict[str, Any]) -> bool:
     if determine_answer_policy(question, profile) != "product_detail" or not answer.strip():
         return False
+    low_q = question.lower()
     low = answer.lower()
+    if "used for" in low_q and any(
+        fragment in low
+        for fragment in (
+            "omnichannel ai chatbot",
+            "complex decision trees",
+            "multi-tenant database isolation",
+            "oauth 2.0",
+            "manages apis",
+        )
+    ):
+        return True
     return any(
         fragment in low
         for fragment in (
