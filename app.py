@@ -2726,7 +2726,7 @@ def main() -> None:
         )
         combined_planning = st.toggle(
             "Combined planning",
-            value=True,
+            value=False,
             help=(
                 "When on, one model call handles both query rewriting and intent classification "
                 "before retrieval. This usually reduces latency because the RAG path makes fewer "
