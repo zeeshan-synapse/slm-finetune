@@ -1,0 +1,512 @@
+TECHNICAL
+URL: https://www.biek.edu.pk/TENDERS/2018-2019/TANDER%207-3-19/OMR/SBD%20Supply%20of%20OMR%20%20Technical%202019.pdf
+Source: https://www.biek.edu.pk/tenders.asp
+
+Page 1 of 13
+STANDARD BIDDING DOCUMENTS
+FOR
+NATIONAL COMPETITIVE BIDDING
+SINGLE STAGE – ONE ENVELOPE PROCEDURE
+TENDER FOR PROCUREMENT
+OF OMR
+IN RESPECT OF THE
+BIEK/AG/L&N/384/2019
+Volume – I
+(TECHNICAL PROPOSAL)
+Instructions to Bidders (ITB)
+General Conditions of Contract (GCC)
+BOARD OF INTERMEDIATE EDUCATION,
+BAKHTIYARI YOUTH CENTER, NORTH NAZIMABAD,
+KARACHI-74700
+Phones: 
+99260211
+99260212
+99260213
+Page 2 of 13
+INSTRUCTIONS TO BIDDERS & GENERAL
+CONDITIONS OF CONTRACT:
+The Instructions to Bidders (ITB) and General Conditions of Contract
+(GCC) applied in this Contract shall be the same as per Standard Bidding Documents for
+Goods, issued by SPPRA. For further references the same may be downloaded from
+SPPRA’s website www.pprasindh.gov.pk or it may be provided from this Office if it may
+be demanded by the bidder. Whenever there is a conflict, the provisions hereafter shall
+prevail over those in the Instructions to Bidders & General Conditions of Contract. The
+corresponding clause number of the ITB & GCC is indicated in parentheses.
+BID DATA SHEET
+INTRODUCTION
+ITB 1.1
+Name of Contract
+Procurement of OMR (Optical
+Mark
+Recognition)
+Software
+solution
+(Hardware/Software
+with support)
+ITB 4.1
+Name of Procuring Agency
+Board of Intermediate
+Education Karachi
+ITB 6.1
+Procuring agency’s address,
+telephone, telex, and facsimile
+numbers
+Education, Bakhtiyari Youth
+Center North Nazimabad
+Tel: 99260211
+Fax: 99260203 & 99260208
+ITB 8.1
+Language of the bid
+English or Urdu
+BID PRICE AND CURRENCY
+ITB 11.2
+The price shall be in Pakistani currency inclusive of all Taxes,
+Transportation, Material and Labour charges involved therein.
+ITB 11.5
+During the entire period of bid validity, the price shall be fixed and the
+bidder will have to supply the required items as per specifications and
+quoted rates.
+Page 3 of 13
+PREPARATION AND SUBMISSION OF BIDS
+ITB 13.3 (d)
+Qualification
+Requirements
+
+05 years experience in the relevant field (Client List)
+Turn-over of at least last three years having a sum of
+minimum Rs.20 Million
+Minimum 3 contracts of Rs.5 Million in last 3 years of
+similar goods / jobs
+Registration with Federal Board of Revenue (FBR), for
+Income Tax, GST and Sales Tax in case of
+procurement of goods.
+Registration with the Sindh Revenue Board (SRB) in
+case of procurement of works and services.
+Valid Authorized Distributorship / Dealership Or
+Manufacturer Certificate.
+An Affidavit on Stamp Paper that the firm has never
+been Blacklisted
+ITB 15.1
+Amount of bid
+security (refundable)
+3% (three percent) of the bid price, which should be
+submitted in shape of Pay Order in the name of Secretary,
+Board of Intermediate Education Karachi and shall remain
+valid for a period of 28 days beyond the validity period for
+bid.
+ITB 16.1
+Bid Validity Period
+90 days from the date of opening of Tender.
+ITB 17.1
+Number of copies
+02 Copies of the Bid shall be submitted by the bidder.
+One original and one photocopy of the same.
+ITB 18.2 (a)
+Address for bid
+submission
+Procurement Wing, Admin General section (Chairman’s
+secretariat), ground floor Board of Intermediate Education,
+Karachi.
+ITB 18.2 (b)
+IFB title and number
+Title: Procurement of OMR.
+IFB No: BIE//AG/L&N/384/2019
+Dated: 27-02-2019
+ITB 19.1
+Deadline for bid
+Thursday 21st March 2019 up to 2:30 p.m
+Sealed bids duly filled-in, mentioning on top of the
+envelope
+“Procurement
+of
+OMR
+(Optical
+Recognition) hardware/software with support”
+Page 4 of 13
+ITB 22.1
+Time, date, and
+place for bid
+opening
+Bids duly stamped on each document must be
+submitted in the office of the Admin General
+Section (chairman’s secretariat), ground floor, Board
+of Intermediate Education, Karachi, in a sealed
+cover on 21/03/2019 up to 2:30 P.M and will be
+opened on the same day at 03:00 P.M in the
+presence of bidders’ representatives who wish to
+attend.
+ITB 25.4 (b)
+Delivery schedule
+The delivery will have to be made at our site
+within stipulated time as mentioned in the
+Contract Award. Minimum time period will be at
+least 60 Days after issuance of contract award
+which may be increased or decreased due to
+demand of time/situation.
+BID EVALUATION CRITERIA
+Bids of only those Bidders will be evaluated who can fulfill the Eligibility Criteria and
+enclose Bid Security.
+Shortcomings in submission of documents related to Eligibility Criteria or non-submission of
+Bid Security or specimen/samples shall be rejected.
+Prior to submission of bids, the bidders may obtain further information and completely satisfy
+themselves about the required items for which they are bidding for.
+An interested bidder, who has obtained bidding documents, may request for clarification of
+contents of the bidding document in writing, and procuring agency shall respond to such
+queries in writing within three calendar days, provided they are received at least five calendar
+days prior to the date of opening of bid.
+The bidders shall submit only one rate for every item. Dual rates or alternate bid is strictly
+restricted/prohibited. In case a bidder has quoted more than one rate for a single item, its bid
+shall be rejected.
+Procurement and installation of OMR software is the major part of procurement therefore
+contract award for installation of OMR hardware may also be awarded to the successful
+bidder for procurement and installation of OMR software as per its lowest evaluated bid
+subject to compatibility of products and prices comparable to the prices or rates of the current
+market prices.
+Page 5 of 13
+The quoted rates shall include the charges of procurement and installation till the system
+comes into operative condition including all taxes, transportation, material, Labour,
+testing/commission and installation charges involved therein i.e complete in all respects.
+The offered products should be prime quality products. Cheap products of low quality or
+substandard shall not be accepted and the said bid shall be treated as Irresponsive.
+Inferior, low quality or substandard products will be rejected and Security Money shall be
+forfeited and the bidder may also be blacklisted.
+The bidder with the “Lowest Evaluated Cost” but not necessarily the “Lowest
+Submitted Price” shall be awarded the Procurement Contract.
+SECTION III.
+SPECIAL CONDITIONS OF CONTRACT
+The following Special Conditions of Contract shall supplement the General Conditions of
+Contract. Whenever there is a conflict, the provisions herein shall prevail over those in the
+General Conditions of Contract. The corresponding clause number of the GCC is indicated in
+parentheses.
+1. DEFINITIONS (GCC CLAUSE 1)
+1)
+GCC 1.1 (g)
+The Procuring agency
+is:
+Board
+Intermediate
+Education,
+2)
+GCC 1.1 (h) The Procuring agency’s
+country is:
+Islamic Republic of Pakistan.
+3)
+GCC 1.1 (j)
+The Project Site is:
+Same as GCC 1.1(g) mentioned above.
+2. COUNTRY OF ORIGIN (GCC CLAUSE 3)
+All countries and territories as indicated in Part Two Section VI of the bidding documents,
+―Eligibility for the Provisions of Goods, Works, and Services in Government-Financed
+Procurement‖.
+3. PERFORMANCE SECURITY (GCC CLAUSE 7)
+GCC 7.1
+The amount of performance security, as a percentage of the Contract
+Price, shall be Ten (10) percent of the Contract Price which should
+be submitted in shape of Pay Order in the name of Secretary, Board
+of Intermediate Education Karachi.
+4. RESOLUTION OF DISPUTES (GCC CLAUSE 28)
+The dispute resolution mechanism to be applied pursuant to relevant SPPRA Rules.
+Page 6 of 13
+5. GOVERNING LANGUAGE (GCC CLAUSE 29)
+GCC 29.1
+The Governing
+Language shall be:
+English.
+6. NOTICES (GCC CLAUSE 31)
+GCC 31.1 — Procuring agency’s address for notice purposes:
+Office of the Assistant Secretary, Admin General Section, Room No.32, 1st Floor, Board of
+Intermediate Education, Karachi.
+7. PENALTY
+1) Preferred penalties according to the issue\subject may be imposed upon the
+Supplier(s) such as:
+i.
+rejection of the unsatisfactory Supplied material
+ii.
+Blacklisting of the firm
+iii.
+deduction of amount from 2% to 10% per week of the total value of the bill
+iv.
+forfeiting of whole Security amount
+Anyone or more than one from the aforesaid penalties may be imposed upon the Supplier(s)
+in the following cases:
+a) In case of transgression/deviation of the time given in the Contract Award
+b) In case of transgression, deviation, mistake or low quality found in the supplied
+Item(s)
+c) In case the specification, quantity, rate or stuff of a Tender in certain item or items are
+approved and the Bidder backs out of his commitment on any pretext or fails to
+supply the material or complete the job in time or in the required criteria.
+8.
+SUBJECT TO RELEVANT SPPRA RULES,
+THE COMPETENT AUTHORITY RESERVES THE RIGHT TO:
+(a) divert/distribute a particular work among different Bidders on the lowest approved
+rate(s) in the interest of the office due to demand of time/situation.
+(b) accept or reject all or any bid.
+(c) increase or decrease quantity without any notice at any time/stage subject to ITB
+Clause 29.
+Page 7 of 13
+9. SPECIAL CLAUSE (TERMS & CONDITIONS)
+1) Under following conditions bid will be rejected:-
+Conditional and telegraphic bids/tenders
+Bids not accompanied by Bid Security of required amount and form
+Bids received after specified date and time
+Bids of Blacklisted firms
+2) Bids of only those Bidders will be evaluated who can fulfill the Eligibility Criteria
+and enclose Bid Security.
+3) Shortcomings in submission of documents related to Eligibility Criteria or non-
+submission of Bid Security shall be rejected.
+4) Prior to submission of bids, the bidders may obtain further information and
+completely satisfy themselves about the required items for which they are bidding for.
+5) An interested bidder, who has obtained bidding documents, may request for
+clarification of contents of the bidding document in writing, and procuring agency
+shall respond to such queries in writing within three calendar days, provided they are
+received at least five calendar days prior to the date of opening of bid.
+6) The specification offered by the bidder(s) may vary from the required items because
+the requirement are mentioned on the basis of transitory survey, in such case(s) the
+procurement committee shall decide and recommend the offer(s) that may be suitable
+for procuring agency.
+7) Procurement and installation of OMR software is the major part of procurement
+therefore contract award for installation of OMR hardware may also be awarded to
+the successful bidder for procurement and installation of OMR software as per its
+lowest evaluated bid subject to compatibility of products and prices comparable to the
+prices or rates of the current market prices.
+8) The quoted rates shall include the charges of procurement and installation till the
+system comes into operative condition including all taxes. Transportation material,
+labour, testing/commission and installation charges involved therein i.e complete in
+all respects.
+9) The offered products should be prime quality products. Cheap products of low quality
+or substandard shall not be accepted and the said bid shall be treated as Irresponsive.
+10) Inferior, low quality or substandard products will be rejected and Security Money
+shall be forfeited and the bidder may also be blacklisted.
+11) The bidder with the ―Lowest Evaluated Cost‖ but not necessarily the ―Lowest
+Submitted Price‖ shall be awarded the Procurement Contract subject to
+compatibility/suitability of the item(s).
+Page 8 of 13
+12) The bidder shall supply the article(s) as per approved specifications mentioned in the
+Contract Award. The article(s) not found in conformity with the approved
+specifications shall be rejected at the risk & cost of the bidder.
+13) The Contract Award may be assigned at any time during the period of bid validity.
+14) A guarantee for reasonable period shall be recorded by the bidder preferably at least
+01 year warranty will be provided by the supplier including service and all parts if the
+system or any item related to it goes out of order during guarantee period, it shall be
+brought in perfect order without any charges.
+15) The successful bidder will have to deposit Performance Security @ 10% of the
+value of Contract Award which is 8% refundable after Six months of the satisfactory
+completion of supplies and remaining will be refunded after the expiry of warranty
+period.
+16) The amount of Performance Security is in addition to the amount of Bid Security
+which should be deposited by the successful bidder(s). Bid Security shall remain valid
+for a period of 28 days beyond the validity period for bids, whereas Performance
+Security shall be released ninety days beyond the date of completion of contract to
+cover defects liability period subject to final acceptance by the procuring agency.
+17) Placement of Contract Award will be subject to payment of Performance Security.
+18) The material shall be delivered to Storekeeper, through the concerned Officers as the
+case may be, against delivery challan in triplicate along with samples of material in
+duplicate. Two copies of the bills and challan shall be retained by the Storekeeper
+while the third copy shall be returned to the supplier for his own record.
+19) The items should be supplied strictly in accordance with the approved samples.
+20) Training of BIEK relevant staff to operate the system should be performed by the
+successful bidder.
+21) The delivery will have to be made at our site within stipulated time as mentioned in
+the Contract Award. Minimum time period will be at least one month after issuance of
+contract award which may be increased or decreased due to demand of time/situation.
+22) SPPRA Rules-2010 (Amended 2013) shall strictly be followed.
+10. EQUIVALENCY OF STANDARDS AND CODES
+Reference to brand name, catalogue number or country where used, they should always be
+read with followed by the words ―or at least equivalent.‖
+Page 9 of 13
+SECTION-IV.
+SCHEDULE OF REQUIREMENTS
+SCHEDULE OF REQUIREMENTS:
+The delivery will have to be made at our site within stipulated time as mentioned in the
+Contract Award. Minimum time period will be at least 60 Days after issuance of contract
+award which may be increased or decreased due to demand of time/situation.
+Page 10 of 13
+SECTION-V.
+TECHNICAL SPECIFICATIONS
+S.No.
+SPECIFICATIONS
+QTY
+1.
+ADF Scanner
+ Scanning Face
+Duplex Scanning
+ Scanning Method
+Hybrid CIS
+ Resolution
+100 – 600 dpi
+ Binary Speed
+200 / 300 dpi Simplex: 100ppm Duplex: 200ipm
+ Color Speed
+200 /300 dpi Simplex: 100ppm Duplex: 200ipm
+ Feed Tray
+Capacity
+Up to 350 sheets (75 g/m2,20lbs)
+ Other Functions
+Control Sheet
+Patch Code detection (type 2,3 T)(ISIS)
+Double feed detection : 3 positions
+Length control
+Barcode detection (ISIS)
+ Image Output
+Multi Stream (bitonal & color, bitonal & gray
+scale) Binary mode, Grayscale mode, Color
+mode
+ Tonal Gradation
+(Bitonal Mode)
+Dither, Error diffusion, Grayscale(8 bit),
+Binary
+ Image
+Compression
+JPEG for color and grayscale
+ Scanning Size
+302 mm x 2,540 mm (11.9 in x 100 in)
+ Document ADF
+Size
+Minimum 48mm 70 mm(1.9in. x 2.75in.)
+Maximum 297mm x 432 mm (11.7 in. 17 in.)
+ Weight
+Thin mode 20 – 50 g/m2 (5-13 lbs)
+Normal Mode: 50 –157 g/m (13 – 42 lbs)
+Thick Mode: 157 -209 g/m (42-56 lbs)
+Auto Mode: 20 -157 g/m (5-42 lbs)
+ Interface
+USB 2.0
+ Power
+Requirement
+AC 100 – 240 V (50 Hz/60 Hz)
+Page 11 of 13
+OMR E-MARKING SOFTWARE
+OMR software should have the features as under:
+Software must be able to integrate with item banking software.
+2.
+Lifetime license with unlimited number of pages processing.
+3.
+Should be able read barcode.
+4.
+Physical hardware key (dongle) which should allow to install software on several
+machines.
+5.
+Software should support imaging scanners, avoid to purchase expensive traditional
+OMR scanner.
+6.
+Software should support proper filling (full filling), partial filling, tick & cross.
+7.
+Software must have auto alighment feature of bubble sheet for 100% accuracy &
+0% unreadable sheets.
+Software should align miss aligned printed or scanned OMR sheets.
+9.
+Can generate ―Teacher Annotations‖ of every sheet.
+10.
+Software should be capable to export cropped images of desired areas in excel
+sheet.
+11.
+Software should not need special designing software to design OMR sheet. (Any
+Graphics Designing software can be used for design an OMR sheet).
+12.
+Software should need special OMR printed sheets.
+13.
+Software should be able to process sheets in real time (processing during
+scanning). Or later processing (processing of pre-scanned images).
+14.
+Software should support multi choice single answer, multi choice multiple answer
+& binary answers?
+15.
+Software should able to allocate different scoring criteria for each question.
+16.
+Software should validate fixed length questions i-e roll no., CNIC or Cell No.
+17.
+Software should generate useful statistical & graphical reports.
+18.
+Software should support export of data to many different formats.
+QUESTION ITEM BANK SOFTWARE
+Software should have ability to maintain courses.
+Software should have curriculum to define the stages of questions.
+Software should have unlimited nodes/trees.
+Software should be able to insert images.
+Software should be able to insert Equations.
+Software should have import pattern from excel where user import bulk questions
+in no time.
+A supporting application with same UI should be along with the software for
+secure data entry & having unlimited number licenses & strictly bound that data entry
+made in this application could not be used elsewhere except the item banking
+software.
+i) Question workbench, which is a standalone utility for the data entry of the
+Question item in to the Question item Bank by the authors and / or data-entry-
+operators and will be used Question item bank only.
+ii) Workbench should be an offline utility and will not rely on the web access for
+performing its functions.
+iii) Question Data Bank will generate an empty ―QiB Snapshot‖ the workbench users
+will be able to release their populated QiB snapshot file back to the main
+office where it can be imported into the main Question item Bank.
+Page 12 of 13
+iv) Any author/data entry operator with the workbench utility and certain login
+credentials then can attach the ‖QiB snapshot‖ to their workbench utility and
+proceed with adding question items.
+v) After completing their data entry into ―QiB snapshot‖ the workbench users will be
+able to release their populated QiB snapshot file back to the main office where
+it can be imported into the Question Item Bank.
+vi) All data transfer will be secure and protected by the user login mechanism and a
+strong encryption algorithm.
+vii) To ensure the security of the question items, the only Question item bank which
+has generated the snapshot will be able to fetch questions from the populated
+snapshot file. QiB snapshot file will only be accessible by the releasing
+Question item bank or by the designated workbench utilty.
+Software should have at least 4 languages support i-e Arabic, Sindhi, Urdu &
+Software should support multi types of question.
+i) Multiple choice (single)
+ii) Multiple choice (multiple answer)
+iii) Yes/no
+iv) Yes/no extended
+v) True/false
+vi) True/false extended
+vii) Subjective fixed length (short text)
+viii) Subjective open end (long text)
+ix) Fill in the blanks
+x) Comprehension
+xi) Child question ( multiple sub question)
+xii) Choice of question in between. (long & short)
+Software should be integrated with OMR software to gather data, to analyze
+question items & automatically update the difficulty level of each used question
+according to stats.
+Question paper should be generated manually, randomly & on the basis of
+difficulty level.
+There should be a blue print of whole question paper to visualize the learning
+objective, difficulty level of question, usage history & statistics of used questions.
+Software should be able to create unlimited number of versions of a question
+paper (same questions but randomly in order)
+Software should export generated question in (single column, multi column& bi-
+lingual).
+Software should export generated question paper in MS Word, Ms Excel, PDF,
+Rich Text Format, XML & HTML etc…
+Software should export exact answer key/correct answer of objective type
+questions.
+Software should keep history of each question usage.
+Software should have learning objectives.
+19.
+Software should keep the record/history of the generated questionnaire.
+20.
+Software should show history stats & present stats of the question item.
+Page 13 of 13
+21.
+Software should show history of a question item that how many times question is
+used in previous exams.
+22.
+Question data software should show analytical, statistical report of the used
+question paper.
+i) Question item mean score
+ii) Facility
+iii) Difficulty
+iv) P-value
+v) 25%item discrimination
+vi) Point biserial correlation
+vii) Correlation coefficient
+viii) Chronbach’s alpha
+ix) Mode value
+x) Range
+xi) Standard deviation
+xii) Variance
+xiii) Discrimination index
+xiv) Median
+23 Software should have backup database.
+24 Software should have user privileges to restrict the user in a module
+*****************************xxxxxxxxxxxxxx*************************

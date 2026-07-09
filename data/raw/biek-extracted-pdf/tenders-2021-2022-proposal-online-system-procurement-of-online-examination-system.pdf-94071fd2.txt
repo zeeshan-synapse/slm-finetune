@@ -1,0 +1,1360 @@
+Procurement 
+                / Development of Software and Installation of Online Management 
+                System, For Affiliation / Recognition,  
+                Enrollment, Registration, Permission and Examinations Accounts 
+                with Verifications.
+URL: https://www.biek.edu.pk/TENDERS/2021-2022/Proposal-Online-System/Procurement-of-Online-Examination-System.pdf
+Source: https://www.biek.edu.pk/tenders.asp
+
+Procurement / Development Software and Installation of Online Management System, For Enrollment, Registration,
+Examination, Accounts with Verifications
+1
+TENDER DOCUMENT
+SINGLE STAGE – TWO ENVELOPES
+VOLUME-I
+TECHNICAL PROPOSAL
+FOR THE YEAR 2021-2022
+Tender Reference No. BIE/AG/L&N/266/2022
+Dated: 12.01.2022
+Procurement / Development of
+Software and Installation of Online
+Management System, For Affiliation /
+Recognition, Enrollment, Registration,
+Permission and Examinations Accounts
+with Verifications.
+Tender issued to M/s. _______________________________
+Board of Intermediate Education, Karachi
+2
+The deadline for submission is ______________________________
+Tender will be opened on same day at ________________________
+SECTION – I
+INSTRUCTIONS TO BIDDERS & GENERAL CONDITIONS OF CONTRACT
+The Instructions to Bidders (ITB) and General Conditions of Contract (GCC)
+applied in this Contract shall be the same as per Standard Bidding Documents
+for Goods, issued by SPPRA. For further references the same may be
+downloaded from SPPRA’s website www.pprasindh.gov.pk or it may be
+provided from this Office if it may be demanded by the bidder. Whenever
+there is a conflict, the provisions hereafter shall prevail over those in the
+Instructions to Bidders & General Conditions of Contract. The corresponding
+clause number of the ITB & GCC is indicated in parentheses.
+BID DATA SHEET
+INTRODUCTION
+Name of
+Procuring
+Agency:
+Board of Intermediate Education,
+Bakhtiyari Youth Center,
+North Nazimabad, Karachi
+Tel: 99260211-12 (Two Lines)
+Fax: 99260203 & 99260208
+Contract
+Procurement / Development Software and Installation of Online
+Management System, for affiliation, recognition, permission,
+Enrollment, Registration, Examination Accounts with Verifications.
+Bid Price
+and
+Currency
+Prices quoted by the Bidder shall be “fixed” and in” Pak
+Rupees”
+PREPARATION AND SUBMISSION OF BIDS
+Eligibility
+Criteria
+a) Bidder should have own Project Team and operate
+own software company office in Pakistan
+b) Provide minimum 02 Purchase Orders of any web
+based solution along with completion certificates for
+the works completed.
+c) Bidder should have in-house product support team.
+Bidder should be providing ongoing support &
+customization of proposed solution.
+3
+d) Bidder should have an experience to work with any
+Government organization.
+e) Copy of NTN Certificate duly company stamped is
+required.
+f) Copy of GST Registration Certificate duly company
+stamped is required.
+g) Total of Annual Turnover for last three years should be
+at least 30.00 Million. Firm should provide declaration
+bank account statement from July 2018 to June 2021
+showing stated turnover. No any other document will
+be considered at place of the required documents,
+bidder
+should
+not
+attach,
+Sales
+Tax
+Acknowledgements, Challans, and Returns/summaries
+of un-relevant period.
+h) Copy of Income Tax returns duly e-filed with FBR, for the
+tax years 2018, 2019 & 2020 duly company stamped is
+i) Affidavit confirming that the firm is not blacklisted by
+any Government, Semi Government or Autonomous
+Bodies, upon non judicial paper of Rs.100/- (in origin).
+j) Technical/Brochure of proposed solution.
+k) Previous successful projects of the bidding firm with
+duration of projects.
+l) The technical team capability of the software house with
+their experiences on different technology.
+m) Experienced to work with large web online portals and
+implementations.
+n) Describe & present the architect and workflow plan to
+implement the project.
+o) Describe
+present
+the
+requirement
+of
+Web
+Infrastructure with information Security.
+4
+p) Suggested front end and back end technology
+q) Any Enrollment, Registration and Examination System
+Experience and its implementation
+Amount of
+Bid Security
+Three (3) percent of Bid Value/Price
+Bid Validity
+Period
+90 days
+Number of
+Copies
+One Original
+Deadline for
+Submission
+of Bid
+As notified in Tender Notice dated 12.01.2022 (up to 2.30
+PM)
+Opening of
+Bids
+9th February, 2022 at 3.00 PM
+Bid
+Evaluation
+Lowest Evaluated Responsive Bid
+OTHER TERMS & CONDITIONS
+a) In case of any unforeseen situation or government
+holiday resulting in closure of office on the date of
+opening. Bid shall be submitted / opened on next
+working day at the given time.
+b) The specification offered by the bidder(s) may vary from
+the required items because the requirements are
+mentioned on the basis of transitory survey, in such
+case(s) the Procurement Committee shall decide and
+recommend the offer(s) that may be suitable for
+procuring agency.
+c) Demonstration of required Software and/or Hardware
+may be made within the premises of Board for which
+supplier shall be liable to bring the same for the said
+purpose if need.
+d) The offered software development services should be
+durable, reliable and prime quality with software
+support and provided the complete source code
+including training of staff and admin or user manuals.
+e) Substandard and low quality services shall not be
+accepted and during and after deployment of
+software, the company products will be rejected and
+Security Money shall be forfeited and the bidder may
+also be blacklisted.
+f) The bidder with the “Lowest Evaluated Cost” but not
+necessarily the “Lowest Submitted Price” shall be
+awarded the Procurement Contract preferably on
+quality cum rate basis.
+5
+g) Tender documents can also be obtained through
+courier service, against Pay Order/Bank Draft of
+Rs.1,500/- as bid document fee.
+h) BIEK may reject all or any bid subject to relevant
+provision of SPP Rules and may cancel the bidding
+process at any time prior to acceptance of bid or
+proposal as per Rule 25(1) of said rules.
+i) Incomplete,
+conditional
+bid/tender
+without
+required extent of bid security in the specified
+form/format shall be rejected.
+j) Bidders are required to provide their valid e-mail Ids,
+complete postal address and contact numbers (s) for
+effective and timely communication.
+k) Contract Agreement and Integrity Pact both are
+mandatory for successful bidder.
+6
+ELIGIBILITY CRITERIA
+The clear statement/Criteria for the Eligibility criteria are given in following table.
+Applicants who wish to apply for participating in this tendering process may
+prepare their profile exactly in-accordance of the criteria set herein. There will
+be three stages of Evaluation:
+Company Profile
+S.
+No. Evaluation Criteria
+Documentary
+Evidence Required
+Max.
+Marks
+Classification of
+Years of Establishment of
+bidders firm
+Max Marks
+10
+10 Years = 10 Marks
+7 Years = 7 Marks
+5Years = 5 Marks
+3 Years = 3 Marks
+The Software company should
+be a registered firm and having
+the sound software team with
+Projects
+Team Capability and
+their project
+Yes = 10 Marks
+No = 0 Marks
+FBR and GST / SRB Registered
+Certification
+Both Certificate
+required
+Evidence of 3 Successfully
+Letters Required
+Any Government Project Details
+The company show
+any project, which
+done at any
+Government
+organization
+Financial Capability
+No.
+Evaluation Criteria
+Average Annual Turnover of the
+firm for the last 3 years
+Audited Annual
+Financial Statement
+with single page
+consolidated report
+showing the last 3
+years turn over
+20
+30 Million = 20 Marks
+11 Million = 10 Marks
+Less than 15 Million
+= 5 Marks
+Total Marks: 70
+* Minimum marks required for Qualification = 80%
+* Technical Committee Evaluation weightage = 20%
+7
+The clear statement/Criteria for the Evaluation requirements are given in
+following table. Applicants who wish to apply for participating in this tendering
+process may prepare their profile exactly in-accordance of the criteria set
+herein.
+Software Company Technical Requirements
+Service Level Agreement (SLA)
+of Software Management with
+any Private, Public Sector’s
+Organizations and Autonomous
+bodies
+evidence Must attach
+PO/Agreement (In
+active form)
+100
+5 or above =100 Marks
+3 = 80 Marks
+2 = 50 Marks
+Less than 2 = 5 Marks
+Certified Developers,
+Certified SQA and DBA’s
+Certificates
+50
+5 or above= 50 Marks
+4 = 40 Marks
+3 = 30 Marks
+2 = 20 Marks
+1 = 10 Marks
+The number of installations &
+Experience and Developments
+of Web Online Portals or similar
+type of Software Projects
+List of deployed
+Projects in
+Pakistan with cliental.
+30
+Deployment and
+Installation of at least
+Projects 5 = 30 Marks
+3 = 15 Marks
+2 = 10 Marks
+Present the architect, workflow
+and web security of the project
+The bidder should
+present and describe
+the project flow,
+security and
+implementation
+methodology
+100% Compliance =50
+Less than 100% = 0
+Experience of working with other
+Boards / Government
+Organizations
+PO / Agreement (In
+Max
+Yes = 20 Marks
+Note: In point # 4, The Technical Committee calls the bidders for presentations and
+Evaluate accordingly, If needed.
+TOTAL MARKS
+200
+MARKS OBTAINED
+8
+PREPARATION OF PROPOSAL
+Technical Proposal:
+a) While preparing Technical Proposal Bidding firm(s) are expected to
+examine the documents comprising this invitation in detail, as material
+deficiencies in providing the information requested may result in rejection
+of the proposal.
+b) The Technical proposal should provide the information as mentioned in
+Section-II.
+c) To establish the conformity of the items required though this Tender
+Document, the bidder shall furnish as part of its Technical Proposal, a
+detailed description of the Bidder’s proposed items conforming in all
+material aspects with the Technical Requirements both overall as well as
+in regards to the performance of each proposed items.
+d) The bidder shall give the presentation for development of software
+system after submission of proposals as per their provided date from BIEK
+regarding the requirements and according to eligibility criteria the firm
+shall be short listed.
+e) Please note that the technical proposal shall not include any financial
+information.
+Financial Proposal:
+a) While preparing the financial proposal, bidders(s) are expected to take
+into account the requirement and conditions of the invitation
+documents. The Financial proposal should follow instructions as
+mentioned in Volume-II. It should provide lump sum costs of the
+requirements and support cost of one year separately associated with
+the assignment and all other out of pocket expenses.
+b) The Data sheet shows validity of bid up to 90 days. The BIEK will make its
+best effort to complete technical clarification (if needed) within this
+period. Proposal validity may be extended with mutual consent.
+c) Rates should be inclusive of all government taxes/levies such as Income
+Tax, GST, FED, Stamp Duty Excise or what so ever may be in practice, and
+will be borne by the bidders in all aspect.
+Bid Price / Payment:
+a) This Document showing itemized list along with specifications, quantity
+and detailed terms and conditions for bidding is available on provision of
+Rs. 1500/- (non refundable) Bank DD/PO/Bank Challan in favor of
+Secretary, BIE, Karachi on any working day during office hours. Bidders
+may submit bids on Bid documents issued by procuring agency or
+downloaded from Authority’s website along with tender fee (if any) by
+mail or by hand as per the schedule as prescribed in NIT.
+9
+b) All payments will be made in Pak Rupees.
+c) The prices charged by the successful bidder for the required items along
+with accessories and associated services shall not vary from the prices as
+quoted in the financial proposal.
+d) Payment will be made after deliveries of requirements at consignee end,
+Installation, completion and inspection certificate for Quality/Quantity
+issued by the concerned officers.
+Cost of Bidding:
+The bidder shall bear all costs associated with the preparation and submission
+of bid and BIEK will in no case be responsible or liable for those costs, regardless
+of the outcome of the bidding process.
+Language of Bidding:
+The bid must be prepared and submitted in English language. Supporting
+documents and printed literature furnished by the bidder with the bid may be
+in another language as long as they are accompanied by an English
+translation of the pertinent passages. For the purpose of interpretation of the
+Bid, English language shall prevail.
+Confidentiality:
+a) Information
+relating
+to
+proposals
+recommendations concerning award shall not be disclosed to the
+bidder(s) who submitted the proposals or to other persons not officially
+concerned with the process, until the award of Contract is notified to the
+successful firm(s).
+b) Information related to the examination evaluation, comparison and post
+qualification of Proposals, and recommendation of contract award, shall
+not be disclosed to Bidders or any other persons.
+c) Any attempt by a Bidder to influence BIEK in the examination, evaluation,
+comparison, and post – qualification of the Proposals or Contract award
+decisions will result in the rejection of its proposals.
+d) The bidder must provide an undertaking on judicial paper stating to
+maintain confidentiality and binding that the documents provided under
+this bid are correct and can be verified from concerned authorities.
+Use of Documents and Information by external & internal Audit:
+The Bidder shall permit BIEK to inspect their accounts and records relating to the
+performance of the supplier and to have them audited by auditors appointed
+by the BIEK, if so required by the BIEK can directly contact the references given
+in the technical requirement as a part of TENDER DOCUMENT to verify the
+bidder’s technical reasons supporting compliance.
+Bid Validity:
+a) Bid shall remain valid and open for acceptance for a period of 30 days
+from the specified date of tender opening.
+b) In exceptional circumstances prior to expiry of the original bid validity
+period, the bidder may be requested in writing for an extension of the
+period of validity. A bidder agreeing to such request will not be permitted
+to modify his bid. A bidder not agreeing to such request may be
+withdrawn at the discretion of BIEK.
+Amendment of Bidding Documents:
+a) At any time prior to the deadline for submission of Bids, BIEK may for any
+reason, whether at its own initiative or in response to a clarification
+requested by a prospective Bidder can modify the Bidding Documents
+by making essential amendment.
+b) The amendment shall be the part of the Bidding Documents, and will be
+notified in writing through fax or letter by courier or shall be made
+available on the BIEK’s website https://www.biek.edu.pk/or SPPRA
+website to all prospective bidders who have received the Bidding
+Documents.
+Clarification(s) / Queries of Tender:
+a) The bidders are expected to carefully examine all instructions, forms and
+specifications in the Bidding Documents. Any Bidder in doubt as to the
+exact meaning or interpretation of any part of the Bidding Documents
+should immediately seek clarification in writing from the Secretary BIEK.
+b) Requests for all clarifications in regard to the given specifications or other
+information contained in Tender Documents should come either through
+E-mail/Fax or Courier to the Secretary BIEK. Telephone enquiries may not
+be entertained.
+Contradictions, Obscurities and Omissions:
+The Bidder should likewise notify to the above of any contradictions, obscurities
+and omissions in the Bidding Documents if clarification of these is necessary for
+the clear understanding of the documents and for preparation of the Bid. Such
+enquires must reach to the Secretary, BIE, KARACHI not later than DECEMBER-
+2021.
+Inspection:
+a) The inspection will be carried on the Services by representatives of the
+BIEK (Inspection Committee) or concerned officers upon software and its
+features according to the requirements. It is Bidders responsibility to
+ensure quantity, correctness and adherence to the Specifications etc.
+any deviation will be rejected, and the supplying firm will be solely
+responsible for it.
+11
+b) The inspection report, which, inter-alia, should indicate the condition,
+Quality as approved in inspection, features of softwareprovided by the
+firm, shall be signed by the inspection committee or concerned officer.
+c) Taking Over: Upon delivery of software development services at BIEK and
+after inspection, the concerned Officers of BIEK will issue a taking-over
+certificate in respect of those softwaredeployment received in
+acceptable condition.
+Installation & Demonstration:
+Installation
+a) After inspection and taking over of the concerned officer, as stated
+above, the Contractor shall develop, install and deploy the required
+software with features are to be install and run appropriately with all
+required services. For this purpose, the Contractor shall co-ordinate with
+the Secretary BIEK, for making arrangements for proper installation of
+delivered goods/ Machinery equipment or services.
+Completion Certificate:
+After completion of the installation and demonstration, as stated above, a
+certificate is to be obtained by the Contractor from the Secretary BIEK stating
+that the concerned officer have been satisfactorily installed and demonstrated
+by the Contractor.
+Breach of Contract:
+In case of breach of warranty / guarantee / Support or Contract, the damages
+suffered by the BIEK shall be recovered from the Contractor out of any payment
+due to the Contractor and / or in accordance with the terms and conditions of
+the terms and conditions of the Contract Security / Performance Bond, without
+notice to the Contractor.
+Contractor’s Default Liability:
+a) The BIEK may upon written notice of default to the Contractor terminate
+the Contract in the circumstances detailed hereunder:
+i)
+If in the judgment of the BIEK, the Contractor fails to make delivery
+of the stores within the time specified in the Contract Agreement or
+within the period for which extension has been granted by the BIEK;
+ii)
+If, in the judgment of the BIEK, the Contractor fails to comply with
+any of the other provisions of the Contract.
+b) In the event the BIEK terminates the Contract, in whole or in part, as
+provided in above, the BIEK reserves the right to purchase, on such terms
+and the conditions as it may deem appropriate, Stores similar to the one
+terminated, and the Contractor will be liable to the BIEK for any
+additional costs for such similar Stores, and / or for liquidated damages
+12
+for delay, as defined in Clause 1.18 (c) of the Conditions of Contract until
+such reasonable time as may be required for the final supply of the
+Stores.
+c) If the Contract is terminated, as provided in above, the BIEK, in addition
+to any other rights provided in this Clause, may require the Contractor to
+transfer title and deliver to the BIEK under any of the following cases in
+the manner and as directed by the BIEK.
+d) Any completed work or services; and such partially completed,
+drawings,
+information
+right
+(hereinafter
+called
+manufacturing material or services) as the Contractor has specifically
+produced or acquired for the performance of such parts of the Contract
+as has been terminated.
+e) The BIEK will pay to the Contractor the Contract Price for the completed
+delivered to and accepted/ certified/ inspected by the Inspection
+Committee or concerned officers of BIEK and also for the delivered
+services.
+f) In the event the BIEK does not terminate the Contract, as provided
+above, the Contractor shall continue with the performance of his / her
+Contract, in which case the Contractor shall to liable to the BIEK for
+liquidated damages for delay as set out in Clause 1.18 (c) until the Stores
+are accepted.
+Partial Shipments or Services:
+a) The BIEK accepts partial shipments / Services and also allows partial
+payments subject to pre-information and agreement, by observing other
+terms and condition laid down in the contract agreement.
+b) In the event any portion of the services supplied by the Contractor is
+found defective or not up to the requirement, or otherwise not in
+conformity with the requirement, the BIEK shall have the right to reject or
+require, in writing, rectification of the Stores/concerned section. In the
+latter case, the Contractor shall with utmost diligence, and at his own
+expense, make good/services the defects so specified or replace the
+defective supplies or services. If the Contractor fails to rectify or replace
+the rejected supplies, the BIEK may adopt any of the following options:
+I.
+replace or rectify, at its option, such defective supplies or services
+and charge to the Contractor the excess cost occasioned to the
+BIEK plus (15%) fifteen percent; or
+II.
+Acquire the said Stores/Services at a reduced price considered
+equitable under the circumstances; or terminate the Contract.
+13
+Extension of Time:
+If the completion of the Contract is delayed due to reason beyond the control
+of the Contractor, the Contractor shall without delay request the BIEK, in writing,
+of his claim for an extension of time. The BIEK on receipt of such request may
+agree to extend the completion date as may be reasonable in the
+circumstances of the case but without prejudice to other terms and conditions
+of the Contract.
+Delay in Delivery – Liquidated Damages:
+a) Delivery plan: The Responding Organization shall provide a detailed
+delivery, installation and configuration plan. Bidder should provide the life
+line, which should describe exactly what and how material will be
+delivered, installed and configured. Delivery plan should not be in
+generic terms but should be specific to this assignment, Activities,
+schedule should be in tabular form mentioning names of tasks, and sub
+tasks, start date, finish date resources and milestones will also be
+appreciated.
+b) The progress of the Contract at any time should not be lagging behind
+the program agreed between the BIEK and the Contractor, the BIEK will
+notify the Contractor in writing and the Contractor shall there upon take
+such steps as he / she may deem fit to expedite the progress of the
+Contract. Non-issuance of this notice by the BIEK shall not in any way
+absolve the Contractor of the liquidated damages as stated in below
+section (c).
+c) If the Contractor fails to complete the Contract, in full or part, within the
+time laid down in the Contract Agreement or any extension thereof,
+there shall be deducted from the Contract Price, as liquidated damages,
+equal to (1%) of the Contract price of each unit of the delayed Stores for
+each calendar week of delay subject to the maximum of five percent
+(5%) of the Contract Price of the unit or units so delayed, and such
+deduction shall be in full satisfaction of the Contractor’s liability for the
+said failure.
+Post Deployment Support & Services or Warranty:
+Bidder is required to provide support services till 360 days from the date of
+supply or delivery of software, in this regard an under-tacking on company
+letter head is required to be submitted along with the technical proposal.
+Training:
+The bidder should provide a comprehensive training plan which should be
+flexible to cater to the current requirements. It should encompass all ranges of
+users i.e. functional, operational and managerial etc. Training Documents such
+as schedules, training material must be provided with the technical proposal.
+14
+Signing of Contract:
+Within (15) working days after notification to the successful bidder regarding
+acceptance of his bid and submission of 3% Performance Security in shape of
+DD/Pay order or Bank Guarantee, the contract incorporating all agreements
+between the parties will be signed. The Contract agreement will be affixed with
+revenue stamps @ 0.3% of contract value as per stamp act. For sample of
+agreement refer to page No. 15.
+Post Letter of Intent/ Contract Acceptance:
+Before signing of formal contract, a letter of intent will be issued by the BIEK to
+the lowest best evaluated bidder. In response to letter of intent (LOI) the bidder
+will have to submit its letter of consent for acceptance of the LOI within the
+prescribed time period as per SPPRA, in case letter of acceptance is not
+received within stipulated time framework it will be assumed that first lowest
+evaluated or technical qualify bidder is not interested in signing the formal
+contract with this Board. In that situation the LOI will be issued to the second
+lowest evaluated or technical qualify bidder and the earnest money of first
+evaluated bidder will be forfeited. This condition will also apply on the second
+and third evaluated bidder (as the case may).
+15
+SECTION – II
+REQUIREMENTS
+S. No.
+Name of the Article & Description
+Qty
+Main Overview:
+This system will be used Online for the Board office through
+official website and Mobile APP of the Board. It will be a web
+application with mobile friendly user interface and have
+following Modules.
+See technical system requirements for further details.
+1) Administration Portal (For Board Office use only)
+2) Institutes Portal (For Institutes use only)
+3) Student’s
+Service
+Portal
+(For
+Students
+for
+online
+submission of enrolment, examination, registration and
+other forms as service desk and candidate can apply
+duplicates of testimonial or Certificates)
+4) Challan Integration with Bank & Online Checkout
+through payment gateways requires.
+Modules Overview:
+This system should consist of several industry standard modules.
+Manual System is attached as Annexure “A”, we required the
+attached manual system into the automated way.
+There are three stakeholders for this system:
+1) Student
+2) College or Institute
+3) Board Office
+We have required data from the student that can be
+endorsed by concerned Institutions for regular students and
+individual date from private students then route to Board
+office concerned sections.
+Every transaction should have the unique transaction ID with
+Queue Management System.
+01
+16
+In this respect, we have required following modules as portal,
+which
+shall
+be
+connected
+at
+our
+official
+website
+https://www.biek.edu.pk and then it will be integrated through
+WEB API or WEB SERVICES to our Core System, which is already
+running. The API or Web Services may also provide the
+privilege to download and upload the data through
+application.
+Modules Required as web portal:
+1) Student Portal
+2) College or Institute Portal
+3) Administration Portal
+In addition, the following support modules are also required.
+4) Complain Management System for students and earlier
+graduates.
+5) Real-time dashboard for Chairman and Controller of
+Examinations and Colleges/Institute Principals/Heads.
+6) Necessary mobile app with notifications.
+a. Enrolment forms Applications
+b. Examination Forms Applications
+c. Verification form Applications
+d. Duplicate Forms Applications
+e. Certificate Form Applications
+f. Notifications & Circulars, Press Release
+Tenders etc.
+The bidder is also requested to present such a design that
+makes it easy for future integrations with data coming from
+matriculation boards and data export and verifications to and
+from universities.
+STUDENT WEB PORTAL
+Student can register on portal through his valid EMAIL ADDRESS
+or CELL NUMBER that can be authenticated through OTP and
+after signing in he/she may use following features of the Board.
+Enrollment and Registration Form Submission Process:
+Enrollment Process automation
+a) On this portal the student can submit enrollment forms
+according to the fields that are attached as enrolment
+and registration manual forms.
+17
+b) The student can upload or attached their picture and
+required documents after submitting the data.
+c) Further the regular student shall also upload the college/
+Higher Secondary School admission slips as well.
+d) After that student have a privilege to submit their fee
+online via any payment gateway or he/she can also
+submit fee in any designated Bank or then submitted
+voucher can also upload.
+e) Finally when the student submitted all the data and
+information, so it shall be combined page wise and if
+he/she submitted the fee then it should be become
+PAID and stored in data base on first page and below
+college admission receipt image can be seen.
+f) Finally student can download the complete data in PDF
+form and able to submit at their concern college.
+g) The student can be traceable through any Queue
+Management system with some unique Case-ID.
+h) Student can get the Enrollment Card (After Board
+Process).
+i) Student will get the notifications on his portal and SMS /
+watsup, if there any discrepancy or objection is found
+then he/she may intimate on real time basis. (The
+Board’s Administrative Module can manage).
+Registration Process automation:
+a) On this portal the student can submit registration forms
+c) After that student have a privilege to submit their fee
+submit fee in bank UBL or then submitted voucher can
+also upload.
+d) Finally when the student submitted all the data and
+PAID on first page and data will directly stored in the
+18
+data base.
+e) Finally student can download the complete data in PDF
+form for his record, where on final submission the student
+can get the information via email and SMS.
+f) The student can be traceable through any Queue
+Management system with some unique Case-ID i-e
+CNIC Number / Matric Roll Number or any.
+g) Student can get the registration Card Online (After
+Board Process).
+h) Student will get the notifications on his portal and SMS /
+WhatsApp, if there any discrepancy or objection is
+found then he/she may intimate on real time basis. (The
+Examination Form Process automation:
+a) On this portal the student can submit Examination forms
+(faculty Wise & college wise / Higher Secondary School)
+according to the fields that are attached in Examination
+manual form.
+b) The student can upload or attach their picture and
+d) Finally when the regular student submitted all the data
+and information through college portal, so it shall be
+combined page wise and if he/she submitted the fee
+then it should be become PAID on first page and the
+data will be stored in the data basis.
+can get the information via email and SMS/ WhatsApp.
+f) Student can take the print of examination form and
+submit to concerned college for further actions.
+19
+i) The student can be traceable through any Queue
+g) Student can get the Admit Card Online with QR Code
+(After Board Process)
+h) Student will get the notifications on his portal and SMS, if
+there any discrepancy or objection is found then he/she
+may
+intimate
+on
+real
+time
+basis.
+(The
+Board’s
+Administrative Module can manage).
+Migration requirement
+a) The student can apply migration (if required), where
+after he/she can submit the fee online or batch mode
+and upload the voucher for information and also get
+the online receipt as well. The courier fee may also
+charge simultaneously and courier the document on the
+provided address.
+Pakka or Original Certificate Requirement
+a) The student can apply Pakka or Original Certificate
+where after he/she can submit the fee online or batch
+mode and upload the voucher for information and also
+get the online receipt as well. The courier fee may also
+b) The required documents can also be uploaded
+according to the requirements.
+Provisional Certificate Requirement
+a) The student can apply provisional certificate where after
+he/she can submit the fee online or batch mode and
+upload the voucher for information and also get the
+online receipt as well. The courier fee may also charge
+simultaneously and courier the document on the
+Duplicate Testimonials requirements.
+a) Duplicate Mark-sheet
+b) Duplicate Admit Card
+c) Duplicate Enrollment Card
+d) Duplicate Registration Card
+e) Duplicate Manual Admit Card
+f) Duplicate Certificate
+g) The student can apply above duplicates, where after
+Verification of Testimonials requirements
+a) Mark-sheet
+b) Certificate
+c) The student can upload the desired scanned document
+on this portal and apply physical verification, where
+d) The concerned section of the Board will take print and
+verify and then send via courier to the concerned
+candidate / email.
+COLLEGE OR INSTITUTE PORTAL
+a) College can register, if they affiliated with the Board
+office and Board can authorize it. During authorization
+the OTP can be enabled through email or Cell Number.
+b) College
+upload
+student’s
+record
+i-e
+examination form, enrolment form etc.
+c) College can check Online Enrollment forms (faculty
+wise) and Fees year-wise, and also able to generate the
+list of Enrolled candidates.
+d) College can check Online Examination forms (faculty
+list of candidates.
+e) The college or institute will endorse online forms which
+can carry forward to Board office.
+f) If any regular candidate’s objection shall be raised then
+it will be intimated to college through notifications as
+well as on candidate’s portal, email, SMS / WhatsApp.
+21
+g) College can also get the list of candidates’ faculty wise
+with fee (if there).
+(Faculty Means: Science Pre-Engineering, Science Pre-
+Medical,
+Science-General,
+Commerce
+Regular,
+Commerce Private, and Humanities Regular, Humanities
+Private, Home economics, Medical Technology and
+D.P.E).
+h) College can Print list of Enrollment of candidates
+i) College can print enrolment cards, once approved from
+the board
+j) College can Print list of Examination forms of candidates
+k) College Print Online Examination Admit Card/slip once
+approved by the Board
+l) Get all notification related to candidates or Board office
+m) College can also receive Circulars, Press Releases and
+Notification from the board at their portal or registered
+email / whatsApp.
+n) College can search Student through Enrolment number,
+name of student Roll number / CNIC number. (If
+Generated)
+BOARD’S ADMINISTRATIVE PORTAL
+User And Roll Management System
+a) The system administrator as super user can define roll and
+users for internal use of Board Office.
+b) User and Roll Management system required
+Accounts Section of the Board
+a) Account section can check complete payments records with
+candidate
+date
+wise,
+college
+testimonial head wise.
+b) Accounts section can also search the individual candidate
+records and its payment through searching system.
+c) After verification and validation of record the account
+section can send the information to concerned section for
+further necessary action through online approval system with
+unique Approved ID. (The Concerned Section would be
+Enrollment, Registration, Mark-sheet, Permission and IT
+Section, Recognition Section, Certificate Section and I.T
+Section).
+22
+Enrollment Section
+a) When account section gives the online approval to the
+enrollment section can get the following details.
+b) List of Students College wise with their institution code (The
+code will be provided by IT Section / Recognition Section).
+c) After getting the list of student the Enrollment section can
+endorsed and approved online with Unique Approved ID and
+forward to IT Section.
+Registration Section
+a) When account section give the online approval to
+aforementioned section the Registration section can get the
+following details.
+b) List of all private students date wise, month wise and year
+wise.
+c) After getting the list of student the registration section can
+endorsed and approved with Unique Approved ID online and
+Complaint System
+a) The system can get the list of complaint of the users/students
+through website portal and user will notify and response of
+the board through his login area.
+b) Total numbers of complaints, resolved status is required on
+dashboard.
+IT Section
+a) After
+approval
+accounts,
+recognition,
+enrolment,
+registration or examination section, the IT Section get the
+student’s data faculty wise and year wise.
+b) The IT Section will download the records through WEB API or
+WEB SERVICES from Online Webs Server.
+c) The Data can be integrated with the core system, and after
+that objections shall be raised. These records are required
+separately with types of objections.
+d) IT Section will upload the objections on web online system
+where it can be routed to permission section (if required) and
+also intimated to concerned stakeholders like college or
+candidate/student.
+d) Required consolidated List of Objections of Enrollment,
+permission,
+registration
+or
+examination
+according to the data to section wise, faculty wise.
+e) The software module may generate the list of institution,
+Enrollment, Registration and Examination forms, faculty wise
+of current year.
+23
+f) The software module will have to generate the Statistical
+reports according to the requirements (it can discussed
+during development of software)
+g) Complete DASH BOARD REQUIRES where all the real time
+information regarding institutions, enrolment, registration,
+migration, duplicates, provisional certificate, and Pakka
+certificate request with fees on daily, weekly, monthly
+and yearly basis in tabulated and graphical depiction
+level.
+Permission Section
+a) When objection raised by IT Section and uploaded to
+online server, then permission section can get the
+notifications.
+b) According to objections; permission section can mark
+permission
+Board
+where
+automatically the fee shall be raised through Master
+Table of fee and intimate to candidate.
+c) After submission of point no (b) the concerned
+candidate get notified and submit documents and pay
+fee online or batch mode through its STUDENT PORTAL.
+Challan Integration with Bank & Online Checkout through
+payment gateways system
+a) The web portal and App shall be integrated with online
+payment gateway system.
+b) The vendor shall propose/recommend any payment
+gateway company.
+c) The Board will make a contract directly on the provided
+terms and conditions of Payment Gateway Company.
+Note: Rather than above requirements, If the vendor
+suggests something new or latest in terms of technology,
+the BIEK will consider positively.
+The vendor shall provide the complete source code of web
+application/ online / web API and also Mobile App code to
+BIEK.
+24
+SYSTEM SOLUTION ARCHITECTURE:
+This system will be a hybrid solution, which will run in parallel
+modes at the same time as follows:
+a) Web Server Online / Public
+b) Offline
+The software vendor will need to fully understand and apply
+only if they already have such hybrid solutions infrastructure
+system and who has full experience dealing with challenges of
+multi-architectural platform.
+Software Architecture:
+This system should be architected using multi-tiered software
+architecture & service-oriented architecture and should
+consist of Web API based private services or representational
+state transfer supported secure data gateways.
+The solution vendor should need to be fully experienced
+working with secure data gateways and apply only if they
+have already worked on such gateways in the past. They
+also
+have
+hands-on
+expertise
+windows
+communication foundation based private services.
+Existing Core Module Technology :
+Framework: Microsoft .Net Framework
+Scripting: Microsoft ASP.Net MVC
+Language: C# .Net
+Data Store: Oracle 11g
+HTML 5, CSS 3, Bootstrap, jQuery, Data Tables
+Operate: Standard Web Browser like Mozilla Firefox,
+Chrome
+Technology Requirements:
+Data Store: Microsoft SQL Server 2016 / Oracle
+React JS, HTML 5, CSS 3, Bootstrap, jQuery, Data Tables
+Salient Features:
+ Web based application, that can be integrated with the
+existing official website of the Board and also able to
+integrate with core system that have been running
+through WEB API or WEB SERVICES
+25
+ Web/Browser based reports
+ Upgradable customizable and integrate-able with
+expended modules
+ Simple back up procedure
+Application Security:
+The software should be secure free from external or internal
+men mishandling, providing multilayer security such as:
+a) Encrypted User ID Password for login
+b) Only Authorized terminals should be able to login
+c) Session expiration policies
+d) User log report
+e) Un-breakable Database security
+f) Authorization Process
+g) Secure Socket layer SSL
+h) Transaction Layer Security TLS
+i) Certificate Server (if Required)
+So that a single user should not be able to temper the
+database. Software should be restricted only authorized users
+who should have access to work, view or print selected forms,
+reports etc.
+Customization:
+Software must be prone to any changes and it can handle
+new requirements and up-gradations.
+Audit Trail:
+Through the application, we can search history option of any
+modified record, and should be able to see the changes for
+Audit purpose.
+Reporting:
+ Application includes different interface for different kinds
+of reports, which contains selection criteria to select
+between different fields.
+ Report should be printed as sorted out according to user
+inputs.
+ Report should be exported in PDF, word and excel
+format.
+ This section gives overall summary in a report manner.
+This system should require dedicated reports portal for
+multiple reports. Reports should be printable and
+exportable in PDF, Word, Excel and other formats.
+26
+Training User Manuals:
+ Training of application is required so as end user can use
+it easily
+ User manuals should also be provided
+ Product Functions
+ Enrollment of students
+ Student Data submission
+Deployment & Implementation:
+a) Required complete web based application which can
+run on hosting servers.
+b) The BIEK Management should provide access to the
+qualified vendor to install, deploy the software.
+c) The first priority is to be developed the Enrollment,
+Registration Part with Student and College modules with
+60 days.
+d) Second Priority the development and deployment of
+other modules and shall be deployed within 120 days
+from the date of signing of the contract.
+e) Third priority is the rest of modules that needs to be
+developed and deployed in a year from the date of
+signing of the contract.
+Source Code:
+a) The vendor shall provide the complete source code of
+the develop web application software.
+b) The vendor shall provide the complete source code of
+the develop Mobile App.
+Service & Support:
+a) The qualified vendor would be responsible to provide 12
+months supports & services after deployment of Online
+System.
+Deployment:
+a) The system can be deployed on web hosting to any dedicated hosting
+and Integrate able through API or web services. (BIEK will provide)
+b) The BIEK Management shall provide access to the qualified vendor to
+install, deploy the software.
+27
+Note: Bidders should submit their technical proposals as per qualification
+criteria and the above-mentioned technical requirements, by providing,
+documentary evidence of already deployed project. Similarly, the
+financial proposal is prepared by the venders separately for each of the
+section.
+CERTIFICATE
+IF PROVIDED INFORMATION FOUND FALSE, THE SERVICES OF THE HIRED SECURITY
+AGENCY / FIRM WILL BE TERMINATED WITHOUT ASSIGNING ANY REASON AND
+MAKING ANY REFUND / PAYMENT. FURTHER THE AGENCY / FIRM WILL BE
+BLACKLISTED.
+It is hereby certified that the terms and conditions have been read, agreed upon and
+signed.
+M/s. _______________________________________________________________________
+Contact Person: ______________________________________________________________
+Address: ____________________________________________________________________
+Tel#: _________________________________ Fax#: ________________________________
+Mobile#: _____________________________ Email: _________________________________
+Dated: _____________________.
+Stamp & Signature
+Tender Document – Security Services (Financial Proposal)
+Page 1
+STANDARD BIDDING DOCUMENTS
+NATIONAL COMPETITIVE BIDDING
+SINGLE STAGE – TWO ENVELOPES PROCEDURE
+FINANCIAL PROPOSAL
+IN RESPECT OF THE
+BIEK/AG/L&N/266/2022
+VOLUME–II
+Board of Intermediate Education
+Bakhtiari Youth Center, North Nazimabad,
+Karachi - 74700
+Phones:
+99260205
+99260214
+99260207
+99260219
+Page 2
+1. BIDDING DATA
+(a).
+Name of Procuring Agency: Board of Intermediate Education, Karachi
+(b).
+Brief description of works: Procurement / Development of Software and Installation
+of Online Management System, For Affiliation / Recognition, Enrollment, Registration,
+Permission and Examinations Accounts with Verifications.
+(c).
+Procuring Agency’s address: Bakhtiari Youth Centre, North Nazimabad, Karachi.
+(d).
+Amount of Bid Security: Bid Security of 3% of total amount/cost will be
+submitted along with Tender Documents in shape of Pay Order / Demand Draft
+only in the name of Secretary, Board of Intermediate Education, Karachi.
+(e).
+Period of Bid Validity (days): Ninety (90) days.
+(f).
+Performance Security Deposit: Successful bidder should provide 10%
+Performance Security of total value of Work Order in the form of Pay Order or
+Bank Guarantee before submission of invoice. The Performance Security shall
+extend at least three months beyond the Date of Delivery / Completion of Work /
+Contract.
+(g).
+Deadline for Submission of Bids along with Time: The last date for submission
+the Tender Document in sealed envelope is February 09, 2022 by 02:30 pm in the
+office of the Procurement Wing of Board of Intermediate Education, Karachi.
+(h).
+Venue Time and Date of Bid Opening: In presence of representatives who may
+care to attend, the Tender will be opened on February 09, 2022 at 03:00 pm in the
+Committee Room situated on Ground Floor of Chairman’s Secretariat Building of
+Board of Intermediate Education, Karachi.
+Page 3
+Core System
+No. Name of the Article & Description
+Rate
+Offered
+Including
+Taxes
+Procurement / Development of Software and Installation
+Management
+System,
+Affiliation
+/
+Recognition, Enrolment, Registration, Permission and
+Examination Accounts with Verification.
+02
+Online Examination System with 1-Year Free Support
+3rd Party License Requirements
+Microsoft Window Server 2019 Standard Edition License 56 Core
+Microsoft SQL 2016 Standard Edition License 56 Core
+03
+Antimalware and Antivirus Protection Software
+TOTAL AMOUNT IN WORDS (with all Taxes):____________________________________.
+SUMMARY OF BID
+Rupees In Words
+Rupees In Figures
+Total cost of the Bid:
+(as offered by the Bidder)
+3% (three percent) amount
+of the Bid Price
+Bid Security (Refundable)
+10% (Ten percent) amount
+of the Contract Price
+Performance Security
+(Refundable)
+Page 4
+AGREEMENT
+This agreement is made on the _______ day of ________ 2022 between Board of Intermediate
+Education, Karachi of the one part:
+WHEREAS the procuring agency invited bids for Procurement / Development of Software
+and Installation of Online Management System for Affiliation / Recognition, Enrolment,
+Registration, Permission and Examinations Accounts with verification viz, and has
+accepted a bid by the M/s._____________________ for Procurement in the sum of
+Rs.___________/= (Rupees_______________________________________).
+NOW THIS AGREEMENT WITNESSES AS FOLLOWS:
+In this agreement words and expressions shall have the same meanings as are
+respectively assigned to them in the conditions of contract referred to in the Advance
+Acceptance Issued vide Letter No.____________________________, dated_______ (copy attached).
+In consideration of the payments to be made by the Board of Intermediate Education,
+Karachi to the M/s._______________________________, as hereinafter mentioned in the Terms &
+Conditions which is already signed by the bidder, the bidder hereby covenants with the
+procuring agency to provide the Development of Software and Installation of Online
+Management System for Affiliation / Recognition, Enrolment, Registration, Permission
+and Examinations Accounts with verification and to remedy defects therein in conformity
+in all respect with the provisions of the Contract.
+As bidder, I am completely satisfied & agreed with the award items and do not have any
+grievances.
+Mr. ________________________________________, S/o. _____________________________________, Bearing
+CNIC
+________________________________Resident
+House
+________________________________________________________Sole
+proprietor
+M/s.
+________________________________________________________Having
+their
+registered
+office
+_________________________________________________Which expression wherever the contest so
+admits shall mean and include their executors, successors-in-interest, and assign of the
+OTHER PART.
+WHEREAS the BIEK is desirous of availing Development of Software and Installation of
+Online Management System for Affiliation / Recognition, Enrolment, Registration,
+Permission and Examinations Accounts with verification from a competent firm dealing
+in IT services for Development of Software and Installation of Online Management
+System for Affiliation / Recognition, Enrolment, Registration, Permission and
+Examinations Accounts with verification of BIEK, situated at Bakhtiyari Youth Center,
+North Nazimabad, Karachi AND WHEREAS the “Contractor” has offered for as competent
+firm to carry out and perform the above said.
+Page 5
+NOW IT IS HEREBY AGREED & DECLARED BY AND BETWEEN THE PARTIES AS FOLLOWS:
+ARTICLE –I
+DUTIES & SCOPE OF WORK
+1.1
+Requirement.
+S.No.
+Description
+Total Contract Amount
+1.2
+“THE SERVICE PROVIDER” agrees to provide services to “BIEK” whenever and wherever form
+is required as per the terms & conditions of this Agreement.
+1.3
+“THE SERVICE PROVIDER” will coordinate with I.T. Manager, of the “BIEK” who will assist
+“THE SERVICE PROVIDER” in Supervision of proposed work.
+1.4
+“THE SERVICE PROVIDER” hereby agrees to accept variation, if occurred, in scope of
+professional
+services
+works
+with
+mutual
+consent
+acceptable
+cost/price/charges/amount inclusive of all taxes and levies.
+1.5
+All logistic charges will be borne by “THE SUPPLIER”
+ARTICLE –II
+SCOPE OF PROFESSIONAL SERVICES:
+2.1
+“THE SERVICE PROVIDER” hereby agrees and acknowledges for the periodic supervision of
+the work and to check the execution of work in accordance with the Description &
+Specification.
+2.2
+“THE SERVICE PROVIDER” hereby agrees and acknowledges the acceptance of attending
+the meetings with the I.T. Manager “BIEK” as & when required.
+.
+2.3
+“THE SERVICE PROVIDER” hereby agrees to provide services as per work scope provided in
+the bidding documents.
+ARTICLE –III
+REMUNERATION
+3.1
+The cost offered by the Service Provider is Rs. /- (Rupees ------------------------------------------
+--- only) (inclusive of all taxes) in connection with Development of Software and Installation of
+Online Management System for Affiliation / Recognition, Enrolment, Registration, Permission
+and Examinations Accounts with verification vide Notification of Award of Contract #
+BIE/AG/L&N/266 /2022.
+3.2
+Liquidity damages as per SPPRA Rules.
+3.3 One Year Free support will be provided by the “Service Provider”.
+3.3
+Payment will be made as per provisions of SPPRA Rules.
+3.4 Performance Security 10% of total amount of work order should be submitted in shape of
+Pay Order before signing of Contract Agreement.
+Page 6
+3.5
+Stamp Duty @ 0.35% of the cost of transaction / work order will be deposited in
+Government treasury by the Service Provider. This paid Stamp Duty challan would be
+submitted along with the Bill / Invoice.
+3.6
+Tax(es) Challan(s) / Levy(ies), If any, on additional will be paid / borne by the Service Provider
+as per SRO Notification.
+ARTICLE –IV
+ARBITRATION
+4.1
+In case of any dispute, difference or and question which may at any time arise between the
+parties hereto or any person under them, arising out in respect of this letter of intent
+this
+subject matter thereof shall be referred to the Chairman BIEK for arbitration / settling of the
+dispute, failing which the decision of the court law in the jurisdiction of Karachi binding to the
+parties. The Arbitration proceedings will be governed by the Arbitration Act, 1940 and the
+Substantive and procedural law of Pakistan. The venue shall be Karachi.
+ARTICLE –V
+TERMINATION
+5.1
+“BIEK” may terminate this agreement if the job is not executed according to the
+requirement at any time after issuing a 15 day’s notice.
+ARTICLE –VI
+INDEMNITY
+6.1
+“THE SERVICE PROVIDER” in its individual capacity shall indemnify and keep “BIEK” and any
+person claiming through BIEK fully indemnified and harmless from and against all damages,
+cost and expenses caused to or incurred by “THE SERVICE PROVIDER”, as a result of any
+defect in the title of BIEK or any fault, neglect or omission by the “THE SERVICE PROVIDER”
+which disturbs or damage the reputation, quality or the standard of service provided by the
+“BIEK” and any person claiming through the BIEK.
+ARTICLE –VII
+NOTICE
+7.1
+Any notice given under this AGREEMENT shall be sufficient if it is in writing and if sent by
+courier or registered mail.
+Page 7
+ARTICLE –VIII
+INTEGRITY PACT
+8.1
+The intention not to obtain the procurement / work of any Contract, right, interest, privilege,
+or other obligation or benefit from the BIEK or any administrative or financial offices thereof
+or any other department under the control of the BIEK through any corrupt practice(s).
+8.2
+limiting
+generality
+forgoing
+M/s.___________________, represents and warrants that it has fully declared the charges,
+fees, commission, taxes, levies etc, paid or payable to anyone and not given or agreed to
+give and shall not give or agree to give anyone within the BIEK directly or indirectly through
+any means any commission, gratification, bribe, gifts, kickback whether described as
+consultation fee or otherwise, with the object of obtaining or including the procurement or
+service contract or order or other obligations whatsoever from the BIEK, except that which
+has been expressly declared pursuant hereto.
+8.3
+M/s. ______________ accepts full responsibility and strict liability for making any false
+declaration / statement, not making full disclosure, misrepresenting facts or taking any action
+likely to degrade the purpose of declaration, representation and warranty. It agrees that any
+contract / order obtained aforesaid shall without prejudice to any other right & remedies
+available to the BIEK under any law, contract, or other instrument, be stand void at the
+discretion of the BIEK.
+8.4
+Notwithstanding any right and remedies exercised by the BIEK in this regard,
+M/s. _________________ agrees to indemnify BIEK for any loss or damage incurred by it on
+account of its corrupt business practice & further pay compensation to BIEK in any amount
+equivalent to the loss of any commission, gratification, bribe, gifts, kickback given by the
+M/s._________________ as aforesaid for the purpose of obtaining or inducing procurement
+/ work / service or other obligation or benefit in whatsoever from the BIEK.
+ARTICLE –IX
+MISCELLANEOUS
+9.1 Any addition & alteration (s) made for item(s) as required by BIEK on the basis of the work in
+progress which entail extra time & labor and material on part of the supply, shall not be
+charged separately / extra on ‘Quantum Merit’ basis before & on final material handed over
+to the “BIEK”. After FINALAIZATION OF SAMPLE, if any alteration(s), arise charges will be paid
+on mutually agreed upon.
+9.2
+The terms & conditions of this AGREEMENT have been read over to the parties which they
+admit to be correct and abide by the same.
+9.3
+The contract will be effective from the date of issue of Purchase Order.
+9.4
+All terms and conditions of tender vide # BIE/AG/L&N/266 /2022 will be the integral part of
+this agreement and can’t be revoked.
+Page 8
+IN WITNESS WHEREOF both the parties hereto have set & subscribed their respective hands to this
+agreement at Karachi on the date as mentioned above.
+___________
+_______________________
+SECRETARY
+Proprietor M/s. __________
+BIE, Karachi
+CNIC __________________
+WITNESSES:
+1. Name & Signature
+2. Name & Signature
+CNIC NO. _____________
+CNIC NO. ____________
+Page 9
+C E R T I F I C A T E
+I/We have carefully read & understood the Terms & Conditions whatever has been stated
+herein the enclosed pages and abide to the same. I/We guarantee to supply/deliver/install the items
+exactly in accordance with the requirements and enclosed the Bid Security payable to Board of
+Intermediate Education, Karachi.
+AUTHORISED SIGNATURE WITH DATE: _____________________________
+NAME OF FIRM: _____________________________
+ADDRESS OF FIRM: _____________________________
+_____________________________
+FULL NAME OF CONCERNED PERSON: _____________________________
+CNIC NUMBER:
+POSITION HELD IN: _____________________________
+PHONE NUMBER(S): _____________________________
+MOBILE NUMBER(S): ____________________________
+FAX NUMBER(S): _____________________________
+NATIONAL TAX NUMBER: _____________________________
+GENERAL SALES TAX NUMBER: _____________________________
+STAMP OF THE FIRM: _____________________________
+PAY ORDER NUMBER: _____________________________
+BANK & BRANCH NAME: _____________________________
+DATED: _____________________________
+FOR RUPEES: _____________________________
+DRAWN: _____________________________
+as Bid Security is enclosed herewith.

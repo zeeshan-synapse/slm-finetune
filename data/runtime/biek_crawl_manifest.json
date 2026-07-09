@@ -1,0 +1,3868 @@
+{
+  "site": "biek",
+  "base_url": "https://www.biek.edu.pk/default.asp",
+  "close_reason": "finished",
+  "summary": {
+    "page_limit": 150,
+    "seed_url_count": 5,
+    "seed_urls": [
+      "https://www.biek.edu.pk/default.asp",
+      "https://www.biek.edu.pk/history.asp",
+      "https://www.biek.edu.pk/notifications.asp",
+      "https://www.biek.edu.pk/Allforms.asp",
+      "https://www.biek.edu.pk/affcoll.asp"
+    ],
+    "discovered_total": 425,
+    "html_page_count": 39,
+    "pdf_count": 386,
+    "kind_counts": {
+      "html_page": 39,
+      "pdf": 386
+    },
+    "status_counts": {
+      "200": 39
+    },
+    "missing_seed_urls": [],
+    "sample_html_urls": [
+      "https://www.biek.edu.pk/default.asp",
+      "https://www.biek.edu.pk/history.asp",
+      "https://www.biek.edu.pk/notifications.asp",
+      "https://www.biek.edu.pk/Allforms.asp",
+      "https://www.biek.edu.pk/affcoll.asp"
+    ],
+    "sample_pdf_urls": [
+      "https://www.biek.edu.pk/E-Sheet-Sample/E-Sheet%2030%20pages.pdf",
+      "https://www.biek.edu.pk/E-Sheet-Sample/E-Sheet%2022%20Pages.pdf",
+      "https://www.biek.edu.pk/Sc_Std/SCHEME-OF-STUDIES-FOR-HSC.pdf",
+      "https://www.biek.edu.pk/ModelPaper/2026/Model%20Paper%202026.pdf",
+      "https://www.biek.edu.pk/ModelPaper/2026/SCI%20GENERAL%20Mathematics-II-NEW-BOOK%20MODEL%20PAPER%202026.pdf"
+    ]
+  },
+  "entries": [
+    {
+      "kind": "html_page",
+      "url": "https://www.biek.edu.pk/default.asp",
+      "status_code": 200,
+      "content_type": "text/html",
+      "title": "Welcome to Board of Intermediate Education Karachi",
+      "depth": 0,
+      "discovered_from": null
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/E-Sheet-Sample/E-Sheet%2030%20pages.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Sample \n              E-Sheet of 30 Pages for Annual 2026 E-Marking",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/default.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/E-Sheet-Sample/E-Sheet%2022%20Pages.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Sample \n              E-Sheet of 22 Pages for Annual 2026 E-Marking",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/default.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Sc_Std/SCHEME-OF-STUDIES-FOR-HSC.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Scheme \n              of Studies for Higher Secondary Certificates",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/default.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/ModelPaper/2026/Model%20Paper%202026.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Model \n              Paper 2026",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/default.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/ModelPaper/2026/SCI%20GENERAL%20Mathematics-II-NEW-BOOK%20MODEL%20PAPER%202026.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Science \n              General Mathematics Part-II Model Paper",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/default.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Online_Forms/HSC-CERTIFICATE/Certificate-Form-Final.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Certificate \n                        Form",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/default.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Online_Forms/Scrutiny%20Forms/Scruitny-Form.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Scrutiny \n                        Form",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/default.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Online_Forms/HSC-CERTIFICATE/Provisional-Certificate-Form.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Provisional \n                        Certification Form",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/default.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Online_Forms/HSC-CERTIFICATE/MIGRATION-CERTIFICATE.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Migration \n                        Form",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/default.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Online_Forms/Enrolment-Registration-forms/Registration-Form-Commerce.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Registration \n                        Form Commerce",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/default.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Online_Forms/Enrolment-Registration-forms/Registration-Form-Humanities.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Registration \n                        Form Humanities",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/default.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Online_Forms/Verification%20forms/Verification-Certificate-Form.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Verification Certificate Form",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/default.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Online_Forms/Verification%20forms/Verification-Forms-All.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Verification Provisional Certificate",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/default.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Online_Forms/Enrolment-Registration-forms/CANCELATION-OF-ENROLMENT.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Cancellation of Enrolment",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/default.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Online_Forms/Enrolment-Registration-forms/CANCELATION-OF-REGISTRATION.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Cancellation of Registration",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/default.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Online_Forms/Duplicate%20Testimonials/BIEK-Duplicate-Forms.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Duplicate Marksheet",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/default.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Online_Forms/EXAMINATION-FORMS/BIEK-Duplicate-Forms.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Proforma of Special Chance",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/default.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Online_Forms/EXAMINATION-FORMS/Improvement-of-Division-Form-Final.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Improvement of Division",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/default.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Online_Forms/Enrolment-Registration-forms/Registration-Form-All-Groups.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Registration of All Groups",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/default.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/ModelPaper/2025/MODEL-PAPER-2025.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Donwload \n        Model Paper",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/default.asp"
+    },
+    {
+      "kind": "html_page",
+      "url": "https://www.biek.edu.pk/history.asp",
+      "status_code": 200,
+      "content_type": "text/html",
+      "title": "Welcome to Board of Intermediate Education Karachi",
+      "depth": 0,
+      "discovered_from": null
+    },
+    {
+      "kind": "html_page",
+      "url": "https://www.biek.edu.pk/notifications.asp",
+      "status_code": 200,
+      "content_type": "text/html",
+      "title": "Welcome to Board of Intermediate Education Karachi",
+      "depth": 0,
+      "discovered_from": null
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Notifications/2026/Examinationforms-xi-2026-15-01-2026.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Schedule for Submission of Examination forms and fees for the HSC Part-I(Fresh) Annual Examinations 2026 in respect of Science(Pre-Medical, Pre-Engineering & Science General), Commerce, Humanities and Medical Technology Groups",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/notifications.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Notifications/2024/Enrolment-govt-2025.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Notifications regarding Collection of Enrolment Forms and submission of Fee there of for the HSC Part-I Annual Examinations 2025",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/notifications.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Notifications/2024/Enrolment-pvt-2025.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Notifications regarding Collection of Enrolment Forms and submission of Fee there of for the HSC Part-I Annual Examinations 2025",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/notifications.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Notifications/2024/OMR & Emarking speciman.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Circular regarding OMR & E-Marking specimen",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/notifications.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Notifications/2024/BIE-EG-92-2024.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Schedule for Submission of Examination forms for the HSC Part-I and Part-II (Fresh) Annual Examinations 2024 in respect of Commerce, Humanities Groups and Diploma in Physical Education Stray Cases",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/notifications.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Notifications/2024/BIE-EG-91-2024.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Submission of Examination Forms & Fee for the Failure Candidates of Supplementary Examinations 2023 for the HSC Annual Examinations 2024(second phase)",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/notifications.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Notifications/2024/Affiliation of colleges.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Circular regarding Recognition/Affiliation of New Institutions for the Session 2024-2024",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/notifications.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Notifications/2024/Pvt. Collges.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Acceptance of Enrolment forms for the HSC Part-I Annual Examinations 2024 for Successful Candidates of SSC Supplementary Examinations 2023",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/notifications.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Notifications/2024/Govt. Colleges.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Acceptance of Enrolment forms for the HSC Part-I Annual Examinations 2024 for Successful Candidates of SSC Supplementary Examinations 2023",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/notifications.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Notifications/2024/BIE-ENROLMENT-732-2024.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Collection of Enrolment Forms for the HSC Part-I Annual Examinations 2024 with penalty of Rs. 2000/-",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/notifications.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Notifications/2024/BIE-ENROLMENT-731-2024.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Collection of Enrolment Forms for the HSC Part-I Annual Examinations 2024 with penalty of Rs. 2000/-",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/notifications.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Notifications/2024/Enrolment Notification for Govt. Institutions.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Enrolment 2024 Notification for Government Institutions",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/notifications.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Notifications/2024/Enrolment Notification for Pvt. Institutions.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Enrolment  2024 Notification for Private Institutions",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/notifications.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Notifications/2021/SteeringComittee-Minutes/steering-committee-meeting-30-01-2021.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Steering Committee Minutes - Govt of Sindh School Education and Literacy Department",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/notifications.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Notifications/2019/Notification%20for%20renewal%20of%20recognition.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Notification regarding Renewal of Recognition/Affiliation for the Academic Session 2019-2020 (NEW)",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/notifications.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Notifications/2019/enrl%20govt%20colleges%2006-09-2019.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Collection of Enrolment Forms for HSC Part-I Annual Examinations 2020 for Govt. Colleges",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/notifications.asp"
+    },
+    {
+      "kind": "html_page",
+      "url": "https://www.biek.edu.pk/Allforms.asp",
+      "status_code": 200,
+      "content_type": "text/html",
+      "title": "Board of Intermediate Education Karachi - Download Types of Form",
+      "depth": 0,
+      "discovered_from": null
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Online_Forms/Fee-Structure/UBLFeeVoucher.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "UBL Fee Voucher",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/Allforms.asp"
+    },
+    {
+      "kind": "html_page",
+      "url": "https://www.biek.edu.pk/affcoll.asp",
+      "status_code": 200,
+      "content_type": "text/html",
+      "title": "Welcome to Board of Intermediate Education Karachi",
+      "depth": 0,
+      "discovered_from": null
+    },
+    {
+      "kind": "html_page",
+      "url": "https://www.biek.edu.pk/contactus.asp",
+      "status_code": 200,
+      "content_type": "text/html",
+      "title": "Welcome to Board of Intermediate Education Karachi",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/default.asp"
+    },
+    {
+      "kind": "html_page",
+      "url": "https://www.biek.edu.pk/tenders.asp",
+      "status_code": 200,
+      "content_type": "text/html",
+      "title": "Welcome to Board of Intermediate Education Karachi",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/default.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2025-2026/quotations/room%20for%20confidential%20section.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Request \n                for Quotations for the Extension of Room for the storage of Printing \n                Cell  ( 01-04-2026)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2025-2026/quotations/Request%20for%20Bid,%20Newspaper%20Cutting%20&%20Biddin%20Documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Request \n                for BID, Disposal of Used Answer Scripts & Waste Paper  ( \n                31-03-2026)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2025-2026/Firewall/SBD%20FOR%20PROCUREMENT%20OF%20NEXT%20GENERATION%20FIREWALL.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                FOR PROCUREMENT OF NEXT GENERATION FIREWALL      ( \n                19-01-2026)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2025-2026/Firewall/other%20tender%20documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Other \n                tender documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2025-2026/server/SBD%20FOR%20PROCUREMENT%20OF%20SERVER%20MACHINES.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                for the procurement of Server Machines  \n                ( 13-01-2026)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2025-2026/server/other%20tender%20documents%20(1).pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Other \n                tender documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2025-2026/network/SBD%20FOR%20PROCUREMENT%20OF%20NETWORKING%20ACCESSORIES%20&%20INSTALLATION%20OF%20NETWORK.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                for the procurement of Networking Accessories & Installation \n                of Network  ( 13-01-2026)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2025-2026/network/other%20tender%20documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Other \n                tender documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2025-2026/quotations/rfq-19-12-2025.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Request \n                for Quotations for the development of Inventory Management Software \n                 ( 19-12-2025)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2025-2026/19/SBD%20for%20PRocurement%20of%20Duplicating%20Papers,%20Master%20Roll%20&%20Ink.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                for PRocurement of Duplicating Papers, Master Roll & Ink  (19-11-2025)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2025-2026/19/other%20tender%20documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Other \n                tender documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2025-2026/SBD-RE-TENDER%20PRINTING%20OF%20TABULATION%20REGISTERS%20(TECHNICAL%20&%20FINANCI)%20CORRIGENDUM.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "RE-TENDER \n                FOR \n                PRINTING & SUPPLY OF TABULATION REGISTERS  ( \n                (10-11-2025)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2025-2026/Other%20tender%20documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Other \n                tender documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2025-2026/quotations/10-11-25.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Request \n                for quotations Renovation & Repairing of Washroom  \n                (10-11-2025)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2025-2026/quotations/03-10-2025.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Request \n                for quotations for the supply of 02 Air Conditioners  ( \n                03-10-2025)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2025-2026/quotations/04-09-25.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Request \n                for Quotations for the Repairing of Sofa Seat & Revolving \n                Chairs  ( 04-09-2025)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2025-2026/quotations/02-09-25.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Request \n                for Quotations for the Supply of Deep Freezer , Crockery  (02-09-2025)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2025-2026/quotations/29-08-25.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Request \n                for Quotations for the arrangement of Eid Millad UL Nani  (29-08-2025)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2025-2026/quotations/RFQ-13-08-25.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Request \n                for Quotations for the Hiring of Services for Online Payment Gateway \n                for Issuance of Certificates  (13-08-2025)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/Quotations/29-07-2025.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Request \n                for Quotations for the arrangement of Celeberation of 14th August \n                2025  ( 29-07-2025)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/05-06-2025/1000022817.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Bidding \n                Document for Disposal of Waste Paper & Used Answer Scripts \n                 ( 05-06-2025)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/Notification%20Award,%20Contract%20Agreement,%20Evaluation%20Form%20&%20BOQ%20-16-05-2025).pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Contract \n                for procurement of examinations, enrolment, certification system \n                software support  ( 16-05-2025)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/Quotations/CamScanner%2016-05-2025.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Request \n                for Quotations for the purchase of Revolving Chair & Visitors \n                Chair  ( 16-05-2025)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/Notification%20of%20Award%20Contract%2014-05-2025.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Notification \n                Award of Contract for the Supply of MarkSheets Part-I & Misc \n                Forms etc  (14-05-2025)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/Bid_evaluation_software_development.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Bid \n                Evaluatioin Report for the Procurement of Examination, Enrolment \n                Software System  (08-05-2025)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/Minutes%20of%20Meeting,%20Bid%20Evaluation%20Report,%20Comparative%20Statement%20&%20Eligibility%20Report.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "BID \n                EVALUATION REPORT FOR PRINTING & SUPPLY OF MISC. FORMS ETC \n                 (15-04-2025)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/09-04-2025/Notification%20Award,%20Contract,%20Evaluation%20Form%20&%20BOQ%20(Sindh%20Enterprises).pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Notification \n                Award of Contract for the Supply of Duplicating Paper  \n                ( 09-04-2025)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/09-04-2025/Notification%20Award,%20Contract,%20Evaluation%20Form%20&%20BOQ%20(Riso%20Traders).pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Notification \n                Award of Contract for the Supply of Master Roll & Ink  ( \n                09-04-2025)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/Standard%20Bidding%20Document%20for%20the%20Procurement%20of%20Stationary%20&%20Consumable%20Articls%20(%2008-04-2025).pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Standard \n                Bidding Document for the Procurement of Stationary & Consumable \n                Articls  ( 08-04-2025)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/Quotations/color_printer_26-03-2025.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Request \n                for Quotations for the repairing of Color Printers  ( \n                26-03-2025)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/ATTENDANCE,%20MINUTES%20OF%20MEETING,%20INSPECTION%20REPORT%20&%20BID%20EVALUATION%20REPORT.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Bid \n                Evaluation Report for Hiring of furniture and other accessories \n                 (07-04-2025)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/24-03-25/Procuremnet_of_Duplicating_papers/Procurement_of_Duplicating_papers.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Procurement \n                of Duplicating Papers (different tender documents)   24-03-2025",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/24-03-25/Hiring_of_Security_Services/Hiring_of_Security_Services.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Hiring \n                of Security Services (different tender documetns)  24-03-2025",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/Final%20Evaluation%20Report%20(BER,%20Minutes,%20Comparative%20&%20Eligibility%20Report).pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Final \n                Evaluation Report (BER, Minutes, Comparative & Eligibility \n                Report) for the Procurment of Computer, Printers & Scanners \n                 (03-03-2025)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/Notification%20Award,%20Contract%20&%20other%20related%20docs.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Notification \n                Award of Contract for the Supply of Uniforms & Shoes  (25-02-2025)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/Quotations/I.T_Section-Tile_work.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Request \n                for Quotations for Tile Work(Floor Work)     \n                 24-02-2025",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/Procurement-Enrolment-Examinatioin%20System%2006-02-2025/BIDDING%20DOCUMENTS.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                for the Procurement-Enrolment-Examinatioin System  \n                (06-02-2025)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/Procurement-Enrolment-Examinatioin%20System%2006-02-2025/Other%20tender%20documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Other \n                tender documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/Tender-Supply-of-Answer-Scripts-03-02-2024/Bidding%20Documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                for the procurement of Anwser Scripts  (03-02-2025)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/Tender-Supply-of-Answer-Scripts-03-02-2024/Other%20Tender%20documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Other \n                Tender Documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/SBD-Procurement-for-the-installatioin-of-Networks-and-Accessories/Bidding%20Documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                Procurement for the installatioin of Networks and Accessories \n                 ( 30-01-2025)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/SBD-Procurement-for-the-installatioin-of-Networks-and-Accessories/other%20tender%20documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Other \n                tender documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/FINAL%20BID%20EVALUATION%20REPORT%20FOR%20THE%20SUPPLY%20OF%20UNIFORM%20AND%20SHOES.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "FINAL \n                BID EVALUATION REPORT FOR THE SUPPLY OF UNIFORM AND SHOES ( \n                20-01-2025)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/NIT%20TENDER%20FOR%20HIRING%20furniture/SBD%20HIRING%20OF%20FURNITURE.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "BD \n                for hiring of Furniture & Other Accessories of HSC Annual \n                Examinations, 2025  (20-01-2025)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/NIT%20TENDER%20FOR%20HIRING%20furniture/Other%20tender%20documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Other \n                tender documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/SBD%20for%20Re-Tender%20for%20Hiring%20of%20Security%20Services/Standard%20Bidding%20Documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                for Re-Tender for Hiring of Security Services     \n                 19-01-2025",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/SBD%20for%20Re-Tender%20for%20Hiring%20of%20Security%20Services/Other%20tender%20documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Other \n                tender documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/SBD%20FOR%20PROCUREMENT%20OF%20DUPLICATING%20PAPERS,%20MASTER%20ROLLS%20&%20INK/SBD%20FOR%20PROCUREMENT%20OF%20DUPLICATING%20PAPERS,%20MASTER%20ROLLS%20&%20INK.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                FOR PROCUREMENT OF DUPLICATING PAPERS, MASTER ROLLS & INK \n                 (31-12-2024)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/SBD%20FOR%20PROCUREMENT%20OF%20DUPLICATING%20PAPERS,%20MASTER%20ROLLS%20&%20INK/Other%20tender%20documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Other \n                Tender Documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/24-12-24/SBD%20FOR%20PROCUREMENT%20EXAMINATION%20ENROLMENT%20CERTIFICATION%20SYSTEM%20SUPPORT.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                FOR PROCUREMENT EXAMINATION ENROLMENT CERTIFICATION SYSTEM SUPPORT \n                 (24-12=2024)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/24-12-24/other%20tender%20documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Other \n                tender documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/Final-Evaluation-Report-for-Printing-of-Tabulation-Register/Final%20Evaluation%20Report%20for%20Printing%20of%20Tabulation%20Register.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Final \n                Evaluation Report for Printing of Tabulation Register  ( \n                20-12-2024)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/Final-Evaluation-Report-for-Printing-of-Tabulation-Register/Minutes%20of%20Meeting%20for%20Printing%20of%20Tabulation%20Register.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Minutes \n                of Meeting for Printing of Tabulation Register",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/SBD-PROCUREMENT-OF-COMPUTERS/SBD%20PROCUREMENT%20OF%20COMPUTERS,%20PRINTERS%20&%20SCANNERS%20ETC%202024-2025.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                PROCUREMENT OF COMPUTERS, PRINTERS & SCANNERS ETC  ( \n                20-12-2024)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/04-12-24/SBD%20Uniforms%20Shoes%202024-2025.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Tender \n                for the Supply of Uniforms & Shoes  \n                04-12-2024",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/Quotations/Honor-Board.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Request \n                for Quotations for Honor Board - Insertion of Name  26-11-2024",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/14-11-24/SBD-PRINTING%20OF%20TABULATION%20REGISTERS%20(TECHNICAL%20&%20FINANCIAL).pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                for the Printing of Tabulation Registers  14-11-2024",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/14-11-24/Other%20tender%20document.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Other \n                tender documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/Quotations/CamScanner%2011-15-2024%2016.55.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Request \n                for Quotations for the Renovation of washroom     \n                 15-11-2024",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/Procurmenet%20of%20Sports%20Goods%2030-10-2024.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Procurement \n                of Sports Goods tender documents  ( \n                30-10-2024)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/30-09-24/SBD%20HIRING%20OF%20SECURITY%20SERVICES%20(TECHNICAL%20&%20FINANCIAL).pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                for hiring of Security Services  \n                30-09-2024",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/30-09-24/other%20tender%20documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "other \n                tender documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/13-09/SBD%20Procurement%20of%20Sports%20Goods.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                for the Procurement of Sports Goods  13-09-2024",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/Quotations/03-09.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Request \n                for Quoations for Maintenance of Sewerage Lines  03-09-2024",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/SBD-printing%20of%20TR/SBD-PRINTING%20OF%20TABULATION%20REGISTERS%20(TECHNICAL%20&%20FINANCIAL).pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                for the printing of Tabulation Registers  08-08-2024",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/SBD-printing%20of%20TR/other%20tender%20documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Other \n                tender documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/BIE%20COMPUTER%20STATIONARY/Bid%20Evaluation%20Report.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Bid \n                Evaluation Report for the Procurement of Computer Stationary  24-07-2024",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/BIE%20COMPUTER%20STATIONARY/Financial%20Statement.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Fiancial \n                Statement",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/BIE%20COMPUTER%20STATIONARY/Attendance.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Attendance",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/Quotations/Chair-Repair-work.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Request \n                for Quotations for the repairing of Sofa Seat & Revolding \n                Chairs  04-07-2024",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2024-2025/Quotations/Oil%20Paint.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Request \n                for Quotations for the Supply of Oil Paint & Distumbar and \n                Mixing Oil  02-07-2024",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2023-2024/SBD%20PROCUREMENT%20OF%20COMPUTER%20STATIONERY/SBD%20PROCUREMENT%20OF%20COMPUTER%20STATIONERY.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                PROCUREMENT OF COMPUTER STATIONERY  10-06-2024",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2023-2024/SBD%20PROCUREMENT%20OF%20COMPUTER%20STATIONERY/Other%20tender%20documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Other \n                tender documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2023-2024/Quotations/30-01-24/water%20cooler.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Request \n                for Quotations for the Purchase of Water Cooler  30-05-2024",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2023-2024/SBD%20HIRING%20OF%20SECURITY%20SERVICES/SBD%20HIRING%20OF%20SECURITY%20SERVICES%20(Single%20Stage%20One%20Envelope).pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                HIRING OF SECURITY SERVICES (Single Stage One Envelope)  23-05-2024",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2023-2024/SBD%20HIRING%20OF%20SECURITY%20SERVICES/other%20tender%20documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "other \n                tender documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2023-2024/SBD%20HIRING%20OF%20FURNITURE%20&%20OTHER%20ACCESSORIE/SBD%20HIRING%20OF%20FURNITURE%20&%20OTHER%20ACCESSORIES%20FOR%20HSC%20ANNUAL%20EXAMINATIONS%202024.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                Hiring of Furniture & other Accessories for HSC Annual Examinations \n                2024  24-04-2024",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2023-2024/SBD%20HIRING%20OF%20FURNITURE%20&%20OTHER%20ACCESSORIE/other%20tender%20documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Other \n                tender documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2023-2024/Bidding%20Documents%20BLANK%20Mark%20sheets-I/Bidding%20Documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                for the Procurement of Printing of Blank Mark Sheets Part-I  02-04-2024",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2023-2024/Bidding%20Documents%20BLANK%20Mark%20sheets-I/Other%20tender%20documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Other \n                Tender Documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2023-2024/SBD%20Procurement%20of%20Stationery/SBD%20Procurement%20of%20Stationery%20&%20Consumable%20Articles%202023-2024%20(FINAL).pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                Procurement of Stationery & Consumable Articles 2023-2024 \n                 02-04-2024",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2023-2024/SBD%20Procurement%20of%20Stationery/Other%20Tender%20Documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Other \n                Tender Documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2023-2024/SBD%20PRINTING%20&%20SUPPLY%20OF%20MISC/SBD%20PRINTING%20&%20SUPPLY%20OF%20MISC.%20FORMS%20&%20OTHER%20MATERIAL%20(FINAL).pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                PRINTING & SUPPLY OF MISC. FORMS & OTHER MATERIAL  01-04-2024",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2023-2024/SBD%20PRINTING%20&%20SUPPLY%20OF%20MISC/Other%20Tender%20Documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Other \n                Tender Documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2023-2024/SBD/SBD%20PROCUREMENT%20OF%20DUPLICATING%20PAPER,%20MASTER%20ROLLS%20&%20INK%20FOR%20RISO%20GRAPH%20MACHINE.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                PROCUREMENT OF DUPLICATING PAPER, MASTER ROLLS & INK FOR RISO \n                GRAPH MACHINE  25-03-2024",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2023-2024/SBD/Other%20Tender%20documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Other \n                tender documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2023-2024/SBD%20(TECHNICAL%20&%20FINANCIAL)%20PRINTING%20OF%20ANSWER%20SCRIPTS/SBD%20(TECHNICAL%20&%20FINANCIAL)%20PRINTING%20OF%20ANSWER%20SCRIPTS.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                (TECHNICAL & FINANCIAL) PRINTING OF ANSWER SCRIPTS  21-03-2024",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2023-2024/SBD%20(TECHNICAL%20&%20FINANCIAL)%20PRINTING%20OF%20ANSWER%20SCRIPTS/Other%20Tender%20documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Other \n                tender documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2023-2024/SBD%20(HIRING%20OF%20JANITORIAL%20SERVICES)%202024.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                (HIRING OF JANITORIAL SERVICES) 2024  20-03-2024",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2023-2024/other%20tender%20documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Other \n                tender documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2023-2024/Part-I%20MARK%20SHEETS/SBD%20PRINTING%20OF%20PART-I%20MARKSHEET.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                for the printing of Part-I blank Mark Sheets   \n                   22-01-2024",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2023-2024/BID%20EVALUATION%20REPORT%20AND%20MINUTES%20AND%20ATTENDANCE.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Bid \n                Evaluation Report for Re-Tender for the Printing of Tabulation \n                Registers  02-10-2023",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2023-2024/SBD%20re-tender/STANDARD%20BIDDING%20DOCUMENTS.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                Re-Tender for the Printing of Tabulation Registers     \n                 16-09-2023",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2023-2024/SBD%20re-tender/Other%20Tender%20Documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Other \n                Tender Documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2023-2024/New%20folder/BIDDING%20DOCUMENTS%20(1).pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                tender for procurement of Liveries(Uniforms Winder & Summer) \n                and Shoes  12-09-2023",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2023-2024/New%20folder/Complaint%20%20Redressal%20Committee.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Complaint \n                Redressal Committee",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2023-2024/New%20folder/Procurement%20Committee.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Procurement \n                Committee",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2023-2024/New%20folder/other%20tender%20documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Press \n                releases",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2022-2023/Printing-of-Tabulation-Registers/NIT.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "NIT",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2022-2023/Hiring-of-Security-Services/NIT.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "NIT",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2022-2023/21-06-2023/SBD%20Procurement%20of%20Polythene%20Bags.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                for the Procurement of Polythene Bags  21-06-2023",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2022-2023/21-06-2023/NIT%20Polythene%20Bags.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "NIT",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2022-2023/SBD%20for%20Procurement%20of%20Computer%20Statopmary%202023/SBD%20Procurement%20of%20Computer%20Stationery%202023.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                for Procurement of Computer Stationary  28-04-2023",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2022-2023/SBD%20for%20Procurement%20of%20Computer%20Statopmary%202023/other%20tender%20documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Other \n                tender documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2022-2023/SBD%20FOR%20HIRING%20OF%20FURNITURE%20(%2014-04-2023/SBD%20(TECHNICAL)%20HIRING%20OF%20FURNITURE.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "TECHNICAL",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2022-2023/SBD%20FOR%20HIRING%20OF%20FURNITURE%20(%2014-04-2023/SBD%20(FINANCIAL)%20HIRING%20OF%20FURNITURE.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "FINANCIAL",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2022-2023/SBD%20FOR%20HIRING%20OF%20FURNITURE%20(%2014-04-2023/other%20tender%20documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Other \n                tender documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2022-2023/Tender-Servers/Tender_Docs.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Tender \n                of Servers, Computers, Scanners, Printers, Network Installation, \n                Internet Services Etc",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2022-2023/Tender-Servers/SBD%20Procurement%20of%20servers,%20Scanners%20and%20Solution%20of%20Internet%20Services%20on%20Radio%20&%20Fiber%20with%20Access%20Points%20Etc%20Combine%20File.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                Procurement of servers, Scanners and Solution of Internet Services \n                on Radio & Fiber with Access Points Etc",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2022-2023/27-01-2023/SBD%20HIRING%20OF%20SECURITY/SBD%20HIRING%20OF%20SECURITY%20(Combine).pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                for Hiring of Security Services  27-01-2023",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2022-2023/27-01-2023/SBD%20HIRING%20OF%20SECURITY/Other%20tender%20documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Other \n                Tender Documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2022-2023/27-01-2023/SBD%20PRINTING%20OF%20ANSWER%20SCRIPTS/SBD%20PRINTING%20OF%20ANSWER%20SCRIPTS%20&%20OTHER%20PRINTED%20MATERIAL%20(COMBINE).pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                for Printing and Supply of Answer Scripts   \n                   27-01-2023",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2022-2023/27-01-2023/SBD%20PRINTING%20OF%20ANSWER%20SCRIPTS/Other%20tender%20documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Other \n                Tender documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2022-2023/SBD-Duplicating%20Papers/SBD%20Procurement%20of%20Duplicating%20Papers,%20Master%20Roll%20&%20INK%202022-2023%20(Combine).pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                for the procurement of duplicating papers, master rolls & \n                ink for Riso Graph Machines",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2022-2023/Final%20SBD%20Procurement%20of%20servers,%20Scanners%20and%20Solution%20of%20Internet%20Services/Final%20SBD%20Procurement%20of%20servers.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                for the procurement of Servers, Scanners, and Internet Service \n                 12-12-2022",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2022-2023/Final%20SBD%20Procurement%20of%20servers,%20Scanners%20and%20Solution%20of%20Internet%20Services/other%20tender%20documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "other \n                tender documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2022-2023/Quotations/SBD-REN-CHAIRMAN-OFFICE-7-12-2022.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "RENOVATION \n                /MAINTENANCE OF CHAIRMAN’S SECRETARIAT & FIXING OF PRECAST \n                CONCRETE BOUNDARY WALL",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2022-2023/SBD%20Procurement%20of%20Stationery%20&%20Consumable%20Articles/SBD%20Procurement%20of%20Stationery%20&%20Consumable%20Articles.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                Procurement of Stationery & Consumable Articles  24-10-2022",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2022-2023/SBD%20Procurement%20of%20Stationery%20&%20Consumable%20Articles/press%20clips.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Press \n                Clips",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2022-2023/SBD%20Procurement%20of%20goods/SBD%20Procurement%20of%20Sports%20Goods.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                Procurement of Sports Goods  24-10-2022",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2022-2023/SBD%20Procurement%20of%20goods/news%20clips.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Press \n                Clips",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2022-2023/quotations/Procurement%20of%20Server.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Request \n                for Quotations for the Procurement of Server  14-09-2022",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2022-2023/SBD%20TECHNICAL%20&%20FINANCIAL%20PRINTING%20OF%20TABULATION%20REGISTERS/SBD%20TECHNICAL%20&%20FINANCIAL%20PRINTING%20OF%20TABULATION%20REGISTERS.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                TECHNICAL & FINANCIAL PRINTING OF TABULATION REGISTERS  \n                 30-08-2022",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2022-2023/SBD%20TECHNICAL%20&%20FINANCIAL%20PRINTING%20OF%20TABULATION%20REGISTERS/other%20tender%20documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Other \n                Tender Documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2022-2023/RFQ%20Reparing%20of%20UPS.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Request \n                forQuotations for the Repair of UPS  19-07-2022",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/Auction%20Notice%20Disposal%20of%20Used%20Answer%20Scripts%20&%20Scrap%20ETC..pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Auction \n                Notice Disposal of used answer scripts & scrap etc  30-06-2022",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/quotations/RFQ%20Dell%20Optiplex%203070,%20Intel%20Proc%20Ci5-9500%20Two.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Request \n                for Quotations for the purchase of Computers     \n                 23-06-2022",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/quotations/RFQ%20for%20Purchasing%20Spare%20Parts.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Request \n                for Quotations for the purchase of Spare Parts  16-06-2022",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/quotations/RFQ%20for%20Making%20Penaflex.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Request \n                for Quotations for making of Penaflex      15-06-2022",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/quotations/RFQ%20Managed%20Gigabit%20Layer%203%20Cisco%20Switch.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Request \n                for Quotations for the purchase of Switches   \n                   10-06-2022",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/nit%20single%20page%20print%20one%20side%20from%20outsource/SBD%20SINGLE%20PAGE%20PRINT%20(ONE%20SIDE).pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                Single Page Print ( One Side)  03-06-2022",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/quotations/CamScanner%2006-03-2022%2011.14%20(1).pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Request \n                for Quatations for the purchase of Computers     \n                 01-06-2022",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/nitnetworkingincodificationhallrelatedaccessories/SDB%20(NETWORKING%20OF%20CODIFICATION%20HALL).pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                (NETWORKING OF CODIFICATION HALL) BIE, KARACHI     \n                 14-05-2022",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/tender%20documents%20renovation%20maintenance%20of%20codification%20hall/(FINAL)%20SBD%20RENOVATION%20&%20MAINTENANCE%20OF%20CODIFICATION%20HALL.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                Renovation & Maintenance OF Codification HALL  25-04-2022",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/12-04-2022/hiring%20of%20examination%20furniture%20for%20annualexaminations%202022/Technical%20&%20Financial%20SBD%20Hiring%20of%20Furniture.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Technical \n                & Financial SBD Hiring of Furniture      12-04-2022",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/12-04-2022/hiring%20of%20examination%20furniture%20for%20annualexaminations%202022/NIT%20n%20news%20paper%20clips.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "NIT \n                & News Paper Clips",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/12-04-2022/nit%20hiring%20of%20consultant%20for%20board%20of%20intermediate%20education/SDB%20Hiring%20of%20Consultant%20Merge.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SDB \n                Hiring of Consultant Merge for BIE, Karachi  \n                12-04-2022",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/12-04-2022/nit%20hiring%20of%20consultant%20for%20board%20of%20intermediate%20education/NIT%20and%20news%20paper%20clips.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "NIT \n                & News Paper Clips",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/12-04-2022/procurement%20of%20computer%20stationery%20accessories/SDB%20TECHNICAL%20(COMPUTER%20STATIONERY%20&%20ACCESSORIES).pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SDB \n                TECHNICAL (COMPUTER STATIONERY & ACCESSORIES)  \n                12-04-2022",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/12-04-2022/procurement%20of%20computer%20stationery%20accessories/NIT%20n%20news%20paper%20clips.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "NIT \n                & News Paper Clips",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/quotations/RFQ%20CCTV.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Request \n                for Quotations for installation & restoration of CCTV system \n                 08-04-2022",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/nit%20for%20procurement%20of%20heavy%20duty%20digital%20duplicator%20machine/SBD-HEAVY-DUTY-DIGITAL-DUPLICATOR-MACHINES-_-ELECTRICAL-APPLIANCES-_Final_.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                HEAVY DUTY DIGITAL DUPLICATOR MACHINES  09-03-2022",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/nit%20for%20procurement%20of%20heavy%20duty%20digital%20duplicator%20machine/NIT.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "other \n                tender documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/nitforhiringofconsultantforboardofintermediateeduca/SBD%20Technical%20&%20Financial%20(RFP)Hiring%20of%20Consultant.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                Technical & Financial (RFP)Hiring of Consultant  23-02-2022",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/nitforhiringofconsultantforboardofintermediateeduca/Other%20tender%20documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "other \n                related documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/Proposal-Omr-Codification/Procurement-of-Codification-System-OMR.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "CODIFICATION \n                SYSTEM & OMR SOLUTIONS WITH INFRATRUCTURES",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/Proposal-Omr-Codification/Other-Relavant-Document.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Other \n                Documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/Proposal-Online-System/Procurement-of-Online-Examination-System.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Procurement \n                / Development of Software and Installation of Online Management \n                System, For Affiliation / Recognition,  \n                Enrollment, Registration, Permission and Examinations Accounts \n                with Verifications.",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/Proposal-Online-System/other-tender-documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Other \n                Documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/Procurement-Heavy-Duty-Duplicator/TENDER%20FOR%20PRINTING-SUPPLY-ANS-Scripts.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "TENDER \n                FOR PROCUREMENT OF HEAVY DUTY DIGITAL DUPLICATOR MACHINES",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/Procurement-Heavy-Duty-Duplicator/Other-Docs.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Other \n                Documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/Printing-Supply-AnswerScripts/TENDER%20FOR%20PRINTING-SUPPLY-ANS-Scripts.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "TENDER \n                FOR PRINTING & SUPPLY OF \n                ANSWER SCRIPTS \n                FOR THE ANNUAL EXAMINATIONS 2022",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/Printing-Supply-AnswerScripts/Other-Docs.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Other \n                Document",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/bidevaluationreportforhoistingonboardswebsite/bid%20evaluation%20report%20for%20the%20procurement%20of%20I.T%20&%20related%20items.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Bid \n                evaluation report for the procurement of I.T & related items \n                 03-12-2021",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/bidevaluationreportofprintingoftabulationregisterto/bid%20evaluation%20report%20of%20printing%20of%20tabulation%20registers.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Bid \n                evaluation report of printing of tabulation registers  03-12-2021",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/09-11-2021/tender/9-Procurement%20of%20Duplicating%20Paper,%20Master%20Rolls%20&%20Ink/SBD%20Procurement%20of%20Duplicating%20Papers,%20Master%20Roll%20&%20INK%202021-2022.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                for Procurement of Duplicating Paper, Master Rolls & Ink  09-11-2021",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/09-11-2021/tender/9-Procurement%20of%20Duplicating%20Paper,%20Master%20Rolls%20&%20Ink/other%20tender%20documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "other \n                tender documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/09-11-2021/tender/8-Printing%20&%20Supply%20of%20Misc.%20Forms,%20Envelopes%20etc/SBD%20PRINTING%20OF%20MISC.%20FORMS%20&%20ENVELOPES%20ETC.%202021-2022.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                for Printing & Supply of Misc. Forms, Envelopes etc  09-11-2021",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/09-11-2021/tender/8-Printing%20&%20Supply%20of%20Misc.%20Forms,%20Envelopes%20etc/other%20tender%20documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "other \n                tender documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/09-11-2021/tender/7-Procurement%20of%20Sports%20Goods/SBD%20Procurement%20of%20Sports%20Goods%202021-2022.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                for Procurement of Sports Goods  09-11-2021",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/09-11-2021/tender/7-Procurement%20of%20Sports%20Goods/other%20tender%20documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "other \n                tender documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/09-11-2021/tender/6-Procurement%20of%20Printers,%20Toners%20&%20Photocopier%20Machines/SBD%20Procurement%20of%20Printers,%20Photocopier%20Machines%20&%20Toners%20(Technical%20&%20Financial).pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                for Procurement of Printers, Toners & Photocopier Machines \n                 09-11-2021",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/09-11-2021/tender/6-Procurement%20of%20Printers,%20Toners%20&%20Photocopier%20Machines/other%20tender%20documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "other \n                tender documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/09-11-2021/tender/5-Hiring%20of%20Janitorial%20Services/SBD%20(HIRING%20OF%20JANITORIAL%20SERVICES)%202021.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                for Hiring of Janitorial Services  09-11-2021",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/09-11-2021/tender/5-Hiring%20of%20Janitorial%20Services/other%20tender%20documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "other \n                tender documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/Tenders/Procurement%20of%20Computers%20&%20I.T%20Related%20Items/SBD%20Procurement%20of%20Computer%20&%20I.T%20Related%20Items%20%202021-2022.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                Procurement of Computer & I.T Related Items  20-10-2021",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/Tenders/Procurement%20of%20Computers%20&%20I.T%20Related%20Items/other%20tender%20documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "other \n                tender documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/Tenders/Procurement%20of%20Stationery%20&%20Consumable%20Articles/Procurement%20of%20Stationery%20&%20Consumable%20Articles%202021-2022.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                for Procurement of Stationery & Consumable Articles  20-10-2021",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/Tenders/Procurement%20of%20Stationery%20&%20Consumable%20Articles/other%20tender%20documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Other \n                tender documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/Tenders/Printing%20of%20Tabulation%20Register/SBD%20Printing%20of%20Tabulation%20Registers%202021-2022.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                for Printing of Tabulation Registers  20-10-2021",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/Tenders/Printing%20of%20Tabulation%20Register/other%20tender%20documets.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Other \n                tender documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/Tenders/Hiring%20of%20Security%20Services/SBD%20Hiring%20of%20Security%20Bidding%20Documents%20(Technical%20&%20Financial%20Proposals).pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                for Hiring of Security Services  20-10-2021",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/Tenders/Hiring%20of%20Security%20Services/other%20tender%20documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Other \n                tender documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/Security%202021/714854-SBD%20Hiring%20of%20Security%20Services2021.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                for Hiring of Security Services 2021  27-07-2021",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2021-2022/Security%202021/other%20tender%20documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Other \n                Tender Documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2020-2021/sbdforcomputerizationdigitalizationofexaminationsyst/SBD%20FOR%20COMPUTERIZATION%20,%20DIGITALIZATION%20OF%20EXAMINATION%20SYSTEM%20(TECHNICAL%20&%20FINANCIAL).pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                FOR COMPUTERIZATION , DIGITALIZATION OF EXAMINATION SYSTEM",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2020-2021/sbdforcomputerizationdigitalizationofexaminationsyst/other%20tender%20documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Other \n                Tender Documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2020-2021/evaluation%20for%20procurement%20of%20computers%2031-052021/evaluation%20for%20procurement%20of%20computers.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Bid \n                Evaluation for the Procurement of Computers & I.T Related \n                items  31-05-2021",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2020-2021/bid%20evaluation%20for%20the%20procument%20of%20furniture%2001-06-2021/bid%20evaluation%20for%20the%20procument%20of%20furniture.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Bid \n                Evalation for the Procurement of Furniture   \n                 01-06-2021",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2020-2021/Bid%20Evaluation%20report%20for%20Printer%20Parts/Bid%20Evaluation%20report%20for%20Printer%20Parts.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Bid \n                Evaluation Report for Printer Parts  14-04-2021",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2020-2021/TENDER-FOR-PROCUREMENT-OF-DC-INVERTOR-AIR-CONDITIONS/Bidding%20Documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Standard \n                Bidding Document",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2020-2021/TENDER-FOR-PROCUREMENT-OF-DC-INVERTOR-AIR-CONDITIONS/BILL%20OF%20QUANTITY.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Bill \n                of Quantity",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2020-2021/TENDER-FOR-PROCUREMENT-OF-DC-INVERTOR-AIR-CONDITIONS/Contract%20&%20Notification%20of%20Award.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Contract \n                and Notification of Award",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2020-2021/TENDER-FOR-PROCUREMENT-OF-DC-INVERTOR-AIR-CONDITIONS/Evaluation%20Form.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Evaluation \n                Form",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2020-2021/TENDER-FOR-PROCUREMENT-OF-DC-INVERTOR-AIR-CONDITIONS/Integrity.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Integrity",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2020-2021/Hiring-of-Security-Services-2021/Final%20SBD%20for%20Hiring%20of%20Security/SBD%20HIRING%20OF%20Security%20Services.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Standard \n                Bidding Document",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2020-2021/Bid%20Evaluation%20Report%20for%20Printing%20&%20Supply%20of%20Misc.%20Forms%20&%20Envelopes%20etc.%202020-2021/2.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "File2",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2020-2021/Bid%20Evaluation%20Report%20for%20Printing%20&%20Supply%20of%20Misc.%20Forms%20&%20Envelopes%20etc.%202020-2021/3.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "File3",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2020-2021/Bid%20Evaluation%20Report%20for%20Printing%20&%20Supply%20of%20Misc.%20Forms%20&%20Envelopes%20etc.%202020-2021/4.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "File3",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2020-2021/Bid%20EvaluationReport/UPS-Scanner/4.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "file4",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2020-2021/Bid%20EvaluationReport/UPS-Scanner/5.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "file5",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2020-2021/Bid%20EvaluationReport/UPS-Scanner/6.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "file6",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2020-2021/Image%20Data%20Extraction%20Contract%20Award/Image%20Data%20Extraction.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Contract \n                and Notification of Award for Image Data Extraction  19-03-2021",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2020-2021/bidevaluationdcinverteraircon/bidevaluationreportforprocurementofdcinverteraircon.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "BID \n                evaluation report for DC Inverter  11-03-2021",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2020-2021/furniture%20of%20examination/Combined-SBD%20HIRING%20OF%20FURNITURE%20FOR%20EXAMINATION%20CENTRES%20ANNUAL%20EXAM%202021%20(Technical%20&%20Financial).pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                for hiring of furniture for Examination Centers     \n                 08-03-2021",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2020-2021/furniture%20of%20examination/other%20tender%20documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Other \n                Tender Documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2020-2021/nittendernoticeforprocurementofprinterparts/printer%20parts.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                for the Procurement of Printer Parts  16-02-2021",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2020-2021/nittendernoticeforprocurementofprinterparts/other%20tender%20documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Other \n                Tender Documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2020-2021/nitforprocurementofcomputersi_t_relateditems/Binded%20SBD%20Procurement%20of%20Computer%20&%20I.T%20Related%20Items%20(Financial%20&%20Technical)%202020-2021.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                Procurement of Computer & I.T Related items  10-02-2021",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2020-2021/nitforprocurementofcomputersi_t_relateditems/other%20documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Other \n                Tender Documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2020-2021/11-01-2021-Procurement%20of%20DC%20Inverter%20AC%20&%20other%20electrical%20appliances%202020-2021/SBD%20Procurement%20of%20DC%20Inverter%20AirConditioner%20&%20Other%20Electrical%20Appliances%202020-2021%20(Re%20Tender)%20Final.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                Procurement of DC Inverter AC & other electrical appliances \n                 11-01-2021",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2020-2021/11-01-2021-Procurement%20of%20DC%20Inverter%20AC%20&%20other%20electrical%20appliances%202020-2021/other%20tender%20documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Other \n                Tender Documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2020-2021/07-01-2021-Procurement%20of%20Stationery%20&%20Consumable%20Articles%202020-2021/Procurement%20of%20Stationery%20&%20Consumable%20Articles%202020-2021%20FINAL.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                for the procurement of Stationary & Consumable Articles  07-01-2021",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2020-2021/07-01-2021-Procurement%20of%20Stationery%20&%20Consumable%20Articles%202020-2021/other%20tender%20documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Other \n                Tender Documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2020-2021/hiringofFirms-ImageDataExtraction/SBD-Image-Data-Extraction-off-load-2020.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Bidding \n                Documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2020-2021/Procurement%20of%20DC%20Inverter%20AC%20&%20other%20Electrical%20appliances%202020-2021/SBD%20Procurement%20of%20DC%20Inverter%20Air%20Conditioner%20&%20Other%20Electrical%20Appliances%202020-2021.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                Procurement of DC Inverter Air Conditioner & Other Electrical \n                Appliances  12-10-2020",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2020-2021/Procurement%20of%20DC%20Inverter%20AC%20&%20other%20Electrical%20appliances%202020-2021/Other%20tender%20documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Other \n                Tender Documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2020-2021/Printing%20of%20Misc%20Forms%20&%20Envelopes%20etc/SBD%20Printing%20&%20Supply%20of%20Misc.%20Forms%20&%20Envelopes%20etc.%202020-2021.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                Printing & Supply of Misc. Forms & Envelopes etc.  30-09-2020",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2020-2021/Printing%20of%20Misc%20Forms%20&%20Envelopes%20etc/other%20tender%20documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "All \n                other Tender Documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2020-2021/Printing%20of%20Tabulation%20Register%202020-2021/SBD%20Printing%20Tabulation%20Registers%202020-2021.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                Printing Tabulation Registers 2020-2021  ( \n                21-08-2020)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2020-2021/Printing%20of%20Tabulation%20Register%202020-2021/all%20tender%20documents%20(%20Printing%20of%20Tabulation%20registers).pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "All \n                other Tender Documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2020-2021/Procurement%20of%20Computer%20Stationery%202020-2021/SBD%20Procurement%20of%20Computer%20Stationery%202020-2021.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                Procurement of Computer Stationery 2020-2021  ( \n                21-08-2020)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2020-2021/Procurement%20of%20Computer%20Stationery%202020-2021/all%20tender%20documents%20(%20Procurement%20of%20Computer%20Stationary).pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "All \n                other Tender Documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2020-2021/Procurement%20of%20Scanners%20-%202020-2021/SBD%20Procurement%20of%20Scanners%202020-2021.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                Procurement of Scanners 2020-2021  ( \n                21-08-2020)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2020-2021/Procurement%20of%20Scanners%20-%202020-2021/all%20tender%20documents%20(Procurement%20of%20Scanners%20).pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "All \n                other Tender Documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2020-2021/Procurement%20of%20UPS%20-%202020-2021/SBD%20Procurement%20of%20UPS%20(Interrupted%20Power%20Supply)%202020-2021.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                Procurement of UPS (Interrupted Power Supply) 2020-2021  (21-08-2020)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2020-2021/Procurement%20of%20UPS%20-%202020-2021/all%20tender%20documents%20(Procurement%20of%20UPS%20).pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "All \n                other Tender Documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2019-2020/Evaluation/24-01-2020/Bid-Evaluation-Procurement-of-Answer-Script.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Bid \n                  Evaluation Report - Procurement-of-Answer-Script",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2019-2020/Evaluation/26-12-2019/Bid%20Evaluation-Tender%20-Duplicating-Paper-Photocopier-Machines.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "BID \n                  EVALUATION TENDER FOR PROCUREMENT OF DUPLICATING PAPER, MASTER \n                  ROLL, INK & TONER FOR RISOGRAPH & PHOTOCOPIER MACHINES",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2019-2020/Hiring%20of%20Security%20Services/2-SBD%20Hiring%20of%20Security%20Services.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "-- \n                  SBD Hiring of Security Services",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2019-2020/Hiring%20of%20Security%20Services/Press-Releases.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "-- \n                  PRESS CLIPS",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2019-2020/Procurement%20of%20Sports%20Goods/337500-SBD%20Sports%20Goods.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "-",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2019-2020/Procurement%20of%20Sports%20Goods/PRESS%20CLIPS.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "- \n                  PRESS CLIPS",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2019-2020/Tender%20For%20Procurement%20Duplicating%20Paper/SBD%20Duplicating%20Papers%202019-20.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "- \n                  SBD Duplicating Papers",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2019-2020/Tender%20For%20Procurement%20Duplicating%20Paper/different%20tender%20documents.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "- \n                  Other related tender documents",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2019-2020/TENDER%20SECURITY%2019-20/Press%20Clipping/Press%20releases.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "PRESS \n                  RELEASES",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2019-2020/TENDER%20SECURITY%2019-20/SBD/SBD%20Security%20Services%202019.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2018-2019/tabulation%20registers/SBD%20Tabulation%20Registers%202018-2019%20Technical.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Tender \n                  Document for the printing of Tabulation Registers (Technical) \n                   16-04-19  \n                   ()",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2018-2019/tabulation%20registers/Tabulation%20Financial%20.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Tender \n                  Document for the Printing of Tabulation Registers (Financial \n                  )  ()",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2018-2019/tabulation%20registers/NIT%20Tabulation%20Registers.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "NIT \n                  for the Printing of Tabulation Registers  (N \n                  E W )",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2018-2019/Special%20Chance%20Tender/new%20RFP.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Tender \n                  Document, Request For Proposal (RFP) for Special Chance Candidates \n                  Management Module Development & Integeration With Existing \n                  Examinations, Enrolment and Registration System  11-04-2019  \n                   ( N E W )",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2018-2019/TANDER%207-3-19/NIT.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "NIT \n                  for the procurement of Air Conditions, Duplicating Papers, etc \n                       05-03-2019  ()",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2018-2019/TANDER%207-3-19/Air%20Conditioners/SBD%20TECHNICAL%20(AIR%20CONDITIONERS%20&%20OTHER%20APPLIANCES)Final%20OS.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "TECHNICAL",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2018-2019/TANDER%207-3-19/Air%20Conditioners/SBD%20FINANCIAL%20(AIR%20CONDITIONERS%20&%20OTHER%20APPLIANCES)Final%20by%20OS.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "FINANCIAL",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2018-2019/TANDER%207-3-19/Duplicating%20Papers/SBD%20Duplicating%20Papers%202019.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Procurement \n                  of Duplicating Papers",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2018-2019/TANDER%207-3-19/Hiring%20of%20Examination%20Center%20Equipment%20Accessories%202019/SBD%20HIRING%20OF%20FURNITURE%20%20Technical%202019.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "TECHNICAL",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2018-2019/TANDER%207-3-19/Hiring%20of%20Examination%20Center%20Equipment%20Accessories%202019/SBD%20Financial%20Hiring%20of%20Furniture.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "FINANCIAL",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2018-2019/TANDER%207-3-19/OMR/SBD%20Supply%20of%20OMR%20%20Technical%202019.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "TECHNICAL",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2018-2019/TANDER%207-3-19/OMR/SBD%20Financial%20Procurement%20of%20OMR%202019.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "FINANCIAL",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2018-2019/TANDER%207-3-19/Stationery%20Consumable/ST.%20&%20CONSUMABLE%20ARTICLES%20%202019%20SBD.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Procurement \n                  of Stationery, Consumable Articles  05-03-2019  \n                   ( N E W )",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2018-2019/hirin%20of%20security%20services%20and%20CCTV%20CAMERAS/SBD%20Hiring%20of%20Security%20Technical%20&%20Financial.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Tender \n                  document for the Hiring of Security Services  23-01-2019  \n                   ( N E W )",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2018-2019/hirin%20of%20security%20services%20and%20CCTV%20CAMERAS/SBD%20Installation%20of%20CCTV%20System.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Tender \n                  document for the installation of CCTV system  23-01-2019 \n                   ( N E W )",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2018-2019/Bid%20Evaluation/Bid%20Evaluation%20for%20%20Computer%20Stationery%202019/Computer%20Stationery%202019.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Bid \n                  Evaluation for Computer Stationery 2019 -  15-01-2019  \n                  (N E W )",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2018-2019/Bid%20Evaluation/Bid%20Evaluation%20for%20Computer%20IT%20Related%20items%202019/Computer%20IT%20Related%20items%202019.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Bid \n                  Evaluation for Computer IT Related items 2019 -  15-01-2019 \n                   ( N E W )",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2018-2019/Bid%20Evaluation/Bid%20Evaluation%20for%20Printing%20of%20Priced%20Non%20Priced%20forms/Printing%20of%20Priced%20Non%20Priced%20forms.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Bid \n                  Evaluation for Printing of Priced Non Priced forms  15-01-2019 \n                   ( N E W )",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2018-2019/NIT/standard.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "--STANDARD \n                  BIDDING DOCUMENTS Answer Scripts",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2018-2019/NIT/120534-SBD%20Supply%20of%20Duplicating%20Paper%20and%20Master%20Rolls%202018.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                  Supply of Duplicating Paper and Master Rolls 2018",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2018-2019/NIT/press%20clips.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "--Press \n                  Clips",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2017-2018/computer,%20printer%20accessories%20and%20sports%20goods.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Tender \n                  Notice for Procurement of Computers, Printers & Accessories \n                  and Supply of Sports Goods",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2017-2018/SBD%20Computers,%20Printers%20and%20Accessories.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                  Computers, Printers and Accessories",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2017-2018/SBD%20Sports%20Goods.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "SBD \n                  Sports Goods",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2017-2018/Printing%20of%20Examination%20Sensitive%20Material/FINAL%20TECHNICAL%20PROPOSAL%20(PRINTING%202017-2018)%5B204%5D.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Technical \n                  Proposal",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2017-2018/Printing%20of%20Examination%20Sensitive%20Material/FINANCIAL%20PROPOSAL%20(PRINTING%202017-2018)%5B201%5D.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "--- Financial Proposal",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2017-2018/Stationary%20and%20Consumable%20articles%202017-2018/ST.%20&%20CONSUMABLE%20ARTICLES%20%202017-2018.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Tender \n                  for Stationary and Consumable articles 2017-2018",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2017-2018/Supply%20of%20Liveries/SBD%20Uniforms%20Shoes%202017%20New.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Tender \n                  Notice for the Supply of Liveries",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2017-2018/NIT%20OF%20TENDERS%20(2017-2018).pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "NIT \n                  of tenders",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2017/tender%20for%20hiring%20of%20furniture.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Tender \n                  Notice for Hiring of Furniture 2018",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2017/tender%20for%20office%20furniture.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Tender \n                  Notice for Office Furniture",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2017/tender%20notice%20for%20the%20supply%20of%20plastic%20bags/Tender%20for%20Plastic%20Bags.PDF",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Tender \n                  Notice for the supply of Plastic Bags",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2015/30July/FeeStructure02-072009-Notifications.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Tender Document Notification,",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/TENDERS/2015/30July/Technical%20Bid%20for%20Printing.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Technical \n                  Bid for Printing",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/tenders.asp"
+    },
+    {
+      "kind": "html_page",
+      "url": "https://www.biek.edu.pk/Vertificationforms.asp",
+      "status_code": 200,
+      "content_type": "text/html",
+      "title": "Board of Intermediate Education Karachi - Download Types of Form",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/Allforms.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Online_Forms/Verification forms/Verification-Certificate-Form.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Verification Certificate Form (Print on A4 size page).",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/Vertificationforms.asp"
+    },
+    {
+      "kind": "html_page",
+      "url": "https://www.biek.edu.pk/PMaleCol.asp",
+      "status_code": 200,
+      "content_type": "text/html",
+      "title": "Welcome to Board of Intermediate Education Karachi",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/affcoll.asp"
+    },
+    {
+      "kind": "html_page",
+      "url": "https://www.biek.edu.pk/gmaleCol.asp",
+      "status_code": 200,
+      "content_type": "text/html",
+      "title": "Welcome to Board of Intermediate Education Karachi",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/affcoll.asp"
+    },
+    {
+      "kind": "html_page",
+      "url": "https://www.biek.edu.pk/CertificateForms.asp",
+      "status_code": 200,
+      "content_type": "text/html",
+      "title": "Board of Intermediate Education Karachi - Download Types of Form",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/Allforms.asp"
+    },
+    {
+      "kind": "html_page",
+      "url": "https://www.biek.edu.pk/Scrutinyforms.asp",
+      "status_code": 200,
+      "content_type": "text/html",
+      "title": "Board of Intermediate Education Karachi - Download Types of Form",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/Allforms.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Online_Forms/Scrutiny Forms/Scruitny-Form.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "1. Scrutiny Form with ubl voucher (Print on Legal Size \n                        Page)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/Scrutinyforms.asp"
+    },
+    {
+      "kind": "html_page",
+      "url": "https://www.biek.edu.pk/Duplicateforms.asp",
+      "status_code": 200,
+      "content_type": "text/html",
+      "title": "Board of Intermediate Education Karachi - Download Types of Form",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/Allforms.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Online_Forms/Duplicate Testimonials/BIEK-Duplicate-Forms.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Duplicate Manual Admit Card Form (Print on Legal Size Page)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/Duplicateforms.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Online_Forms/Duplicate Testimonials/B.I.E Duplicate Certificate from 2020.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Duplicate Certificate Form (Print on A4 Size Page)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/Duplicateforms.asp"
+    },
+    {
+      "kind": "html_page",
+      "url": "https://www.biek.edu.pk/EnrollmentRegForms.asp",
+      "status_code": 200,
+      "content_type": "text/html",
+      "title": "Board of Intermediate Education Karachi - Download Types of Form",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/Allforms.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Online_Forms/Enrolment-Registration-forms/RE-ENROLMENT.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Re-Enrolment Form",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/EnrollmentRegForms.asp"
+    },
+    {
+      "kind": "html_page",
+      "url": "https://www.biek.edu.pk/allforms.asp",
+      "status_code": 200,
+      "content_type": "text/html",
+      "title": "Board of Intermediate Education Karachi - Download Types of Form",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/Allforms.asp"
+    },
+    {
+      "kind": "html_page",
+      "url": "https://www.biek.edu.pk/faculties.asp",
+      "status_code": 200,
+      "content_type": "text/html",
+      "title": "Welcome to Board of Intermediate Education Karachi",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/default.asp"
+    },
+    {
+      "kind": "html_page",
+      "url": "https://www.biek.edu.pk/",
+      "status_code": 200,
+      "content_type": "text/html",
+      "title": "Welcome to Board of Intermediate Education Karachi",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/default.asp"
+    },
+    {
+      "kind": "html_page",
+      "url": "https://www.biek.edu.pk/Result-Declaration-default.asp",
+      "status_code": 200,
+      "content_type": "text/html",
+      "title": "Welcome to Board of Intermediate Education Karachi",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/default.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2025/Supply/SE/RESULT-GAZZETTE-PRE-ENGINEERING-HSC-PART-II-SUPPLEMENTARY-2025.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Science \n                  Pre-Engineering  (02-02-2026)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/Result-Declaration-default.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2025/Supply/SM/RESULT-GAZZETTE-PRE-MEDICAL-HSC-PART-II-SUPPLEMENTARY-2025.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Science \n                  Pre-Medical  (02-02-2026)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/Result-Declaration-default.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2025/Supply/SG/RESULT-GAZZETTE-SCIENCE-GENERAL-HSC-PART-II-SUPPLEMENTARY-2025.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Science \n                  General  (02-02-2026)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/Result-Declaration-default.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2025/Supply/HTR/RESULT-GAZZETTE-HUMANITIES-REGULAR-HSC-PART-II-SUPPLEMENTARY-2025.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Humanities \n                  Regular  (02-02-2026)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/Result-Declaration-default.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2025/Supply/HTP/RESULT-GAZZETTE-HUMANITIES-PRIVATE-HSC-PART-II-SUPPLEMENTARY-2025.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Humanities \n                  Private  (02-02-2026)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/Result-Declaration-default.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2025/Supply/CMR/RESULT-GAZZETTE-COMMERCE-REGULAR-HSC-PART-II-SUPPLEMENTARY-2025.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Commerce \n                  Regular  (02-02-2026)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/Result-Declaration-default.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2025/Supply/CMP/RESULT-GAZZETTE-COMMERCE-PRIVATE-HSC-PART-II-SUPPLEMENTARY-2025.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Commerce \n                  Private  (02-02-2026)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/Result-Declaration-default.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2025/Supply/HE/Gazzette%202025%20Supplementary%20HE.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Home \n                  Economics  (02-02-2026)",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/Result-Declaration-default.asp"
+    },
+    {
+      "kind": "html_page",
+      "url": "https://www.biek.edu.pk/Enrolment-College-Instructions.asp",
+      "status_code": 200,
+      "content_type": "text/html",
+      "title": "Welcome to Board of Intermediate Education Karachi",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/default.asp"
+    },
+    {
+      "kind": "html_page",
+      "url": "https://www.biek.edu.pk/Enrolment-Student-Instructions.asp",
+      "status_code": 200,
+      "content_type": "text/html",
+      "title": "Welcome to Board of Intermediate Education Karachi",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/default.asp"
+    },
+    {
+      "kind": "html_page",
+      "url": "https://www.biek.edu.pk/IOC-Performa.asp",
+      "status_code": 200,
+      "content_type": "text/html",
+      "title": "Board of Intermediate Education Karachi - Download IOC Proforma for Affiliation",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/default.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/IOC/New Proforma for Affiliation Renewal of Affiliation 01-07-2020 ahsan-converted.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Affiliation and Renewal Proforma",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/IOC-Performa.asp"
+    },
+    {
+      "kind": "html_page",
+      "url": "https://www.biek.edu.pk/Permissionforms.asp",
+      "status_code": 200,
+      "content_type": "text/html",
+      "title": "Board of Intermediate Education Karachi - Download Types of Form",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/default.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Online_Forms/PermissionForms/B.I.E. Permission Form Karachi Board 2020.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Permission Form for Karachi Board (Print on legal size \n                        page).",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/Permissionforms.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Online_Forms/PermissionForms/B.I.E. permission other Borads 2020 Update.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Permission \n                        Form for Other Boards (Print on legal size page).",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/Permissionforms.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Online_Forms/PermissionForms/B.I.E. Repaters Permission 2020.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Permission \n                        For Repeaters (Print on legal size page).",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/Permissionforms.asp"
+    },
+    {
+      "kind": "html_page",
+      "url": "https://www.biek.edu.pk/examinationforms.asp",
+      "status_code": 200,
+      "content_type": "text/html",
+      "title": "Board of Intermediate Education Karachi - Download Types of Form",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/default.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Online_Forms/EXAMINATION-FORMS/Commerce-Private-Part-1.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Commerce \n                        Private Part-I",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/examinationforms.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Online_Forms/EXAMINATION-FORMS/Commerce-Private-Part-2.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Commerce \n                        Private Part-II",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/examinationforms.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Online_Forms/EXAMINATION-FORMS/CMR-PART-I.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Commerce \n                        Regular, Part-I",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/examinationforms.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Online_Forms/EXAMINATION-FORMS/CMR-PART-II.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Commerce \n                        Regular, Part-II",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/examinationforms.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Online_Forms/EXAMINATION-FORMS/HER-I.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Home \n                        Economics Regular Part-I",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/examinationforms.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Online_Forms/EXAMINATION-FORMS/HEC-II.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Home \n                        Economics Regular, Part-II",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/examinationforms.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Online_Forms/EXAMINATION-FORMS/Humanities-Private-Part-1.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Humanities \n                        Private Part-I",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/examinationforms.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Online_Forms/EXAMINATION-FORMS/Humanities-Private-Part-2.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Humanities \n                        Private, Part-II",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/examinationforms.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Online_Forms/EXAMINATION-FORMS/Humanities-Regular-Part-1.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Humanities \n                        Regular Part-I",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/examinationforms.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Online_Forms/EXAMINATION-FORMS/Humanities-Regular-Part-2.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Humanities \n                        Regular Part-II",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/examinationforms.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Online_Forms/EXAMINATION-FORMS/PE-PART-I.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Pre-Engineering \n                        Part-I",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/examinationforms.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Online_Forms/EXAMINATION-FORMS/PE-PART-II.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Pre-Engineering \n                        Part-II",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/examinationforms.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Online_Forms/EXAMINATION-FORMS/PM-PART-I.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Pre-Medical \n                        Part-I",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/examinationforms.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Online_Forms/EXAMINATION-FORMS/PM-PART-II.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Pre-Medical \n                        Part-II",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/examinationforms.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Online_Forms/EXAMINATION-FORMS/SG-PART-I.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Science \n                        General Part-I",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/examinationforms.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Online_Forms/EXAMINATION-FORMS/SG-PART-II.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Science \n                        General Part-II",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/examinationforms.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Online_Forms/EXAMINATION-FORMS/SPECIALCHANCEPROFORMA.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Special \n                        Candiadate Proforma",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/examinationforms.asp"
+    },
+    {
+      "kind": "html_page",
+      "url": "https://www.biek.edu.pk/mcq.asp",
+      "status_code": 200,
+      "content_type": "text/html",
+      "title": "Welcome to Board of Intermediate Education Karachi",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/default.asp"
+    },
+    {
+      "kind": "html_page",
+      "url": "https://www.biek.edu.pk/PapersScheme-2023.asp",
+      "status_code": 200,
+      "content_type": "text/html",
+      "title": "Welcome to Board of Intermediate Education Karachi - Papers Scheme 2023",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/default.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/ModelPaper/2023/Scheme%20%20&%20Model%20Paper%202023-final.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "MODEL \n                        PAPER AND SCHEME",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/PapersScheme-2023.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Scheme-of-Paper/2023/Scheme%202023%202nd%20Part.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Paper \n                        Scheme 2023 2nd Part",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/PapersScheme-2023.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/ModelPaper/2023/REVISED%20CHEMISTRY%20PAPER-I.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Revised \n                        Chemistry Paper I",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/PapersScheme-2023.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/ModelPaper/2023/XII%20Chemsitry%20Model%20Paper%202023.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Revised \n                        Chemistry Paper II",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/PapersScheme-2023.asp"
+    },
+    {
+      "kind": "html_page",
+      "url": "https://www.biek.edu.pk/Stats.asp",
+      "status_code": 200,
+      "content_type": "text/html",
+      "title": "Welcome to Board of Intermediate Education Karachi",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/default.asp"
+    },
+    {
+      "kind": "html_page",
+      "url": "https://www.biek.edu.pk/authbanks.asp",
+      "status_code": 200,
+      "content_type": "text/html",
+      "title": "Welcome to Board of Intermediate Education Karachi",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/default.asp"
+    },
+    {
+      "kind": "html_page",
+      "url": "https://www.biek.edu.pk/Datesheet.asp",
+      "status_code": 200,
+      "content_type": "text/html",
+      "title": "Welcome to Board of Intermediate Education Karachi",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/default.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/datesheet/2026/Date%20Sheet%20Commerce%20(Regular%20&%20Private)%20Annual%20Examination%202026.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Download \n                the Date Sheet of Commerce Regular & Private Annual Examinations, \n                2026",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/Datesheet.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/datesheet/2026/FINAL%20DATE%20SHEET%20ANNUAL%202026%20Consolidated%20(Page-1)%20copy%20(4%20files%20merged).pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Download \n                the Date Sheet of Annual Examinations, 2026",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/Datesheet.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/datesheet/2025/FINAL%20DATE%20SHEET%20ANNUAL%202025%20Consolidated.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/Datesheet.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/datesheet/2024/Annual/Revised/Revised%20Date%20Sheets%20All%20Groups.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/Datesheet.asp"
+    },
+    {
+      "kind": "html_page",
+      "url": "https://www.biek.edu.pk/results.asp",
+      "status_code": 200,
+      "content_type": "text/html",
+      "title": "",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/default.asp"
+    },
+    {
+      "kind": "html_page",
+      "url": "https://www.biek.edu.pk/press_release.asp",
+      "status_code": 200,
+      "content_type": "text/html",
+      "title": "Welcome to Board of Intermediate Education Karachi",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/default.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Press-Release/2024/press release.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Press Release regarding collection of Enrolment forms for the HSC Part-I annual Examinations 2024 with the penalty of Rs. 2000/-",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/press_release.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Press-Release/2024/Press Relase regarding Enrolment 2024.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Press Release regarding Enrolment 2024 for Govt and Private Institutions for all groups",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/press_release.asp"
+    },
+    {
+      "kind": "html_page",
+      "url": "https://www.biek.edu.pk/Tenders.asp",
+      "status_code": 200,
+      "content_type": "text/html",
+      "title": "Welcome to Board of Intermediate Education Karachi",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/default.asp"
+    },
+    {
+      "kind": "html_page",
+      "url": "https://www.biek.edu.pk/ContactUs.asp",
+      "status_code": 200,
+      "content_type": "text/html",
+      "title": "Welcome to Board of Intermediate Education Karachi",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/default.asp"
+    },
+    {
+      "kind": "html_page",
+      "url": "https://www.biek.edu.pk/LastResults.asp",
+      "status_code": 200,
+      "content_type": "text/html",
+      "title": "Welcome to Board of Intermediate Education Karachi",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/default.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2022/Supplementary/SE/With-Held%20&%20UFM-SE-PART-II-2022-SUPPLY-ANNUAL-II.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "With \n                  Held",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/LastResults.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2022/Supplementary/SM/RESULT-GAZZETTE-SMR-SUPPLY-ANNUAL-II-2022.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Supplementary \n                  Examination of Pre-Medical Result 2022",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/LastResults.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2022/Supplementary/SM/With-Held%20&%20UFM-SMR-PART-II-2022-SUPPLY-ANNUAL-II.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "With \n                  Held",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/LastResults.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2022/Supplementary/HE/gazzette-home-eco-supply-annual-II%202022.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Supplementary \n                  Examination of Homeconomics Result 2022",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/LastResults.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2022/Supplementary/CMR/Result-Gazette-CMR-Supply-Annual-II-2022.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Supplementary \n                  Examination of Commerce Regular",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/LastResults.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2022/Supplementary/CMR/With-Held%20&%20UFM-CMR-PART-II-2022-SUPPLY-ANNUAL-II.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "With \n                  Held",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/LastResults.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2022/Supplementary/CMP/Result-Gazette-CMP-Supply-Annual-II-2022.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Supplementary \n                  Examination of Commerce Private",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/LastResults.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2022/Supplementary/CMP/With-Held%20&%20UFM-CMP-SUPPLY-ANNUAL-II-2022.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "With \n                  Held",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/LastResults.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2022/Supplementary/SG/Result-Gazette-SGR-Supply-Annual-II-2022.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Supplementary \n                  Examination of Science General",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/LastResults.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2022/Supplementary/SG/With-Held%20&%20UFM-SG-PART-II-2022-SUPPLY-ANNUAL-II.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "With \n                  Held",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/LastResults.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2022/Supplementary/HTR/Result-Gazzette-HTR-Supply-Annual-II-2022.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Supplementary \n                  Examination of Humanities Regular",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/LastResults.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2022/Supplementary/HTR/With-Held%20&%20UFM-HTR-PART-II-2022-SUPPLY-ANNUAL-II.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "With \n                  Held",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/LastResults.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2022/Supplementary/HTP/Result-Gazzette-HTP-Supply-Annual-II-2022.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Supplementary \n                  Examination of Humanities Private",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/LastResults.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2022/Supplementary/HTP/With-Held%20&%20UFM-HTP-2022-SUPPLY-ANNUAL-II.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "With \n                  Held",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/LastResults.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2022/Part-I/CMR/Result-Gazette-CMR-Part-I-Annual-2022.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Commerce \n                  Reg Part I",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/LastResults.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2022/Part-I/CMR/With-Held%20&%20UFM%20Page%20CMR-PART-I-2022-ANNUAL.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "With \n                  Held",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/LastResults.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2022/Part-I/SM/RESULT-GAZETTE-SMR-PART-I-A-2022.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Pre-Medical \n                  Part-I",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/LastResults.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2022/Part-I/SM/With-Held%20&%20UFM%20Page%20SM-PART-I-2022-ANNUAL.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "With \n                  Held",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/LastResults.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2022/Part-I/HTR/Result-Gazzette-HTR-Part-I-A-2022.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Humanities \n                  Regular Part-I",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/LastResults.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2022/Part-I/HTR/With-Held%20&%20UFM%20Page.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "With \n                  Held",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/LastResults.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2022/Part-I/SE/Result-Gazette-SER-Part-I-Annual-2022.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Science \n                  Pre-Engineering Part I",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/LastResults.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2022/Part-I/SE/With-Held%20&%20UFM%20Page%20SE-PART-I-2022-ANNUAL.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "With \n                  Held",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/LastResults.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2022/Part-I/HTP/Result%20Gazette%20HTP-Part-I-2022-Annual.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Humanities \n                  Private Part I",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/LastResults.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2022/Part-I/HTP/With-Held%20&%20UFM%20Page%20HTP-PART-I-2022-ANNUAL.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "With \n                  Held",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/LastResults.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2022/Part-I/HTP/SPC/Special%20Part%20I%20Gazzette%202022.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Humanities \n                  Special Candidate Part I",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/LastResults.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2022/Part-I/CMP/RESULT-GAZETTE-CMP-PART-I-ANNUAL-2022-FINAL.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Commerce \n                  Private Part I",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/LastResults.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2022/Part-I/CMP/With-Held%20&%20UFM%20Page%20CMP-PART-I-2022-ANNUAL.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "With \n                  Held",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/LastResults.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2022/Part-I/HEC/GAZZETTE%20HOME%20ECO%20PART-I%20ANNUAL%20-%202022.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Homeconomics \n                  Part I",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/LastResults.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2022/Part-II/HTR/RESULT-GAZETTE-HTR-PART-II-ANNUAL-2022-FINAL.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Humanities \n                  Regular Part II",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/LastResults.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2022/Part-II/HTR/With-Held%20&%20UFM-HTR-PART-II-2022-ANNUAL.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "With \n                  Held",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/LastResults.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2022/Part-II/CMR/Result-Gazette-CMR-Part-II-Annual-2022-Final.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Commerce \n                  Regular Part II",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/LastResults.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2022/Part-II/CMR/With-Held%20&%20UFM-CMR-PART-II-2022-ANNUAL.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "With \n                  Held",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/LastResults.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2022/Part-II/HTP/RESULT-GAZZETTE-HTP-ANNUAL-2022-PART-II-FINAL.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Humanities \n                  Private Part II",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/LastResults.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2022/Part-II/HTP/With-Held%20&%20UFM-HTP-PART-II-2022-ANNUAL.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "With \n                  Held",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/LastResults.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2022/Part-II/CMP/RESULT-GAZZETTE-CMP-PART-II-ANNUAL-2022-FINAL-29.11.2022.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Commerce \n                  Private Part II",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/LastResults.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2022/Part-II/CMP/With-Held%20&%20UFM%20Page%20CMP-PART-II-2022-ANNUAL.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "With \n                  Held",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/LastResults.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2022/Part-II/SM/Result-Gazzette-SMR-Part-II-Annual-2022-Final.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Pre-Medical \n                  Part II",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/LastResults.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2022/Part-II/SM/With-Held%20&%20UFM%20Page%20SM-PART-II-2022-ANNUAL.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "With \n                  Held",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/LastResults.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2022/Part-II/SE/Result-Gazzette-SER-Part-II-Annual-2022-FINAL-WITH-W-H.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Pre-Engineering \n                  Part II",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/LastResults.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2022/Part-II/SE/With-Held%20&%20UFM%20Page%20SE-PART-II-2022-ANNUAL.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "With \n                  Held",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/LastResults.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2022/Part-II/SG/RESULT-GAZETTE-SGR-II-ANNUAL-2022.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Science \n                  General Part II",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/LastResults.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2022/Part-II/SG/With-Held%20&%20UFM%20Page%20SG-PART-II-2022-ANNUAL.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "With \n                  Held",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/LastResults.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2022/Part-II/DPE/GAZZETTE-DPE-2022.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Diploma \n                  in Physical Education Part II",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/LastResults.asp"
+    },
+    {
+      "kind": "pdf",
+      "url": "https://www.biek.edu.pk/Result-2022/Part-II/HEC/Gazzette-2022-HE.pdf",
+      "status_code": null,
+      "content_type": "application/pdf",
+      "title": "Homeconomics \n                  Part II",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/LastResults.asp"
+    },
+    {
+      "kind": "html_page",
+      "url": "https://www.biek.edu.pk/Committees.asp",
+      "status_code": 200,
+      "content_type": "text/html",
+      "title": "Welcome to Board of Intermediate Education Karachi",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/default.asp"
+    },
+    {
+      "kind": "html_page",
+      "url": "https://www.biek.edu.pk/Bmembers.asp",
+      "status_code": 200,
+      "content_type": "text/html",
+      "title": "Welcome to Board of Intermediate Education Karachi",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/default.asp"
+    },
+    {
+      "kind": "html_page",
+      "url": "https://www.biek.edu.pk/chairman.asp",
+      "status_code": 200,
+      "content_type": "text/html",
+      "title": "Welcome to Board of Intermediate Education Karachi",
+      "depth": 1,
+      "discovered_from": "https://www.biek.edu.pk/default.asp"
+    },
+    {
+      "kind": "html_page",
+      "url": "https://www.biek.edu.pk/FinanceComm.asp",
+      "status_code": 200,
+      "content_type": "text/html",
+      "title": "Welcome to Board of Intermediate Education Karachi",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/Committees.asp"
+    },
+    {
+      "kind": "html_page",
+      "url": "https://www.biek.edu.pk/academiccomm.asp",
+      "status_code": 200,
+      "content_type": "text/html",
+      "title": "Welcome to Board of Intermediate Education Karachi",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/Committees.asp"
+    },
+    {
+      "kind": "html_page",
+      "url": "https://www.biek.edu.pk/APPTCOMM.asp",
+      "status_code": 200,
+      "content_type": "text/html",
+      "title": "Welcome to Board of Intermediate Education Karachi",
+      "depth": 2,
+      "discovered_from": "https://www.biek.edu.pk/Committees.asp"
+    }
+  ]
+}

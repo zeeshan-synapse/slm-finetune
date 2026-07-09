@@ -1,0 +1,257 @@
+Tender 
+                  Document, Request For Proposal (RFP) for Special Chance Candidates 
+                  Management Module Development & Integeration With Existing 
+                  Examinations, Enrolment and Registration System  11-04-2019  
+                   ( N E W )
+URL: https://www.biek.edu.pk/TENDERS/2018-2019/Special%20Chance%20Tender/new%20RFP.pdf
+Source: https://www.biek.edu.pk/tenders.asp
+
+Board of Intermediate Education Karachi
+Page # 1 of 9
+Request for Proposal (RFP)
+SPECIAL CHANCE CANDIDATES
+MANAGEMENT MODULE
+DEVELOPMENT & INTEGRATION
+WITH EXISTING
+EXAMINATIONS, ENROLMENT, &
+REGISTRATION SYSTEM
+Board of Intermediate Education, Karachi
+2019
+Page # 2 of 9
+Table of Contents
+1. Introduction…………………………………………………………………………………………….
+3
+2. Requirements………………………………………………………………………………………….
+2.1
+Special Chance Management Module
+2.2
+Major Expertise required
+3.0
+Existing Infrastructure …………………………………………………………………………….
+7
+4.0
+General ……………………………………………………………………………………………...
+5.0 Reporting ……………………………………………………………………………………………...
+6
+Criteria for Evaluation……………………………………………………………………………….….
+8
+6.1 General Evaluation……………………………………………………………………………..…
+6.1.1 Functional Evaluation….............................................................
+6.1.2 Technical Evaluation…………………………………………………………………...
+6.1.3 Risk Evaluation…………………………………………………………………………..
+6.1.4 Reference Evaluation…………………………………………………………………
+6.2 Financial Evaluation……………………………………………………………………………..
+5.2.1
+Financial Evaluation ………………………………………………………..
+12
+General Terms and Conditions……………………….……………………………………………..
+9
+Page # 3 of 9
+Details of specifications, quantities required and the terms & conditions of the tender:
+Following is the detail of the specifications, quantities required and the terms & conditions of the tender
+notice published in the newspapers.
+1
+Introduction
+The Board of Intermediate Education, Karachi (BIEK) intends SPECIAL CHANCE CANDIDATES
+MANAGEMENT MODULE DEVELOPMENT & INTEGRATION WITH EXISTING EXAMINATIONS,
+ENROLMENT, & REGISTRATION SYSTEM.
+For this purpose, sealed bids are invited from well reputed IT companies. The sealed bid comprising of
+Technical as well as Financial proposal (both separately) are to be submitted separately.
+2
+Requirements
+Special Chance Candidates Management
+a)
+Board, from Annual Exams 2018, allowed previous failed candidates to appear in
+examination again despite their Chances/Enrolment/Registration have been expired.
+b)
+Existing
+system
+has
+no
+provision
+to
+entertain
+such
+candidates
+whose
+Chances/Enrolment/Registration have been expired until and unless their previous
+Enrolment/Registration is cancelled and new Registration is issued to appear as a
+private candidate.
+c)
+New Module to be developed by considering these student as Special Chance
+d)
+Special Chances should be permitted only to those candidates who are eligible
+according to the policy
+e)
+New Special Chance Candidates Management module should be fully integrated with
+existing Examination, Enrolment and Registration Systems
+f)
+New Special Chance Candidates Management module should be developed following
+complete process starting from detail requirement definitions, analysis, design,
+development, testing, training, implementation and support
+2.2 Major Expertise required:
+a) Previous Project Experience of intercity Examination System required to handle with
+existing examination system and able to develop the required Module with
+examination’s rules with integration, and preference shall be given who have
+Page # 4 of 9
+extensive experience of projects in same domain and also work with any Board of
+Government Offices.
+b) Expert team to understand the existing organization, its IT environment and delivery
+under stipulated time and resource constraints
+c) Expertise to handle various types of candidates/scenarios in the system
+d) Expertise to handle large database with structured and unstructured data
+e) Expertise to understand the legacy/existing source code and update according to the
+requirements keeping in view existing dependencies for unwanted side-effects
+f) Vendors with at least 5 years experience of working on Examination Boards and/or
+related education environments
+3.0 EXISTING INFRASTRUCTURE
+Tools have to be used to develop the required module:
+3.1 DATABASE
+Applicant must possess experience of database management system and its application in general
+and following in particular:
+a) Oracle 11g Database
+b) Relational Database Concepts
+c) Database Architecture, Administration and Tuning
+d) Client Server Architecture
+e) Expertise in handling PL/SQL and Packages, Procedure, Views, User Defined Types
+(e.g. Object Types), and other related objects and structures.
+f) Expertise of database performance monitoring and optimization
+3.2 MICROSOFT DOT NET FRAMEWORK:
+Applicant must possess expertise over following technologies and be able to create new module
+with:
+a) MS Dot Net Framework based Applications
+b) Desktop Application with Windows Forms
+c) Web Application with Asp.Net Web Forms, Asp.Net MVC
+d) Programming languages: C#, VB.Net, Html, CSS, Javascript
+Page # 5 of 9
+e) .Net Report Designer/Viewer for Desktop and Web Applications
+f) Multi-User and Multi-Session Environment
+g) Able to access anywhere via secure user ID
+h) Maintain more than one session
+i)
+Audit Trail
+j)
+Application Logs
+k) Optimization of application performance
+3.3 OPERATING SYSTEM:
+Microsoft Windows 2003 and 2008 Server
+Page # 6 of 9
+GENERAL
+a. The Board of Intermediate Education Karachi (BIEK) has formulated elaborate rules and
+regulations to regulate, conduct and develop intermediate education. BIEK has automated
+and deployed all related aforementioned software systems. Now focusing on concerned
+departments, which are the main facilitator and required Software Solutions according to the
+said RFS with integrations and current environment. Hence it’s the job of BIEK to ensure
+proper, secure, confidential and timely examinations. The proposed solution/system must
+have proven ability to meet the above mentioned requirement.
+b. The Support should have a secure fault-tolerant and highly reliable for current scenario.
+c.
+Technical manuals (If available) shall be provided of each item is required.
+d. All training manuals (If available) of each item is required in detail.
+e. Maintenance Schedule is required of each item mentioned above accordingly.
+f.
+The vendor may also give the complete schedule of Support program.
+g.
+Backup plan of hardware may also describe in your support proposal in detail.
+h. Above item may be provided by the different vendors as per bid, rules and regulations of
+tender process; therefore concerned vendor may take care of all the above mentioned
+general conditions.
+i.
+If any item is become out of order or malfunctioned then vendor may please provide the
+items on urgent basis with submission of delivery challan and concerned item invoice for
+approval and payment.
+5.0
+Reporting
+5.0.1 Initial Report
+●
+The vendor must provide the current position and the existing situation of the each item
+mentioned from clause 2.0.1 to 2.0.2 software by software.
+Vendor must provide access for a reporting and retrieval tool that works across modules and
+generate the log report of Software errors.
+In case of any failure the report shall be provided from vendor with their logo or letterhead.
+Page # 7 of 9
+6.0
+Criteria for Evaluation
+The criteria for evaluation will also include:
+Technical Proposal
+6.1
+General Evaluation
+6.1.1
+Technical Evaluation
+6.1.2
+Functional Evaluation
+6.1.3
+Risk Evaluation
+6.1.4
+Reference Evaluation
+6.2
+Evaluation for decision
+6.2.1
+6.2.1.1 Oracle development Expertise
+6.2.1.2 C#, VB.NET, HTML, CSS, ASP MVC Expertise
+6.2.1.3 Multi User and Multi Session Handling Expertise
+6.2.1.4 Web Application Interfacing and DB Connectivity Expertise
+6.2.1.5 Client Server Application Required
+6.2.1.6 Examination System Information of Any Board
+6.2.1.7 Board’s Examinations Rules of Karachi Intermediate
+The final evaluation is totally dependent on the technical capability of
+companies and their expert’s profile related to Projects.
+7.0
+Financial Proposal
+7.0.1
+One Year Support Cost describe on quarterly basis
+7.0.2
+Total Cost of Ownership
+Page # 8 of 9
+8.0
+General Terms and Conditions
+Tenders should be addressed to the Secretary Board of Intermediate Education, Karachi.
+Tender should be accompanied with the pay order 3% of the quoted value in favour of the Secretary
+Board on Intermediate Education, Karachi towards earnest money (Cheques Shall not be accepted)
+Tender without pay orders, similarly conditional tenders shall not be accepted
+Pay order of unsuccessful parties will be returned within 20 days after opening the tenders while pay
+orders successful party/parties will be refunded after three months of the completion of the supply.
+If any party backs out on any pretext he shall be black listed and the security money of the party
+concerned shall stand fortified.
+Complete supply should be made within stipulated time failing which penalty @2% of the bill will be
+deducted for delay.
+If any disputed arises between Board and the party, the decision of the chairman shall be final and
+acceptable to both the parties.
+The office has the right to increase or decrease the items or quantity or amend which the office
+deems proper.
+The Chairman reserve the right to accept or reject any or all tenders without assigning any reason
+thereof.
+Tender must be submitted on or before 30-04-2019 by 2:30Pm and will be opened on the same day at
+3:00Pm in presence of the tenderers who wish to be present on the occasion.
+Photocopy of General Sales Tax/Registration Certificate be enclosed and income tax number should
+be mentioned clearly, income tax shall be deducted from the bill as per rules.
+The quoted rates shall remain valid for 120 days from the date of opening of tender. The job may be
+assigned either in parts or in single work order.
+No deviation shall be allowed from the specification in case of any deviation, the whole or part
+consignment shall be returned at the risk and cost of the tenderer and the security deposit will be for-
+fitted.
+The Supply of the articles has to be made at site in good condition from the fresh stock. The article
+shall have to be delivered against delivery Challan/Invoice in triplicate mentioning the
+details/specification of the items under supply.
+Rates should be quoted in the attached from including all Govt. Taxes No. increase of any kind will be
+admissible over and above the quoted rates subsequently.
+Payment shall be made on submission of Bill along with Sale Tax invoice and no advance payment
+shall be admissible under any circumstances.
+The Tender whose rate will be accepted will have to deposit 10% of the total amount as security
+deposit the pay order of the earnest money will be adjusted towards security money.
+Page # 9 of 9
+S.No.
+Description
+Quantity
+Amount
+1.
+Additional Module of Examination (Modular
+Approach) Analyze and Software
+Development of Specialized module of
+Examination to adjured with the existing
+System of Examination Software
+2.
+Maintenance / Troubleshooting of above
+System for One year
+SECRETARY
+Zareena Rashid (ACTING)

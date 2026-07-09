@@ -1,0 +1,879 @@
+SBD 
+                FOR PROCUREMENT EXAMINATION ENROLMENT CERTIFICATION SYSTEM SUPPORT 
+                 (24-12=2024)
+URL: https://www.biek.edu.pk/TENDERS/2024-2025/24-12-24/SBD%20FOR%20PROCUREMENT%20EXAMINATION%20ENROLMENT%20CERTIFICATION%20SYSTEM%20SUPPORT.pdf
+Source: https://www.biek.edu.pk/tenders.asp
+
+BOARD OF INTERMEDIATE {
+EDUCATION KARACHI
+STANDARD BIDDING DOCUMENTS
+FOR
+NATIONAL COMPETITIVE BIDDING
+SINGLE STAGE
+TWO ENVELOPES PROCEDURE
+PROCUREMENT OF
+ENROLMENT, EXAMINATION,
+CERTIFICATION SYSTEM
+SOFTWARE SUPPORT WITH
+INTEGRATION &
+DEVELOPMENT OF OTHER
+MODULES
+IN RESPECT OF THE
+BIE/AG/L&N/1269/2024
+Dated: 16/12/2024
+on VOLUME-|
+TECHNICAL PROPOSAL
+Board of Intermediate Education phones: 99260211
+Bakhtiari Youth Center, North Nazimabad, 99260212
+Karachi - 74700 99260213
+NO.BIE/AG /LaN//2672024 Dated: 14-12-2024
+Board's Website EPADS Website
+www.biekedupk. www portalsindh.eprocuire.gov.pk/4t/
+NOTICE_INVITING TENDERS,
+Bids invited through E-Pak Acquisition and Disposal System (EPADS) from reputed / established
+firms / suppliers / contractors, registered with concerned Tax authorities for supply of following:
+bustna, | leswancoot | ciomision | ex! | Procurement
+Examinations,
+Enrolment, pate
+Certification
+System Software | naz000/- | "0. OEE iets Ear
+Support With opoiz0 | * at 03:00PM | Envelopes
+Integration & Leno rome
+Development of
+Other Modules
+The interest bidders can obtain bidding documents containing terms G conditions, can be
+downloaded from https://portalsindh.epracure.gov.nk/#t/ or www.blek.edupk and the Tender Documents
+fee @Rs.2,000/= (Non-refundable) must be submitted in shape of pay order in favor of Secratary. Baar
+of Intermediate Education, Karachl on any working day as per schedule mentioned above before ontine
+submission deadline of bid on EPADS.
+The preparation of bids must in accordance with the instructions in the bidding documents, and the
+bids must be submitted on EPADS on or before submission deadline as per schedule mentioned above,
+Bids should be submitted electronically through EPADS and original Bids must be submitted in
+Procurement Wing, Administration General Section, Old Building, Ist Floor, Room No.3} before online
+submission deadline of the Bids. Only those bid will be entertained which 1s already submitted on EPADS.
+Allinterest bidders must register themselves At EPADS at,
+bttps:/sindh epracure.gav.nk/#/suppller/registration
+In case of unexpected announcement of holiday, unforeseen situation, climate changing & disaster
+incity, the tender will be opened on next working day on the same venue & time as mentioned above
+Bid Security in shape of pay order in favor of the Secretary, Board of Intermediate Education
+Kerach! must be submitted in Procurement Wing, Administration General Section, Old Building, !* Floor,
+Room No 31 before online submission deadline of the Bids
+<The Procuring Agency may reject all or any bid subject to the relevant provision of SPPRA rules”
+ae
+(PROF, AMEER HUMBAIN GADRI)
+SECRETARY
+1|Page
+@ BOARD OF INTERMEDIATE EDUCATION, KARACHI
+web: www biek.edu.pk , Ph: 99260205, 99260214-19
+INSTRUCTIONS TO BIDDERS &
+GENERAL CONDITIONS OF CONTRAC
+___ The Instructions to Bidders (ITB) and General Conditions of Contract (GCC) applied in
+this Contract shall be the same as per Standard Bidding Documents for Goods, issued by
+SPPRA. For further references the same may be downloaded from SPPRA’s website
+www.pprasindh.gov.pk or it may be provided from this Office if it may be demanded by the
+bidder. Whenever there is a conflict, the provisions hereafter shall prevail over those in the
+Instructions to Bidders & General Conditions of Contract. The corresponding clause number
+of the ITB & GCC is indicated in parentheses
+SECTION - |
+BID DATA SHEET
+INTRODUCTION
+184.4 Name of Contract Procurement Of Enrolment, Examination,
+Certification System Software Support
+With Integration & Development Of
+ITB 4.1 Name of Procuring Agency Board of Intermediate Education,
+Karachi
+ITB 6.1 Procuring Agency's Address, Board of Intermediate Education,
+Telephone, Telex and Facsimile | Bakhtiyari Youth Center North Nazimabad
+Numbers Tel: 99260211, 99260212,
+99260213
+Fax: 99260203 & 99260208
+1788.4 Language of the Bid English or Urdu
+BID PRICE AND CURRENCY
+178 44.2, The price shall be in Pakistani currency inclusive of all Taxes, Transportation,
+and Material and Labour charges involved therein.
+1844.5, During the entire period of bid validity, the price shall be fixed and the
+bidder will have to supply the required items as per specifications and
+quoted rates.
+PREPARATION AND SUBMISSION OF BIDS
+1B 43.3(d) | Qualification 03 years’ experience executing the similar
+Requirements
+job/assignment having similar cost in one or more
+Educational Boards, Universities or any reputed
+Examination conducting authority as well as
+Government Departments.
++ Turn-over of at least last three years having a sum of
+minimum Rs. 10 Million in last 03 years (Coples of
+financial statements / Audit Report be attached.
+‘¢ Registration with Federal Board of Revenue (FBR), for
+Income Tax and Sales Tax in case of procurement of
+2|Page
+web: www.biek.edu.pk , Ph: 99260205, 99260214-19
+goods
+Satisfactory Completion Certificates from 3 reputed
+clients of recent assignments /jobs of similar work.
+# Submission of catalog along with bidding documents Is
+mandatory bids submitted without catalog shall be
+treated as “Non-Responsive”.
+‘An affidavit on stamp paper that the firm has never
+been blacklisted
+1B 15.4 ‘Amount of Bid 3% (Three percent) of the bid price, which should be
+Security submitted in shape of Pay Order in the name of
+(Refundable) Secretary, Board of Intermediate Education Karachi and
+shall remain valid for a period of 28 days beyond the
+ity period for bid.
+1TB 16.1 Bid Validity Period | 90 days from the date of opening of Tender.
+1B 18.2(a) | Address for Bid | The office of the (Procurement Wing), Administration
+Submission General Section, Old Building, 1* Floor, Room No.31,
+Board of Intermediate Education, Karachi.
+ITB 18.2 (b) IFB Title and Title: Procurement Of Enrolment, Examination,
+Number Certification System Software Support With Integration
+& Development Of Other Modules
+1FB No: BIE/AG/L&N/1269 DATED 16-12-2024
+178 19.1 Deadline for Bid | 09-01-2025 at 2:30 PM Sealed bids duly filled-in,
+Submission mentioning on top of the envelope “Procurement Of
+Enrolment, Examination, Certification System
+Software Support With Integration & Development Of
+Other Modules”
+178 22.1 Time, Date and | Bids duly stamped on each document must be
+Place for Bid submitted in the office of the (Procurement Wing)
+Opening Administration General Section Old Building, 1* Floor,
+Room No.31, Board of Intermediate Education, Karachi,
+in a sealed cover on 09-01-2025 up to 02:30 P.M and
+will be opened on the same day at 0: M in the
+presence of bidders’ representatives who wish to
+attend.
+17B25.4(b) | Delivery Schedule | The delivery will have to be made at our site within
+stipulated time as mentioned in the Contract Award.
+Minimum time period will be at least 90 Days after
+issuance of contract award which may be increased or
+decreased due to demand of time/situation as per
+SPPRA Rules.
+3|Page
+(a) BOARD OF INTERMEDIATE EDUCATION, KARACHI
+web: www.biek.edu,pk , Ph: 99260205, 99260214-19
+SECTION - Il
+BID EVALUATION CRITERIA
+* Bids of only those Bidders will be evaluated who can fulfill the Eligibility Criteria and
+enclose Bid Security.
+‘+ Shortcomings in submission of documents related to Eligibility Criteria or non-
+submission of Bid Security shall be rejected.
+* Bids of those bidders treated Non Responsive who fail to submit the Catalog of
+required items at the time of opening of bids.
+* Prior to submission of bids, the bidders may obtain further information from the
+office of Procurement Wing, Administration General Section, Old Building, 1" Floor,
+Room No.31 and completely satisfy themselves about the required items for which
+they are bidding for.
+© An interested bidder, who has obtained bidding documents, may request for
+clarification of contents of the bidding document in writing, and procuring agency
+shall respond to such queries in writing within three calendar days, provided they
+are received at least five calendar days prior to the date of opening of bid.
+* The bidders shall submit only one rate for each item. Dual rates or alternate bid is
+strictly restricted/prohibited. In case a bidder has quoted more than one rate for a
+single item, its bid shall be rejected.
+‘The specification offered by the bidder(s) may vary from the required items because
+the requirements are mentioned on the basis of transitory survey, in such case(s) the
+Procurement Committee shall decide and recommend the offer(s) that may be
+suitable for procuring agency.
+‘© Demonstration of Software and/or Hardware may be made within the premises of
+Board for which supplier shall be liable to bring the same for the said purpose.
+‘© The software firm may be selected according to their experience, projects, and
+expertise on same domain purely on technical backgrounds.
+© The offered products should be prime quality products. Cheap products of low
+quality or substandard shall not be accepted and the said bid shall be treated as
+Irresponsive.
+© Inferior, low quality or substandard products / services will be rejected and Security
+Money shall be forfeited and the bidder may also be blacklisted.
+© Reference to brand name, catalogue number or country where used, they should
+always be read with followed by the words “or at least equivalent”.
+* The bidder with the “Lowest Submitted Price” shall be liable to provide
+specimen/sample of items, if deem necessary, failing which the bid will not be
+evaluated and shall be rejected.
+* The specimen/sample of items as supplied by the bidders of “Lowest Submitted
+Price”, should must be strictly in accordance with the approved specifications,
+4|Page
+BOARD OF INTERMEDIATE EDUCATION, KARACHI
+Fequirement and/or the specimen/sample shown by the procuring agency
+which the bid will not be evaluated and shall be rejected.
+The bidder(s) shall be liable to provide documentary evidence, especially for branded
+products like Dell, HP, Ricoh, Nashuatec etc., in shape of “Manufacturer's Certificate
+or Authorized Distributor Certificate” in case a Bidder Is offering to supply goods
+under the contract which the Bidder did not manufacture or otherwise produce.
+{fa bid is found “Lowest Submitted Price” but the specimen/samples provided by the
+said bidder are found inferior, low quality, substandard products, not up to the
+requirement or fails to provide “Manufacturer's Certificate or Authorized Distributor
+Certificate” (where required), in such case, the said bid shall not be evaluated and
+may be rejected.
+The bidder with the “Lowest Evaluated Cost” but not necessarily the “Lowest
+Submitted Price” shall be awarded the Procurement Contract preferably on quality
+cum rate basi
+In case of intangible products like services or software, so bidder would be qualified
+according to technical criteria according to their submitted required documents.
+5|Page
+/ BOARD OF INTERMEDIATE EDUCATION, KARACHI
+SECTION - III
+SPECIAL CONDITIONS OF CONTRACT
+The following Special Conditions of Contract shall supplement the General
+Conditions of Contract. Whenever there is a conflict, the provisions herein shall prevail over
+those in the General Conditions of Contract. The corresponding clause number of the GCC is
+indicated in parentheses,
+1, DEFINITIONS (GCC CLAUSE 1)
+1) | GCC 1.4 (g) | The Procuring agency is:_| Board of Intermediate Education, Karachi.
+2) |GCC1.1(h) | The Procuring agency's _| Islamic Republic of Pakistan.
+country is:
+3) |Gcc1.1(j)__| The Project Site is: Same as GCC 1.1(g) mentioned above.
+2, COUNTRY OF ORIGIN (GCC CLAUSE 3)
+All countries and territories as indicated in Part Two Section VI of the bidding documents, “Eligibility
+for the Provisions of Goods, Works, and Services in Government-Financed Procurement”
+3. PERFORMANCE SECURITY (GCC CLAUSE 7)
+1) | eec7.2 The amount of performance security, as a percentage of the Contract
+Price, shall be Ten (10) percent of the Contract Price which should be
+submitted in shape of Pay Order in the name of Secretary, Board of
+Intermediate Education Karachi
+4, RESOLUTION OF DISPUTES (GCC CLAUSE 28)
+The dispute resolution mechanism to be applied pursuant to relevant SPPRA Rules.
+5, GOVERNING LANGUAGE (GCC CLAUSE 29)
+1) | 6cc29.1 | The Governing English.
+Language shall be:
+6. NOTICES (GCC CLAUSE 31)
+GCC 31,1 — procuring agency's address for notice purposes:
+Office of the Procurement Wing, Administration General Section, (Chairman's Secretariat
+Ground Floor), Board of Intermediate Education, Karachi.
+7. PENALTY
+1) Preferred penalties according to the issue\subject may be imposed upon the
+Supplier(s) such as:
+i, _ rejection of the unsatisfactory Supplied material
+ji, _ Blacklisting of the firm
+Liquidity damages shall be imposed as per SPPRA Rules.
+iv. forfeiting of whole Security amount
+‘Anyone or more than one from the aforesaid penalties may be imposed upon the
+Supplier(s) in the following cases:
+a) Incase of transgression/deviation of the time given in the Contract Award.
+6|Page
+8.
+1)
+2)
+3)
+4)
+5)
+6)
+7)
+8)
+9)
+b) In case of transgression, deviation, mistake or low quality found in the supplied
+Item(s)
+©) In case the specification, quantity, rate or stuff of a Tender in certain item or items
+are approved and the Bidder backs out of his commitment on any pretext or fails to
+supply the material or complete the job in time or in the required criteria,
+SUBJECT TO RELEVANT SPPRA RULES,
+‘THE COMPETENT AUTHORITY RESERVES THE RIGHT TO:
+(2) Divert/distribute a particular work among different Bidders on the lowest approved
+rate(s) in the interest of the office due to demand of time/situation.
+(b) Accept or reject all or any bid.
+(c) Increase or decrease quantity without any notice at any time/stage subject to ITB
+Clause 29.
+SPECIAL CLAUSE (TERMS & CONDITIONS)
+Under following conditions bid will be rejected:-
+|. Conditional and telegraphic bids/tenders
+ll, Bids not accompanied by Bid Security of required amount and form
+Ill. Bids received after specified date and time
+IV. Bids of Blacklisted firms
+Bids of only those Bidders will be evaluated who can fulfill the Eligibility Criteria and
+or non-
+Shortcomings in submission of documents related to Eligibility Crit
+Prior to submission of bids, the bidders may obtain further information and
+completely satisfy themselves about the required items for which they are bidding
+for.
+‘An interested bidder, who has obtained bidding documents, may request for
+The offered products should be prime quality products. Cheap products of low
+Inferior, low quality or substandard products will be rejected and Security Money
+shall be forfeited and the bidder may also be blacklisted.
+Submitted Price” shall be awarded the Procurement Contract subject to
+compatibility/suitability of the item(s).
+The bidder shall supply the article(s) as per approved specifications mentioned in the
+Contract Award. The article(s) not found in conformity with the approved
+specifications shall be rejected at the risk & cost of the bidder.
+7|\Page
+12)
+13)
+14)
+15)
+16)
+18)
+17)
+The Contract Award may be assigned at any time during the period of bid validity.
+Performance Security:
+GCC3.1 The amount of Performance security is 10% of the Contract Price.
+GCC3.2 After delivery and acceptance of the Goods, the performance security
+shall be released as per SPPRA Rules.
+The amount of Performance Security is in addition to the amount of Bid Security
+which should be deposited by the successful bidder(s). Bid Security shall remain valid
+for a period of 28 days beyond the validity period for bids, whereas Performance
+Security shall be released ninety days beyond the date of completion of contract to
+cover defects liability period subject to final acceptance by the procuring agency in
+accordance with SPPRA Rules.
+Placement of Contract Award will be subject to payment of Performance Security.
+The material shall be delivered to Storekeeper/ Concerned Section Head, through
+the concerned Officers as the case may be, against delivery challan in triplicate. Two
+copies of the bills and challan shall be retained by the Storekeeper while the third
+copy shalll be returned to the supplier for his own record,
+The items should be supplied strictly in accordance with the approved specification.
+The delivery will have to be made at our site within stipulated time as mentioned in
+the Contract Award. Minimum time period will be at least NINETY (90) DAYS after
+issuance of contract award which may be increased or decreased due to demand of
+time/situation.
+The Payment shall be subject to deduction of Income / Sales Tax at source,
+satisfactory report of concerned officer, completion certificate and production of
+delivery challans as being delivered the stores in full quantity & quality.
+‘SPPRA Rules-2010 (Amended) shall strictly be followed.
+10. EQUIVALENCY OF STANDARDS AND CODES.
+Reference to brand name, catalogue number or country where used, they should always be
+read with followed by the words “or at least equivalent.”
+8|Page
+ww. biek.edu.pk , Ph: 99260205, 99260214-19
+SECTION - IV
+SCHEDULE OF REQUIREMENTS
+SCHEDULE OF REQUIREMENTS:
+The delivery will have to be made at our site within stipulated time as mentioned in the
+Contract Award. Minimum time period will be at least 90 days after Issuance of contract
+award which may be increased or decreased due to demand of time/situation.
+MODE OF PAYMEMT
+The currency of payment shall be Pak. Rupees.
+The Supplier's request(s) for payment shall be made to the Board in writing, accompanied
+by an invoice describing, as appropriate, the Goods delivered and Services performed, and
+by documents submitted, and upon fulfillment of other obligations stipulated in the
+Contract.
+Payment shall be made 100% of the Contract Price on complete delivery of awarded items
+to Store(s) within Ninety (90) days on submission of claim supported by Acceptance
+Certificate from the Authorized Officers of the Board declaring Goods have been delivered
+and that all contracted services have been performed.
+Part payment on part supply may be allowed only in case when permitted/approved by the
+Chairman BIE, Karachi,
+9|Page
+a @ BOARD OF INTERMEDIATE EDUCATION, KARACHI
+TECHNICAL SPECIFICATIONS
+PROCUREMENT OF ENROLMENT, EXAMINATION,
+CERTIFICATION SYSTEM SOFTWARE SUPPORT WITH
+INTEGRATION & DEVELOPMENT OF OTHER MODULES
+ITEM NO. 4
+Procurement of Software firm with relevant and proven experience to support of existing
+Enrolment, Examination, and Certification System of any Public or Private Board or
+University. The Software Firm must have sound expertise to deal with following software
+environment:
+DATABASE
+(a) Oracle Database (11g and higher)
+(b) Relational Database Concepts
+(c) Database Architecture, Administration, backup/ recovery & Tuning
+(d) Client Server Architecture
+(e) Expertise in handling PL/SQL and Packages, Procedure, Views, User Defined Types
+(e.g. Object Types), and other related objects and structures.
+(f)_ Expertise of database performance monitoring and optimization
+MICROSOFT DOT NET FRAMEWORK:
+a) MS Dot Net Framework based Applications
+b) Desktop Application with Win Forms
+c) Web Application with ASP.Net Web Forms, ASP.Net MVC
+d) Programming languages: C#, VB.Net, Html, CSS, JavaScript
+e) .Net Report Designer/Viewer for Desktop and Web Applications
+f) Multi-User and Multi-Session Environment
+g) Able to access anywhere via secure user ID
+h) Maintain more than one sessions
+i) Audit Trail
+}) Application Logs
+k)_ Optimization of application performance
+10|Page
+web: www.biek.edu.pk Ph: 99260205, 99260214-19
+ITEM NO,
+VENDOR MAY QUOTE WITH RESIDENT ENGINEERS AND SOFTWARE
+DEVELOPERS FOR THE BELOW REQUIREMENTS
+Procurement of Firm with relevant and proven experience that can provide two resident
+software developers and one infrastructure engineer under its supervision in order to
+provide the following services:
+Services to transform old System into the latest technologies.
+Services to migrate the oracle database version from 11g to the Oracle 22c or 23al. |
+Services to develop Queue Management & Ticket Management System Software and
+integrate with machine as well the existing system to maintain the logs and tracking.
+Services to develop new modules/software in order to enhance the capability and
+capacity of the system.
+Web API Interface for Verification
+Web API Interface for Examination Forms Submission
+Web API Interface for Enrollment Cancellation
+Web API Interface for IBCC Verification Online Services
+Services to develop different modules according to the BIEK future requirements
+vvV
+v
+vvvvv
+SOFTWARE DEVELOPERS TEAM — QTY -02
+Capable to understand the existing architecture of software
+Capable to devise and update the Software documents
+Hands on Experience of coding with Latest web, mobile and desktop technologies on
+Microsoft platform.
+Capable to work on advanced Oracle PL/SQL technology.
+Capable to work on Crystal Reports and able to integrate with the system
+Hands on Experience on the large scale applications
+Capable to hand large database and its load
+Capable to develop WEB APIs
+INFRASTRUCTURE TEAM — QTY -1
+Expertise to maintain the data center and its Standards
+Expertise to maintain the infrastructure related to server and network
+administration
+Hand-on Experience on Server Administration on Windows platform
+Sound knowledge of Server Virtualizations
+Hands-On Experience on Server Migration, Clustering, Replication, administration,
+virtualization with real time backups
+‘Able to manage the update the Disaster Recovery Site.
+Hand-on Experience with latest software of backups and restoration process
+Expertise on Oracle Database Backup and restoration
+‘Able to know about the DevOps and its deployment
+Capable to manage and trouble shoot the Existing and new computer networks
+vv
+VV VYVY
+[Page
+GQ BOARD OF INTERMEDIATE EDUCATION, KARACHI
+> Sound knowledge of dows Shell Scripts and Infrastructure management scripts
+> Hands on Experience on Natting, Sub Netting, Super Netting , VPN and V-LANs
+management through System and routers
+Capable to configure, manage and update the Existing SAN (Storage Area Network)
+and MSA (Media Storage Array)
+Knowledge of Network Security, Scheming and heterogeneous networks
+Hands-on Experience on Firewalls of Cisco, Microtech or Etc.
+J
+we
+IMPORTANT NOTE: The Firm who shall bid on Items # 2, they must have to provide the
+services of Item # 1 as well
+ELIGIBILITY/QUALIFICATION CRITERIA DETAIL
+(MANDATORY REQUIREMENTS}
+Note:
+1
+.. Each and every section ie. Technical, Financial and below mentioned sections should
+be separated by a colored page separator in the bidder's file with the title of the
+section mentioned on the page.
+2, Bidders are required to attach valid certificate(s) and documentary evidences from
+concerned regulatory body / authority for all the below requirements.
+All the Equipment’s / Devices / Appliances / Components / Sub-Components/
+Services should be provided with all related and required accessories with proper
+installation, configuration, deployment, testing and commissioning of the same as
+per needed and as per required
+4, All the work / services should be done on as per actual, as needed and on as
+required basis i.e. software development cabling, placement, deployment,
+installation, configuration and functioning of the same.
+5. Availability of hardware resources in all respect.
+6. Resources should be certified in proposed solution.
+12|Page
+. Gy) BOARD OF INTERMEDIATE EDUCATION, KARACHI
+web: www.biek,edu.pk, Ph: 99260205, 99260214-19
+Ty) bidder's Assignment
+S# | Documents Required eva LNA) .
+J 4 rovi
+1__| Registration of National Tax Number (NTN) of the Company with
+Federal Board of Revenue (FBR)
+Registration of General Sales Tax (GST) with Federal Board of
+Revenue (FBR).
+3 | Valid registration of the company with Sindh Revenue Board (SRB).
+Affidavit that firm is not Blacklisted and involved in any active
+litigation in Pakistan.
+13|Page
+) BOARD OF INTERMEDIATE EDUCATION, KARACHI
+a
+web: www.biek.edu.pk,, Ph: 99260205, 99260214-19
+sections +:
+COMPANY / OEM PROFILE
+S# | Evaluation Criteria Documentary Evidence Required Marks
+B Years or more = 100
+Marks
+7 Years or more = 70
+Company Profile / documentary (eri,
+Years of Establishment | evidence / proof should be
+ae = 5
+of bidders firm attached in the Technical bid for | M@xMarks=100 | 5-7 years = 50 Marks
+verification 3-5 Years = 30 Marks
+Less than 3 Years = 0 Marks
+The Software 3-4 Letter Provided: 100
+| development company es
+2_| work in any Letters Required Max Marks=100 | 1-2 Letter Provided: 50
+Government/Board or 7
+: Letter Not provided: 0
+Public Sector/ MNCs Mine
+The Software 3 Project or more: 100
+development company Marks
+should have the
+3 | capability on Oracle/ | Letters Required Max Marks = 100 ;
+{ASP.NET and show 2 Project: SOMarks
+their deployed
+projects Zero Projects: 0 Marks
+Total: 300 | Marks Obtained:
+SECTION
+FINANCIAL CAPABILITY
+s#| Evaluation Criteria | Documentary Evidence Required Marks
+Pe ea Audited Annual Financial 10 Million = 100 Marks
+Statement with single page Max Marks = —
+1 | tumover ofthe firm | Sorsotdated report showing the. | 100 8 Million = 80 Marks
+forthe last3years | f
+ast 3 years turn over 5 Million = 50 Marks
+Total: 100 | Marks Obtained:
+14|Page
+SECTION 3
+SPECIALIZATION / CORE EXPERTISE IN SOFTWARE DEVELOPMENT
+SH
+Evaluation Criteria
+Documentary Evidence Required
+Software Engineers
+(Professional Level)
+8 or above= 100 Marks
+1 | with at least 8 years of | Team profile required Max Marks = 100
+experience in the ae 7 oars
+relevant field
+2to3=25 Marks
+1 Project = 10 Marks
+The number of
+Software are List of deployed Project: If 10 Projects then = 100
+is rojects in is
+Developed and Pakistan with customer details, | M@*M@rks=100 | racks
+deployed in Pakistan. 50 Project
+Max Mark
+than 10 Projects
+The Bidder must have experience
+for the development and Avonmore prajects=100)
+Experience inthe | deployment of any Examination
+3 | similar workin Public | and Enrollment system at any | Max Marks = 100
+& Private Sector
+Government Universities / Board
+in all over the Pakistan (Provide
+document)
+No projects = 0
+TOTAL MARKS
+300
+Marks Obtained:
+FULL MARKS
+700
+* Minimum marks required for qualification = 70%
+* Technical Committee evaluation weightage = 30%
+15|Page
+a BOARD OF INTERMEDIATE EDUCATION, KARACHI
+web: www.biek.edu.pk, Ph: 99260205, 99260214-19
+Wait Sao Sma Bet
+Daily Times 22. |
+dot tater
+AO WLAD AWA ate
+wat
+don pegibeted sch atatted far eg hasta
+Ceruicatien
+J 81 | Sytem Sotwsry | hsacone
+Supeea Wah
+stuchl of any workry dag
+9 CPA!
+Te preperatlon ol bs
+ody oust be eutm
+ide whguld bo eanitied ectronleuly
+seamclen decallny ef ts Os, OMY th
+2f ilereus bidders ruck rege nareelagy f4 CREM
+Uwips/Alndeptecucn conn i/eupndlochsplt4un
+£49 61 Uneape ted Lungunicruncat of jalsay, girs
+weary the lander will Gy opured cr ead wring Gx7 sth coma dL die Gt
+Utd Secunty to ehopo ul way stor i fovur i Stzzetery, aug 2 I
+Korsenl wet be cukiattol in Procurement Win, Adler Gana &
+{Hoon Ho! uvars cePine evboleston doehe Hy Bhs
+Dus Precurlng fgonp nay exjych ol ony Ud subject Wey rate
+(Prok Aumeet Huszatn Cod
+16|Page
+iG a) BOARD OF INTERMEDIATE EDUCATION, KARACHI
+BS)
+Wiehe
+UN ae
+seman pmo os
+resents reread lyayniesn|
+nn aE ale solydrastdSU 33
+Bea tl DH drt
+Pea PORE] = Dems
+Janelle vat Pa it
+i: aka]
+Bes
+Hy" Bebe sabicl © keel
+| Con fiend pen
+carr mamares
+papier renmnrce
+beerencetime raced
+Bae smeairremetr
+Be aertnon
+Pe ecensanarnert
+kverwenmpnenrratoentrre
+ii eon indeatcit ONS ce Boer
+eRe nore ariel
+lamechorerninirepnnage|
+i pensraurw@lerrae
+asso
+bauteramemrcnarnsen
+Vic neHoe enna ara
+Ercan
+eetineianeeyanceal
+fieremntaresiaiarte
+INemaereo erate
+pereere
+astattietip bag taet
+Veet ntblimbe|
+gy2lh a yu guy)
+sd
+17|Page
+DAILY JANG 24-12-2024
+220021 ATEN.
+INP HY toa 2024
+18|Page
+web: www. biek.edu.ok , Ph: 99260205, 99260214-19
+. ‘ 99260211
+Board of Intermediate Education py ies. J oontieis
+Bakhtiari Youth Center, North Nazimabad, 99260213
+Karachl-74700
+No. BIE/AG/LEN/ Zog74/2024 Dated 16-4- 2624
+ORDER
+CONSTITUTION OF PROCUREMENT COMMITTEE
+FOR IT RELATED ITEMS
+With the approval of competent authority, a “Committee for IT Related Procurement
+saurbrising of the following is hereby constituted in compliance of SPPRA Rule~7, to invite,
+fvaluate and finalize the bids for Procurement of LT related Good & Services for BIE,
+Marachi and recommend the successful bidder /firm to the competent authority for award
+of contract
+1. Mr. Muhammad Shaheer Wagar, Convener
+IT Manager/Oeputy Controller of Examination,
+BIE, Karachi
+2. Mr. Arif Hussain Jalbani, pepe ones
+Assistant Programmer, a
+BIE, Karachi My
+3. Mr, Farhan ittikhar, Member {onl
+Assistant Secretary,
+4, Syed Mansoor Ahmed, Member Ls
+Assistant, IT Manager,
+Sindh Board of Technical Education,
+Karach
+5. Najaf Ali Mughni Member
+System Administrator,
+Abbasi Shaheed Hospital,
+‘TORs;
+1) Preparing and/or reviewing bidding documents,
+2) Carrying out technical as well as financial evaluation of the bids,
+3) Preparing evaluation report as provided in SPPRA rule 45.
+4) Making recommendations for the award of contract to the competent authority,
+5) Perform any other function ancillary and incidental to the above,
+7
+(SHUJAAT HASHMI)
+‘SECRETARY (ACTING)
+19|Page
+. 99260211
+Board of Intermediate Education phones: df 99260212
+baldhtiarl Youth Center, North Nazimabad, 99260213
+Karachi 74700 Ay
+No. BIE/AG/LEN//o 5/2024 Dated: 25-01-2024
+NOTIFICATION
+In pursuance of Rute-31 of Sindh Public Procurement Rules 2010, with the approval of
+the competent authority, @ “COMPLAINT REORESSAL COMMITTEE, comprising the
+follow
+9, 15 hereby conslituled to address the complaint of bidders thal may occur during
+the procurement proceedings:
+in | MULAMMAD KASHIF SINDIQUE
+Convener
+Director Public Relation & Information (GPS-19}
+93
+|
+| 02
+is
+7 \
+Representative of the Account General Sindy lember
+An independent professional from the relevant teld
+concerning the procurement process n question, to be
+nomineted by Ine Chairman Board of Intermediate
+Education, Karachi
+IMember
+Terms.of Reference:
+On receipt a complaint Irom an aggrieved bidder may, f sat
+ied.
+Prohilyt the Procurement Commitee trom acting of deciding in 2 manner,
+inconsistent with SPPRA r ules and regulaticns;
+Annul in whole of on parl, 3 rherized act or decision of the Procurement
+Committe:
+Reverse any decision el the Procurement Committee or substitute its own decision.
+for suce a decision, v
+May os
+pravide any record retevant the complaint or hiding,
+Shall arnaunce its
+ivi within seven days reczipl af 8 complaint,
+Cees TDD.
+(HAROON RASHID)
+SCCRETARY (OFFICIATING)
+20|Page
+* BOARD OF INTERMEDIATE
+- NATIONAL COMPETITIVE BIDDING
+MNVOCE IN WEVE OPE Se PRO) Cres iC RE:
+Dated: 16-12-2024
+om VOLUME-II
+FINANCIAL PROPOSAL
+web: www.biek.edu, pk, Ph: 99260205, 99260214-19
+Dates
+ICBO:
+Invitation for Bid No.
+Alternative Nos
+The Deputy Secretary (Administration General)
+Board of intermediate Education,
+North Nazimabad,
+We, the undersigned, declare that:
+We have examined and have no reservations to the Bidding Document, including Addenda
+No.: ;
+(2) We offer to supply in conformity with the Bidding Document and In accordance with
+the delivery schedule specified in the Schedule of Supply, the Goods and Related
+Services.
+{b) The total price of our Bid, excluding any discounts offered in item (d) below Is:
+Rs. (Rupees. i
+(c)_ The discounts offered and the methodology for their application are:
+(4) Our Bid shall be valid for a period of 90 days from the date fixed for the bid
+submission deadline in accordance with the Bidding Document, and it shall remain
+nding upon us and may be accepted at any time before the expiration of that
+period;
+(e) [four Bid is accepted, we commit to obtain a Performance Security @ 10% of the
+Contract Price for the due performance of the Contract;
+(8) Our firm, including any subcontractors or suppliers for any part ofthe Contract, have
+nationalities from these eligible countries;
+(g) We are not participating, as Bidders, in more than one Bid in this bidding process,
+other than alternative offers in accordance with the Bidding Documents;
+(h) Our firm, its affiliates or subsidiaries, including any subcontractors or suppliers for
+any part of the contract, has not been declared ineligible by the Government;
+0}
+i)
+(k)
+(m)
+(n)
+Date
+The following commissions, or fees have been paid or are to be paid with respect to
+the bidding process or execution of the Contract:
+Name of Receipt Address Reason Amount
+(If none has been paid or is to be paid, indicate “none.”)
+We understand that this Bid, together with your written acceptance thereof included
+in your notification of award, shall constitute a binding contract between us, until a
+formal Contract is prepared and executed.
+We understand that you are not bound to accept the lowest evaluated bid or any
+other bid that you may receive.
+Name.
+In the capacity of. }
+Signed
+Duly authorized to sign the security for and on behalf of.
+PROCUREMENT OF ENROLMENT,
+EXAMINATION, CERTIFICATION SYSTEM
+SOFTWARE SUPPORT WITH INTEGRATION &
+DEVELOPMENT OF OTHER MODULES
+ITEM NO:
+Cost Per Month [Rs.
+ITEM NO:2 Cost Per Month Rs
+NT ‘As mentioned above that if you are applying for Item No: 2 then then Item
+No: 1 requirements must be covered
+The contract length is required for one year and will be increase to further
+Contract Length years up to next three years subject to the requirements and performance
+of the Contractor / Software Firm.
+web: www. biek.edu, pk , Ph: 99260205, 99260214-19
+Rupees In Words
+Rupees in Figures
+Total cost of the Bid:
+(as offered by the Bidder)
+3% (Three percent) amount
+of the Bid Price
+Bid Security (Refundable)
+10% (ten percent) amount
+of the Contract Price
+Performance Security
+[ (Refundable)
+@)
+CONTRACT AGREEMENT
+THIS AGREEMENT made the day of 2025 between [name
+and address of Procuring Agency] of Pakistan (hereinafter called “the Procuring
+Agency”) of the one part and [name of Supplier] of [city and country of
+Supplier](hereinafter called “the Supplier”) of the other part:
+WHEREAS the Procuring Agency invited Bids for certain goods and zelated
+services, viz., [brief description of goods and services] and has accepted a Bid by the
+Supplier for the supply of those goods and related services in the sum of [contract
+price in words and figures] (hereinafter called “the Contract Price”).
+NOW THIS CONTRACT WITNESSETH AS FOLLOWS:
+« In this Contract words and expressions shall have the same meanings as are respectively
+assigned to them in the Conditions of Contract referred to.
+‘The following documents shall be deemed to form and be read and construed as part of this
+Contract, In the event of any ambiguity or conflict between the Contract Documents listed
+below, the order of precedence shall be the order in which the Contract Documents are listed
+below:~
+a. This form of Contract;
+b. the Form of Bid and the Price Schedule submitted by the Bidder;
+¢. the Schedule of Requirements;
+d_ the Technical Specifications;
+€. the Special Conditions of Contract;
+f, the General Conditions of the Contract;
+g. the Procuring Agency’s Letter of Acceptance; and
+h [add here: any other documents}
+. In consideration of the payments to be made by the Procuring Agency to the Supplier as
+hereinafter mentioned, the Supplier hereby covenants with the Procuring Agency to provide
+the goods and related services and to remedy defects therein in conformity in all respects
+with the provisions of the Contract
+. The Procuring Agency hereby covenants to pay the Supplier in consideration of the
+provision of the goods and related services and the remedying of defects therein, the
+Contract Price or such other sum as may become payable under the provisions of the
+contract at the times and in the manner prescribed by the contract,
+a)
+°)
+))
+web: www. biek.edu. pk , Ph: 99260205, 99260214-19
+REMUNERATION
+The cost offered by the Supplier is Rs. J= (Rupees
+Only) (inclusive of all taxes) supply of goods and relevant services vide tender #
+BIEK/AG/L&N/1269/2024 variation may occurred. The cost is inclusive of,
+labour/transportation/supplies/ete,
+Liquidity damages as per SPPRA Rules
+The Payment shall be subject to deduction of Income / Sales Tax at source, Satisfactory
+report of concemed officer, completion certificate and production of delivery challans as
+being delivered the stores in full quantity & quality.
+Performance Security 10% of value of contract amount will be provided by the party.
+Stamp Duty @ 0.35% of the cost of transaction / Work order will be deposited in
+Government treasury by the SUPPLIER. This paid Stamp Duty challan would be submitted
+along with the Bill / Invoice.
+Tax(es) Challan(s) / Levy(ies). If any on additional will be paid / borne by SUPPLIER as per
+SRO Notification
+Alll terms and conditions of tender vide # BIE/AG/L&N/1269/2024 will be the integral part
+of this agreement and can’t be revoked.
+IN WITNESS whereof the parties hereto have caused this Contract to be executed in accordance
+with their respective laws the day and year first above written,
+“Board of Intermediate Education, Karachi” Mis.
+NAME NAME;
+CNICH CNIC #
+Signatur Address:
+Signature:
+WITNESS: 1 WITNESS: 2
+NAME: NAME:
+CNIC# CNIC #
+Address: Address;
+Signature: Signature:
+web: www, biek.edu.pk , Ph: 99260205, 99260214-19
+INTEGRITY PACT
+Declaration of Charges, Fees, Commission, Taxes, Levies etc payable by the contractor;
+M/s,
+(a)
+(b)
+(o)
+(d)
+the contract hereby declares th
+Its intention not to obtain the procurement work of any Contract, right, interest,
+Privilege, or other obligation or benefit from the BIEK or any administrative or
+financial offices thereof or any other department under the control of the BIEK
+through any corrupt practice(s).
+Without limiting the generality of the forgoing the contractor represents and
+Warrants that it has fully declared the charges, fees, commission, taxes, levies etc,
+paid or payable to anyone and not given or agreed to give and shall not give or agree
+to give to anyone within the BIEK directly or indirectly through any means any
+commission, gratification, bribe, gifts, kickback whether described as consultation
+fee or otherwise, with the object of obtaining or including the procurement or
+service contract or order or other obligations whatsoever from the BIEK, except that
+which has been expressly declared pursuant hereto.
+He contractor accepts full responsibility and strict liability for making any false
+declaration/statement, not making full disclosure, misrepresenting facts or taking
+any action likely to degrade the purpose of declaration, representation and
+warranty. It agrees that any contract/order obtained aforesaid shall without
+prejudice to any other right & remedies available to the BIEK under any law, contact,
+or other instrument, be stand void at the discretion of the BIEK.
+Notwithstanding any right and remedies exercised by the BIEK in this regard,
+contractor agrees to indemnify the BIEK for any loss or damage incurred by it on
+account of its corrupt business practice & further pay compensation to the BIEK in
+any amount equivalent to the loss of any commission, gratification, bribe, gifts,
+kickback given by the contractor as aforesaid for the purpose of obtaining or
+inducing procurement/ work/ service or other obligation or benefit in whatsoever
+from the BIEK.
+This integrity pact is mandatory requirement other than auxiliary services / works.
+7|Page

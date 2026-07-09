@@ -1,145 +1,93 @@
+from __future__ import annotations
+
+import argparse
+import hashlib
 import json
 import os
 import re
+import sys
 import time
+from pathlib import Path
 from urllib.parse import urljoin, urlparse
 
 import requests
 from bs4 import BeautifulSoup
+try:
+    import trafilatura
+except ImportError:  # pragma: no cover - handled at runtime when dependency is missing
+    trafilatura = None
 
-# ── Config ──────────────────────────────────────────────────────────────────
-BASE_URL = "https://synapsetechinc.com"
-ALLOWED_DOMAINS = {"synapsetechinc.com", "www.synapsetechinc.com"}
+_ROOT_DIR = Path(__file__).resolve().parents[1]
+_SCRIPTS_DIR = _ROOT_DIR / "scripts"
+if str(_SCRIPTS_DIR) not in sys.path:
+    sys.path.insert(0, str(_SCRIPTS_DIR))
 
-SEED_URLS = [
-    "https://synapsetechinc.com/",
-    "https://synapsetechinc.com/about-us/",
-    "https://synapsetechinc.com/product/",
-    "https://synapsetechinc.com/product/irecruit-one/",
-    "https://synapsetechinc.com/product/agentic-bot/",
-    "https://synapsetechinc.com/product/coversaction-ai/",
-    "https://synapsetechinc.com/product/opira-ai/",
-    "https://synapsetechinc.com/product/cyber-security-automation/",
-    "https://synapsetechinc.com/services/",
-    "https://synapsetechinc.com/services/automation/",
-    "https://synapsetechinc.com/services/cloud-ai/",
-    "https://synapsetechinc.com/services/custom-development/",
-    "https://synapsetechinc.com/services/voice-agent/",
-    "https://synapsetechinc.com/industries/",
-    "https://synapsetechinc.com/industries/banking-and-financial/",
-    "https://synapsetechinc.com/industries/cyber-security/",
-    "https://synapsetechinc.com/industries/bpo-contact-centers/",
-    "https://synapsetechinc.com/industries/retail-e-commerce/",
-    "https://synapsetechinc.com/blogs/",
-    "https://synapsetechinc.com/contact-us/",
-]
+from kb_paths import cleaned_data_dir
+from site_profiles import SITE_PROFILES, SiteProfile, get_site_profile
 
-RAW_DIR = "data/raw"
-OUTPUT_DIR = os.path.join(RAW_DIR, "cleaned-data")
-JSON_OUTPUT_PATH = os.path.join(OUTPUT_DIR, "scraped.json")
-MAX_PAGES = 100
-DELAY = 1.0
-TIMEOUT = 20
-MIN_CONTENT_LENGTH = 80
 
-HEADERS = {
-    "User-Agent": (
-        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
-        "AppleWebKit/537.36 (KHTML, like Gecko) "
-        "Chrome/124.0.0.0 Safari/537.36"
-    ),
-    "Accept": (
-        "text/html,application/xhtml+xml,application/xml;q=0.9,"
-        "image/avif,image/webp,*/*;q=0.8"
-    ),
-    "Accept-Language": "en-US,en;q=0.9",
-    "Cache-Control": "no-cache",
-    "Pragma": "no-cache",
-    "Referer": BASE_URL + "/",
+BIEK_DROP_LINE_PATTERNS = (
+    "© 2026 board of intermediate education karachi",
+    "all rights reserved",
+    "every year conducting about 375,000 candidates examination",
+    "every year conducting about 375,000 candidates examination!, assessments & results",
+    "mega events, students results declaration, medal award ceremony",
+)
+BIEK_HOMEPAGE_BLEED_PATTERNS = (
+    "the board has announced to get any type of form online",
+    "board of interemdiate education karachi has introduced a unique and advanced vertificaiton system",
+    "board of intermediate education karachi is now developed an one pager form",
+    "board of intermediate education karachi has introduced a online banking system",
+    "board of intermediate education it department has devised the international pattern of marksheet",
+)
+BIEK_EXPECTED_SIGNALS = {
+    "homepage": ("student", "board", "form", "model paper", "fee", "karachi"),
+    "contact": ("contact", "phone", "email", "address", "board office", "fax"),
+    "history": ("history", "ordinance", "university", "education", "board", "established"),
+    "affiliation": ("affiliation", "affiliated", "college", "recognition", "institution"),
+    "forms": ("form", "forms", "download", "voucher", "verification", "registration", "fee"),
+    "datesheet": ("date sheet", "datesheet", "exam", "examination", "schedule", "hsc"),
+    "committee": ("committee", "member", "chairman", "secretary", "board"),
+}
+BIEK_MISMATCH_SIGNALS = {
+    "contact": ("ordinance", "vice-chancellor", "sharif commission"),
+    "affiliation": ("ordinance", "vice-chancellor", "sharif commission"),
+    "committee": ("ordinance", "vice-chancellor", "sharif commission"),
+}
+BIEK_MOJIBAKE_REPLACEMENTS = {
+    "âWest": "West",
+    "â€™": "'",
+    "â€œ": '"',
+    "â€": '"',
+    "â€": '"',
+    "â": "",
 }
 
-SKIP_PATTERNS = [
-    "/cdn-cgi/",
-    "/wp-",
-    ".pdf",
-    ".jpg",
-    ".jpeg",
-    ".png",
-    ".svg",
-    ".webp",
-    "/careers/",
-    "/jobs/",
-    "/login",
-    "/logout",
-    "javascript:",
-    "mailto:",
-    "#",
-    "/zh-cn",
-    "/pt-br",
-    "/es-",
-    "/de-",
-    "/fr-",
-]
-
-NOISE_SELECTORS = [
-    "script",
-    "style",
-    "noscript",
-    "iframe",
-    "svg",
-    "form",
-    "button",
-    "nav",
-    "footer",
-    "header",
-    ".menu",
-    ".navigation",
-    ".nav",
-    ".footer",
-    ".header",
-    ".breadcrumbs",
-    ".breadcrumb",
-    ".cookie",
-    ".popup",
-    ".modal",
-    ".newsletter",
-]
-
-MAIN_SELECTORS = [
-    "main",
-    "article",
-    "[role='main']",
-    ".elementor-location-single",
-    ".elementor-location-archive",
-    ".elementor-widget-theme-post-content",
-    ".site-main",
-    "#content",
-    ".content",
-    ".page-content",
-    ".entry-content",
-]
-
-
-# ── Helpers ──────────────────────────────────────────────────────────────────
 
 def normalize_url(url: str) -> str:
     parsed = urlparse(url)
+    scheme = parsed.scheme or "https"
+    netloc = parsed.netloc.lower()
+    if netloc in {"biek.edu.pk", "www.biek.edu.pk"}:
+        scheme = "https"
+        netloc = "www.biek.edu.pk"
     path = parsed.path.rstrip("/") or "/"
-    return f"{parsed.scheme}://{parsed.netloc}{path}"
+    return f"{scheme}://{netloc}{path}"
 
 
-def should_skip(url: str) -> bool:
-    return any(pattern in url for pattern in SKIP_PATTERNS)
+def should_skip(url: str, profile: SiteProfile) -> bool:
+    lowered = url.lower()
+    return any(pattern.lower() in lowered for pattern in profile.skip_patterns)
 
 
-def is_same_domain(url: str) -> bool:
+def is_same_domain(url: str, profile: SiteProfile) -> bool:
     parsed = urlparse(url)
-    return parsed.netloc in ALLOWED_DOMAINS or parsed.netloc == ""
+    return parsed.netloc in profile.allowed_domains or parsed.netloc == ""
 
 
-def make_session() -> requests.Session:
+def make_session(profile: SiteProfile) -> requests.Session:
     session = requests.Session()
-    session.headers.update(HEADERS)
+    session.headers.update(profile.headers)
     return session
 
 
@@ -156,6 +104,12 @@ def slugify_url(url: str) -> str:
     return slug or "page"
 
 
+def unique_slug_for_url(url: str) -> str:
+    slug = slugify_url(url)
+    digest = hashlib.sha1(url.encode("utf-8")).hexdigest()[:8]
+    return f"{slug}-{digest}"
+
+
 def clean_lines(lines: list[str]) -> list[str]:
     cleaned = []
     seen = set()
@@ -165,7 +119,6 @@ def clean_lines(lines: list[str]) -> list[str]:
         if not line:
             continue
 
-        # Drop exact duplicates that often come from repeated UI blocks.
         lowered = line.lower()
         if lowered in seen:
             continue
@@ -176,131 +129,361 @@ def clean_lines(lines: list[str]) -> list[str]:
     return cleaned
 
 
-def extract_text(soup: BeautifulSoup) -> str:
-    for selector in NOISE_SELECTORS:
-        for tag in soup.select(selector):
+def normalized_text(text: str) -> str:
+    if not text:
+        return ""
+    lines = text.splitlines()
+    cleaned = clean_lines(lines)
+    return "\n".join(cleaned)
+
+
+def normalize_mojibake(text: str) -> str:
+    fixed = text
+    for bad, good in BIEK_MOJIBAKE_REPLACEMENTS.items():
+        fixed = fixed.replace(bad, good)
+    return fixed
+
+
+def biek_page_kind(url: str) -> str:
+    path = urlparse(url).path.lower()
+    if path.endswith("/default.asp") or path == "/" or path.endswith("/home.asp"):
+        return "homepage"
+    if "contact" in path:
+        return "contact"
+    if "history" in path:
+        return "history"
+    if "affcoll" in path or "affiliation" in path or "recognition" in path:
+        return "affiliation"
+    if "form" in path or "voucher" in path:
+        return "forms"
+    if "datesheet" in path:
+        return "datesheet"
+    if "committee" in path or "member" in path or "chairman" in path:
+        return "committee"
+    return "generic"
+
+
+def clean_biek_text(url: str, title: str, text: str) -> str:
+    page_kind = biek_page_kind(url)
+    working = normalize_mojibake(text)
+    kept_lines: list[str] = []
+
+    for raw_line in working.splitlines():
+        line = re.sub(r"\s+", " ", raw_line).strip()
+        if not line:
+            continue
+
+        lowered = line.lower()
+        if any(pattern in lowered for pattern in BIEK_DROP_LINE_PATTERNS):
+            continue
+        if page_kind != "generic" and any(pattern in lowered for pattern in BIEK_HOMEPAGE_BLEED_PATTERNS):
+            continue
+        if page_kind == "homepage" and (
+            "ordinance number iii of 1962" in lowered
+            or "vice-chancellor" in lowered
+            or "on 8 january 1962" in lowered
+        ):
+            continue
+        if page_kind in {"affiliation", "committee"} and (
+            "ordinance number iii of 1962" in lowered
+            or "vice-chancellor" in lowered
+            or "sharif commission" in lowered
+            or "on 8 january 1962" in lowered
+        ):
+            continue
+        if page_kind == "contact" and ("ordinance number iii of 1962" in lowered or "vice-chancellor" in lowered):
+            continue
+
+        kept_lines.append(line)
+
+    cleaned = normalized_text("\n".join(kept_lines))
+
+    if page_kind == "homepage":
+        homepage_lines: list[str] = []
+        for line in cleaned.splitlines():
+            lowered = line.lower()
+            if "board of intermediate education karachi on 8 january 1962" in lowered:
+                continue
+            homepage_lines.append(line)
+        cleaned = normalized_text("\n".join(homepage_lines))
+
+    return cleaned
+
+
+def validate_biek_text(url: str, text: str, profile: SiteProfile) -> tuple[bool, str]:
+    if len(text) < profile.min_content_length:
+        return False, "below_min_content_length"
+
+    page_kind = biek_page_kind(url)
+    lowered = text.lower()
+
+    if page_kind == "generic":
+        return True, "generic_ok"
+
+    expected_hits = sum(1 for token in BIEK_EXPECTED_SIGNALS.get(page_kind, ()) if token in lowered)
+    mismatch_hits = sum(1 for token in BIEK_MISMATCH_SIGNALS.get(page_kind, ()) if token in lowered)
+
+    if page_kind == "homepage":
+        if expected_hits < 2:
+            return False, "missing_homepage_signals"
+        return True, "homepage_ok"
+
+    if page_kind == "contact":
+        if expected_hits == 0:
+            return False, "missing_contact_signals"
+        if mismatch_hits >= 2:
+            return False, "history_bleed_on_contact_page"
+        return True, "contact_ok"
+
+    if page_kind in {"affiliation", "committee"}:
+        if expected_hits == 0:
+            return False, f"missing_{page_kind}_signals"
+        if mismatch_hits >= 1:
+            return False, f"history_bleed_on_{page_kind}_page"
+        return True, f"{page_kind}_ok"
+
+    if page_kind in {"history", "forms", "datesheet"}:
+        if expected_hits == 0:
+            return False, f"missing_{page_kind}_signals"
+        return True, f"{page_kind}_ok"
+
+    return True, "ok"
+
+
+def finalize_extracted_text(
+    *,
+    profile: SiteProfile,
+    url: str,
+    title: str,
+    text: str,
+) -> tuple[str, bool, str]:
+    cleaned = normalized_text(text)
+    if profile.name != "biek":
+        return cleaned, len(cleaned) >= profile.min_content_length, "generic"
+
+    cleaned = clean_biek_text(url, title, cleaned)
+    is_valid, reason = validate_biek_text(url, cleaned, profile)
+    return cleaned, is_valid, reason
+
+
+def extract_text_fallback(soup: BeautifulSoup, profile: SiteProfile) -> str:
+    working_soup = BeautifulSoup(str(soup), "lxml")
+
+    for selector in profile.noise_selectors:
+        for tag in working_soup.select(selector):
             tag.decompose()
 
     main = None
-    for selector in MAIN_SELECTORS:
-        main = soup.select_one(selector)
+    for selector in profile.main_selectors:
+        main = working_soup.select_one(selector)
         if main:
             break
 
     if main is None:
-        main = soup.body
+        main = working_soup.body
 
     if main is None:
         return ""
 
     lines = main.get_text(separator="\n").splitlines()
-    cleaned = clean_lines(lines)
-    return "\n".join(cleaned)
+    return "\n".join(clean_lines(lines))
 
 
-def extract_links(soup: BeautifulSoup, current_url: str) -> list[str]:
+def extract_text_with_trafilatura(html: str, url: str) -> str:
+    if trafilatura is None:
+        return ""
+
+    extracted = trafilatura.extract(
+        html,
+        url=url,
+        favor_precision=True,
+        include_links=False,
+        include_tables=False,
+        include_images=False,
+    )
+    return normalized_text(extracted)
+
+
+def extract_text(
+    html: str,
+    soup: BeautifulSoup,
+    profile: SiteProfile,
+    url: str,
+    title: str,
+) -> tuple[str, str, str]:
+    primary_text = extract_text_with_trafilatura(html, url)
+    primary_text, primary_valid, primary_reason = finalize_extracted_text(
+        profile=profile,
+        url=url,
+        title=title,
+        text=primary_text,
+    )
+    if primary_valid:
+        return primary_text, "trafilatura", primary_reason
+
+    fallback_text, fallback_valid, fallback_reason = finalize_extracted_text(
+        profile=profile,
+        url=url,
+        title=title,
+        text=extract_text_fallback(soup, profile),
+    )
+    if fallback_valid:
+        return fallback_text, "beautifulsoup_fallback", fallback_reason
+
+    final_reason = f"trafilatura:{primary_reason};fallback:{fallback_reason}"
+    return "", "empty", final_reason
+
+
+def extract_links(soup: BeautifulSoup, current_url: str, profile: SiteProfile) -> list[str]:
     links = []
 
     for a_tag in soup.find_all("a", href=True):
         href = a_tag["href"].strip()
+        if not href or href == "#":
+            continue
+
         full_url = normalize_url(urljoin(current_url, href).split("#")[0])
 
-        if is_same_domain(full_url) and not should_skip(full_url):
+        if is_same_domain(full_url, profile) and not should_skip(full_url, profile):
             links.append(full_url)
 
     return sorted(set(links))
 
 
-def write_text_file(url: str, title: str, text: str) -> str:
-    filename = f"{slugify_url(url)}.txt"
-    path = os.path.join(OUTPUT_DIR, filename)
+def write_text_file(url: str, title: str, text: str, output_dir: Path) -> str:
+    filename = f"{unique_slug_for_url(url)}.txt"
+    path = output_dir / filename
 
-    with open(path, "w", encoding="utf-8") as f:
+    with path.open("w", encoding="utf-8") as f:
         f.write(f"{title}\n")
         f.write(f"URL: {url}\n\n")
         f.write(text)
         f.write("\n")
 
-    return path
+    return str(path)
 
 
-def fetch_page(session: requests.Session, url: str) -> requests.Response:
-    return session.get(url, timeout=TIMEOUT, allow_redirects=True)
+def reset_output_dir(output_dir: Path) -> None:
+    output_dir.mkdir(parents=True, exist_ok=True)
+    for path in output_dir.glob("*.txt"):
+        path.unlink()
+    json_path = output_dir / "scraped.json"
+    if json_path.exists():
+        json_path.unlink()
 
 
-# ── Main Crawler ─────────────────────────────────────────────────────────────
+def fetch_page(session: requests.Session, url: str, profile: SiteProfile) -> requests.Response:
+    return session.get(url, timeout=profile.timeout, allow_redirects=True)
 
-def crawl(start_url: str, seed_urls: list[str] | None = None):
-    os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-    session = make_session()
+def crawl(profile: SiteProfile, max_pages: int | None = None) -> list[dict]:
+    output_dir = cleaned_data_dir(profile.output_domain)
+    json_output_path = output_dir / "scraped.json"
+    page_limit = max_pages or profile.max_pages
+
+    os.makedirs(output_dir, exist_ok=True)
+
+    session = make_session(profile)
     visited = set()
-    queue = [normalize_url(url) for url in (seed_urls or [start_url])]
+    queue = [normalize_url(url) for url in profile.seed_urls]
     scraped_pages = []
 
-    print(f"Starting crawl from: {start_url}")
-    print(f"Max pages: {MAX_PAGES}\n")
+    print(f"Starting crawl for site profile: {profile.name}")
+    print(f"Base URL: {profile.base_url}")
+    print(f"Output dir: {output_dir}")
+    print(f"Max pages: {page_limit}\n")
 
-    while queue and len(visited) < MAX_PAGES:
+    while queue and len(visited) < page_limit:
         url = queue.pop(0)
 
         if url in visited:
             continue
 
         visited.add(url)
-        print(f"[{len(visited)}/{MAX_PAGES}] Scraping: {url}")
+        print(f"[{len(visited)}/{page_limit}] Scraping: {url}")
 
         try:
-            response = fetch_page(session, url)
+            response = fetch_page(session, url, profile)
         except requests.exceptions.RequestException as e:
-            print(f"  ❌ Request failed: {e}")
+            print(f"  Request failed: {e}")
             continue
 
         if response.status_code != 200:
-            print(f"  ⚠️  Skipping (status {response.status_code})")
+            print(f"  Skipping (status {response.status_code})")
             continue
 
         content_type = response.headers.get("Content-Type", "")
         if "text/html" not in content_type:
-            print("  ⚠️  Skipping (non-HTML response)")
+            print("  Skipping (non-HTML response)")
             continue
 
         soup = BeautifulSoup(response.text, "lxml")
         title = soup.title.get_text(strip=True) if soup.title else url
-        text = extract_text(soup)
+        text, extractor_used, validation_reason = extract_text(
+            response.text,
+            soup,
+            profile,
+            url,
+            title,
+        )
 
-        if len(text) < MIN_CONTENT_LENGTH:
-            print(f"  ⚠️  Skipping (too little content: {len(text)} chars)")
+        if len(text) < profile.min_content_length:
+            print(
+                f"  Skipping (too little/invalid content: {len(text)} chars, "
+                f"reason={validation_reason})"
+            )
             continue
 
-        saved_path = write_text_file(url, title, text)
+        saved_path = write_text_file(url, title, text, output_dir)
         page_data = {
             "url": url,
             "title": title,
             "content": text,
             "text_file": saved_path,
+            "extractor": extractor_used,
+            "validation": validation_reason,
         }
         scraped_pages.append(page_data)
 
-        new_links = extract_links(soup, url)
+        new_links = extract_links(soup, url, profile)
         for link in new_links:
             if link not in visited and link not in queue:
                 queue.append(link)
 
-        print(f"  ✅ Saved {saved_path} ({len(text)} chars) | Queue: {len(queue)}")
-        time.sleep(DELAY)
+        print(
+            f"  Saved {saved_path} ({len(text)} chars, extractor={extractor_used}, "
+            f"validation={validation_reason}) | "
+            f"Queue: {len(queue)}"
+        )
+        time.sleep(profile.delay)
 
-    with open(JSON_OUTPUT_PATH, "w", encoding="utf-8") as f:
+    with json_output_path.open("w", encoding="utf-8") as f:
         json.dump(scraped_pages, f, indent=2, ensure_ascii=False)
 
-    print(f"\n{'─' * 50}")
-    print(f"✅ Done! Scraped {len(scraped_pages)} pages")
-    print(f"📁 Text files saved in: {OUTPUT_DIR}")
-    print(f"📁 JSON index saved to: {JSON_OUTPUT_PATH}")
+    print(f"\n{'-' * 50}")
+    print(f"Done. Scraped {len(scraped_pages)} pages")
+    print(f"Text files saved in: {output_dir}")
+    print(f"JSON index saved to: {json_output_path}")
     return scraped_pages
 
 
-# ── Entry Point ───────────────────────────────────────────────────────────────
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Scrape a configured site profile.")
+    parser.add_argument(
+        "--site",
+        choices=sorted(SITE_PROFILES),
+        default="synapse",
+        help="Which configured site profile to scrape.",
+    )
+    parser.add_argument(
+        "--max-pages",
+        type=int,
+        default=None,
+        help="Optional page limit override.",
+    )
+    return parser.parse_args()
+
 
 if __name__ == "__main__":
-    crawl(BASE_URL, seed_urls=SEED_URLS)
+    args = parse_args()
+    crawl(get_site_profile(args.site), max_pages=args.max_pages)

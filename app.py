@@ -80,6 +80,10 @@ MODEL_OPTIONS: dict[str, dict[str, Any]] = {
     },
 }
 DEFAULT_MODEL_LABEL = "Synapse Qwen 2.5 1.5B V2"
+KNOWLEDGE_SOURCE_OPTIONS = {
+    "Synapse KB": "synapse",
+    "BIEK KB": "biek",
+}
 
 ANSWER_MODES = {
     "Base": "base_plain",
@@ -486,42 +490,18 @@ def answer_question(
     rag_generated: bool,
     combined_planning: bool,
     fast_rag: bool,
+    knowledge_domain: str,
     temperature: float,
     max_tokens: int,
 ) -> dict[str, Any]:
     aw.RAG_GENERATE_ORDINARY_ANSWERS = rag_generated
     aw.RAG_COMBINED_PLANNING = combined_planning
     aw.RAG_FAST_MODE = fast_rag
+    normalized_knowledge_domain = (knowledge_domain or "synapse").strip().lower() or "synapse"
     base_model = model_config["base_model"]
     fine_tuned_model = model_config.get("fine_tuned_model")
     selected_model = selected_model_for_mode(model_config, answer_mode)
-
-    bypass = quick_bypass(question)
-    if bypass is not None:
-        return bypass
-
-    purchase_bypass = purchase_response(question, messages)
-    if purchase_bypass is not None:
-        return purchase_bypass
-
-    if is_valid_product_deployment_question(question):
-        scope_result = {
-            "scope": "direct_synapse",
-            "intent_validity": "valid",
-            "entity": canonical_product_name(question) or "",
-            "confidence": 1.0,
-            "reason": "This is a valid deployment question about a named Synapse product.",
-        }
-    elif selected_model is not None:
-        scope_result = classify_scope(question, selected_model)
-    else:
-        scope_result = None
-
-    if scope_result is not None:
-        if scope_result["intent_validity"] == "invalid":
-            return invalid_intent_response(scope_result)
-        if scope_result["scope"] == "out_of_scope":
-            return out_of_scope_response(question, scope_result)
+    rag_mode = answer_mode in {"base_rag", "fine_tuned_rag"}
 
     if answer_mode == "base_plain":
         return ollama_plain_answer(
@@ -545,9 +525,40 @@ def answer_question(
             max_tokens=max_tokens,
         )
 
+    bypass = quick_bypass(question)
+    if bypass is not None:
+        return bypass
+
+    if rag_mode and normalized_knowledge_domain != "synapse":
+        scope_result = None
+    else:
+        purchase_bypass = purchase_response(question, messages)
+        if purchase_bypass is not None:
+            return purchase_bypass
+
+        if rag_mode and is_valid_product_deployment_question(question):
+            scope_result = {
+                "scope": "direct_synapse",
+                "intent_validity": "valid",
+                "entity": canonical_product_name(question) or "",
+                "confidence": 1.0,
+                "reason": "This is a valid deployment question about a named Synapse product.",
+            }
+        elif rag_mode and selected_model is not None:
+            scope_result = classify_scope(question, selected_model)
+        else:
+            scope_result = None
+
+    if scope_result is not None:
+        if scope_result["intent_validity"] == "invalid":
+            return invalid_intent_response(scope_result)
+        if scope_result["scope"] == "out_of_scope":
+            return out_of_scope_response(question, scope_result)
+
     if answer_mode == "base_rag":
         return kb_grounded_answer_with_meta(
             question,
+            knowledge_domain=knowledge_domain,
             generation_model=base_model,
             rewrite_model=base_model,
             classifier_model=base_model,
@@ -564,6 +575,7 @@ def answer_question(
             }
         return kb_grounded_answer_with_meta(
             question,
+            knowledge_domain=knowledge_domain,
             generation_model=fine_tuned_model,
             rewrite_model=fine_tuned_model,
             classifier_model=fine_tuned_model,
@@ -632,6 +644,7 @@ def render_message(item: dict[str, Any], *, debug_enabled: bool, show_sources: b
         )
         st.caption(
             f"Mode: {item['mode_label']} | Model: {item['model_label']} | "
+            f"Knowledge: {item.get('knowledge_source_label', 'Synapse KB')} | "
             f"Generator: {generator_display if item.get('generation_model') else 'quick bypass'} | "
             f"Time: {item.get('elapsed_s', 0.0):.2f}s"
         )
@@ -658,6 +671,7 @@ def run_generation_job(job: dict[str, Any]) -> None:
             rag_generated=job["rag_generated"],
             combined_planning=job["combined_planning"],
             fast_rag=job["fast_rag"],
+            knowledge_domain=job["knowledge_domain"],
             temperature=job["temperature"],
             max_tokens=job["max_tokens"],
         )
@@ -685,6 +699,8 @@ def start_generation_job(
     rag_generated: bool,
     combined_planning: bool,
     fast_rag: bool,
+    knowledge_domain: str,
+    knowledge_source_label: str,
     temperature: float,
     max_tokens: int,
 ) -> dict[str, Any]:
@@ -699,6 +715,8 @@ def start_generation_job(
         "rag_generated": rag_generated,
         "combined_planning": combined_planning,
         "fast_rag": fast_rag,
+        "knowledge_domain": knowledge_domain,
+        "knowledge_source_label": knowledge_source_label,
         "temperature": temperature,
         "max_tokens": max_tokens,
         "started_at": time.perf_counter(),
@@ -726,6 +744,7 @@ def render_active_job(debug_enabled: bool, show_sources: bool) -> None:
                 "answer": result.get("answer", ""),
                 "mode_label": job["mode_label"],
                 "model_label": job["model_label"],
+                "knowledge_source_label": job.get("knowledge_source_label", "Synapse KB"),
                 "generation_model": result.get("generation_model"),
                 "elapsed_s": job.get("elapsed_s", 0.0),
                 "raw": result,
@@ -951,6 +970,7 @@ def run_batch_eval(
     rag_generated: bool,
     combined_planning: bool,
     fast_rag: bool,
+    knowledge_domain: str,
     temperature: float,
     max_tokens: int,
     progress_slot: Any | None = None,
@@ -973,6 +993,7 @@ def run_batch_eval(
         rag_generated=rag_generated,
         combined_planning=combined_planning,
         fast_rag=fast_rag,
+        knowledge_domain=knowledge_domain,
         temperature=temperature,
         max_tokens=max_tokens,
         progress_callback=progress_callback,
@@ -990,6 +1011,7 @@ def run_batch_eval_core(
     rag_generated: bool,
     combined_planning: bool,
     fast_rag: bool,
+    knowledge_domain: str,
     temperature: float,
     max_tokens: int,
     progress_callback: Any | None = None,
@@ -1014,6 +1036,7 @@ def run_batch_eval_core(
                 rag_generated=rag_generated,
                 combined_planning=combined_planning,
                 fast_rag=fast_rag,
+                knowledge_domain=knowledge_domain,
                 temperature=temperature,
                 max_tokens=max_tokens,
             )
@@ -1119,6 +1142,7 @@ def run_automation_job(job: dict[str, Any]) -> None:
                 rag_generated=job["rag_generated"],
                 combined_planning=job["combined_planning"],
                 fast_rag=job["fast_rag"],
+                knowledge_domain=job["knowledge_domain"],
                 temperature=job["temperature"],
                 max_tokens=job["max_tokens"],
                 progress_callback=progress_callback,
@@ -1170,6 +1194,8 @@ def start_automation_job(
     rag_style: str,
     combined_planning: bool,
     fast_rag: bool,
+    knowledge_domain: str,
+    knowledge_source_label: str,
     temperature: float,
     max_tokens: int,
     retrieval_change_label: str,
@@ -1183,6 +1209,8 @@ def start_automation_job(
         "rag_generated": rag_style == "Model-generated",
         "combined_planning": combined_planning,
         "fast_rag": fast_rag,
+        "knowledge_domain": knowledge_domain,
+        "knowledge_source_label": knowledge_source_label,
         "temperature": temperature,
         "max_tokens": max_tokens,
         "retrieval_change_label": retrieval_change_label.strip(),
@@ -1222,6 +1250,7 @@ def run_manual_batch_job(job: dict[str, Any]) -> None:
             rag_generated=job["rag_generated"],
             combined_planning=job["combined_planning"],
             fast_rag=job["fast_rag"],
+            knowledge_domain=job["knowledge_domain"],
             temperature=job["temperature"],
             max_tokens=job["max_tokens"],
             progress_callback=progress_callback,
@@ -1244,6 +1273,8 @@ def start_manual_batch_job(
     rag_style: str,
     combined_planning: bool,
     fast_rag: bool,
+    knowledge_domain: str,
+    knowledge_source_label: str,
     temperature: float,
     max_tokens: int,
     retrieval_change_label: str,
@@ -1258,6 +1289,8 @@ def start_manual_batch_job(
         "rag_generated": rag_style == "Model-generated",
         "combined_planning": combined_planning,
         "fast_rag": fast_rag,
+        "knowledge_domain": knowledge_domain,
+        "knowledge_source_label": knowledge_source_label,
         "temperature": temperature,
         "max_tokens": max_tokens,
         "retrieval_change_label": retrieval_change_label.strip(),
@@ -2541,6 +2574,8 @@ def render_batch_eval_tab(
     rag_style: str,
     combined_planning: bool,
     fast_rag: bool,
+    knowledge_domain: str,
+    knowledge_source_label: str,
     temperature: float,
     max_tokens: int,
     batch_view: str,
@@ -2603,6 +2638,8 @@ def render_batch_eval_tab(
                     rag_style=rag_style,
                     combined_planning=combined_planning,
                     fast_rag=fast_rag,
+                    knowledge_domain=knowledge_domain,
+                    knowledge_source_label=knowledge_source_label,
                     temperature=temperature,
                     max_tokens=max_tokens,
                     retrieval_change_label=retrieval_change_label,
@@ -2675,6 +2712,8 @@ def render_batch_eval_tab(
                 rag_style=rag_style,
                 combined_planning=combined_planning,
                 fast_rag=fast_rag,
+                knowledge_domain=knowledge_domain,
+                knowledge_source_label=knowledge_source_label,
                 temperature=temperature,
                 max_tokens=max_tokens,
                 retrieval_change_label=retrieval_change_label,
@@ -2963,6 +3002,7 @@ def main() -> None:
 
         model_label = st.session_state.get("manual_model_label", DEFAULT_MODEL_LABEL)
         mode_label = st.session_state.get("manual_mode_label", "Base + RAG")
+        knowledge_source_label = st.session_state.get("knowledge_source_label", "Synapse KB")
         if batch_view == "Manual":
             model_label = st.selectbox(
                 "Model family / selected model",
@@ -2985,6 +3025,16 @@ def main() -> None:
                     "Fine-tuned = Synapse model only. Fine-tuned + RAG = Synapse model with KB retrieval."
                 ),
             )
+        knowledge_source_label = st.selectbox(
+            "Knowledge source",
+            list(KNOWLEDGE_SOURCE_OPTIONS),
+            index=list(KNOWLEDGE_SOURCE_OPTIONS).index(knowledge_source_label)
+            if knowledge_source_label in KNOWLEDGE_SOURCE_OPTIONS
+            else 0,
+            key="knowledge_source_label",
+            help="Choose which local knowledge base the RAG modes should query.",
+        )
+        knowledge_domain = KNOWLEDGE_SOURCE_OPTIONS[knowledge_source_label]
         rag_style = st.radio(
             "RAG behavior",
             ["Deterministic/template", "Model-generated"],
@@ -3094,6 +3144,8 @@ def main() -> None:
             rag_style=rag_style,
             combined_planning=combined_planning,
             fast_rag=fast_rag,
+            knowledge_domain=knowledge_domain,
+            knowledge_source_label=knowledge_source_label,
             temperature=temperature,
             max_tokens=max_tokens,
             batch_view=batch_view,
@@ -3128,6 +3180,8 @@ def main() -> None:
                 rag_generated=rag_style == "Model-generated",
                 combined_planning=combined_planning,
                 fast_rag=fast_rag,
+                knowledge_domain=knowledge_domain,
+                knowledge_source_label=knowledge_source_label,
                 temperature=temperature,
                 max_tokens=max_tokens,
             )
@@ -3141,6 +3195,8 @@ def main() -> None:
             rag_style=rag_style,
             combined_planning=combined_planning,
             fast_rag=fast_rag,
+            knowledge_domain=knowledge_domain,
+            knowledge_source_label=knowledge_source_label,
             temperature=temperature,
             max_tokens=max_tokens,
             batch_view=batch_view,

@@ -1,0 +1,387 @@
+Contract 
+                and Notification of Award for Image Data Extraction  19-03-2021
+URL: https://www.biek.edu.pk/TENDERS/2020-2021/Image%20Data%20Extraction%20Contract%20Award/Image%20Data%20Extraction.pdf
+Source: https://www.biek.edu.pk/tenders.asp
+
+BOARD OF INTERMEDIATE EDUCATION, | ,,,_..... 4 go260211
+21
+BAKHTIYARI YOUTH CENTER, NORTH NAZIMABAD, eae
+et KARACHI-74700
+STANDARD BIDDING DOCUMENTS
+FOR
+NATIONAL COMPETITIVE BIDDING
+SINGLE STAGE - ONE ENVELOPE PROCEDURE
+TENDER FOR IMAGE DATA EXTRACTION (OFF-
+LOAD) TO FILE SYSTEM SOLUTION DEVELOPMENT
+& INTEGRATION WITH EXISTING EXAMINATIONS,
+ENROLMENT, & REGISTRATION SYSTEM
+IN RESPECT OF THE
+BIE/AG/L&N/701/2020
+e Instructions to Bidders (ITB)
+General Conditions of Contract (GCC)
+Oe Zs /
+ERR”
+Page 2 of 16
+KARACHI-74700
+BAKHTIYARI YOUTH CENTER, NORTH NAZIMABAD,
+SECTION-V.
+TECHNICAL / FINACIAL
+SPECIFICATIONS
+RATES
+SPECIFICATION INCLUDING ALL | TOTAL
+GOVT. TAXES
+Data Extraction (Off-Load) to 13,96 : 4 80 13,96,680
+‘Wear Support Cost Bi yg. (70 3,4 L170
+LAST THREE YEARS
+YEAR-2018 YEAR-2019
+31,32,533/- | 30, 26,15 7
+143,48, 80>]
+CERTIFICATE
+I/We have carefully read & understood the Terms & Conditions whatever has
+"= stated herein the enclosed Pages and abide to the same. V/We guarantee to
+ply/deliver/install the items exactly in accordance with the requirements and enclosed the Bid
+ity payable to Board of Intermediate Education, Karachi.
+we 23/I0)2020
+win Gore & Jr, arrow
+NAME OF CONCERNED PERSON: Ny ube: Nomen
+NUMBER: O/-7435368-)
+ONE NUMBER(S): ©323-2U7(677
+NUMBER(S): ©323-247 (47 i.
+~~ NUMBER(S):
+~ TONAL TAX NUMBER:
+RAL SALES TAX NUMBER:
+» OF THE FIRM:
+ORDER NUMBER:
+& BRANCH NAME:
+Security is enclosed herewith,
+99260211
+99260212
+99260213
+BOARD OF INTERMEDIATE EDUCATION,
+Bakhtiari Youth Center, North Nazimabad,
+Tender No. BIE/AG/L&N/ 701 /2020 dated: 07.10.2020
+BILL OF QUANTITY
+HIRING OF SERVICES FOR IMAGE DATA EXTRACTION (OFF LOAD)
+Phones:
+M/S. TRANDTS
+| S.No, ~~] Descriptions / Specification Quoted Rate
+01. Image Data Extraction (Off-Load) to File 1,396,680/-
+System
+102. One Year Support Cost 349,170/-
+1
+GRAND TOTAL = Rs. 1,745,850/-
+» Total Amount in Words:
+Rupees Seventeen Lac Forty Five Thousand Eight Hundred Fi
+Signature & Seal of the Firm
+Committee Members Signature Committee Members Signatur
+(Mr. Farhan Iftikhar) (Mr. Iqbal Hussain)
+Assistant Secretary (Accounts) Superintendent
+BIE, Karachi. / Member Humanities Private Section
+BIE, Karachi / Member
+(Mr. Muhammad Fahad) (Mr. Najaf Ali Mughni)
+Dy. Executive Engineer (Electrical), ¢ System Administrator,
+Department of Engineering, Abbasi Shaheed Hospital,
+University of Karachi. / Member Karachi. / Member
+(Mr. Zahid Ali Lakho} iy
+Audit Officer, y
+BIE, Karachi / Convener
+: . 99260211
+Board of Intermediate Education phor 99260212
+Bakhtiari YouthCenter, North Nazimabad, 99260213
+Karachi - 74700 Fax: 99260203
+99260208
+NO. BIE/AG/L&N/3 9 /2021 Dated: 24" February, 2021
+M/s. Trandts,
+C-202, Golden Heights
+Block-13, Gulistan-e-Johar
+KARACHI.
+Subject: NOTIFICATION AWARD OF CONTRACT OF SERVICES FOR IMAGE DATA
+EXTRACTION (OFF LOAD’
+Kindly refer to your Bid regarding subject matter, opened on 07-11-2020. As per
+recommendation of the Procurement Committee in its meeting dated 07.01.2021 ‘BIEK’, the
+competent authority is pleased to accept your offer for Services of Image Data Extraction (off load),
+as per details of specifications & quantities, given below:
+With all Govt. Taxes
+| s.no. TECHNICAL SPECIFICATIONS RATE GRAND TOTAL
+|, | Image Data Extraction (offload) to file system | 1,396,680/- |
+a - Rs. 1,745,850/-
+2. _ | One Year Support 349,170/-
+You are hereby requested through this letter to submit your acceptance along with
+Performance Security 10% of the contract amount (as given above) within seven (07) days receipt of
+this letter and sign the contract documents, failing which this bid offer will stand cancelled.
+All terms and conditions mentioned in the tender document shall remain the same.
+moe,
+SECRETARY (ACTING)
+Copy to:
+1. AS. Coordination
+2. P.S. to Chairman
+3. P.A, to Secretary
+4, Guard File
+Z Ww Os. we ADMIN GENERAL SECTION
+a |.918366 : Le 100 0 0A
+S. Zargham Abbas Zaidi Stamp Vendor
+— 57845
+asco Baloch
+oH ate
+eee, CONTRACT AGREEM
+THIS AGREEMENT is executed at KARACHI, on this day 08" Day of March, 2021
+BETWEEN
+M/s. Board of Intermediate Education, Karachi tt ‘ough its Secretary, at Board of Intermediate
+Education, Bakhtiyari Youth Center North Nazim chi, hereinafter called and referred to
+as “BIEK" (which expression shall wherever the context so permits, be deemed to include its legal
+representatives, executors, successors and assigns} of the FIRST PART.
+AND
+M/s. Trandts, Karachi, having its office at C-202, Golden Heights, Block-13, Gulistan-e-Johar,
+Karachi, hereinafter referred to as “THE SERVICE PROVIDER” (which expression shall wherever
+the context so permits be deemed to include its legal representatives, ExecULOrs, SUCCESSOr and
+assigns), through its proprietor Mr. Imran Patel, hoiding CNIC No 42501-2324012-3 on the
+SECOND PART.
+WHEREAS “BIEK” intends to obtain Services for the Image Data Extension (Off-Load) to File
+System Solution Development & Integration with existing examinations, enrolment &Registration
+System “THE Service Provider” has offered to provide said Services as per technical spec S
+of the work mentioned in the bidding documents “BIEK” having accepted the offer. “BIEK"
+hereby offer to appoint “THESERVICE PROVIDER” as their official Service Provider for the Imaq:
+Data Extraction [Off-Load) in respect with the Terms & Conditions of this contract. “THE Service
+Provider” hereby agrees to the offer of the “BIEK” in acceptance of the terms & conditions here in
+below forth,
+NOW IT IS HEREBY AGREED & DECLA\
+_ S. Zargham Abbas Zai
+Shop No.2, D.C. Office Compound East, Karachi
+Lic, No.148 57846
+8.NO.
+DATE
+ARTICLE -1
+DUTIES & SCOPE OF WORK
+No. Description Total Contract Amount |
+Requirement Defination, Analysis & Design
+j Image Data Extraction (off load) mechanisrr Rs.1,745,850/=
+development and implementation _ With all Govt. Taxes
+Technical Support {1 year) |
+2
+“THE SERVICE PROVIDER’ agrees to provide services to “BIEK” whenever and wherever form is
+required as per the terms & conditions of this Agreement
+13 “THE SERVICE PROVIDER” will coordinate with 11. Manager, of the “BIEK” who wuill assist “THE
+SERVICE PROVIDER’ in Supervision of proposed work.
+14 “THE SERVICE PROVIDER” hereby agrees to ac
+services and works with mutual consent on
+alll taxes and levies.
+ot variation, if occurred, in scape of professional
+acceptable cost/price/charges/amount inclusive of
+1.5 Alllogistic charges will be borne by “THE SUPPLIER
+ARTICLE -Il
+SCOPE OF PROFESSIONAL SERVICES:
+2.1 “THE SERVICE PROVIDER” hereby agrees and acknowledges for the periodic supervision of the
+work and to check the execution of work in accordance with the Description & Specification
+2.2 “THE SUPPLIER” hereby agrees and acknowledges the acceptance
+with the IT. Manager “BIEK” as & when required
+tending the meetings
+23. “THE SERVICE PROVIDER” hereby agrees to provide services as per work scope provided in the
+bidding documents
+ARTICLE -IIl
+REMUNERATION
+31 The cost offered by the Service Provider is Rs L745,850/- (Rupees Seventeen Lacs Forty Five
+Thousand Eight Hundred and Fifty only) (inclusive of ail taxes) in connection with Image Data,
+Extraction 2020 vide Notification of Award of Contract # BIE/AG/L&N/39/202 1
+oe" Ae
+SCD
+Te Node Office Compound East, Karachi
+oars i 57847
+7 SPPRA Rules.
+33 Payment for support.will be made on monthly basis on production of invoice along with
+satisfactory services certificate by the i.T. Manager of the Board
+33 Payment will be made Payment will be made as per provisions of SPPRA Rules.
+34 Performance Security 10% of total amount of work order should be submitted in shape of Pay
+Order before signing of Contract Agreemer
+3.5 Stamp Duty @ 0.35% of the cost of transaction / work order will be deposited in Government
+treasury by the Service Provider. This paid Stamp Duty challan would be submitted aiong with the
+Bill / Invoice
+36 Tax{es} Challan(s} / Levylies), If any, on additional will be paid / borne by the Service Provider as
+per SRO Notification
+ARTICLE -IV
+ARBITRATION
+4.1 In case of any dispute, difference or and question which may at any time arise between
+the parties hereto or any person under them, arising out in respect of this letter of intent or
+this subject matter thereof shail be referred to the Chairman BIEK for arbitration /
+settling of the dispute, failing which the de of the court law in the jurisdiction of
+Karachi binding to the parties. The Arbitration proceedings will be governed by the
+Arbitration Act, 1940 and the Substantive and procedural law of Pakistan. The venue shail
+be Karachi
+ARTICLE -V
+TERMINATION
+5.1 “BIEK” may terminate this agreement if the job is not executed according to the
+requirement at any time after issuing a 15 day's notice
+ARTICLE -VI
+INDEMNITY
+6.1 “THE SERVICE PROVIDER’ in its individual capacity shall indemnify and keep “BIEK" and
+any person claiming through BIEK fully indemnified and harmless from and against.all_ damages,
+Cost and expenses caused to or incurred by “THE SERVICE PROVIDER”, as a
+result of any defect in the title of BIEK or any fault, neglect or omission by the “THE
+SERVICE PROVIDER’ which disturbs or damage the reputation, quality or the standard of
+service provided by the “BIEK” and any person claiming through the BIEK
+eg NV
+¥ —
+fb5243
+——
+S.WAQAR 2a | OTPEES THD MORED OP
+frente, Dc enlDl STAMP VENDOR se a
+0.170 ind East, Karachi
+S.NO,
+01 MAR 2aa1
+ARTICLE -VIi
+NOTICE
+M.tbrahim
+on AGREEMENT shall be sufficient if it is in writing and if sent by
+ARTICLE -Vill
+INTEGRITY PACT
+8.1 The intention not to obtain the procurement / work of any Contract, right. interest, privilege.
+or other obligation or benefit from the BIEK or any administrative or financial offices thereof or any
+other department under the control of the BIEK through any corrupt practice(s)
+8.2 Without limiting the generality of the forgoing the M/s. Tranats represents and warrants
+that it has fully declared the charges, fees, commission, taxes, _levies etc, paid or
+payable to anyone and not given or agreed to give and shail not ive or agree to
+Give anyone within the BIEK directly or indirectly through any means any commission,
+Gratification, bribe, gifts, kickback whether described as consultation fee or otherwise, with
+the object of obtaining or including the procurement or service contract or order or other
+Obligations whatsoever from the BIEK, except that which has been expressly declared
+pursuant hereto.
+83 M/s. Trandts, Karachi accepts full responsibility and strict liability for making any false
+declaration / statement, not making full disciosure, misrepresenting facts or taking any action
+likely to degrade the purpose of deciaration, representation and warranty. It agrees that any contract /
+order obtained aforesaid shall without prejudice to any other right & remedies available to the
+BIEK under any law, contract, or other instrument, be stand void at the discretion of the BIEK.
+84 Notwithstanding any right and remedies exercised by the BIEK in this regard, M/s. Trandts, Karachi
+agrees to indemnify BIEK for any loss or damage incurred by iton account of its corrupt business
+practice & further pay compensation to BIEK in any amount equivalent to the loss of any Commission,
+gratification, bribe, gifts, kickback given by the M/s, Trandts, Karachi as aforesaid for the purpose of
+obtaining or inducing procurement / work / service or other obligation or benefit in whatsoever from the
+BIEK.
+SINDH PUBLIC PROCUREMENT REGULATORY AUTHORITY
+CONTRACT EVALUATION FORM
+IN BY ALL PROCU! iF
+WORKS, SERVICES & GOODS
+BOARD OF INTERMEDIATE EDUCATION KARACHI
+1) NAME OF THE ORGANIZATION / DEPTT.
+2) PROVINCIAL / LOCAL GOVT/ OTHER —_OTHER
+3) TITLE OF CONTRACT HIRING OF SERVICES FOR IMAGE DATA EXTRACTION
+4) TENDER NUMBER BIE/AGIL&N/701/2020
+5) BRIEF DESCRIPTION OF CONTRACT
+6) FORUM THAT APPROVED THE SCHEME Procurement Committee
+7) TENDER ESTIMATED VALUE 4 MILLION
+8) ENGINEER'S ESTIMATE
+(For civil works only)
+9) ESTIMATED Ct OD (AS PER CONTRACT)
+10) TENDER OP' ) 02-11-2020 03:00 PM
+11) NUMBER OF TE} LD 08
+(Attach list of buyers)
+12) NUMBER OF BIDS RECEIVED.
+13) NUMBER OF BIDDERS PRESENT AT,
+OPENING OF BIDS °%
+14) BID EVALUATION REPORT
+(Enclose a copy)
+15) NAME AND ADDRESS OF THE SUCCESSFUI
+16) CONTRACT AWARD PRICE,
+17) RANKING OF SUCCESSFUL BIDDER IN Le 9,
+(ie. 1", 2", 3 EVALUATION BID). ‘1st (Qualified lowest
+18) METHOD OF PROCUREMENT USED
+(Tick one)
+a) _ SINGLE STAGE - ONE ENVELOPE PROCEDURE YES [Domestic/ Local
+b) SINGLE STAGE - TWO ENVELOPE PROCEDURE
+©) TWOSTAGE BIDDING PROCEDURE
+d) TWO STAGE -TWO ENVELOPE BIDDING PROCEDURE
+PLEASE SPECIFY IF ANY OTHER METHOD OF PROCUREMENT WAS ADOPTED ic.
+EMERGENCY, DIRECT CONTRACTING ETC. WITH BRIEF REASONS,
+QA U3
+CHAIRMAN BIEK
+19) APPROVING AUTHORITY FOR AWARD (oF CONTRACT
+20) WHETHER THE pROCUREMENT WAS INCLUDED IN ANNUAL pROCUREMENT, aia
+igeaicalm
+2y) ADVERTISEMENT =
+‘es | 100535-20-0007
+i) SPPRA Website 3-10-2020
+(yes, give date and sppRA Identification No.)
+iy News Papers = “amano 09-10-2020
+(if yes, give ™ newspapers and dates) Express Teeentan Rava ‘09-10-2020
+32) NATURE OF CO!
+23) WHETHER QU. YUALIFICA’ N CI
+WAS INCLUDE! ED IN BIDDING / TENDI
+(tyes, enclose ‘acopy)
+Ay WHETHER BIDE’ EVALUATION CRITERIA,
+WAS INCLUDED IN IN BIDDING t ENDER poc
+(ifyes, enclose acopy)
+25) WHETHER APPROVAL OF (COMPE’ T
+‘METHOD OTHER {AN OPEN ‘COMPETITIV!
+26) WAS BID SECURITY OBTAINED FROM, ALL THE
+comune (alee)
+“THE SUCCESSFUL BID ‘was LOWE’
+‘of Consultancies)
+27) WHETHER THI
+BID / BEST TRELUATED BID (in case of
+28) WI HETHER THE SUCCESSFUL BIDDER WAS TECHNICALLY Ds. v||No
+COMPLIANT?
+| 29) SEE OF MES OF THE BIDDERS AND THEIR QUOTED PRICES, WERE, READ. out AT
+| “HE TIME O1 OF SPENING ‘OF BIDS? (ve [ll No imal}
+|
+30) EET EV. ALUATION REPORT GIVEN TO BIDDERS BEFORE THE AW ‘ARD OF
+I=
+CONTRACT?
+{amtach copy ofthe bid evaluation report)
+_ es
+23
+r
+31) ANY COMPLAINTS RECEIVED Yes
+(ify, result thereof)
+No [No
+32) ANY DEVIATION FROM SPECIFICATIONS GIVEN IN THE TENDER NOTICE / DOCUMENTS
+(ifyes, give details)
+Yes
+No
+33) WAS THE EXTENSION MADE IN RESPONSE TIME?
+(if,yes, give reasons) Yes
+3M) DEVIATION LIFIGATION CRITERIA
+(Ut yes, give det ; Yes
+35) WAS IT ASSURED BY THE PR CY THAT THE SELECTED FIRM IS NOT
+BLACK LISTED? Yes ical No
+PROCURING AGENCY TO THE.
+REMENT? IF SO, DETAILS TO
+36) WAS A VISIT MADE BY ANY OFFICER/OI
+SUPPLIER'S PREMISES IN CONNECTION WI
+BE ASCERTAINED REGARDING FINANCING @
+(lfyes, enclose a copy)
+37) WERE PROPER SAFEGUARDS PROVIDED ON Mi VANCE PAYMENT IN
+‘THE CONTRACT (BANK GUARANTEE ETC.)? Ol im
+Yes [No
+38) SPECIAL CONDITIONS, IF ANY =
+(If yes, give Brief Description) bw
+Signature & Official Stamp of @;)
+Authorized Officer
+Mrs. Zarina Rashid
+= Secretary (Acting)
+FOR OFFICE USEONLY gard af intermediate Education
+Karachi
+SPPRA, Block. No.8, Sindh Secretariat No.4-A, Court Road, Karachi
+Tele: 021-9205356; 021-9205369 & Fax: 021-9206291
+38
+oo
+TEA
+SIO ee
+S. WA oe
+passa) SnlOl STAMP VENDOR Pe
+v
+Lic. No.170 Mpourd East, Karachi
+Speci OT MAR 202) is ARTICLE. ad
+M.ibrahim
+givenee RRP tris AGREEMENT shall be sufficient if it is in writing and if sent by
+a
+ARTICLE -VIII
+8.1 The intention not to obtain the procurement / work of any Contract, right, interest, _ privilege.
+other department under the contro! of the BIEK through any corrupt practice(s).
+8.2 Without limiting the generality of the forgoing the M/s. Trandts represents and warrants
+that it has fully declared the charges, fees, commission, taxes, _ levies etc, paid or
+Payable to anyone and not given or agreed to give and shall not give or agree to
+obligations whatsoever from the BIEK, except that which has been expressly deciared
+8.3 M/s. Trandts, Karachi accepts full responsibility and strict liability for making any false
+declaration / statement, not making full disclosure, misrepresenting facts or taking any action
+likely to degrade the purpose of declaration, representation and warranty. It agrees that any contract /
+8.4 Notwithstanding any right and remedies exercised by the BIEK in this regard, M/s. Trandts, Karachi
+agrees to indemnify BIEK for any loss or damage incurred by it on account of its corrupt business
+gratification, bribe, gifts, kickback given by the M/s. Trandts, Karachi as aforesaid for the purpose of

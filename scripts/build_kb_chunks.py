@@ -6,10 +6,11 @@ import re
 from collections import Counter
 from typing import Any
 
+from kb_paths import knowledge_base_dir
 
-PROJECT_DIR = pathlib.Path(__file__).resolve().parents[1]
-DEFAULT_INPUT_PATH = PROJECT_DIR / "data" / "knowledge-base" / "source_docs.jsonl"
-DEFAULT_OUTPUT_PATH = PROJECT_DIR / "data" / "knowledge-base" / "chunks.jsonl"
+DEFAULT_KB_DIR = knowledge_base_dir()
+DEFAULT_INPUT_PATH = DEFAULT_KB_DIR / "source_docs.jsonl"
+DEFAULT_OUTPUT_PATH = DEFAULT_KB_DIR / "chunks.jsonl"
 
 EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
 
@@ -133,6 +134,58 @@ def split_doc_into_units(clean_text: str) -> list[str]:
     return merged_units
 
 
+def split_oversized_unit(unit: str, max_words: int) -> list[str]:
+    if word_count(unit) <= max_words:
+        return [unit]
+
+    parts = re.split(r"(?<=[.!?])\s+", unit)
+    parts = [normalize_line(part) for part in parts if normalize_line(part)]
+
+    if len(parts) <= 1:
+        words = unit.split()
+        return [
+            " ".join(words[start : start + max_words]).strip()
+            for start in range(0, len(words), max_words)
+            if " ".join(words[start : start + max_words]).strip()
+        ]
+
+    expanded: list[str] = []
+    current_parts: list[str] = []
+
+    for part in parts:
+        candidate_parts = current_parts + [part]
+        candidate_text = " ".join(candidate_parts).strip()
+        if current_parts and word_count(candidate_text) > max_words:
+            expanded.append(" ".join(current_parts).strip())
+            current_parts = [part]
+            continue
+        current_parts = candidate_parts
+
+    if current_parts:
+        expanded.append(" ".join(current_parts).strip())
+
+    final_units: list[str] = []
+    for piece in expanded:
+        if word_count(piece) <= max_words:
+            final_units.append(piece)
+            continue
+        words = piece.split()
+        final_units.extend(
+            " ".join(words[start : start + max_words]).strip()
+            for start in range(0, len(words), max_words)
+            if " ".join(words[start : start + max_words]).strip()
+        )
+
+    return final_units
+
+
+def expand_oversized_units(units: list[str], max_words: int) -> list[str]:
+    expanded: list[str] = []
+    for unit in units:
+        expanded.extend(split_oversized_unit(unit, max_words))
+    return expanded
+
+
 def overlap_units(units: list[str], overlap_words: int) -> list[str]:
     if overlap_words <= 0:
         return []
@@ -201,6 +254,7 @@ def chunk_doc(
     overlap_words: int,
 ) -> list[dict[str, Any]]:
     units = split_doc_into_units(doc.get("clean_text", ""))
+    units = expand_oversized_units(units, max_words)
     if not units:
         return []
 

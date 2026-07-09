@@ -1,0 +1,196 @@
+{
+  "site": "biek",
+  "audited_urls": [
+    "https://www.biek.edu.pk/default.asp",
+    "https://www.biek.edu.pk/notifications.asp",
+    "https://www.biek.edu.pk/Allforms.asp",
+    "https://www.biek.edu.pk/Datesheet.asp",
+    "https://www.biek.edu.pk/affcoll.asp",
+    "https://www.biek.edu.pk/LastResults.asp",
+    "https://www.biek.edu.pk/Permissionforms.asp"
+  ],
+  "reports": [
+    {
+      "url": "https://www.biek.edu.pk/default.asp",
+      "status_code": 200,
+      "title": "Welcome to Board of Intermediate Education Karachi",
+      "normal_href_count": 78,
+      "pdf_link_count": 26,
+      "hash_href_count": 189,
+      "javascript_href_count": 0,
+      "has_postback": false,
+      "has_onclick_handlers": false,
+      "pdf_link_samples": [
+        "https://www.biek.edu.pk/E-Sheet-Sample/E-Sheet%2030%20pages.pdf",
+        "https://www.biek.edu.pk/E-Sheet-Sample/E-Sheet%2022%20Pages.pdf",
+        "https://www.biek.edu.pk/Sc_Std/SCHEME-OF-STUDIES-FOR-HSC.pdf",
+        "https://www.biek.edu.pk/ModelPaper/2026/Model%20Paper%202026.pdf",
+        "https://www.biek.edu.pk/ModelPaper/2026/SCI%20GENERAL%20Mathematics-II-NEW-BOOK%20MODEL%20PAPER%202026.pdf"
+      ],
+      "suspicious_samples": [
+        "text=Email Us href=#",
+        "text=9221 99260211 - 13 href=#",
+        "text=[no text] href=#",
+        "text=About Us href=#",
+        "text=Misc href=#"
+      ],
+      "assessment": "static_ok"
+    },
+    {
+      "url": "https://www.biek.edu.pk/notifications.asp",
+      "status_code": 200,
+      "title": "Welcome to Board of Intermediate Education Karachi",
+      "normal_href_count": 429,
+      "pdf_link_count": 41,
+      "hash_href_count": 16,
+      "javascript_href_count": 0,
+      "has_postback": false,
+      "has_onclick_handlers": false,
+      "pdf_link_samples": [
+        "https://www.biek.edu.pk/E-Sheet-Sample/E-Sheet%2030%20pages.pdf",
+        "https://www.biek.edu.pk/E-Sheet-Sample/E-Sheet%2022%20Pages.pdf",
+        "https://www.biek.edu.pk/Sc_Std/SCHEME-OF-STUDIES-FOR-HSC.pdf",
+        "https://www.biek.edu.pk/ModelPaper/2026/Model%20Paper%202026.pdf",
+        "https://www.biek.edu.pk/ModelPaper/2026/SCI%20GENERAL%20Mathematics-II-NEW-BOOK%20MODEL%20PAPER%202026.pdf"
+      ],
+      "suspicious_samples": [
+        "text=Email Us href=#",
+        "text=9221 99260211 - 13 href=#",
+        "text=[no text] href=#",
+        "text=About Us href=#",
+        "text=Misc href=#"
+      ],
+      "assessment": "static_ok"
+    },
+    {
+      "url": "https://www.biek.edu.pk/Allforms.asp",
+      "status_code": 200,
+      "title": "Board of Intermediate Education Karachi - Download Types of Form",
+      "normal_href_count": 76,
+      "pdf_link_count": 26,
+      "hash_href_count": 15,
+      "javascript_href_count": 0,
+      "has_postback": false,
+      "has_onclick_handlers": false,
+      "pdf_link_samples": [
+        "https://www.biek.edu.pk/E-Sheet-Sample/E-Sheet%2030%20pages.pdf",
+        "https://www.biek.edu.pk/E-Sheet-Sample/E-Sheet%2022%20Pages.pdf",
+        "https://www.biek.edu.pk/Sc_Std/SCHEME-OF-STUDIES-FOR-HSC.pdf",
+        "https://www.biek.edu.pk/ModelPaper/2026/Model%20Paper%202026.pdf",
+        "https://www.biek.edu.pk/ModelPaper/2026/SCI%20GENERAL%20Mathematics-II-NEW-BOOK%20MODEL%20PAPER%202026.pdf"
+      ],
+      "suspicious_samples": [
+        "text=Email Us href=#",
+        "text=9221 99260211 - 13 href=#",
+        "text=[no text] href=#",
+        "text=About Us href=#",
+        "text=Misc href=#"
+      ],
+      "assessment": "static_ok"
+    },
+    {
+      "url": "https://www.biek.edu.pk/Datesheet.asp",
+      "status_code": 200,
+      "title": "Welcome to Board of Intermediate Education Karachi",
+      "normal_href_count": 71,
+      "pdf_link_count": 29,
+      "hash_href_count": 15,
+      "javascript_href_count": 0,
+      "has_postback": false,
+      "has_onclick_handlers": false,
+      "pdf_link_samples": [
+        "https://www.biek.edu.pk/E-Sheet-Sample/E-Sheet%2030%20pages.pdf",
+        "https://www.biek.edu.pk/E-Sheet-Sample/E-Sheet%2022%20Pages.pdf",
+        "https://www.biek.edu.pk/Sc_Std/SCHEME-OF-STUDIES-FOR-HSC.pdf",
+        "https://www.biek.edu.pk/ModelPaper/2026/Model%20Paper%202026.pdf",
+        "https://www.biek.edu.pk/ModelPaper/2026/SCI%20GENERAL%20Mathematics-II-NEW-BOOK%20MODEL%20PAPER%202026.pdf"
+      ],
+      "suspicious_samples": [
+        "text=Email Us href=#",
+        "text=9221 99260211 - 13 href=#",
+        "text=[no text] href=#",
+        "text=About Us href=#",
+        "text=Misc href=#"
+      ],
+      "assessment": "static_ok"
+    },
+    {
+      "url": "https://www.biek.edu.pk/affcoll.asp",
+      "status_code": 200,
+      "title": "Welcome to Board of Intermediate Education Karachi",
+      "normal_href_count": 68,
+      "pdf_link_count": 25,
+      "hash_href_count": 15,
+      "javascript_href_count": 0,
+      "has_postback": false,
+      "has_onclick_handlers": false,
+      "pdf_link_samples": [
+        "https://www.biek.edu.pk/E-Sheet-Sample/E-Sheet%2030%20pages.pdf",
+        "https://www.biek.edu.pk/E-Sheet-Sample/E-Sheet%2022%20Pages.pdf",
+        "https://www.biek.edu.pk/Sc_Std/SCHEME-OF-STUDIES-FOR-HSC.pdf",
+        "https://www.biek.edu.pk/ModelPaper/2026/Model%20Paper%202026.pdf",
+        "https://www.biek.edu.pk/ModelPaper/2026/SCI%20GENERAL%20Mathematics-II-NEW-BOOK%20MODEL%20PAPER%202026.pdf"
+      ],
+      "suspicious_samples": [
+        "text=Email Us href=#",
+        "text=9221 99260211 - 13 href=#",
+        "text=[no text] href=#",
+        "text=About Us href=#",
+        "text=Misc href=#"
+      ],
+      "assessment": "static_ok"
+    },
+    {
+      "url": "https://www.biek.edu.pk/LastResults.asp",
+      "status_code": 200,
+      "title": "Welcome to Board of Intermediate Education Karachi",
+      "normal_href_count": 110,
+      "pdf_link_count": 69,
+      "hash_href_count": 15,
+      "javascript_href_count": 0,
+      "has_postback": false,
+      "has_onclick_handlers": false,
+      "pdf_link_samples": [
+        "https://www.biek.edu.pk/E-Sheet-Sample/E-Sheet%2030%20pages.pdf",
+        "https://www.biek.edu.pk/E-Sheet-Sample/E-Sheet%2022%20Pages.pdf",
+        "https://www.biek.edu.pk/Sc_Std/SCHEME-OF-STUDIES-FOR-HSC.pdf",
+        "https://www.biek.edu.pk/ModelPaper/2026/Model%20Paper%202026.pdf",
+        "https://www.biek.edu.pk/ModelPaper/2026/SCI%20GENERAL%20Mathematics-II-NEW-BOOK%20MODEL%20PAPER%202026.pdf"
+      ],
+      "suspicious_samples": [
+        "text=Email Us href=#",
+        "text=9221 99260211 - 13 href=#",
+        "text=[no text] href=#",
+        "text=About Us href=#",
+        "text=Misc href=#"
+      ],
+      "assessment": "static_ok"
+    },
+    {
+      "url": "https://www.biek.edu.pk/Permissionforms.asp",
+      "status_code": 200,
+      "title": "Board of Intermediate Education Karachi - Download Types of Form",
+      "normal_href_count": 79,
+      "pdf_link_count": 29,
+      "hash_href_count": 15,
+      "javascript_href_count": 0,
+      "has_postback": false,
+      "has_onclick_handlers": false,
+      "pdf_link_samples": [
+        "https://www.biek.edu.pk/E-Sheet-Sample/E-Sheet%2030%20pages.pdf",
+        "https://www.biek.edu.pk/E-Sheet-Sample/E-Sheet%2022%20Pages.pdf",
+        "https://www.biek.edu.pk/Sc_Std/SCHEME-OF-STUDIES-FOR-HSC.pdf",
+        "https://www.biek.edu.pk/ModelPaper/2026/Model%20Paper%202026.pdf",
+        "https://www.biek.edu.pk/ModelPaper/2026/SCI%20GENERAL%20Mathematics-II-NEW-BOOK%20MODEL%20PAPER%202026.pdf"
+      ],
+      "suspicious_samples": [
+        "text=Email Us href=#",
+        "text=9221 99260211 - 13 href=#",
+        "text=[no text] href=#",
+        "text=About Us href=#",
+        "text=Misc href=#"
+      ],
+      "assessment": "static_ok"
+    }
+  ]
+}

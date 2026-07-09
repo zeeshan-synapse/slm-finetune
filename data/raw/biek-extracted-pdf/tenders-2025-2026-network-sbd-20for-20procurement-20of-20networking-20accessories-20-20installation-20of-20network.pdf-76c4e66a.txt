@@ -1,0 +1,507 @@
+SBD 
+                for the procurement of Networking Accessories & Installation 
+                of Network  ( 13-01-2026)
+URL: https://www.biek.edu.pk/TENDERS/2025-2026/network/SBD%20FOR%20PROCUREMENT%20OF%20NETWORKING%20ACCESSORIES%20&%20INSTALLATION%20OF%20NETWORK.pdf
+Source: https://www.biek.edu.pk/tenders.asp
+
+BOARD OF INTERMEDIATED
+EDUCATION, KARACHI
+National Competetive Bidding
+Single Stage Two Envelopes Procedure
+STANDARD BIDDING DOCUMENTS FOR
+Tender for Procurement of Networking
+Accessories & Installation of Network
+TECHNICAL PROPOSAL
+A VOLUME —|
+In respect of:
+- _ BIE/AG/L&N/1611/2026 dated:
+02/01/2026
+‘SBD for Procurement of Networking Accessories & Installation of Network Page 1 of 14
+NOTICE INVITING TENDERS
+Bids invited through E-Pak Acquisition and Disposal System (EPADS) from reputed /established
+firms / suppliers / contractors, registered with concerned Tax authorities for supply of following,
+Cost of | 'ssuance& | Deadline
+= Deadline of } for Opening of | Method of Bid
+Tender Title | Bidding #
+Document | d2cuments } submissio Bid | Procurement | Security
+date n
+3%
+goods.
+Tender for
+Procurement of iso at rece
+Networking : 29.01.2026 | 29012026 roe | ofthe
+TO Stage Two
+Accessories & 2900%,2026 | #0230PM | atosooPm | ETP MS | estimated
+Installation of AO00 NOON cost
+Network.
+The interest bidders can obtain bidding documents containing terms & conditions, can be downloaded from
+hitps:/iportalsindh.eprocure.qov.phi#/ or wwww.biek.edupk and the Tender Documents fee @Rs.2,000/= (Non-
+refundable) must be submitted in shape of pay order in favor of Secretary, Board of Intermediate Education, Karachi on
+‘any working day as per schedule mentioned above.
+‘The preparation of bids must in accordance with the instructions in the bidding documents and the bids must be
+‘submitted on EPADS on or before submission deadline as per schedule mentioned above. Bids should be submitted
+electronically through EPADS and orginal Bids must be submitted in Procurement Wing, Administration General Section, Old
+Building, 1st Floor, Room No.31 before online submission deadline of the Bids. Only those bid will be entertained which is
+already submitted on EPADS
+‘All interest bidders must register themselves At EPADS at
+httos://sindh.eprocure.qov.pk/t/supplier/registration
+Pre-Bid Meeting will be held on 23-01-2026 at 02:30 p.m.
+Incase of unexpected announcement of holiday, unforeseen situation, climate changing & disasterin city, the tender
+will be opened on next working day on the same venue & time as mentioned above,
+The Bid Secunty in shape of pay order in favor of the Secretary, Board of Intermediate Education Karachi in
+Procurement Wing, Administration General Section, Old Building, 1* Floor, Room No.31 before online submission deadline
+of the Bids,
+The original Bid Security along with the Onginal Bid (duly signed and stamped) must be delivered to BIE, Karachi on above
+mentioned address before bid opening schedule.
+“The Procuring Agency may reject all or any bid subject tothe relevant provision of SPPRA rules”
+S
+‘SBD for Procurement of Networking Accessories & Installation of Network Page 2 of 14
+BOARD OF INTERMEDIATE EDUCATION, KARACHI
+Bakhtiyari Youth Centre, North Nazimabad
+INSTRUCTIONS TO BIDDERS &
+GENERAL CONDITIONS OF CONTRACT:
+‘The Instructions to Bidders and General Conditions of Contract applied in this Contract shall be
+the same as per Standard Bidding Documents for Goods, issued by SPPRA. For further references the
+same may be downloaded from SPPRA’s website www.
+this Office if it may be demanded by
+shall prevail over those in the Instructions to Bidders & General Conditions of Contract,
+BID DATA SHEET
+pprasindh.gov.pk or it may be provided from
+the bidder. Whenever there is a conflict, the provisions hereafter
+INTRODUCTION
+Name of Contract Procurement of Networking Accessories & Installation of
+Network
+Namie of Procuring Agency Board of Intermediate Education, Karachi
+Procuring Agency's Address, Board of Intermediate Education, Bakhtiyari Youth Center North
+Telephone, Telex and Facsimile | Nazimabad
+Numbers Tel: 99260211, 99260212,
+99260213 Fax: 99260203 & 99260208
+Language of the Bid English or Urdu
+BID PRICE AND CURRENCY
+‘The price shall be in Pakistani currency inclusive of all Taxes, Transportation, and Material and Labour
+charges involved therein.
+During the entire period of bid validity, the price shall be fixed and the bidder will have to Supply the
+required items as per specifications and quoted rates.
+PREPARATION AND SUBMISSION OF BIDS
+Estimated Cost
+19.00 Million (Rupees One Crore Ninety Lac Only)
+Bid Validity Period
+90 days from the date of opening of Tender.
+‘Address for Bid
+The office of the Administration General Section (Procurement Wing), I” Floor,
+Documents,
+‘Submission. Old Building, Room No.31 Board of Intermediate Education, Karachi
+Deadline for From 15-01-2026 10:00 AM to 026 12:00PM
+issuance of bidding | Scaled bids duly filled-in, mentioning on top of the envelope “Procurement of
+Networking Accessories & Installation of Network”
+Time, Date and
+Place for Bid
+Opening
+Bids duly stamped on each document must be submitted electronically through
+EPADS and original bids in separate sealed cover along with bid security with
+Financial Proposal must be submitted on or before 29-01-2026 up to 02:30 P.M in
+the office of the Administration General Section Old Building, 1* Floor, Room
+NO.31, Board of Intermediate Education, Karachi, and bid will be opened on the
+same day at 03:00 P.M in the presence of bidder's representatives who wish to,
+attend.
+Delivery Schedule
+The delivery will have to be made at our site within stipulated time as mentiofed
+the Contract Award. Minimum time period willbe atleast 60 Days after issuance
+of contract award which may be increased or decreased due to demand of
+time/situation as per SPPRA Rules.
+‘SBD for Procurement of Networking Accessories & Installation of Network Page 3 of 14
+o
+1. Introduction
+Board of Intermediate Education, Karachi (BIEK) invites sealed bids under Single Stage Two Envelope
+procedure from eligible bidders for the supply, installation, configuration, deployment, testing and
+commissioning of networks and accessories as per the Bill of Quantities (BOQ) and specifications
+2. Bid Security
+Bidder shall submit a Bid Security of 3% (three percent) of the Estimated Cost in the form of Pay
+Order in favour of “Secretary, Board of Intermediate Education Karachi.” Bid Security shall remain
+valid for at least 28 days beyond the bid validity period.
+3. Performance Security
+‘The successful bidder shall submit Performance Security equal to 10% of the Contract Price in the
+form of Pay Order in favour of “Secretary, Board of Intermediate Education Karachi.” Performance
+Security shall be valid for 90 days beyond the completion of contract to cover defects liability period,
+4, Stamp Duty @ 0.35% of the cost of transaction / Work order will be deposited in Government
+treasury by the SUPPLIER. This paid Stamp Duty challan would be submitted along with the Bill /
+Invoice.
+we
+> Ve
+‘SBD for Procurement of Networking Accessories & Installation of Network Page 4 of 14
+5. Technical Evaluation Criteria (Scored)
+(QUALIFICATION REQUIREMENTS | MAX
+ENO: / EVALUATION CRITERIA MARKS eS CEE
+a fe ae Tio 5 years 5 Marks
+1 | Years of Establishment of Bidder’s Firm. Oe ee
+2 _| Authorized Dealer/Distributor status in 19 | Not Available 00 Marks
+2 | relevant products Available 10 Marks
+3 _ | Centfied Technical Team (CVs, profiles, 15 | Not Available 00 Marks
+certifications). Available 10 Marks
+Tur-over of at Teast last three years having T year 5 Marks
+4 | sum of minimum Rs,60 Million in last03 | 4) | 2 Years 10 Marks
+years (Copies of financial statements / Audit 3 Years & above 20 Marks
+Report be attached.
+5 _ | Number of similar ICT Tafasiructare 19) Eto3 Infrastructure 5 Marks
+Installations and Deployments above 3 Infrastructure 10 Marks
+5 Years* Experience in similar work in To 2 years 5 Marks
+6 | Public & Private Sector (Work Order 15 | 3to years 10 Marks
+Required) above 5 years 15 Marks
+7 _ | Submission of complete technial schematic | __,, | Not Available 00 Marks
+diagram of proposed work. Available 15 Marks
+Note: Minimum 70% seore required for qualification, where rest of 30% is evaluated by IT
+procurement commitice
+6. Eligibility Criteria (Mandatory)
+Bidders must submit:
+Registration with FBR for Income Tax (NTN) and Sales Tax (GST).
+Valid registration with Sindh Revenue Board (SRB).
+Affidavit that firm is not blacklisted and not involved in active litigati
+Authorization Certificate/L etter of Distributorship for quoted brands.
+Catalogues of quoted items,
+Submission of catalogue along with bidding documents is mandatory
+catalog shall be treated as “Non-Responsive”.
+in Pakistan.
+submitted without
+5
+y
+‘SBD for Procurement of Networking Accessories & Installation of Network Page 5 of 14
+RS
+@ J
+7. Scope of Work / Technical Specifications
+Bidders must supply, installation & configuration plan / diagram, deployment time, test and commission
+all listed items. All accessories, cabling, racks, patch panels, switches, UPS and other components must
+be provided with installation, labeling, tagging and complete schematic diagrams and warranty or
+support.
+8, Delivery and Installation
+Delivery and installation at BIEK site within 60 days after issuance of contract award (extendable by
+mutual consent)
+9. Warranty and Maintenance
+All equipment must be covered by manufacturer's warranty. Vendor to provide one-year maintenance
+services with defined response times and spare part availability.
+10. Payment Terms
++ 100% payment upon complete delivery and acceptance within 30 days.
++ Part payment allowed only if approved by Chairman BIEK.
++ Taxes, levies, and stamp duty to be borne by Supplier.
+11, Support Contract with Resource
+‘+ After completion of warranty period the procuring agency will do the support contract with the
+successful bidder for one year with resource engineer 24/7 in office hours for any installed
+network and its accessories issues rectifications. The contract may be extended according to the
+performance and service level provided.
+‘SBD for Procurement of Networking Accessories & Installation of Network. Page 6 of 14
+Technical Specifications & Bill of Quantit
+ies (BOQ)
+1__[ Corning or Equivatent 1/0 fem
+2___| Corning or Equivalent Single shutter Phase plate Tem
+3__ | Corning or Equivatent Dual shutter Phase plate item
+4 | 48 Port Corning or Equivalent Patch Panel loaded 3 Tem
+5__| 24 Port Coming or Equivalent Patch Panel loaded z Tem
+© _ | Corning or Equivalent Cable manager ii item
+7__ | Corning or Equivalent Patch Cord im 680 | Meter
+8 __| Corning or Equivalent Patch Cord Corning or Equivalent 450 | Meter
+9° | Corning or Equivalent Caté Giga Cable 7000 | Ft
+Channel Duct
+1625 350 Fe
+10 [2508 450 Fe
+25x25 350 Fe
+40x60 100 Ft
+Ti | Other Accessories for PVC Pipe and Channel Duct 1 Tem
+42___ | 6U Rack 600X600 with Cooling Fan and One Fix Tray 1 item
+42__ | 6 Core Indoor Fiber Cable 5000 Ft
+73 | 9U Rack 600X600 with Cooling Fan and One Fix Tray 1 item
+14 | 274 Rack for IT Romm cables management f Ttem
+15 | SC to SC pigtail 15 | Meter
+16 | 4 Port ODF Loaded 5 item
+7_| 24 Pore OOF Loaded 1 Item
+18_[1” Flexible Pipe 100 Ft
+19, [4 Flexible Pipe 100 Fe
+20 _|1" PVC Pipe 800 Fe
+21_ | SFP Modules 20 | em
+22 | SCto SC Pigtail 50 | Meter
+23_[ 8 Port POU 2 Tem
+24_| 8 Port ODF Loaded 70 item
+75 [ 650 VA UPS Stabimatic 2 item
+26 | 24 Port Giga Switch 4Pore SFP 4 Ttem
+26 | 8 PORT Giga Switch 1 Item
+Z_| 48 Port Giga Switch 4 pore SFP 5 Ttem
+Labor charges of above work
+170 Punching ,Patch panel making
+Numbering and Testing both end
+1/0 Punching ,Patch panel making
+28 | Numbering and Testing both end 4 lebar
+Labor charges of Fiber Bs i
+Splicing of fiber
+‘SBD for Procurement of Networking Accessories & Installation of Network sy of 14
+a? Bakhtiyari Youth Centre, North Nazimabad
+Qty Unit
+29 _| Server Rack as per same specs 800 x 1000 (two fixed, One Sliding Tray) 2 Item
+30__| ACCESS Point Unifi U6 -LR or Equivalent 4 item
+BL UPS 6 KVA, 1 item
+Page 8 of 14
+‘SBD for Procurement of Networking Accessories & Installation of Network
+‘SUMMARY OF TURN-OVER OF LAST THREE YEARS.
+YEAR-2022-2023
+YEAR-2023-2024
+YEAR-2024-2025
+TOTAL:
+‘SBD for Procurement of Networking Accessories & Installation of Network Page 9 of 14
+CONTRACT AGREEMENT
+Tender Title: Procurement of Networking Accessories & Installation of Network
+This Agreement is executed at Karachi on this __day of _2026.
+BETWEEN
+Board of Intermediate Education, Karachi (BIEK), through its Secretary, h
+“Procuting Agency” (which expression shall, wherever the context so permit
+representatives, executors, successors and assigns) of the FIRST PART;
+after called the
+include its legal
+AND
+, having its registered office at
+the “Supplier” which expression shall, wherever the context so pem
+include its legal representatives, executors, successors and assigns) of the SECOND PART.
+ARTICLE I - PURPOSE & SCOPE
+BIEK has awarded to the Supplier the procurement, supply, installation, configuration, deployment,
+testing and commissioning of Networks & Accessories in accordance with the Technical Proposal and
+BOQ (Annexure-A).
+ARTICLE Il - CONTRACT DOCUMENTS
+This Agreement consists of the Tender/Bidding Documents, Supplier's Technical Proposal and BOQ,
+Letter of Award/Purchase Order, Performance Security and Integrity Pact.
+ARTICLE III - PRICE & TAXES
+The total Contract Price is Rs. /- (Rupees Only) inclusive
+of all applicable taxes, levies, freight, insurance, labour, installation and incidental charges. All taxes,
+duties, stamp duty and levies shall be borne by the Supplier.
+ARTICLE IV ~ BID & PERFORMANCE SECURITY
+Bid Security equal to 3% of the Estimated Cost.
+Performance Security equal to 10% of the Contract Price to be provided within 7 days of signing
+Valid 90 days beyond completion to cover defects liability.
+ARTICLE V — DELIVERY, INSTALLATION & ACCEPTANCE
+‘Supplier shall deliver and complete installation/commissioning within 30 days of issuange of Purchase
+Order, extendable by mutual consent. Delivery shall be made at BIEK premises agAast triplicate
+delivery challans. Acceptance subject to satisfactory inspection/testing. \\
+SBD for Procurement of Networking Accessories & Installation of Network Page 10 of 14
+ARTICLE VI - WARRANTY & MAINTENANCE
+All equipment supplied shall carry manufacturer’s warranty. Supplier shall provide one-year
+maintenance services post-installation at no additional cost.
+ARTICLE VI — PAYMENT TERMS
+100% of the Contract Price on complete delivery and acceptance within 30 days on submission of
+invoice supported by Acceptance Certificate. Part payment on part supply only when approved by
+Chairman BIEK. Deduction of income/sales tax at source as per law.
+ARTICLE VIII — LIQUIDATED DAMAGES & PENALTIES
+In case of delay, liquidated damages @ 0.5% per day of the contract value up to a maximum of 10%
+shall be imposed. Inferior or substandard items will be rejected; Security Money may be forfeited and
+Supplier may be blacklisted.
+ARTICLE IX — VARIATION / ADDITIONAL WORK
+BIEK may, at any time during performance, request changes in scope. Any price/time adjustments shall
+be mutually agreed in writing before execution.
+ARTICLE X - INTEGRITY PACT
+Supplier undertakes that no bribe, commission, gratification, or kickback has been given or shall be
+given. Any false declaration will make the contract void; Supplier shall indemnify BIEK for any
+loss/damage incurred on account of corrupt practices.
+ARTICLE XI- DISPUTE RESOLUTION
+Any dispute arising under this Agreement shall be amicably resolved; if unresolved, it shall be referred
+to arbitration in accordance with the Arbitration Act, 1940 and SPPRA Rules. Venue: Karachi, Pakistan.
+Language: English.
+ARTICLE XII — TERMINATION
+BIEK may terminate this Agreement by giving 15 days’ written notice if the Supplier fails to execute
+the job according to the requirements. In the event of termination, Performance Security shall be
+forfeited
+ARTICLE XIII - INDEMNITY
+‘The Supplier shall indemnify and keep BIEK harmless from and against all damages, losses, claims or
+expenses caused by any defect in the goods, negligence, omission or misconduct of the Supplier.
+ARTICLE XIV — NOTICES \
+All notices under this Agreement shall be in writing and sent by registered mail/courier to the addresses,
+of BIEK and the Supplier.
+‘SBD for Procurement of Networking Accessories & Installation of Network. at ofa
+ARTICLE XV - STAMP DUTY
+Stamp Duty @0.35% of the cost of transaction / Work order will be deposited in Government treasury
+by the SUPPLIER. This paid Stamp Duty challan would be submitted along with the Bill / Invoice
+ARTICLE XV - VALIDITY
+This Agreement shall come into force from the date of issue of Purchase Order and remain valid until
+completion and defects liability period.
+“Board of Intermediate Education, Karachi” Mss
+NAME: NAME:
+NICH NIC #
+Signature: Signature:
+WITNESS: 1 WITNESS: 2
+cNIce. cnic#
+Signature:
+SBD for Procurement of Networking Accessories & installation of Network Page 12 of 14
+INTEGRITY PACT
+Declaration of Charges, Fees, Commission, Taxes, Levies etc payable by the contractor;
+ys. the contract hereby declares that:
+(2) _ Its intention not to obtain the procurement work of any Contract, right, interest, privilege, or
+other obligation or benefit from the BIEK or any administrative or financial offices thereof or
+any other department under the control of the BIEK through any corrupt practice(s).
+(b) Without limiting the generality of the forgoing the contractor represents and warrants that it
+has fully declared the charges, fees, commission, taxes, levies etc, paid or payable to anyone
+and not given or agreed to give and shall not give or agree to give to anyone within the BIEK
+directly or indirectly through any means any commission, gratification, bribe, gifts, kickback
+whether described as consultation fee or otherwise, with the object of obtaining or including.
+the procurement or service contract or order or other obligations whatsoever from the BIEK,
+except that which has been expressly declared pursuant hereto,
+(c) He contractor accepts full responsibility and strict liability for making any false
+declaration/statement, not making full disclosure, misrepresenting facts or taking any action
+likely to degrade the purpose of declaration, representation and warranty. It agrees that any
+contract/order obtained aforesaid shall without prejudice to any other right & remedies
+available to the BIEK under any law, contact, or other instrument, be stand void at the
+discretion of the BIEK.
+{d) Notwithstanding any right and remedies exercised by the BIEK in this regard, contractor agrees
+to indemnify the BIEK for any loss or damage incurred by it on account of its corrupt business
+practice & further pay compensation to the BIEK in any amount equivalent to the loss of any
+commission, gratification, bribe, gifts, kickback given by the contractor as aforesaid for the
+purpose of obtaining or inducing procurement/ work/ service or other obligation or benefit in
+whatsoever from the BIEK.
+Note:
+This integrity pact is mandatory requirement other than auxiliary services / works.
+Stamp & Signature
+‘SBD for Procurement of Networking Accessories & Installation of Network Page 13 of 14
+BIDDER’S CERTIFICATE
+We have carefully read & understood the Terms & Conditions whatever has been stated herein the
+enclosed pages and abide to the same. l/We guarantee to supply/deliver/install the items exactly in accordance
+with the requirements and enclosed the Bid Security payable to Board of Intermediate Education, Karachi.
+NAME OF FIRM:
+‘ADDRESS OF FIRM:
+FULL NAME OF CONCERNED PERSON:
+CNIC NUMBER:
+POSITION HELD IN:
+PHONE NUMBER(S}:
+MOBILE NUMBER(S):
+FAX NUMBER(S):
+NATIONAL TAX NUMBER:
+GENERAL SALES TAX NUMBER:
+PAY ORDER NUMBER:
+BANK & BRANCH NAME:
+SIGNATURE WITH DATE:
+SBD for Procurement of Networking Accessories & Installation of Network age 14 of 14
+STANDARD BIDDING DOCUMENTS
+FINANCIAL PROPOSAL
+VOLUME - II
+In respect of: a a
+BIE/AG/L&N/1611/2026 dated:
+Phones: 9926021 1-12-13 Ext: 130 | Website: www.biek.edu.pk
+SBD Procurement of Networking Accessories & Installation of Network (Financial) Page 1 of 6
+BID SUBMISSION SHEET
+Date:
+ICB NO.:
+Invitation for Bid No.:
+Alternative No.:
+‘The Superintendent (Administration General)
+Board of Intermediate Education,
+North Nazimabad,
+KARACHI
+We, the undersigned, declare that:
+We have examined and have no reservations to the Bidding Document, including Addenda
+No.:
+(a)
+(b)
+()
+(e)
+(
+(h)
+SBD Procurement of Networking Accessories & Installation of Network (Financial)
+We offer to supply in conformity with the Bidding Document and in accordance with
+the delivery schedule specified in the Schedule of Supply, the Goods and Related
+Services.
+The total price of our Bid, excluding any discounts offered in item (d) below is:
+Rs., (Rupees, 3
+The discounts offered and the methodology for their application are:
+Our Bid shall be valid for a period of 90 days from the date fixed for the bid
+submission deadline in accordance with the Bidding Document, and it shall remain
+binding upon us and may be accepted at any time before the expiration of that
+period;
+If our Bid is accepted, we commit to obtain a Performance Security @ 10% of the
+Contract Price for the due performance of the Contract;
+ur firm, including any subcontractors or suppliers for any part of the Contract, have
+nationalities from these eligible countries;
+We are not participating, as Bidders, in more than one Bid in this bidding process,
+other than alternative offers in accordance with the Bidding Documents;
+Our firm, its affiliates or subsidiaries, including any subcontractors or suppliers for
+any part of the contract, has not been declared ineligible by the Governgfent;
+( a
+a
+Page 2 of
+(i) The following commissions, or fees have been paid or are to be paid wit
+the bidding process or execution of the Contract:
+respect to
+Name of Receipt Address Reason Amount
+(If none has been paid or is to be paid, indicate “none.”)
+(j) We understand that this Bid, together with your written acceptance thereof included
+in your notification of award, shall constitute a binding contract between us, until a
+formal Contract is prepared and executed.
+(k) We understand that you are not bound to accept the lowest evaluated bid or any
+other bid that you may receive.
+Name.
+(I) Inthe capacity of
+(m) Signed
+(n) Duly authorized to sign the security for and on behalf of.
+Date
+SBD Procurement of Networking Accessories & Installation of Network (Financial) Page 3 of 6
+PROCUREMENT OF NETWORKING ACCESSORIES &
+INSTALLATION OF NETWORK
+The items are needed with installation and commissioning, please quote the accessories
+price and installation price separately.
+Re ~ | Rate ‘Amount
+S.No Description Qty. | Unit | (inclusive alt
+taxes)
+1__ | Coming or Equivalent 170 450_| item
+Corning or Equivalent Single shutter
+2 | Phase plate a) || Mea
+3) Semin Eaten Dal shutter PaS® | 35 tem
+48 Port Corning or Equivalent Patch
+4 | Panel toaded Sonil etter, -
+74 Port Corning or Equivalent Patch
+5 _| Panet loaded 8 | tea
+© _[ Corning or Equivalent Cable manager 1 _| item
+7__| Corning or Equivalent Patch Cord 1m 680__| Meter
+Coming or Equivalent Patch Cord Corning
+8 | or Equivalent ABO || Str
+9 | Corning or Equivalent Caté Giga Cable | 26000 | Ft
+1625 350 | Ft
+10 [aaa 450_| Ft
+75x25 350 | Ft
+40x60 too | Ft
+‘Other Accessories for PVC Pipe and
+1 | Channel Buct ulate
+6U Rack 600X600 with Cooling Fan and
+12 | one Fix Tray ea
+12_| 6 Core indoor Fiber Cable 5000 | Fe
+U Rack 600X600 with Cooling Fan and
+13 | one Fix Tra ee
+ya | 270 Rack for IT Romm cables wal ie
+management
+15 [SC to SC pigtail 15 _| Meter
+16 | 4 Port ODF Loaded 3 | tem
+17__| 24 Port ODF Loaded 1 | em
+18_ | 1" Flexible Pipe too | Ft u\
+9 exible Pipe 100 | Ft
+20__| 1" PVC Pipe 300 | Ft 3
+21_ | SFP Modules 20 | item
+C
+Page 4 of 6
+2 _ | SC toSC Pigtail 50__| Meter
+23__| 8 Port PDU 12 | item
+24_| 8 Port ODF Loaded 10 | Item
+25 _ | 650 VA UPS Stabimatic 12 | Item
+26 _ | 24 Port Giga Switch 4Port SFP 14_| item
+26 _ | 8 PORT Giga Switch it Item
+27__ | 48 Port Giga Switch 4 port SFP 5 Item
+28 | Numbering and Testing both end 1 | Labor
+Labor charges of Fiber
+‘Access controller configuration and
+Installation
+GRAND TOTAL =
+The successful bidder should have to provide the complete schematic diagram of whole
+network, in respect of building, rooms of cable tagging, switch labeling and patch panel
+labelling with accessories warranty and time period.
+SBD Procurement of Networking Accessories & Installation of Network (Financial) Page 5 of 6
+Bakhtiyari Youth Centre, North Nazimabad.
+Rupees in Words
+Rupees in Figures
+Total cost of the Bid:
+(as offered by the Bidder)
+3% (Three percent) amount
+of the Bid Price
+Bid Security (Refundable)
+10% (ten percent) amount
+of the Contract Price
+Performance Security
+(Refundable)
+Page 6 of 6

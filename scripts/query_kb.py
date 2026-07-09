@@ -9,12 +9,13 @@ from typing import Any
 import faiss
 import numpy as np
 import requests
+from kb_paths import knowledge_base_dir
 
 
-PROJECT_DIR = Path(__file__).resolve().parents[1]
-DEFAULT_INDEX_PATH = PROJECT_DIR / "data" / "knowledge-base" / "faiss.index"
-DEFAULT_META_PATH = PROJECT_DIR / "data" / "knowledge-base" / "index_meta.jsonl"
-DEFAULT_MANIFEST_PATH = PROJECT_DIR / "data" / "knowledge-base" / "index_manifest.json"
+DEFAULT_KB_DIR = knowledge_base_dir()
+DEFAULT_INDEX_PATH = DEFAULT_KB_DIR / "faiss.index"
+DEFAULT_META_PATH = DEFAULT_KB_DIR / "index_meta.jsonl"
+DEFAULT_MANIFEST_PATH = DEFAULT_KB_DIR / "index_manifest.json"
 DEFAULT_OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://localhost:11434")
 OLLAMA_KEEP_ALIVE = os.environ.get("OLLAMA_KEEP_ALIVE", "30m")
 TOKEN_RE = re.compile(r"[a-z0-9]+")

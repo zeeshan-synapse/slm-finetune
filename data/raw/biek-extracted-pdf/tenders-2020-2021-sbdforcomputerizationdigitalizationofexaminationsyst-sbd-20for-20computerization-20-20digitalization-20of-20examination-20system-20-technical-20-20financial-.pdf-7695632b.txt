@@ -1,0 +1,1264 @@
+SBD 
+                FOR COMPUTERIZATION , DIGITALIZATION OF EXAMINATION SYSTEM
+URL: https://www.biek.edu.pk/TENDERS/2020-2021/sbdforcomputerizationdigitalizationofexaminationsyst/SBD%20FOR%20COMPUTERIZATION%20,%20DIGITALIZATION%20OF%20EXAMINATION%20SYSTEM%20(TECHNICAL%20&%20FINANCIAL).pdf
+Source: https://www.biek.edu.pk/tenders.asp
+
+Page 1 of 12
+STANDARD BIDDING DOCUMENTS
+FOR
+NATIONAL COMPETITIVE BIDDING
+SINGLE STAGE – TWO ENVELOPE PROCEDURE
+TENDER FOR COMPUTERIZATION / DIGITALIZATION
+OF EXAMINATIONS SYSTEM
+PROCUREMENT OF HARDWARE /SOFTWARE /
+SERVICES
+IN RESPECT OF THE
+BIE/AG/L&N/ 120 /2021
+(TECHNICAL PROPOSAL)
+
+Instructions to Bidders (ITB)
+General Conditions of Contract (GCC)
+BOARD OF INTERMEDIATE EDUCATION,
+BAKHTIYARI YOUTH CENTER, NORTH NAZIMABAD,
+KARACHI-74700
+Phones: 
+99260211
+99260212
+99260213
+Page 2 of 12
+INSTRUCTIONS TO BIDDERS & GENERAL CONDITIONS
+OF CONTRACT:
+The Instructions to Bidders (ITB) and General Conditions of Contract (GCC)
+applied in this Contract shall be the same as per Standard Bidding Documents for Goods,
+issued by SPPRA. For further references the same may be downloaded from SPPRA’s website
+www.pprasindh.gov.pk or it may be provided from this Office if it may be demanded by the
+bidder. Whenever there is a conflict, the provisions hereafter shall prevail over those in the
+Instructions to Bidders & General Conditions of Contract. The corresponding clause number of
+the ITB & GCC is indicated in parentheses.
+BID DATA SHEET
+INTRODUCTION
+ITB 1.1
+Name of Contract
+Tender for computerization /
+digitalization of examinations
+system procurement of
+Hardware / software / services
+ITB 4.1
+Name of Procuring Agency
+Board of Intermediate
+Education Karachi
+ITB 6.1
+Procuring agency’s address,
+telephone, telex, and facsimile
+numbers
+Education, Bakhtiyari Youth
+Center North Nazimabad
+Tel: 99260211
+Fax: 99260203 & 99260208
+ITB 8.1
+Language of the bid
+English or Urdu
+BID PRICE AND CURRENCY
+ITB 11.2
+The price shall be in Pakistani currency inclusive of all Taxes,
+Transportation, Material and Labour charges involved therein.
+ITB 11.5
+During the entire period of bid validity, the price shall be fixed and the
+bidder will have to supply the required items as per specifications and
+quoted rates.
+Page 3 of 12
+PREPARATION AND SUBMISSION OF BIDS
+ITB 13.3 (d)
+Qualification
+Requirements
+
+05 years experience in the relevant field (Client
+List)
+Turn-over of at least last three years having a sum
+of minimum Rs.50 Million for one year in last 03
+years (Copies of financial statements / Audit
+Report by Chartered Accountant be attached).
+Minimum 3 contracts of similar goods / jobs in last
+3 years
+Registration with Federal Board of Revenue
+(FBR), for Income Tax, GST / SRB and Sales Tax
+in case of procurement of goods.
+An Affidavit on Stamp Paper that the firm has
+never been Blacklisted
+Valid Registration Certificate from PSEB /
+PASHA.
+ITB 15.1
+Amount of bid
+security (refundable)
+3% (Three percent) of the bid price, which should be
+submitted in shape of Pay Order in the name of
+Secretary, Board of Intermediate Education Karachi
+and shall remain valid for a period of 28 days beyond
+the validity period for bid.
+ITB 16.1
+Bid Validity Period
+90 days from the date of opening of Tender.
+ITB 18.2 (a)
+Address for bid
+submission
+The office of the Admin General Section (Chairman’s
+Secretariat), Ground Floor, Board of Intermediate
+Education, Karachi.
+ITB 18.2 (b)
+IFB title and number
+Title: Tender for computerization /
+digitalization of examinations system
+Procurement of Hardware / Software /
+Services.
+IFB No: BIE/AG/L&N/ 120 /2021
+Dated: 01-07-2021
+ITB 19.1
+Deadline for bid
+Friday, 16 July 2021 up to 2:30 P.M
+Sealed bids duly filled-in, mentioning on top of the
+envelope
+“Tender
+computerization
+/
+digitalization
+of
+examinations
+system
+Services.”
+ITB 22.1
+Time, date, and
+place for bid
+opening
+Bids duly stamped on each document must be
+submitted in the office of the Admin General
+Section (Chairman’s Secretariat), Ground Floor,
+Board of Intermediate Education, Karachi, in a
+sealed cover on 16-07-2021 up to 2:30 P.M. The
+Technical & Financial Proposal will be opened on
+the same day at 03:00 P.M & 03:30 P.M.
+respectively
+in
+the
+presence
+bidders’
+representatives who wish to attend.
+ITB 25.4 (b)
+Delivery schedule
+The delivery will have to be made at our site
+within stipulated time as mentioned in the
+Contract Award. Minimum time period will be at
+least 30 DAYS after issuance of contract award
+which may be increased or decreased due to
+demand of time/situation as per SPPRA Rules.
+Page 4 of 12
+GENERAL CONDITIONS
+Bids of only those Bidders will be evaluated who can fulfill the Eligibility Criteria and enclose Bid
+Security.
+Shortcomings in submission of documents related to Eligibility Criteria or non-submission of Bid
+Security or specimen/samples shall be rejected.
+Bids not submitted on Standard Bidding documents issued by the procuring agency shall be
+rejected or treated as Non Responsive.
+Prior to submission of bids, the bidders may obtain further information from the office of Admin
+General Section (Ground Floor Chairman’s Secretariat) and completely satisfy themselves about
+the required items for which they are bidding for.
+An interested bidder, who has obtained bidding documents, may request for clarification of contents
+of the bidding document in writing, and procuring agency shall respond to such queries in writing
+within three calendar days, provided they are received at least five calendar days prior to the date of
+opening of bid.
+The offered products should be prime quality products. Cheap products of low quality or
+substandard shall not be accepted and the said bid shall be treated as Irresponsive.
+Inferior, low quality or substandard products will be rejected and Security Money shall be forfeited
+and the bidder may also be blacklisted.
+The bidder with the “Lowest Evaluated Cost” but not necessarily the “Lowest Submitted
+Price” shall be awarded the Procurement Contract.
+SECTION III.
+SPECIAL CONDITIONS OF CONTRACT
+The following Special Conditions of Contract shall supplement the General
+Conditions of Contract. Whenever there is a conflict, the provisions herein shall prevail over those in
+the General Conditions of Contract. The corresponding clause number of the GCC is indicated in
+parentheses.
+1. DEFINITIONS (GCC CLAUSE 1)
+1)
+GCC 1.1 (g)
+The Procuring agency
+is:
+Board
+Intermediate
+Education,
+Karachi.
+2)
+GCC 1.1 (h) The Procuring agency’s
+country is:
+Islamic Republic of Pakistan.
+3)
+GCC 1.1 (j)
+The Project Site is:
+Same as GCC 1.1(g) mentioned above.
+2. COUNTRY OF ORIGIN (GCC CLAUSE 3)
+All countries and territories as indicated in Part Two Section VI of the bidding documents,
+“Eligibility for the Provisions of Goods, Works, and Services in Government-Financed
+Procurement”.
+Page 5 of 12
+3. PERFORMANCE SECURITY (GCC CLAUSE 7)
+GCC 7.1
+The amount of performance security, as a percentage of the Contract
+Price, shall be Ten (10) percent of the Contract Price which should
+be submitted in shape of Pay Order in the name of Secretary, Board
+of Intermediate Education Karachi.
+4. RESOLUTION OF DISPUTES (GCC CLAUSE 28)
+The dispute resolution mechanism to be applied pursuant to relevant SPPRA Rules.
+5. GOVERNING LANGUAGE (GCC CLAUSE 29)
+GCC 29.1
+The Governing
+Language shall be:
+English.
+6. NOTICES (GCC CLAUSE 31)
+GCC 31.1 — Procuring agency’s address for notice purposes:
+Office of the Admin General Section, (Chairman’s Secretariat Ground Floor), Board of Intermediate
+7. PENALTY
+1) Preferred penalties according to the issue\subject may be imposed upon the Supplier(s) such
+as:
+i.
+rejection of the unsatisfactory Supplied material
+ii.
+Blacklisting of the firm
+iii.
+Liquidity damages applied as per SPPRA rules.
+iv.
+forfeiting of whole Security amount
+Anyone or more than one from the aforesaid penalties may be imposed upon the Supplier(s) in the
+following cases:
+a) In case of transgression/deviation of the time given in the Contract Award
+b) In case of transgression, deviation, mistake or low quality found in the supplied Item(s)
+c) In case the specification, quantity, rate or stuff of a Tender in certain item or items are
+approved and the Bidder backs out of his commitment on any pretext or fails to supply the
+material or complete the job in time or in the required criteria.
+8.
+SUBJECT TO RELEVANT SPPRA RULES,
+THE COMPETENT AUTHORITY RESERVES THE RIGHT TO:
+(a) divert/distribute a particular work among different Bidders on the lowest approved rate(s) in
+the interest of the office due to demand of time/situation.
+(b) accept or reject all or any bid.
+(c) increase or decrease quantity without any notice at any time/stage subject to ITB Clause 29.
+Page 6 of 12
+9. SPECIAL CLAUSE (TERMS & CONDITIONS)
+Under following conditions bid will be rejected:-
+Conditional and telegraphic bids/tenders
+Bids not accompanied by Bid Security of required amount and form
+Bids received after specified date and time
+Bids of Blacklisted firms
+Bids of only those Bidders will be evaluated who can fulfill the Eligibility Criteria
+and enclose Bid Security.
+Shortcomings in submission of documents related to Eligibility Criteria or non-
+submission of Bid Security shall be rejected.
+4)
+Prior to submission of bids, the bidders may obtain further information and
+completely satisfy themselves about the required items for which they are bidding
+for.
+5)
+An interested bidder, who has obtained bidding documents, may request for
+clarification of contents of the bidding document in writing, and procuring agency
+shall respond to such queries in writing within three calendar days, provided they
+are received at least five calendar days prior to the date of opening of bid.
+6)
+The offered products should be prime quality products. Cheap products of low
+quality or substandard shall not be accepted and the said bid shall be treated as
+Irresponsive.
+7)
+Inferior, low quality or substandard products will be rejected and Security Money
+shall be forfeited and the bidder may also be blacklisted.
+8)
+The bidder with the “Lowest Evaluated Cost” but not necessarily the “Lowest
+Submitted Price” shall be awarded the Procurement Contract subject to
+compatibility/suitability of the item(s).
+9)
+The bidder shall supply the article(s) as per approved specifications mentioned in
+the Contract Award. The article(s) not found in conformity with the approved
+specifications shall be rejected at the risk & cost of the bidder.
+10)
+The Contract Award may be assigned at any time during the period of bid validity.
+11)
+Performance Security:
+GCC 3.1
+The amount of Performance security is 10% of the Contract Price.
+GCC 3.2
+After delivery and acceptance of the Goods, the performance
+security may be reduced to Two percent (2%) of the Contract Price to cover the
+Supplier’s warranty obligations in accordance with Clause GCC 15.2.
+12)
+The amount of Performance Security is in addition to the amount of Bid Security
+which should be deposited by the successful bidder(s). Bid Security shall remain
+valid for a period of 28 days beyond the validity period for bids, whereas
+Performance Security shall be released ninety days beyond the date of completion
+of contract to cover defects liability period subject to final acceptance by the
+procuring agency in accordance with SPPRA Rules.
+Page 7 of 12
+13)
+Placement of Contract Award will be subject to payment of Performance Security.
+14)
+The Services shall be delivered to end user department, through the concerned
+Officers as the case may be, against delivery challan in triplicate. Two copies of
+the bills and challan shall be retained by the Officer concerned while the third copy
+shall be returned to the Service Provider for his own record.
+15)
+The items should be supplied strictly in accordance with the approved samples.
+16)
+17)
+The delivery will have to be made at our site within stipulated time as mentioned in
+the Contract Award. Minimum time period will be at least 30 DAYS after issuance
+of contract award which may be increased or decreased due to demand of
+time/situation.
+The Payment shall be subject to deduction of Income / Sales Tax /SRB at source,
+Satisfactory report of concerned officer, completion certificate and production of
+delivery challans as being delivered the stores in full quantity & quality.
+18)
+SPPRA Rules-2010 (Amended) shall strictly be followed.
+10. EQUIVALENCY OF STANDARDS AND CODES
+Reference to brand name, catalogue number or country where used, they should always be read with
+followed by the words “or at least equivalent.”
+Page 8 of 12
+SCOPE OF WORK
+CODIFICATION SOLUTION REQUIRED
+Codification Machine with One Year Services
+Qty: 2(Two)
+Automatic Fictitious Codification Machine
+1.
+Mechanical
+3
+Software
+1.1 Answer Script Lifting Machine
+3.1 Automatic fictitious Code Algorithm
+1.2 Answer Script Bundle Carrier
+3.2 System Integrated Code
+1.3 Answer Script Shift to belt
+3.3 Machine Operating System Desk
+1.4 Conveyor belt
+3.4 Belt Speed Control
+1.5 Printing Station
+3.5 Encoding Decoding Management
+1.6 Output Answer Script Station
+3.6 Reports
+2
+Electrical
+4
+Hardware
+2.1
+Answer Script Lifting Sensors
+4.1 UPS 1 KVA
+2.2
+Answer Script Shifting Sensors
+4.2 Battery 150
+2.3
+Printing Station Sensors
+4.3 Belt Motor
+2.4
+Answer Script print Signal Sensors
+4.4 Copy Lifting Motor
+2.5
+4.5 Belt & Lifter Coupling
+5.
+Cartridges
+Qty: 70 (Seventy)
+5.1 Codification Machine Cartridges
+HP Latex ink or equivalent
+12.7mm high print band
+Resolution upto 600 x 600 dpi
+42 ml nominal volume with 30 picoilter drop
+Approximately 200,000 prints per cartridge (20 character, 10pt. alphanumeric code @ 300 dpi).
+6.
+SERVICES REQUIRED FOR CODIFICATION MACHINE FROM VENDOR
+6.1 The provider will provide complete operational services during codification and will work
+together with the codifiers.
+6.2 The complete confidential agreement shall be made with vendor / service provider.
+6.3 The contract at least shall be made for one year where one annual and supplementary
+examinations shall be covered or at least two examinations shall be done. The contract can be
+enhanced according to the requirements with complete technical assistance.
+6.4 The vendor shall train the concerned codifier team with complete technical assistance.
+6.5 The vendor shall also train required staff and concerned officer and officials (if required).
+6.6 Three years parts and services warranty must be provided.
+OMR WITH ICR
+7. OMR WITH ICR SOFTWARE
+Qty: 01
+7.1 The software shall scanned the answer script of OMR script and generate the award list
+according to the requirements.
+7.2 The software is enable to read the code through ICR and develop the result through code.
+7.3 The software shall be capable to work on OMR (Optical Mark Recognition) and ICR (Intelligent
+Character Recognition) technology.
+7.4 The software is capable to maintain the record in database with scanned OMR Sheet.
+7.5 The software is capable to maintain the records of candidates with year, Faculty, Subject and
+max marks wise data and enable to provide in soft copy to concerned section.
+7.6 The archive of results shall be provided to concerned section when the work is completed.
+7.7 The company should also maintain the record at least for two years.
+Page 9 of 12
+8.1. REQUIREMENT OF HARDWARE
+8 HP SERVER DL 380 G10 OR ABOVE TOWER OR EQUIVALENT
+QTY: 1
+8.1
+Multi Core microprocessor (02)
+8.2
+128 GB RAM
+8.3
+2 TB SAS (16 qty)
+8.4
+Dual Power Supply
+8.5
+Raid Controller Card
+8.6
+Fans with all accessories
+8.7
+With warranty
+9 SCANNER
+QTY: 5
+9.1
+Avision or Kodak (Latest model) or equivalent
+9.2
+600 dpi
+9.3
+Speed: simplex: 65ppm, Duplex: 130ppm (200 dpi / 300 dpi)
+9.4
+Interface: USB 3.0 / USB 2.0 / USB 1.1 (backward compatible)
+9.5
+Zone Scanning (front and back)
+9.6
+Source Volt : 100 to 240 VAC ± 10%
+9.7
+Operating system Support (Windows 7, 8, 8.1, 10, Vista, (32 bit / 64 bit) &
+Windows Server 2016 (64 bit)
+10 COMPUTER
+QTY: 2
+10.1
+Core i7 HP or Dell equivalent (latest model) or equivalent
+10.2
+1 TB HDD
+10.3
+8 GB RAM
+10.4
+15 Inch Monitor or LED
+10.5
+Mouse Keyboard with general specification
+11 SWITCHES
+11.1
+16 Port Switch (Cisco 3920) or equivalent
+11.2
+Cable and Connector
+11.3
+Cat 6 (Good Quality) (1 Box)
+11.4
+RJ 45 Connector (1 Box) 300 connector
+11.5
+Clipping Tool (01)
+12 PRINTER
+12.1
+Nashuatec or Ricoh or equivalent (Black & white) or equivalent
+12.2
+SP 8300 DN or latest Model
+12.3
+Printer Drivers with complete services
+13 SERVICES REQUIRED FOR CODIFICATION MACHINE FROM VENDER
+13.1
+The vendor shall provide complete operational services during OMR scanning
+and provide subject wise award sheet for all faculties.
+13.2
+The complete confidential agreement shall be made with the vendor / service
+provider.
+13.3
+The contract at least shall be made for one year where one annual and
+supplementary examinations shall be covered or at least two examinations
+shall be done. The contract can be enhanced according to the requirements
+with same terms and conditions.
+13.4
+The vendor shall train the concerned team with complete technical assistance.
+13.5
+The vendor shall also train required staff and concerned officer and officials
+(if required)
+13.6
+Three years parts and services warranty must be provided.
+Page 10 of 12
+14. SMART BOXES FOR EXAMINATION PAPER DISTRIBUTION QTY:50
+SPECIFICATION
+14.1
+Smart Locks with Geofencing
+14.2
+Control Center Application
+14.3
+Mobile Application Software
+14.4
+Digital ID based smart locks in the metal box
+14.5
+Box shall be operated with digital key through cell phone and APP
+14.6
+Smart Box has capacity to contains 1500 sheets of 80-gram paper
+14.7
+Smart Box color must be matching with BIEK logo
+14.8
+Smart Box must have logo of BIEK on top
+14.9
+Smart Box must unlock electronically / digitally, there is no other handle or
+source where the door can be unlocked
+14.10 In case of emergency the lock can be opened through control center which
+shall be operated by BIEK by vender
+14.11 Design should smooth and don’t have any handle in the box for open, Box
+door open only when authorized person digitally unlock by his mobile phone.
+15. SMART BOXES FOR EXAMINATION PAPER DISTRIBUTION
+A Cloud based software will provide for command & control center for Box unlock in
+the premise of Board office. There must be a mechanism that acknowledge that each
+and every exam center receive the box and one unlock command run from BIEK
+authority then box will unlock and paper can be taken from Smart Box.
+16. MOBILE APP
+A user-friendly mobile app for Smart Box unlock will provide to all exam center in-
+charge by this app they will acknowledge and unlock the Smart Box once approved
+by BIEK authority.
+17. SECURITY
+17.1
+Smart box cannot be tempered or misused, if so then must be a mechanism
+that acknowledge the said feature.
+17.2
+Smart box cannot be unlocked out of Exam Center unlock must not work if it
+is out of exam center.
+18. IMPLEMENTATION
+The required solution should be ready to implement at the time of submitting the bid
+by the solution vender. Vender should be able to implement the required solution in
+the BIEK in 30 days once approved before annual examination 2021.
+19. SERVICES REQUIREMENT FROM THE VENDER
+19.1
+Deployment of control center and provide operational services during
+examination is the responsibility of the company.
+19.2
+Vendor is responsible to configure the boxes with examination centers.
+19.3
+The workability of the lock and boxes shall be responsibility of the company.
+19.4
+Mobile Application configuration and training to concerned professor/lecturer
+and concerned staff of the BIEK is the responsibility of the company.
+19.5
+One year contract warranty for operational Services is required to run the
+examinations.
+19.6
+Three years hardware and software application warranty and services is also
+required.
+19.7
+If any calibration related to software and hardware is not worked then it is the
+responsibility of the company to resolve on immediate basis during
+examination.
+19.8
+The qualified vendor should make the software integration and APIs bug free
+and do customization as per BIEK requirements until one year after signing of
+the contract.
+Page 11 of 12
+SECTION-IV.
+SCHEDULE OF REQUIREMENTS
+SCHEDULE OF REQUIREMENTS:
+The delivery will have to be made at our site within stipulated time as mentioned in the Contract
+Award. Minimum time period will be at least 30 DAYS after issuance of contract award which may
+be increased or decreased due to demand of time/situation.
+Page 12 of 12
+SUMMARY OF TURN-OVER OF LAST THREE YEARS
+YEAR-2018
+YEAR-2019
+YEAR-2020
+TOTAL:
+C E R T I F I C A T E
+I/We have carefully read & understood the Terms & Conditions whatever has been
+stated herein the enclosed pages and abide to the same. I/We guarantee to supply/deliver/install the
+items exactly in accordance with the requirements and enclosed the Bid Security payable to Board of
+Intermediate Education, Karachi.
+SIGNATURE WITH DATE: _____________________________
+NAME OF FIRM: _____________________________
+ADDRESS OF FIRM: _____________________________
+_____________________________
+FULL NAME OF CONCERNED PERSON: _____________________________
+CNIC NUMBER:
+POSITION HELD IN: _____________________________
+PHONE NUMBER(S): _____________________________
+MOBILE NUMBER(S): ____________________________
+FAX NUMBER(S): _____________________________
+NATIONAL TAX NUMBER: _____________________________
+GENERAL SALES TAX NUMBER: _____________________________
+STAMP OF THE FIRM: _____________________________
+PAY ORDER NUMBER: _____________________________
+BANK & BRANCH NAME: _____________________________
+DATED: _____________________________
+FOR RUPEES: _____________________________
+DRAWN: _____________________________
+as Bid Security is enclosed herewith.
+Page 1 of 15
+OF EXAMINATIONS SYSTEM PROCUREMENT OF
+HARDWARE /SOFTWARE /SERVICES
+(FINANCIAL PROPOSAL)
+Page 2 of 15
+Bid Submission Sheet
+Date: ______________________________________
+ICB NO.: __________________________________
+Invitation for Bid No.: ________________________
+Alternative No.: _____________________________
+SECRETARY,
+North Nazimabad,
+Karachi
+We, the undersigned, declare that:
+We have examined and have no reservations to the Bidding Document, including Addenda No.:
+________________ _____________________________________________________;
+(a)
+We offer to provide services / supply in conformity with the Bidding Document and in
+accordance with the delivery schedule specified in the Schedule of Supply, the Goods and
+Related Services.
+(b)
+The total price of our Bid, excluding any discounts offered in item (d) below is:
+Rs.________________(Rupees_________________________________________________;
+(c)
+The discounts offered and the methodology for their application are: __________
+___________________________________________________________________________
+__________________________________________________________________________;
+(d)
+If our Bid is accepted, we commit to obtain a Performance Security @ 10% of the Contract
+Price for the due performance of the Contract;
+(e)
+Our firm, including any subcontractors or suppliers for any part of the Contract, have
+nationalities
+from
+these
+eligible
+countries;
+______________;
+_______________;
+(f)
+We are not participating, as Bidders, in more than one Bid in this bidding process, other than
+alternative offers in accordance with the Bidding Documents;
+(g)
+Our firm, its affiliates or subsidiaries, including any subcontractors or suppliers for any part
+of the contract, has not been declared ineligible by the Government;
+(h)
+The following commissions, or fees have been paid or are to be paid with respect to the
+bidding process or execution of the Contract:
+Name of Receipt
+Address
+Reason
+Amount
+___________________ ________________ _______________ ___________
+(If none has been paid or is to be paid, indicate “none.”)
+(i)
+We understand that this Bid, together with your written acceptance thereof included in your
+notification of award, shall constitute a binding contract between us, until a formal Contract
+is prepared and executed.
+(j)
+We understand that you are not bound to accept the lowest evaluated bid or any other bid that
+you may receive.
+Name_______________________________________________________________
+(k)
+In the capacity of______________________________________________________
+(l)
+Signed ______________________________________________________________
+(m)
+Duly authorized to sign the security for and on behalf of_______________________
+(n)
+Date ______________________.
+Page 3 of 15
+FINANCIAL PROPOSAL
+S#
+Item
+Descriptions
+Quantity
+Rate
+Total Amount
+Codification
+Machine
+Type: Flatbed
+Feeder Type: Automatic
+Document Feeder
+Feeder
+Capacity:
+30
+answer scripts (copies)
+Sensor: Color CMOS
+contact
+Image
+Sensor
+(CIS)
+Printing
+Modes:
+Simplex, color / gray
+scale / monochrome
+Printing Color: Single
+Color Black Only
+Speed: Up-to 30 answer
+scripts
+(copies)
+per
+minute
+Optical
+Resolution:
+Output Resolution: 50-
+600
+dpi
+1
+increments
+Color Depth: Color:24-
+bit, Grayscale: 8-bit,
+Monochrome:1-bit
+A/D Converter: 65,536
+levels (16-bit)
+Reflective Scan Area:
+4.1x5.8” (105 x 148mm)
+Background: Black
+Scan
+Speed:
+AC
+Adapter
+Color:
+1.7
+seconds at 200 dpi
+Grayscale /
+Monochrome:1.0
+seconds at 200/300 dpi
+USB
+Bus
+Power
+2.0
+Monochrome:2.0
+Daily
+Duty
+(Sheets) : 100 scans
+Connectivity:
+Interface:
+/1.1
+Supported
+OS:
+Windows
+10,8.1,8,7,
+Vista,XP
+(64/32-bit),
+Server
+2008(64/32-bit).
+02
+Page 4 of 15
+Physical:
+Light
+Source: RGB LED
+Certifications:
+Energy
+Star & RoHS
+Requirements:
+100-240 VAC ±10%
+Consumption:
+AC Power
+Operating:
+150W
+or
+less
+Sleep: 5 W or less
+USB Bus Power
+Operating: 5W or less
+Sleep: 2W or less
+Auto
+Standby
+(Off):
+0.5W or less
+Operating Conditions:
+Temperature:
+42
+to
+95ºF (5 to 35ºC)
+Humidity: 20 to 80%,
+relative non-condensing
+Dimensions:
+5.6” x 2.5” x 1.3”
+ Weight:
+110.0 lb (50kg)
+ HP Latex ink
+ 12.7mm high print
+band
+ Resolution upto
+600 x 600 dpi
+ 42 ml nominal
+volume with 30
+picoilter drop
+ Approximately
+200,000 prints per
+cartridge
+(20
+character,
+10pt.
+alphanumeric
+code @ 300 dpi).
+OR Equivalent
+70
+REQUIRED FOR
+ The
+provider
+will
+provide
+complete
+operational
+during codification and
+will work together with
+the codifiers.
+confidential agreement
+shall be made with
+vender
+service
+provider / tenderee.
+ The contract at least
+shall be made for one
+year where one annual
+and
+supplementary
+01 Year
+Page 5 of 15
+examinations shall be
+covered or at least two
+done. The contract can
+be enhanced according
+with complete technical
+assistance.
+ The vender shall train
+the concerned codifier
+team
+with
+technical assistance.
+ The vender shall also
+train required staff and
+concerned officer and
+officials (if required).
+ Three years parts and
+services warranty must
+be provided.
+DEVELOPMENT
+BIEK OMR
+WITH ICR
+ The software shall be
+scanned
+answer
+script of OMR script
+and generate the award
+list according to the
+requirements.
+ The software is enable
+to read the code through
+ICR and develop the
+result through code.
+capable to work on
+OMR (Optical Mark
+Recognition) and ICR
+(Intelligent
+Character
+Recognition)
+technology.
+ The software is capable
+to maintain the record
+database
+scanned OMR Sheet.
+to maintain the records
+of candidates with year,
+Faculty, Subject amd
+max marks wise data
+and enable to provide in
+soft copy to concerned
+section.
+ The archive of results
+shall be provided to
+concerned section when
+the work is completed.
+ The company should
+also maintain the record
+at least for two years.
+01
+HP Server DL-380 G10
+Tower OR Equivalent
+Processor
+Multi Core
+microprocessor
+Page 6 of 15
+RAM
+32 GBx4
+Hard Disk
+2 TB SAS
+16
+Power Supply
+Raid Controller
+Card
+Fans with all
+accessories
+SCANNER
+ Avision or Kodak
+( Latest model) or
+equivalent
+ Resolution 600 dpi
+ Speed: simplex: 65ppm,
+Duplex: 130ppm (200
+dpi / 300 dpi)
+ Interface: USB 3.0 /
+USB 2.0 / USB 1.1
+(backward compatible)
+ Zone Scanning (front
+and back)
+ Source Volt : 100 to
+240 VAC ± 10%
+ Operating system
+Support (Windows 7, 8,
+8.1, 10, Vista, (32 bit /
+64 bit) & Windows
+Server 2016 (64 bit)
+05
+COMPUTER
+ Core i7
+ 1 TB HDD
+ 8 GB RAM
+ Mouse Keyboard with
+general specification
+LED Monitor Latest
+Model
+HP / Dell
+15 Inch
+SWITCHES
+16 Port Switch Cisco /
+Gigabit OR Equivalent
+Cat 6 (Good Quality)
+1 Box
+RJ 45 Connector
+300
+connectors
+Clipping Tool
+PRINTER SP 8300
+Nushatec & Ricoh or
+Equivalent (latest
+Model)
+ Black & White
+ Printer Drivers with
+complete services
+ The vendor shall provide
+during
+OMR
+scanning
+subject wise award sheet
+for all faculties.
+ The complete confidential
+agreement shall be made
+with the vendor / service
+ The contract at least shall
+be made for one year
+Page 7 of 15
+where one annual and
+shall
+be
+done. The contract can be
+enhanced according to the
+requirements with same
+terms and conditions.
+ The vender shall train the
+concerned
+technical
+ The vender shall also train
+required
+staff
+officer
+officials (if required)
+services warranty must be
+provided.
+SMART BOXES
+EXAMINATION
+PAPER
+DISTRIBUTION
+ Smart
+Locks
+Geofencing
+ Control
+Center
+Application
+ Mobile
+ Digital ID based smart
+locks in the metal box
+ Box shall be operated
+with digital key through
+cell phone and APP
+ Smart Box has capacity to
+contains 1500 sheets of
+80-gram paper
+ Smart Box color must be
+matching with BIEK logo
+ Smart Box must have
+logo of BIEK on top
+ Smart Box must unlock
+electronically / digitally,
+there is no other handle or
+source where the door can
+be unlocked
+ In case of emergency the
+lock
+can
+opened
+through
+control
+which shall be operated
+by BIEK by vendor
+ Design
+should
+smooth
+and don’t have any handle
+in the box for open, Box
+door open only when
+authorized
+person
+digitally unlock by his /
+her mobile phone.
+ A Cloud based software
+will provide for command
+& control center for Box
+unlock in the premise of
+Board office. There must
+a
+mechanism
+that
+acknowledge that each
+and every exam center
+receive the box and one
+unlock
+command
+run
+from BIEK authority then
+box will unlock and paper
+can be taken from Smart
+50
+Page 8 of 15
+Box.
+A user-friendly mobile
+app for Smart Box unlock
+will provide to all exam
+center in-charge by this
+app
+they
+acknowledge and unlock
+Smart
+Box
+once
+approved
+by
+BIEK
+authority.
+ Smart box cannot be
+tempered or misused; if so
+then must be a mechanism
+that acknowledge the said
+feature.
+unlocked out of Exam
+Center unlock must not
+work if it is out of exam
+center.
+solution
+ready
+implement at the time of
+submitting the bid by the
+solution vender. Vender
+able
+implement the required
+solution in the BIEK in 30
+days
+before
+annual
+examination 2021.
+ Deployment of control
+during examination is the
+responsibility
+company.
+ Vender is responsible to
+configure the boxes with
+examination centers.
+ The workability of the
+lock and boxes shall be
+configuration and training
+professor/lecturer
+concerned staff of the
+BIEK is the responsibility
+of the company.
+ One
+year
+contract
+warranty for operational
+Services is required to run
+the examinations.
+ Three years hardware and
+warranty and services is
+also required.
+ If any calibration related
+to software and hardware
+is not worked then it is the
+company to resolve on
+immediate basis during
+qualified
+should make the software
+Page 9 of 15
+integration and APIs bug
+free and do customization
+as per BIEK requirements
+until
+one
+after
+signing of the contract.
+Grand Total=
+GRAND TOTAL IN WORDS
+____________________________________________________________________________
+3% (Three percent)
+Amount of the Bid Price
+Bid Security (Refundable)
+10% (ten percent) amount of Contract Price
+Performance Security (Refundable)
+Page 10 of 15
+CONTRACT AGREEMENT
+THIS AGREEMENT is executed at KARACHI, on this day ------- Day of ________, 2021
+BETWEEN
+M/s. Board of Intermediate Education, Karachi through its Secretary, at Board of Intermediate
+Education, Bakhtiyari Youth Center North Nazimabad, Karachi, hereinafter called and referred to
+as “BIEK” (which expression shall wherever the context so permits, be deemed to include its legal
+representatives, executors, successors and assigns) of the FIRST PART.
+M/s. _________________, having its office at ___________________________, hereinafter
+referred to as “THE SERVICE PROVIDER” (which expression shall wherever the context so permits
+be deemed to include its legal representatives, executors, successor and assigns), through its
+proprietor Mr. ___________________, holding CNIC No. _____________ on the SECOND PART.
+WHEREAS “BIEK” intends to obtain computerization / digitalization of examinations system
+procurement of Hardware / Software / Services “THE Service Provider” has offered to provide said
+Services as per technical specifications of the work mentioned in the bidding documents “BIEK”
+having accepted the offer. “BIEK” hereby offer to appoint “THE SERVICE PROVIDER” as their official
+Service Provider for the computerization / digitalization of examinations system procurement of
+Hardware / Software / Service Provider in respect with the Terms & Conditions of this contract.
+“THE Service Provider” hereby agrees to the offer of the “BIEK” in acceptance of the terms &
+conditions here in below forth.
+NOW IT IS HEREBY AGREED & DECLARED BY AND BETWEEN THE PARTIES AS FOLLOWS:
+Page 11 of 15
+ARTICLE –I
+DUTIES & SCOPE OF WORK
+1.1
+Requirement.
+S.No.
+Description
+Total Contract Amount
+1.2
+“THE SERVICE PROVIDER” agrees to provide services to “BIEK” whenever and wherever
+form is required as per the terms & conditions of this Agreement.
+1.3
+“THE SERVICE PROVIDER” will coordinate with Concerned Officer, of the “BIEK” who will
+assist “THE SERVICE PROVIDER” in Supervision of proposed work.
+1.4
+“THE SERVICE PROVIDER” hereby agrees to accept variation, if occurred, in scope of
+professional
+works
+mutual
+consent
+on
+acceptable
+cost/price/charges/amount inclusive of all taxes and levies.
+1.5
+All logistic charges will be borne by “THE SUPPLIER”
+ARTICLE –II
+SCOPE OF PROFESSIONAL SERVICES:
+2.1 “THE SERVICE PROVIDER” hereby agrees and acknowledges for the periodic supervision of
+the work and to check the execution of work in accordance with the Description &
+Specification.
+2.2 “THE SERVICE PROVIDER” hereby agrees and acknowledges the acceptance of attending
+the meetings with the Concerned Officer of “BIEK” as & when required.
+.
+2.3 “THE SERVICE PROVIDER” hereby agrees to provide services as per work scope provided in
+the bidding documents.
+ARTICLE –III
+REMUNERATION
+3.1 The cost offered by the Service Provider is Rs. /- (Rupees --------------------------------------
+------- only) (inclusive of all taxes) in connection with computerization / digitalization of
+examinations system procurement of Hardware / Software / Services vide Notification of
+Award of Contract # BIE/AG/L&N/ /2021.
+3.2 Liquidity damages as per SPPRA Rules.
+3.3 Payment for support will be made on monthly basis on production of invoice along with
+satisfactory services certificate by the Concerned Officer of the Board.
+3.3 Payment will be made as per provisions of SPPRA Rules.
+3.4 Performance Security 10% of total amount of work order should be submitted in shape of
+Pay Order before signing of Contract Agreement.
+3.5 Stamp Duty @ 0.35% of the cost of transaction / work order will be deposited in
+Government treasury by the Service Provider. This paid Stamp Duty challan would be
+submitted along with the Bill / Invoice.
+3.6 Tax(es) Challan(s) / Levy(ies), If any, on additional will be paid / borne by the Service
+Provider as per SRO Notification.
+Page 12 of 15
+ARTICLE –IV
+ARBITRATION
+4.1 In case of any dispute, difference or and question which may at any time arise between
+the parties hereto or any person under them, arising out in respect of this letter of intent or
+this subject matter thereof shall be referred to the Chairman BIEK for arbitration / settling
+of the dispute, failing which the decision of the court law in the jurisdiction of Karachi
+binding to the parties. The Arbitration proceedings will be governed by the Arbitration Act,
+1940 and the Substantive and procedural law of Pakistan. The venue shall be Karachi.
+ARTICLE –V
+TERMINATION
+5.1 “BIEK” may terminate this agreement if the job is not executed according to the
+requirement at any time after issuing a 15 day’s notice.
+ARTICLE –VI
+INDEMNITY
+6.1 “THE SERVICE PROVIDER” in its individual capacity shall indemnify and keep “BIEK” and any
+person claiming through BIEK fully indemnified and harmless from and against all
+damages, cost and expenses caused to or incurred by “THE SERVICE PROVIDER”, as a
+result of any defect in the title of BIEK or any fault, neglect or omission by the “THE SERVICE
+PROVIDER” which disturbs or damage the reputation, quality or the standard of service
+provided by the “BIEK” and any person claiming through the BIEK.
+ARTICLE –VII
+NOTICE
+7.1 Any notice given under this AGREEMENT shall be sufficient if it is in writing and if sent by
+courier or registered mail.
+Page 13 of 15
+ARTICLE –VIII
+INTEGRITY PACT
+8.1 The intention not to obtain the procurement / work of any Contract, right, interest,
+privilege, or other obligation or benefit from the BIEK or any administrative or financial
+offices thereof or any other department under the control of the BIEK through any corrupt
+practice(s).
+8.2 Without
+limiting
+generality
+forgoing
+M/s.___________________represents and warrants that it has fully declared the charges,
+fees, commission, taxes, levies etc, paid or payable to anyone and not given or agreed to
+give and shall not give or agree to give anyone within the BIEK directly or indirectly
+through any means any commission, gratification, bribe, gifts, kickback whether described
+as consultation fee or otherwise, with the object of obtaining or including the
+procurement or service contract or order or other obligations whatsoever from the BIEK,
+except that which has been expressly declared pursuant hereto.
+8.3 M/s. ______________ accepts full responsibility and strict liability for making any false
+declaration / statement, not making full disclosure, misrepresenting facts or taking
+any action likely to degrade the purpose of declaration, representation and warranty. It
+agrees that any contract / order obtained aforesaid shall without prejudice to any other
+right & remedies available to the BIEK under any law, contract, or other instrument, be
+stand void at the discretion of the BIEK.
+Notwithstanding any right and remedies exercised by the BIEK in this regard,
+M/s. _________________ agrees to indemnify BIEK for any loss or damage incurred by it
+account of its corrupt business practice & further pay compensation to BIEK in any
+amount equivalent to the loss of any commission, gratification, bribe, gifts, kickback given
+by the M/s._________________ as aforesaid for the purpose of obtaining or inducing
+procurement / work / service or other obligation or benefit in whatsoever from the BIEK.
+Page 14 of 15
+ARTICLE –IX
+MISCELLANEOUS
+9.1 Any addition & alteration (s) made for item(s) as required by BIEK on the basis of the work
+in progress which entail extra time & labor and material on part of the supply, shall not be
+charged separately / extra on ‘Quantum Merit’ basis before & on final material handed
+over to the “BIEK”. After FINALAIZATION OF SAMPLE, if any alteration(s), arise charges will
+be paid on mutually agreed upon.
+9.2 The terms & conditions of this AGREEMENT have been read over to the parties which they
+admit to be correct and abide by the same.
+9.3 The contract will be effective from the date of issue of Purchase Order.
+9.4 All terms and conditions of tender vide # BIE/AG/L&N/ /2021 will be the integral part
+of this agreement and can’t be revoked.
+IN WITNESS WHEREOF both the parties hereto have set & subscribed their respective hands to
+this agreement at Karachi on the date as mentioned above.
+_______________________
+Secretary,“BIEK”
+M/s._______________________
+NAME:
+CNIC#_________________
+CNIC#
+Address:
+WITNESS:
+1.______________________
+2. _________________________
+Page 15 of 15
+Rupees In Words
+Rupees In Figures
+Total cost of the Bid:
+(as offered by the Bidder)
+10% (ten percent) amount
+of the Contract Price
+Performance Security
+(Refundable)

@@ -1,0 +1,309 @@
+Science 
+              General Mathematics Part-II Model Paper
+URL: https://www.biek.edu.pk/ModelPaper/2026/SCI%20GENERAL%20Mathematics-II-NEW-BOOK%20MODEL%20PAPER%202026.pdf
+Source: https://www.biek.edu.pk/default.asp
+
+INSTRUCTION: The use of scientific calculator is allowed. All notations are used in their usual meanings.
+SECTION ‘B’ (SHORT-ANSWER QUESTIONS) (Marks: 40)
+NOTE: Answer Ten part questions from this section. All part questions carry equal marks.
+2.
+i)
+Find the value of k if
+
+sin
+,
+0
+2,
+kx
+x
+f x
+
+
+
+
+
+
+is continuous at
+x 
+.
+ii)
+Find
+f
+
+for the function
+
+
+5
+2
+
+by using definition.
+iii)
+A particle moves along the curve
+t
+4
+y
+
+and
+3
+z
+where t is the time. Find the components of its
+velocity at time
+1
+t 
+in the direction of
+i
+j
+k
+iv)
+Compute
+tan xdx
+
+
+by using basic properties.
+v)
+Attempt either part (a), or part (b).
+a)
+Evaluate
+6
+sec x dx
+
+b)
+Find a root of 3
+cos
+
+by Newton’s Raphson Method, correct up to 4 decimal places.
+vi)
+Find the area, above the x-axis under the curve
+9
+, between the ordinates
+x 
+Find the orthogonal trajectory of the curve
+ax
+vii)
+Find the equation of the straight line which is at a distance of 9 units from the origin and the perpendicular
+from the origin to the line makes an angle of 30o with the positive direction of x-axis.
+Find the equation of parabola whose vertex is 
+2, 3 and focus is 
+2, 7 .
+viii)
+Find the equation of a line through the intersection of the lines 3
+8, 5
+11
+
+parallel to 6
+13
+25
+Find the equation of the circle passing through 
+3,
+and is concentric with the circle whose equation
+is
+8
+24
+. Also identify the outer circle.
+ix)
+Find eccentricity, foci and equation of directrices for the conic 
+16
+.
+Find equation of tangent to
+36
+with the slope
+3 .
+x)
+Find the Taylor’s series of the expansion of
+log
+a
+centered at
+b 
+Verify Euler’s theorem for
+f x y
+xy
+SECTION ‘C’ (DETAILED-ANSWER QUESTIONS)
+(Marks: 40)
+NOTE: Answer Five questions from this section. All questions carry equal marks.
+3.
+Evaluate any two of the following:
+tan
+xdx
+dx
+x 
+c)
+
+sec
+1 tan
+4.
+a) Solve the differential equation
+dy
+b) If the population of a certain town doubles in 10 years. in how many years will it triple under the assumption that the
+rate of increase in population is proportional to the number of inhabitants.
+Continued on next page…..
+BOARD OF INTERMEDIATE EDUCATION, KARACHI
+INTERMEDIATE EXAMINATION
+MODEL PAPER 2026
+MATHEMATICS PAPER – II
+Max. Marks:80
+(Science General Groups)
+Time: 2 Hours 40 Minutes
+:-2-:
+5.
+a) Evaluate any two of the following:
+*
+1 cos
+lim 1 cos
+mx
+nx
+
+lim
+e
+lim 1
+b) Evaluate dy
+dx of any two of the following:
+ln
+4 1 cos
+ln cos
+h x
+h y
+c
+6.
+a) Find the maximum and minimum values of the function
+sin ,
+where
+:
+b) Evaluate the integral
+sin xdx
+with 6 interval by using Simpson 3
+rule.
+7.
+a) Find the equations of the pair of lines represented jointly by the equation
+, state the nature
+of pair of lines and also find the acute angle between the lines.
+b) Find the equation of the hyperbola with centre 
+1, 3 , focus 
+2, 3 and eccentricity is
+3 , where as transverse
+axis is parallel to x-axis.
+---------------xxxxxxxxxx---------------
+(Science General Group)
+SECTION ‘A’
+(MULTIPLE CHOICE QUESTIONS) – (M.C.Qs.)
+(Marks : 20)
+NOTE:
+This section consists of 20 part questions and all are to be answered. Each part question carries one mark.
+ii) Do not copy the part questions in your answerscript. Write only the answer in full against the proper number
+of the question and its part.
+iii) All notations are used in their usual meanings. The use of Scientific Calculator is allowed.
+1.
+Choose the correct answer for each from the given options:
+This Maple command used to evaluate to 5 digits is::
+>evalf(Pi, 5);
+>eval(Pi, 5);
+>expf(Pi, 5);
+D)
+>exp(Pi, 5);
+This Maple command > Matrix(2): returns?:
+
+
+
+
+
+
+:
+ln3
+ln e
+ln
+n
+
+ solve
+(
+1)!
+! (
+7
+
+Average rate of change of
+( )
+4,
+from 2 to 2.3 is:
+4.3
+0.3
+Derivative of
+cos x w.r.t
+sin x is:
+cos x
+sin x
+tan x
+If
+then
+?
+y
+2k
+3k
+is decreasing at:
+The vector function
+ˆ
+G t
+e i
+tj
+is continuous at:
+(2
+4 )
+xe
+x dx
+xe x
+2 xe x
+e 
+xi)
+cos xdx
+equals to:
+
+xii)
+The point which divides the line segment joining 
+and 
+4, 3 in the ratio 3 : 1 internally is:
+2, 4
+4, 2
+Max. Marks:20
+Time: 20 Minutes
+xiii)
+The normal form of 3
+12
+is:
+A) 3
+B) 3
+
+D) 3
+xiv)
+The centre of the circle
+on x–axis
+on y–axis
+in 1st quadrant
+at origin
+xv)
+The length of the tangent to the circle
+from 
+5, 2 is:
+33
+32
+31
+xvi)
+The Latus rectum of
+is :
+units
+50
+xvii)
+Conjugate hyperbola to
+xviii)
+The differential equation of
+r
+dx 
+xix)
+If 
+ye
+, then f
+
+and f
+are respectively:
+ye and
+xe and
+xe and 0
+ye and 0
+xx)
+In Simpson One Third Method, the number of sub interval is the multiplier of:

@@ -1,0 +1,198 @@
+Revised 
+                        Chemistry Paper I
+URL: https://www.biek.edu.pk/ModelPaper/2023/REVISED%20CHEMISTRY%20PAPER-I.pdf
+Source: https://www.biek.edu.pk/PapersScheme-2023.asp
+
+BOARD OF INTERMEDIATE EDUCATION, KARACHI
+REVISED MODEL QUESTION PAPER OF
+CHEMISTRY PAPER – I (ANNUAL 2023)
+SECTION – A (Multiple Choice Questions)
+Note: This section consists of 17 part questions and all are to be answered. Each
+question carries one mark.
+(17 Marks)
+Q.1
+(i)
+Which of the following samples of substances contains the same number of
+atoms as that of 20g Calcium:
+(a) 16g S
+(b) 20g C
+(c) 19g K
+(d) 24g Mg
+(ii)
+Principal and azimuthal quantum number values for 3d orbital are:
+(a) n = 2, ℓ = 1
+(b) n = 3, ℓ = 2
+(c) n = 3, ℓ = 3
+(d) n = 2, ℓ = 3
+(iii)
+VBT tells us about all of the following facts except:
+(a) Bond length
+(b) Bond strength
+(c) Bond energy
+(d) Bond order
+(iv)
+One bond angle in NH3 molecule reduces from 109.5 to 107 because of the
+following type of repulsion:
+(a) Bond pair – Bond pair
+(b) Bond pair – Lone pair
+(c) Lone pair – Lone pair
+(d) Active pair – Inactive pair
+(v)
+Gas is more ideal at:
+(a) 100C and 1 atm
+(b) 0C and 1 atm
+(c) 0C and 2 atm
+(d) 100C and 200 atm2
+(vi)
+The principle involves in the liquefaction of gas is:
+(a) Charles law
+(b) Henry law
+(c) Joule Thomson effect
+(d) Le-Chatlier’s principle
+(vii)
+Which of the following molecules possesses strongest London forces:
+(a) H2
+(b) He
+(c) CH4
+(d) Ne
+(viii)
+A big crystal can be cut or split into smaller size of identical shape; this
+phenomenon is called:
+(a) Anisotropy
+(b) Cleavage
+(c) Symmetry
+(d) Isomorphism
+(ix)
+If the radius of Zn+2 ion is 0.74A and S-2 ion is 1.84A, the radius ratio of ZnS
+should be:
+(a) 0.74
+(b) 1.84
+(c) 0.40
+(d) 2.48
+(x)
+Kp = Kc when Δn is equal to:
+(a) zero
+(b) 1
+(c) -1
+(d) 2
+(xi)
+The unit of rate constant for the first order reaction is:
+(a) Ms-1
+(b) s-1
+(c) M-1 s-1
+(d) M-2 s-1
+(xii)
+Which of the following set is categorized into partially miscible liquid pair:
+(a) Benzene and water
+(b) Methanol and water
+(c) Phenol and water
+(d) Benzene and toluene
+Continued on next page……………
+(xiii)
+Conjugate base of HCO3
+− is:
+(a) H2CO3
+(b) CO3
+−2
+(c) H+
+(d) H2O
+(xiv)
+Milk is an example of this type of colloid:
+(a) Gel
+(b) Aerosol
+(c) Emulsion
+(d) Foam
+(xv)
+Which of the following enthalpy change is always negative:
+(a) Enthalpy of formation
+(b) Enthalpy of decomposition
+(c) Enthalpy of combustion
+(d) Enthalpy of reaction
+(xvi)
+Which of the following is not a state function of a system?
+(a) Pressure
+(b) Enthalpy
+(c) Internal energy
+(d) Work done
+(xvii)
+Galvanized rod of iron is coated with:
+(a) Nickel
+(b) Zinc
+(c) Chromium
+(d) Carbon
+SECTION – B (Short Answered Questions)
+Note: Attempt any nine (09) parts questions. Each question carries 04 marks.
+(36 Marks)
+Q.2
+Define the term Stoichiometry. In a laboratory experiment if 135g aluminum is
+allowed to react with excess of sulphur, it gives 300g of aluminum sulphide
+(Al2S3) as given in the following equation. Determine the %age yield of Al2S3.
+(atomic mass of Al is 27 and S is 32)
+2Al + 3S  Al2S3
+Sodium hydroxide (NaOH) reacts with phosphoric acid (H3PO4) to form sodium
+phosphate (Na3PO4) and water by the reaction.
+3NaOH + H3PO4
+Na3PO4 + 3H2O
+If 100g of NaOH and 100g of H3PO4 are mixed for the reaction under specific
+conditions, determine the mass of sodium phosphate formed.
+(Atomic mass of P is 31)
+State Pauli’s rule and write the electronic configuration of the following species:
+* Ca+2 (Z = 20)
+* Br-1 (Z = 35)
+* Cu(Z = 29)
+How can you differentiate between sigma and pi bond. Why p-p sigma bond is
+stronger than s-s and s-p.
+State Dalton’s law of partial pressure. Give its two applications.
+OR
+Calculate the molar mass of a given gas whose diffusion rate is 2.83 times the
+diffusion of methane (CH4).
+What is a Liquid crystal? Give its two properties and two uses.
+Explain why metallic solids conduct electricity and molecular solids possess
+low melting point.
+Silver sulphate (Ag2SO4) is used for medicinal purpose to fill wounds. Its
+solubility in water at 25C is 1.43 x 10-2 mol/dm3. What will be its Ksp?
+What is meant by Homogenous and Heterogeneous Catalysis? Give one
+example of each.
+Define acid and base in terms of:
+* Lowry Bronsted theory
+* Lewis theory
+Give examples of them
+What are exothermic and endothermic reactions? Give example of each.
+What is meant by primary battery? Draw a labeled diagram of Dry cell and write
+the redox reaction in it.
+Balance any one of the following equations by ion electron method.
+MnO4
+−+ SO3
+−2 + SO4
+−2 (basic medium)
+Cr2O7
+−2 + I2
+Cr+3 + IO3
+− (acidic medium)
+Define molarity and molality? Calculate the mole fraction of a solution prepared
+by mixing 360g glucose and 900g water.
+Continued on the next page………….
+SECTION – C (Detailed Answer Questions)
+Note: Answer any two questions. All questions carry equal marks. (32 Marks)
+Q.3
+(a) State the main postulates of Bohr’s atomic theory and derive an expression
+for the frequency of radiation of hydrogen atom from the following given values.
+(b) What is an Ideal gas? What are the causes of deviation of real gas from ideal
+behavior? Derive expressions for determining the density and molecular mass of
+an ideal gas by using general gas equation.
+Q.4
+(a) State the main postulates of electron pair repulsion theory and predict the
+geometry of BF3, NH3 and CO2 molecules.
+(b) State law of mass action. Explain the use of Kc in predicting the extent of
+reaction. If Kc for the reaction at 727C is 4.2 x 10–3, calculate its Kp.
+CH4(g) + 2H2S(g) ⇌ CS2(g) + 4H2(g)
+Q.5
+(a) What do ideal and non ideal solution mean? State Raoult law and derive its
+mathematical expression.
+(b) State and explain Hess’s law of constant heat summation? Calculate the
+enthalpy of combustion of propane (C3H8) at 25C by the given information.
+C3H8(g) + 5O2(g)
+3CO2(g) + 4H2O(l) (H = ?)
+Hf of C3H8 = (– 104 KJ/mol)
+Hf of CO2(g) = (– 393.5 KJ/mol)
+Hf of H2O(l)= (– 2858 KJ/mol)

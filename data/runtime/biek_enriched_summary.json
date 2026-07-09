@@ -1,0 +1,36 @@
+{
+  "document_count": 372,
+  "document_types": {
+    "general_page": 3,
+    "scheme_of_studies": 1,
+    "model_paper": 6,
+    "form": 40,
+    "tender": 250,
+    "results_document": 50,
+    "affiliation_list": 1,
+    "datesheet": 4,
+    "notification": 16,
+    "press_release": 1
+  },
+  "sections": {
+    "general": 4,
+    "model_paper": 6,
+    "forms": 39,
+    "tenders": 250,
+    "results": 50,
+    "affiliation": 1,
+    "datesheet": 4,
+    "notifications": 16,
+    "press_release": 2
+  },
+  "extractors": {
+    "pymupdf": 197,
+    "tesseract_ocr": 175
+  },
+  "student_relevance": {
+    "exclude": 253,
+    "medium_relevance": 10,
+    "high_relevance": 108,
+    "low_relevance": 1
+  }
+}

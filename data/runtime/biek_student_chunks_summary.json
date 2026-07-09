@@ -1,0 +1,48 @@
+{
+  "eligible_document_count": 118,
+  "chunk_count": 660,
+  "documents_by_type": {
+    "scheme_of_studies": 1,
+    "model_paper": 6,
+    "form": 40,
+    "results_document": 50,
+    "affiliation_list": 1,
+    "datesheet": 4,
+    "notification": 15,
+    "press_release": 1
+  },
+  "documents_by_section": {
+    "general": 1,
+    "model_paper": 6,
+    "forms": 39,
+    "results": 50,
+    "affiliation": 1,
+    "datesheet": 4,
+    "notifications": 15,
+    "press_release": 2
+  },
+  "documents_by_relevance": {
+    "medium_relevance": 10,
+    "high_relevance": 108
+  },
+  "chunks_by_type": {
+    "scheme_of_studies": 6,
+    "model_paper": 377,
+    "form": 88,
+    "results_document": 16,
+    "affiliation_list": 17,
+    "datesheet": 37,
+    "notification": 115,
+    "press_release": 4
+  },
+  "chunks_by_section": {
+    "general": 6,
+    "model_paper": 377,
+    "forms": 85,
+    "results": 16,
+    "affiliation": 17,
+    "datesheet": 37,
+    "notifications": 115,
+    "press_release": 7
+  }
+}

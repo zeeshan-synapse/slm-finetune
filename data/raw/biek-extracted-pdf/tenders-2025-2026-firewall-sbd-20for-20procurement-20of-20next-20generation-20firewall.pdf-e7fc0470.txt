@@ -1,0 +1,586 @@
+SBD 
+                FOR PROCUREMENT OF NEXT GENERATION FIREWALL      ( 
+                19-01-2026)
+URL: https://www.biek.edu.pk/TENDERS/2025-2026/Firewall/SBD%20FOR%20PROCUREMENT%20OF%20NEXT%20GENERATION%20FIREWALL.pdf
+Source: https://www.biek.edu.pk/tenders.asp
+
+BOARD OF INTERMEDIATED EDUCATION,
+KARACHI
+NCB Single Stage One Envelope
+Procedure
+STANDARD BIDDING DOCUMENTS
+Tender for Procurement of Next Generation
+Firewall (NGFW) Solution with Configuration
+TECHNICAL & FINANCIAL
+PROPOSAL D
+a »
+Ses’
+we KARACHT “ey
+In respect of:
+Vo BIE/AG/L&.N/1615/2026
+YY dated: 08/01/2026
+y
+Phones: 99260211-12-13 Ext: 130 | Websit
+580 for Procurement of Next Generation Firewall (NGFW) Solution with Configuration
+Page 1 of 17
+NOTICE INVITING TENDERS
+Bids invited through E-Pak Acquisition and Disposal System (EPADS) from reputed / established fims / suppliers /
+Contractors, registered with concemed Tax authorities for supply of following goods.
+Cost of J suance &
+Tender Title | Bidding
+Document
+Tender for
+Procurement of
+Next Generation
+Firewall (NGFW)
+Solution with
+Deadline of
+documents:
+date
+20.01.2026
+10:00AM
+TO
+03.02.2026
+Deadline for
+submission
+Method of
+Procurement
+Opening of
+Bid
+03022026
+10300 PM.
+NCB Single
+Stage One
+Envelope
+at 02:30 PM
+12:00 NOON
+Configuration
+The interest bidders can obiain bidding documents containing terms & conditions, can be downloaded from
+httos:/iportalsindh.eprocure.qov.pkit! or www.biekedupk and the Tender Documents fee @Rs.3,000/=
+(Non-efundable) must be submited in shape of pay order in favor of Secretary, Board of Intermediate Education, Karachi
+(on any working day as per schedule mentioned above.
+‘The preparation of bids must in accordance with the instructions in the bidding documents and the bids must be
+‘submitted on EPADS on or before submission deadiine as per schedule mentioned above. Bids should be submitted
+electronically through EPADS and original Bids must be submited in Procurement Wing, Administration General Section, Old
+Building, 1st Floor, and Room No.31 before online submission deadline of the Bids. Only those bid will be entertained wihich
+is already submitted on EPADS,
+Allinterest bidders must register themselves At EPADS at:
+https://sindh.eprocure.aov.pk/#/supplier/registration
+Pre-Bid Meeting will be held on 30-01-2026 at 02:30 p.m.
+Incase of unexpected announcement of holiday, unforeseen situation, climate changing & disaster in city, the tender
+will be opened on next working day on the same venue & time as mentioned above,
+‘The Bid Security in shape of pay order in favor of the Secretary, Board of Intermediate Education Karachi in
+Procurement Wing, Administration General Section, Old Building, 1% Floor, Room No.31 before online submission deadline
+of the Bids.
+The original Bid Secunty along with the Original Bid (duly signed and stamped) must be delivered to BIE, Karachi on above
+mentioned address before bid opening schedule.
+“The Procuring Agency may reject all or any bid subject to the relevant provision of SPPRA rules”.
+8%
+SB for Procurement of Next Generation Firewall (NGFW) Sol
+with Configuration Page 2 0f 17
+BOARD OF INTERMEDIATE EDUCATION, KARACHI
+Bakhtiyari Youth Centre, North Nazimabad
+INSTRUCTIONS TO BIDDERS &
+GENERAL CONDITIONS OF CONTRACT:
+‘The Instructions to Bidders and General Conditions of Contract appli
+shall prevail over those in the Instructions to Bidders & General Conditions of Contract.
+BID DATA SHEET
+INTRODUCTION
+Name of Contract Procurement of Next Generation Firewall (NGFW) Solution with
+Name of Procuring Agency Board of Intermediate Education, Karachi
+Procuring Agency's Address,
+Telephone, Telex and Facsimi
+Board of Intermediate Education, Bakhtiyari Youth Center North
+Nazimabad
+Numbers Tel: 99260211, 99260212,
+99260213 Fax: 99260203 & 99260208
+Language of the Bid English or Urdu
+BID PRICE AND CURRENCY
+The price shall be in Pakistani currency inclusive of all Taxes, Transportation, and Material and Labour
+charges involved therein.
+During the entire period of bid validity, the price shall be fixed and the bidder will have to supply the
+required items as per specifications and quoted rates.
+PREPARATION AND SUBMISSION OF BIDS
+Estimated Cost Rupees 10.00 Million
+Bid Validity Period | 90 days from the date of opening of Tender.
+‘Address for Bid The office of the Administration General Section (Procurement Wing), 1 Floor,
+Submission Old Building, Room No.3! Board of Intermediate Education, Karachi.
+issuance of bidding | From 20-01-2026 10:00 AM to 03-02-2026 12:00PM
+Schedule
+Delivery must be completed within the stipulated time period as mentioned in the
+Contract Award,
+i
+‘SBD for Procurement of Next Generation Firewall (NGFW) Solution with Configuration Pade 3 of 17
+in this Contract shall be
+the same as per Standard Bidding Documents for Goods, issued by SPPRA. For further references the
+same may be downloaded from SPPRA’s website www.pprasindh.gov.pk or it may be provided from
+this Office if it may be demanded by the bidder. Whenever there is a conflict, the provisions hereafter
+Documents.
+Time, Date and Bids duly stamped on each document must be submitted electronically through
+Place for Bid EPADS and original bids in separate sealed cover along with bid security with
+Opening Financial Proposal must be submitted on or before 03-02-2026 up to 02:30 P.M in
+the office of the Administration General Section Old Building, 1" Floor, Room
+NO.31, Board of Intermediate Education, Karachi, and bid will be opened on the
+same day at 03:00 P.M in the presence of bidder's representatives who wish to
+attend.
+Delivery, The successful bidder shall be responsible for delivery, installation, configuration,
+Installation & and commissioning of the FORTINET FORTIGATE 300E at the Procuri
+Commissioning Agency's designated site
+vA
+‘The minimum delivery period shall be hirty (30) days after issuance of the Contract.
+Award, however, this period may be increased or decreased subject to operational
+requirements, urgency, or prevailing circumstances,
+Any variation in delivery timelines shall be governed and regulated strictly in
+accordance with SPPRA Rules
+The bidder shall ensure timely coordination with the Procuring Ageney for smooth.
+delivery and deployment.
+Delays beyond the approved timeline may attract penalties as per contract terms
+and applicable procurement rules.
+‘SBD for Procurement of Next Generation Firewall (NGFW) Solution with Configuration Page 4 of 17
+1. Introduction
+Board of Intermediate Education, Karachi (BIEK) invites sealed bids under Single Stage One Envelope
+procedure from eligible bidders for the Next-Generation Firewall (NGFW) capable of securing
+network traffic for at least 300 concurrent/active users with advanced threat protection, VPN support,
+logging, centralized management, and HA capability as per the Bill of Quantities (BOQ) and
+specifications.
+2. Bid Security
+Bidder shall submit a Bid Security of 3% (three percent) of the Estimated Cost in the form of Pay
+Order in favour of “Secretary, Board of Intermediate Education Karachi.” Bid Security shall remain
+id for at least 28 days beyond the bid validity period.
+3. Performance Security
+‘The successful bidder shall submit Performance Security equal to 10% of the Contract Price in the
+form of Pay Order in favour of “Sceretary, Board of Intermediate Education Karachi.” Performance
+Security shall be valid for 90 days beyond the completion of contract to cover defects liability period.
+4, Stamp Duty @ 0.35% of the cost of transaction / Work order will be deposited in Government
+treasury by the SUPPLIER. This paid Stamp Duty challan would be submitted along with the Bill /
+Invoice.
+SBD for Procurement of Next Generation Firewall (NGFW) Solution with Configuration Page 5 of 17
+Sr Eligibility Requirement Response (Ves] POCtmentary Evidence
+No. eibiity Ren ponse ( Required
+_ No)
+[1 [ie Bidder ‘must be a legally registered! 5.7 \, [Cerificate of Incorporation
+lfirm/company in Pakistan,
+2 |[ihe bidder must be registered with Income)
+[Registration
+D Yes O\No }(Copy of valid NIN Certificate
+|_2 Jfrax Department (NTN),
+[ihe bidder must be registered with Sales Tax| (Copy of valid Sales Tax 7 SRB
+3 |/srB (where applicable) O Yes ONO [Registration Certificate
+[Valid OEM Authorization Lette
+OYesONo |ifrom Fortinet / Authorized|
+[Distributor
+[The bidder must be an Authorized Partner /|
+Reseller of Fortinet.
+(The bidder must have minimum Five (05)
+|| 6 years’ experience in supply, installation, andl] Yes No [Client Details with contact
+|__|support of enterprise-arade firewalls. Details
+| _ [the bidder must have successfully completed] [Copies of Purchase Orders /|
+7 at least two (02) similar projects during the last} O Yes No [Completion Certificates _ with!
+three (03) years. client contact details
+[The bidder must have qualified and Fortinet Ce) NET dit
+5 |centfied technical staff. ENe5IND [palieitis (GBB cy
+J lequivalent)
+|The bidder must capable for providing on-site [Undertaking on company]
+|_° and remote technical support. Yes ONO Hhetterhead
+[Audited Financial Statements /)
+[Audited Financial Statements /
+ICA-certified turnover statement
+[ast 3 years)
+(The bidder must have minimum average!
+11 Jannual tumover of Rupees 30 Million during 0 Yes O No
+the last three (03) financial years,
+INotarized affidavit on stamp]
+14 Jy any Govemment / Semi-Government /| 2 Yes O No | ran
+|Autonomous body,
+[The bidder must accept all terms, conditions)
+16 |Mdelivery timelines, and SPPRA rules C) Yes O.No |[Signed & stamped undertaking |
+|___|mentioned in the tender,
+[The bidder must not be blacklisted or debarred
+IMPORTANT NOTE
++ All eligibility criteria are mandatory.
++ response of “No” or non-submission of documentary evidence against any item shall render
+the bid non-responsive,
++ Documentary evidence must be attached in the same order as listed above. \\s
+‘+ Estimated cost of procurement is PKR 10 Million. A 2
+‘SBD for Procurement of Next Generation Firewall (NGFW) Solution with Configuration Page 6 of 17
+SCOPE OF WORK
+‘The successful bidder shall be responsible for the supply, delivery, installation, configuration,
+‘commissioning, and support of a Next Generation Firewall (NGFW) — Fortinet FortiGate 300E to secure
+the Board of Intermediate Education, Karachi’s network for minimum three hundred (300) active users.
+The following scope of work shall include, but not be limited to:
+1. Supply of Equipment
++ Supply of one (01) brand new, unused, factory sealed Fortinet FortiGate 300E appliance.
++ The equipment must be genuine OEM product with original serial number, eligible for
+registration on Fortinet portal.
++ All required accessories, rack-mount kit, power cables, and connectors shall be included.
+2. Licenses & Subscriptions
++ Provision of valid OEM Fortinet licenses with minimum one (01) year duration (or as specified
+in the tender), including:
+© FortiCare 24x7 Support
+© FortiGuard NGFW / UTP / Enterprise Protection services
++ Licenses must cover:
+© Intrusion Prevention System (IPS)
+© Antivirus & Anti-Malware
+© Application Control
+© Web & URL Filtering
+© SSL/TLS Inspection
++ Licenses must be activated and registere
+the name of the Procuring Agency.
+3. Delivery
++ Delivery shall be made at the Procuring Agency’s designated site within the stipulated time as
+mentioned in the Contract Award.
++ The minimum delivery period shall be thirty (30) days after issuance of Contract Award,
+which may be increased or decreased due to operational requirements, urgency, or prevailing
+circumstances, in accordance with SPPRA Rules.
+‘+ The bidder shall be responsible for safe transportation, handling, and off-loading of equipment.
+4, Installation & Configuration
+\\i
+‘+ Physical installation and rack mounting of the firewall at site.
++ Basic and advanced configuration including:
+© Network interfaces and zones
+© Security policies and access rules
+© NAT and routing
+© IPS, Antivirus, Web Filtering, and Application Control poli
+o SSL-VPN and IPsec VPN configuration
++ Integration with the existing network and security infrastructure.
+‘SBD for Procurement of Next Generation Firewall (NGFW) Solution with Configuration Page 7 of 17
+5. High Availability (HA) & Optimization
++ Configuration of High Availability (Active/Passive) if required by the Procuring Agency.
++ Performance optimization to ensure secure access for minimum 300 active users.
++ Validation and testing of failover and security services.
+6. Testing & Commissioning
++ End-to-end testing of firewall functionality and security features.
++ Performance and security validation as per specifications.
++ Successful commissioning after acceptance by the Procuring Agency.
+7. Training & Knowledge Transfer
++ On-site/Of-Site Hands-on lab based course training / knowledge transfer for IT & Other staff
+covering:
+© Introduction & Initial Configuration, Firewall Fundamentals
+Architect, Designing and Implementation techniques
+Configuration with systems
+Network & Routing
+User and Policy development and Management
+VPN, SD WAN, HA
+Security Profiling,
+IPSEC, Diagnostics, Monitoring and Trouble Shooting
+License and firmware management
+o Backup and restore procedures
++ Training shall be provided by qualified and certified trainers.
+00000000
+8, Warranty & Support
++ Provision of OEM-backed hardware warranty and software support for the license period.
+* Access to firmware upgrades, patches, and security signature updates.
++ Technical support (remote and on-site, if required) during warranty period.
+9. Documentation
++ Submission of complete documentation including:
+‘© Network design and configuration details
+License details and activation proof
+Warranty and support information
+© User manuals and admin guides
+10. Compliance with Rules
+* Allactivities under this scope shall be performed in compliance with:
+co Tender terms and conditions
+© Contract Agreement
+o SPPRA Rules and applicable laws
+‘SBD for Procurement of Next Generation Firewall (NGFW) Solution with Configuration Page 8 of 17
+11. Payment Terms
++ 100% payment upon complete delivery and acceptance within 30 days.
++ Part payment allowed only if approved by Chairman BIEK.
++ Taxes, levies, and stamp duty to be borne by Supplier.
+‘SBD for Procurement of Next Generation Firewall (NGFW) Solution with Configuration Page 9 of 17
+Technical Specification & Financial Proposal
+‘Title of Tender: Procurement of Next Generation Firewall (NGFW)
+Model: Fortinet FortiGate 300E
+Estimated Cost: PKR 10 Mi
+Important Instructions:
+* All prices shall be quoted in Pakistani Rupees (PKR)
+* Prices shall be inclusive of all taxes, duties, transportation, installation, configuration, training, and any
+other incidental costs.
+‘+ No conditional pricing shall be accepted.
+‘+ The bidder shall quote lump-sum prices against each item.
+A. Hardware, Licenses, Services & Implementation
+[Stem No. Item Description
+[Supply of Fortinet FortiGate 300E NGFW Appliance (Brand new, facto
+|mountable, including power cables. rack kit, and standard accessories)
+fFortiCare 24x7 Support License — Minimum 01 Year (OEM-backed, includes firmware
+lupdates & technical support)
+[FortiGuard NGFW / UTP / Enterprise Protection License —
+|Antivirus, Web Filtering, Application Control, SSL Inspection)
+[Transportation, delivery, and off-loading at Procuring Agency’s site as per Contract Award
+(Physical installation and rack mounting of firewall
+{Configuration and integration with existing network (security policies, NAT, routing, IPS,
+|AV, web filtering, application control) }
+[VPN configuration (IPsec & SSL-VPN) for remote and site-to-site connectivity
+[High Availability (1A) configuration — Active/Passive (if required by Procuring Agency)
+imum 01 Year (IPS,
+o1
+[Testing, commissioning, and performance validation
+(Complete technical documentation (configuration, licenses, warranty details)
+Sub Total (Item No.1)
+Hardware, Licenses, Services & Implementation
+‘SBD for Procurement of Next Generation Firewall (NGFW) Solution with Configuration Page 10 of 17
+Item Description
+02. n-site training / knowledge transfer for IT staff
+‘Sub Total (Item No.2 )
+Deseription
+‘Total Amount (PKR)
+{Sub-Total (Item No.1)
+‘Sub-Total (Item No.2)
+[Training for IT Staff
+Grand Total (Inclusive all Taxes)
+Financial Bid Declaration:
+‘+ The quoted Grand Total shall be fi
+ed and final for the entire contract duration,
+'* No additional or hidden charges shall be payable beyond the quoted amount.
+The bidder confirms that al
+Requirements have been fully priced.
+Authorized Signatory.
+Name & Designation:
+‘Company Name:
+Stamp & Signature:
+Date:
+-ms required under Scope of Work, Technical Specifications, and Eligibility
+ae
+ya
+SBD for Procurement of Next Generation Firewall (NGFW) Solution with Configuration Page 11 of 17
+@® BOARD OF INTERMEDIATE EDUCATION, KARACHI
+SUMMARY OF TURN-OVER OF LAST THREE YEARS
+YEAR-2022-2023 | YEAR-2023-2024 | YEAR-2024-2025
+TOTAL:
+ata
+SBD for Procurement of Next Generation Firewall (NGFW) Solution with Configuration Page 12 of 17
+CONTRACT AGREEMENT
+‘Tender Title: Procurement of Next Generation Firewall (NGFW) Solution with Configuration
+This Agreement is executed at Karachi on this__day of __ 2026.
+BETWEEN
+Board of Intermediate Education, Karachi (BIEK), through its Secretary, hereinafter called the
+“Procuring Agency” (which expression shall, wherever the context so permits, include its legal
+representatives, executors, successors, and assigns) of the FIRST PART;
+AND
+Mis , having its registered office at
+Karachi (hereinafter called the “Supplier” which expression shall, wherever the context so permits,
+include its legal representatives, executors, successors, and assigns) of the SECOND PART.
+ARTICLE I - PURPOSE & SCOPE
+BIEK has awarded to the Supplier the procurement, supply, installation, configuration, deployment,
+testing, and commissioning of Fortinet FortiGate 3002 NGFW in accordance with the Technical
+Proposal, Scope of Work, and BOQ for securing minimum 300 active users.
+ARTICLE II - CONTRACT DOCUMENTS
+This Agreement consists of:
+© Tender/Bidding Documents
+© Supplier's Technical Proposal and BOQ
+© Letter of Award / Purchase Order
+© Performance Security
+Integrity Pact
+ARTICLE II - PRICE & TAXES
+‘The total Contract Price is Rs. /- (Rupees Only) inclusive
+ofall applicable taxes, levies, freight, insurance, labour, installation, and incidental charges.
+All taxes, duties, stamp duty, and levies shall be borne by the Supplier.
+ARTICLE LV - BID & PERFORMANCE SECURITY
+Bid Sccurity: 3% of the Estimated Cost.
+Performance Security: 10% of the Contract Price, to be provided within 7 days after jssuance of
+Contract Award.
+Validity: 90 days beyond completion to cover defects liability.
+ARTICLE V ~ DELIVERY, INSTALLATION & ACCEPTANCE oe
+Supplier shall deliver and complete installation & commissioning within 30 days of issuance of Purchase
+Order, extendable by mutual consent,
+Delivery shall be made at BIEK premises against triplicate delivery challans.
+Acceptance shall be subject to satisfactory inspection, testing, and validation.
+‘SBD for Procurement of Next Generation Firewall (NGFW) Solution with Configuration Page 13 of 17
+ARTICLE VI - WARRANTY & MAINTENANCE
+All equipment supplied shall carry manufacturer's warranty.
+Supplier shall provide one-year maintenance services post-installation at no additional cost.
+ARTICLE VII - PAYMENT TERMS
+100% of the Contract Price on complete delivery, completion of work and acceptance, within 30 days
+‘on submission of invoice supported by Satisfactory and Completion Certificate of Concerned officer.
+Part payment on part supply only when approved by Chairman BIEK.
+Deduction of income/sales tax at source as per law.
+ARTICLE VIII - LIQUIDATED DAMAGES & PENALTIES
+In case of delay, liquidated damages @ 0.5% per day of the contract value, up to a maximum of 10%,
+shall be imposed.
+Inferior or substandard items will be rejected; Security Money may be forfeited and Supplier may be
+blacklisted,
+ARTICLE IX - VARIATION / ADDITIONAL WORK
+BIEK may request changes in scope during performance.
+Any price or time adjustments shall be mutually agreed in writing before execution.
+ARTICLE X- INTEGRITY PACT
+Supplier undertakes that no bribe, commission, gratification, or kickback has been given or shall be
+given.
+Any false declaration will render the contract void.
+‘Supplier shall indemnify BIEK for any loss/damage incurred due to corrupt practices.
+ARTICLE XI - DISPUTE RESOLUTION
+Any dispute under this Agreement shall be amicably resolved; if unresolved, it shall be referred to
+arbitration under Arbitration Act, 1940 and SPPRA Rules.
+Venue: Karachi, Pakistan,
+Language: English
+ARTICLE XII - TERMINATION
+BIEK may terminate this Agreement by gi
+the job according to requirements.
+Upon termination, Performance Security shall be forfeited.
+ing 15 days’ written notice if the Supplier fails to execute
+ARTICLE XIII - INDEMNITY
+Supplier shall indemnify and keep BIEK harmless from all damages, losses, claims, or expenses caused
+by: po
+Defects in goods
+Negligence, omission, or misconduct of Supplier
+SBD for Procurement of Next Generation Firewall (NGFW) Solution with Configuration Page 14 of 17
+ARTICLE XIV - NOTICES
+fered mail/courier to the addresses of BIEK and the
+All notices shall be in writing and sent by regi
+Supplier.
+ARTICLE XV - STAMP DUTY
+Stamp Duty @ 0.35% of the cost of transaction / Work Order will be deposited in Government treasury
+by the Supplier.
+ARTICLE XVI - VALIDITY
+‘This Agreement shall come into force from the date of issuance of Purchase Order and remain valid
+until completion of work and defects liability period.
+IN WITNESS WHEREOF, the parties hereto have executed this Agreement as of the day and year
+first above written.
+“Board of Intermediate Education, Karachi” Mis.
+NAME: NAME:
+NICH. cnic#
+Signature: Signature:
+WITNESS: 1 WITNESS: 2
+CNIC#. cnic#
+a
+‘SBD for Procurement of Next Generation Firewall (NGFW) Solution with Configuration Page 15 of 17
+Declaration of Charges, Fees, Commission, Taxes, Levies etc payable by the contractor;
+M/s.
+(a)
+(b)
+(c)
+(4)
+the contract hereby declares that:
+Its inter
+n not to obtain the procurement work of any Contract, right, interest, privilege, or
+other obligation or benefit from the BIEK or any administrative or financial offices thereof or
+any other department under the control of the BIEK through any corrupt practice(s).
+Without limiting the generality of the forgoing the contractor represents and warrants that it
+has fully declared the charges, fees, commission, taxes, levies etc, paid or payable to anyone
+and not given or agreed to give and shall not give or agree to give to anyone within the BIEK
+directly or indirectly through any means any commission, gratification, bribe, gifts, kickback
+whether described as consultation fee or otherwise, with the object of obtaining or including
+the procurement or service contract or order or other obligations whatsoever from the BIEK,
+except that which has been expressly declared pursuant hereto.
+He contractor accepts full responsibility and strict liability for making any false
+declaration/statement, not making full disclosure, misrepresenting facts or taking any action
+likely to degrade the purpose of declaration, representation and warranty. It agrees that any
+contract/order obtained aforesaid shall without prejudice to any other right & remedies
+available to the BIEK under any law, contact, or other instrument, be stand void at the
+discretion of the BIEK.
+Notwithstanding any right and remedies exercised by the BIEK in this regard, contractor agrees
+to indemnify the BIEK for any loss or damage incurred by it on account of its corrupt business
+practice & further pay compensation to the BIEK in any amount equivalent to the loss of any
+commission, gratification, bribe, gifts, kickback given by the contractor as aforesaid for the
+purpose of obtaining or inducing procurement/ work/ service or other obligation or benefit in
+whatsoever from the BIEK.
+Note:
+This integrity pact is mandatory requirement other than auxiliary services / works.
+Stamp & Signature
+SBD for Procurement of Next Generation Firewall (NGFW) Solution with Configuration Page 16 of 17
+BIDDER’S CERTIFICATE
+We have carefully read & understood the Terms & Conditions whatever has been stated herein the
+enclosed pages and abide to the same. |/We guarantee to supply/deliver/install the items exactly in accordance
+with the requirements and enclosed the Bid Security payable to Board of Intermediate Education, Karachi
+NAME OF FIRM
+‘ADDRESS OF FIRM:
+FULL NAME OF CONCERNED PERSON:
+NIC NUMBER:
+POSITION HELD IN:
+PHONE NUMBER(S):
+MOBILE NUMBER(S):
+FAX NUMBER(S):
+NATIONAL TAX NUMBER:
+GENERAL SALES TAX NUMBER:
+PAY ORDER NUMBER:
+BANK & BRANCH NAME:
+HTT
+SIGNATURE WITH DATE:
+v
+‘SBD for Procurement of Next Generation Firewall (NGFW) Solution with Configuration Page 17 of 17
+‘THE EXPRESS TRIBUNE, KARACHI
+A Bakhtiari Youth Center, North Narimabad, Karachi - 74700
+[NaMmBAGitAN/1615/2026 Dated: 08.01.20
+Bids invited through E-Pak Acquisition and Disposal Sytem (EPADS) trom repute / established firms / suppers / con
+tractors, registered with concerned Tax authorities for supply of falling goons
+Frncuetet of Nex 20.01.2026 1000AM| 03.02 2026 | 03 02.2026 sot the
+fon) eae i Rs 3000 | TO03022036 10 | at0300 | Stage One | estimated |
+4G) soaten wi 1200 NOON |idehina| corel pneeeg|
+(Non- refundable) must be submitted in shape of pay order in favor of Secretary, Board of Intermediate Education,
+Karachi on any working day as per schedule mentioned above.
+‘The bids must be prepared In accordance with the instructions in the buding documents and the bids must he
+submitted on EPADS on or before submission deadline as per scheule mentioned above Bids shouldbe submited cl:
+{ronicaly through EPADS and original Bids must be submited in Procure ‘General Section,
+Old Building. 1t Floor, Room Not before oaline submission deadline ofthe Bids Only those bid wll be entertained
+‘which already submited on EPADS,
+Allinterest bidders must eepster themselves At EPADS at
+‘yps//tnuh procure gph zi
+In case of unexpected announcement of holiday, unforescen situation, climate changing & disaster in ety, che
+tender willbe opened on next working day on the same venue & time as mentioned above
+reid Mecting will bs held on 30-01-2026 at 02:30 pm,
+The Bid Security in shape of pay order in favor of the Secretary, Hoard of a
+Procurement Wing, Administration General Section, Old Building, Ist Floor, Roo
+Acadline ofthe Bids.
+The original Bd Security along withthe Original Bid (duly signed and stamped) must be delivered to BIE, Kar
+‘chi on above mentioned address before bid opening schedule
+the Procuring Agency may reject all or any bid subject othe relevant peossion of SPPRA rl
+rmedte Education Karachi
+No3t before online subatission
+oN eae ey
+74700817
+|ceransy iy:
+|
+aa
+£2306 e | er A12- 2026
+1200
+rev pha pos qecre yo il a escFP™ woh B ton
+in DEC bee PM sin D000" AP!
+eu
+PADS J Ki
+rsridig be Sse Pb ted te sLeraps 25)
+bondi fhsegeOr0sad Lebuizit p£31 Arnett
+Lees Fetan
+Fp PP ising de dil
+pA) Ean
+WEaharitomestnat EH
+aL SgeLNLG BIE yee WBE LES
+aa 110/26
+(Gasonitssns) Jworegoasmon
+fad
+sbi re YislS Ah,
+£2026 as 16 ar
+send al SOI orale rd A ald i Ure
+Sa yc al PAS) in sane ak ai
+SF [peat neh] gAINGU [oll p cM] SMGEL | —horrad [or]
+five | stash (2 bubgst | of Ed
+35 [neal at| an-a 0-0-2 | aed ee
+ee | set [200g [230.0 [6 fs100—-] bs froma, read
+prot vit | |e | mnane Exe
+eae
+Nipsi// Bab Ble SL Jae soho g cht 58S 355 eagle
+eB oe gS ost ob wwww.blek.edu.pk U portalsindh.eprocure.gov.pk/#/
+OT a satire Sy are gles Mb) 8000, 1 5
+mer Sars bln te Botd pyle nS oto yal Some let
+“AS Sagan AN LIAS fas Tp BSc atV ol gp ly 9 EPADS|
+its en PEPADS abe rsy2 posing indie sola oly galt
+es EPNDS yes oh est Ge Suypacbysln enn Sad
+Soha Aten eal Biron Sai tly Lolecr Bi pen oni tl
+Al oh pan ISI Rug AI Yet ely £31 nod pay sscres
+ANS ZEPAOS AE gor ny nde yoh gy
+ee? EPADS (65 58205 Sly FOS pl ope
+Rttps://sindh.eprocure-gov-pk/#/supplier/
+H cel yes te Han sol bk 2 registration
+A 2 ame Ralphs plea. SBI Sent pS
+nS enya hte ea 2rd Spb Jeno 30,
+wyfr2.80 pate 9 30-01-2026 Karoo dye
+Seay tates ill ane ge Snare ge 1) tg oly
+Jeo 3 a3 sda Sy tee I teal, Sayama pel |
+ona eer giSllSeutgsl ye ttelesid)
+eee BIE ab pe ome lt not) Sb ol yp Sly al
+a tr HOS dott pe BE Sls Breed le a S|
+Laren eo het pop IT ety Bian
+gen Sly
+(Gadus id1Es arco)
+gra
+irre nossanca
+5 WORK FOR sinpHig JOB PORTAL BY|
+erracon INFORMATION DEPARTMENT.

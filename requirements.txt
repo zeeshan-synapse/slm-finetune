@@ -2,6 +2,12 @@
 requests
 beautifulsoup4
 lxml
+trafilatura
+scrapy
+pdfplumber
+PyMuPDF
+pytesseract
+Pillow
 
 # Dataset preparation
 openai

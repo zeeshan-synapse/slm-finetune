@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 import json
 import re
-from pathlib import Path
+
+from kb_paths import cleaned_data_dir, knowledge_base_dir
 
 
-PROJECT_DIR = Path(__file__).resolve().parents[1]
-INPUT_DIR = PROJECT_DIR / "data" / "raw" / "cleaned-data"
-OUTPUT_DIR = PROJECT_DIR / "data" / "knowledge-base"
+INPUT_DIR = cleaned_data_dir()
+OUTPUT_DIR = knowledge_base_dir()
 OUTPUT_PATH = OUTPUT_DIR / "source_docs.jsonl"
 
 SKIP_EXACT = {

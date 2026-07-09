@@ -9,13 +9,14 @@ from typing import Any
 import faiss
 import numpy as np
 import requests
+from kb_paths import knowledge_base_dir
 
 
-PROJECT_DIR = Path(__file__).resolve().parents[1]
-DEFAULT_INPUT_PATH = PROJECT_DIR / "data" / "knowledge-base" / "chunks.jsonl"
-DEFAULT_INDEX_PATH = PROJECT_DIR / "data" / "knowledge-base" / "faiss.index"
-DEFAULT_META_PATH = PROJECT_DIR / "data" / "knowledge-base" / "index_meta.jsonl"
-DEFAULT_MANIFEST_PATH = PROJECT_DIR / "data" / "knowledge-base" / "index_manifest.json"
+DEFAULT_KB_DIR = knowledge_base_dir()
+DEFAULT_INPUT_PATH = DEFAULT_KB_DIR / "chunks.jsonl"
+DEFAULT_INDEX_PATH = DEFAULT_KB_DIR / "faiss.index"
+DEFAULT_META_PATH = DEFAULT_KB_DIR / "index_meta.jsonl"
+DEFAULT_MANIFEST_PATH = DEFAULT_KB_DIR / "index_manifest.json"
 DEFAULT_OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://localhost:11434")
 DEFAULT_EMBED_MODEL = os.environ.get("KB_EMBED_MODEL", "nomic-embed-text")
 
@@ -129,13 +130,23 @@ def embed_batch_via_legacy_api(
     return embeddings
 
 
+def describe_row(row: dict[str, Any]) -> str:
+    return (
+        f"chunk_id={row.get('chunk_id')} "
+        f"document_type={row.get('document_type')} "
+        f"title={row.get('title')} "
+        f"source_url={row.get('source_url')}"
+    )
+
+
 def embed_texts(
     rows: list[dict[str, Any]],
     ollama_url: str,
     model: str,
     batch_size: int,
-) -> np.ndarray:
+) -> tuple[np.ndarray, list[dict[str, Any]]]:
     embeddings: list[list[float]] = []
+    successful_rows: list[dict[str, Any]] = []
     use_legacy_api = False
 
     for start in range(0, len(rows), batch_size):
@@ -146,8 +157,16 @@ def embed_texts(
         print(f"Embedding batch {batch_number}/{total_batches} ({len(batch)} chunks)...")
 
         if use_legacy_api:
-            batch_embeddings = embed_batch_via_legacy_api(ollama_url, model, texts)
+            try:
+                batch_embeddings = embed_batch_via_legacy_api(ollama_url, model, texts)
+            except Exception as exc:
+                if len(batch) == 1:
+                    print(f"Skipping failed chunk after legacy API error: {describe_row(batch[0])}")
+                    print(f"Legacy API error: {exc}")
+                    continue
+                raise
             embeddings.extend(batch_embeddings)
+            successful_rows.extend(batch)
             continue
 
         try:
@@ -155,14 +174,22 @@ def embed_texts(
         except Exception as exc:
             print(f"/api/embed failed ({exc}); falling back to legacy /api/embeddings.")
             use_legacy_api = True
-            batch_embeddings = embed_batch_via_legacy_api(ollama_url, model, texts)
+            try:
+                batch_embeddings = embed_batch_via_legacy_api(ollama_url, model, texts)
+            except Exception as legacy_exc:
+                if len(batch) == 1:
+                    print(f"Skipping failed chunk after both embedding APIs failed: {describe_row(batch[0])}")
+                    print(f"Legacy API error: {legacy_exc}")
+                    continue
+                raise
 
         embeddings.extend(batch_embeddings)
+        successful_rows.extend(batch)
 
     array = np.asarray(embeddings, dtype="float32")
-    if array.ndim != 2 or array.shape[0] != len(rows):
+    if array.ndim != 2 or array.shape[0] != len(successful_rows):
         raise ValueError("Embedding array shape does not match input rows.")
-    return array
+    return array, successful_rows
 
 
 def build_index(embeddings: np.ndarray) -> faiss.IndexFlatIP:
@@ -232,16 +259,18 @@ def main() -> None:
     print(f"Embedding model: {args.model}")
     print(f"Input chunks: {len(rows)}")
 
-    embeddings = embed_texts(
+    embeddings, embedded_rows = embed_texts(
         rows,
         ollama_url=args.ollama_url,
         model=args.model,
         batch_size=args.batch_size,
     )
+    if not embedded_rows:
+        raise ValueError("No chunks were successfully embedded.")
     index = build_index(embeddings)
 
     faiss.write_index(index, str(index_output))
-    write_metadata(meta_output, rows)
+    write_metadata(meta_output, embedded_rows)
     write_manifest(
         manifest_output,
         input_path=input_path,
@@ -253,8 +282,11 @@ def main() -> None:
         dimension=embeddings.shape[1],
     )
 
+    skipped = len(rows) - len(embedded_rows)
     print(f"FAISS vectors: {index.ntotal}")
     print(f"Embedding dimension: {embeddings.shape[1]}")
+    if skipped:
+        print(f"Skipped chunks: {skipped}")
     print(f"Saved index: {index_output}")
     print(f"Saved metadata: {meta_output}")
     print(f"Saved manifest: {manifest_output}")

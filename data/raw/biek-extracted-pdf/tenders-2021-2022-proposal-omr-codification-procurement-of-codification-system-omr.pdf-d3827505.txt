@@ -1,0 +1,941 @@
+CODIFICATION 
+                SYSTEM & OMR SOLUTIONS WITH INFRATRUCTURES
+URL: https://www.biek.edu.pk/TENDERS/2021-2022/Proposal-Omr-Codification/Procurement-of-Codification-System-OMR.pdf
+Source: https://www.biek.edu.pk/tenders.asp
+
+OMR and ICR Software requirement with integration of Examination System and Requirement of Codification Machine for
+codification on answer script
+TENDER DOCUMENT
+SINGLE STAGE – TWO ENVELOPES
+VOLUME-I
+TECHNICAL PROPOSAL
+FOR THE YEAR 2021-2022
+Tender Reference NO.BIE/AG/L&N/266/2022
+Dated: 12-01-2022
+For Procurement of
+CODIFICATION SYSTEM & OMR
+SOLUTIONS WITH INFRATRUCTURES
+Tender issued to M/s. _______________________________
+The deadline for submission is 09-02-2022 at 3:30 pm
+Tender will be opened on 09-02-2022 at 4:00 pm
+Board of Intermediate Education Karachi
+SECTION – I
+INSTRUCTIONS TO BIDDERS & GENERAL CONDITIONS OF CONTRACT
+The Instructions to Bidders (ITB) and General Conditions of Contract (GCC)
+applied in this Contract shall be the same as per Standard Bidding
+Documents for Goods, issued by SPPRA. For further references the same may
+be downloaded from SPPRA’s website www.pprasindh.gov.pk or it may be
+provided from this Office if it may be demanded by the bidder. Whenever
+there is a conflict, the provisions hereafter shall prevail over those in the
+Instructions to Bidders & General Conditions of Contract. The corresponding
+clause number of the ITB & GCC is indicated in parentheses.
+BID DATA SHEET
+INTRODUCTION
+Name of
+Procuring
+Agency:
+Board of Intermediate Education,
+Bakhtiyari Youth Center,
+North Nazimabad, Karachi
+Tel: 99260211-12 (Two Lines)
+Fax: 99260203 & 99260208
+Contract
+OMR and ICR Software requirement with integration of
+Examination System and Requirement of Codification
+Machine for codification on answer script
+Bid Price
+and
+Currency
+Prices quoted by the Bidder shall be “fixed” and in” Pak
+Rupees”
+PREPARATION AND SUBMISSION OF BIDS
+Eligibility
+Criteria
+a) Bidder should have own Project Team and operate
+own software company office in Pakistan
+b) Provide minimum 02 Purchase Orders of any similar
+solution along with completion certificates for the works
+completed.
+c) Bidder should have in-house product support team.
+Bidder should be providing ongoing support &
+customization of proposed solution.
+d) Bidder should have an experience to work with Boards
+/ in any Government organizations.
+e) Copy of NTN Certificate duly company stamped is
+required.
+f) Copy of GST Registration Certificate duly company
+stamped is required.
+g) Copy of SRB Registration Certificate duly company
+h) Total of Annual Turnover for last three years should be
+at least 40.00 Million. Firm should provide bank account
+statement from July 2018 to June 2021 showing stated
+turnover. No any other document will be considered at
+place of the required documents, bidder should not
+attach, Sales Tax Acknowledgements, Challans, and
+Returns/ summaries of un-relevant period.
+i) Copy of Income Tax returns duly e-filed with FBR, for the
+tax years 2018, 2019 & 2020 duly company stamped is
+j) Affidavit confirming that the firm is not blacklisted by
+any Government, Semi Government or Autonomous
+Bodies, upon non judicial paper of Rs.100/- (in origin).
+k) Bidders should provide detail specification of their
+material being quoted / offered against the BOQ.
+International Brand such as HP, Dell, Lenovo, Fujitsu,
+Toshiba, Acer, Panasonic, Ricoh, etc any other world
+top ten brands or equivalent are eligible only. Officers
+will only be which are submitted for latest new models
+of the stated brands. Refurbished models will be
+rejected.
+l) Technical/Brochure of proposed solution.
+Amount of
+Bid Security
+Three (3) percent of Bid Value/Price
+Bid Validity
+Period
+90 days
+Number of
+Copies
+One Original
+Deadline for
+Submission
+of Bid
+As notified in Tender Notice dated 09.02.2022 (up to 3.30
+PM)
+Opening of
+Bids
+09th February, 2022 at 4.00 PM
+Bid
+Evaluation
+Lowest Evaluated Responsive Bid
+OTHER TERMS & CONDITIONS
+a) In case of any unforeseen situation or government
+holiday resulting in closure of office on the date of
+opening. Bid shall be submitted / opened on next
+working day at the given time.
+b) The specification offered by the bidder(s) may vary from
+the required items because the requirements are
+mentioned on the basis of transitory survey, in such
+case(s) the Procurement Committee shall decide and
+recommend the offer(s) that may be suitable for
+procuring agency.
+c) Demonstration of required Software and/or Hardware
+may be made within the premises of Board for which
+supplier shall be liable to bring the same for the said
+purpose.
+d) The
+offered
+software
+development
+services
+codification machine should be durable, reliable and
+prime quality with software support and provided the
+complete source code including training of staff and
+admin or user manuals.
+e) Substandard and low quality services shall not be
+accepted and during and after deployment of
+software, the company products will be rejected and
+Security Money shall be forfeited and the bidder may
+also be blacklisted.
+f) The bidder with the “Lowest Evaluated Cost” but not
+necessarily the “Lowest Submitted Price” shall be
+awarded the Procurement Contract preferably on
+quality cum rate basis.
+g) Tender documents can also be obtained through
+courier service, against Pay Order/Bank Draft of
+Rs.1500/- as bid document fee.
+h) BIEK may reject all or any bid subject to relevant
+provision of SPP Rules and may cancel the bidding
+process at any time prior to acceptance of bid or
+proposal as per Rule 25(1) of said rules.
+i) Incomplete,
+conditional
+bid/tender
+without
+required extent of bid security in the specified
+form/format shall be rejected.
+j) Bidders are required to provide their valid e-mail Ids,
+complete postal address and contact numbers (s) for
+effective and timely communication.
+k) Contract Agreement and Integrity Pact both are
+mandatory for successful bidder.
+ELIGIBILITY CRITERIA
+The clear statement/Criteria for the Eligibility criteria are given in following
+table. Applicants who wish to apply for participating in this tendering process
+may prepare their profile exactly in-accordance of the criteria set herein.
+There will be three stages of Evaluation:
+Company Profile
+S.
+No. Evaluation Criteria
+Documentary
+Evidence Required
+Max.
+Marks
+Classification of
+1
+Years of Establishment of
+bidders firm
+Max Marks
+10
+10 Years = 10 Marks
+7 Years = 7 Marks
+5Years = 5 Marks
+3 Years = 3 Marks
+2
+The Software company should
+be a registered firm and having
+the sound software team with
+Projects
+Team Capability and
+their project
+Yes = 10 Marks
+No = 0 Marks
+3
+ISO Standard Certified Software
+firm
+Certificate required
+4
+PSEB Registered
+5
+FBR and GST/SRB Registered
+Certification
+Both Certificate
+required
+6
+Evidence of 3 Successfully
+Letters Required
+Financial Capability
+No.
+Evaluation Criteria
+Average Annual Turnover of the
+firm for the last 3 years
+Audited Annual
+Financial Statement
+with single page
+consolidated report
+showing the last 3
+years turn over
+20
+40 Million = 20 Marks
+20 Million = 10 Marks
+Less than 10 Million
+= 5 Marks
+Total Marks: 80
+* Minimum marks required for Qualification = 80%
+The clear statement/Criteria for the Evaluation requirements are given in
+following table. Applicants who wish to apply for participating in this
+tendering process may prepare their profile exactly in-accordance of the
+criteria set herein.
+Software Company Technical Requirements
+Active Service Level Agreement
+(SLA) of BIEK Software
+Management with any Private &
+Public Sector’s Organizations.
+evidence Must attach
+PO/Agreement (In
+active form)
+Max
+50
+5 or above =50 Marks
+3 = 80 Marks
+2 = 50 Marks
+Less than 2 = 5 Marks
+Certified Developers,
+Certified SQA and DBA’s
+Certificates
+5 or above= 50 Marks
+4 = 40 Marks
+3 = 30 Marks
+2 = 20 Marks
+1 = 10 Marks
+The number of installations &
+Experience and Developments
+of similar type of Software
+List of deployed
+Projects in
+Pakistan with cliental.
+30
+Deployment and
+Installation of at least
+Projects 5 = 20 Marks
+3 = 10 Marks
+2 = 5 Marks
+Less than 2 = 2 Marks
+Present the architect , workflow
+and security of the project
+The bidder should
+present and describe
+the project flow,
+security and
+implementation
+methodology
+100% Compliance = 50
+Less than 100% = 0
+Experience of working with any
+Government, and Autonomous
+bodies in Pakistan
+TOTAL MARKS
+200
+(*) MARKS OBTAINED
+PREPARATION OF PROPOSAL
+Technical Proposal:
+a) While preparing Technical Proposal Bidding firm(s) are expected to
+examine the documents comprising this invitation in detail, as material
+deficiencies in providing the information requested may result in
+rejection of the proposal.
+b) The Technical proposal should provide the information as mentioned in
+Section-II.
+c) To establish the conformity of the items required though this Tender
+Document, the bidder shall furnish as part of its Technical Proposal, a
+detailed description of the Bidder’s proposed items conforming in all
+material aspects with the Technical Requirements both overall as well
+as in regards to the performance of each proposed items.
+d) Please note that the technical proposal shall not include any financial
+information.
+Financial Proposal:
+a) While preparing the financial proposal, bidders(s) are expected to take
+into account the requirement and conditions of the invitation
+documents. The Financial proposal should follow instructions as
+mentioned in Volume-II. It should provide lump sum costs of the
+requirements and support cost of one year separately associated with
+the assignment and all other out of pocket expenses.
+b) The Data sheet shows validity of bid up to 90 days. The BIEK will make its
+best effort to complete technical clarification (if needed) within this
+period. Proposal validity may be extended with mutual consent.
+c) Rates should be inclusive of all government taxes/levies such as Income
+Tax, SRB, GST, FED, Stamp Duty Excise or what so ever may be in
+practice, and will be borne by the bidders in all aspect.
+Bid Price / Payment:
+a) This Document showing itemized list along with specifications, quantity
+and detailed terms and conditions for bidding is available on provision
+of Rs.1500/- (nonrefundable) Bank DD/PO/Bank Challan in favor of
+Secretary, BIE, Karachi on any working day during office hours. Bidders
+may submit bids on Bid documents issued by procuring agency or
+downloaded from Authority’s website along with tender fee (if any) by
+mail or by hand as per the schedule as prescribed in NIT.
+b) All payments will be made in Pak Rupees.
+c) The prices charged by the successful bidder for the required items
+along with accessories and associated services shall not vary from the
+prices as quoted in the financial proposal.
+d) Payment will be made after deliveries of requirements at consignee
+end,
+Installation,
+completion
+inspection
+certificate
+for
+Quality/Quantity issued by the concerned officers.
+Cost of Bidding:
+The bidder shall bear all costs associated with the preparation and submission
+of bid and BIEK will in no case be responsible or liable for those costs,
+regardless of the outcome of the bidding process.
+Language of Bidding:
+The bid must be prepared and submitted in English language. Supporting
+documents and printed literature furnished by the bidder with the bid may be
+in another language as long as they are accompanied by an English
+translation of the pertinent passages. For the purpose of interpretation of the
+Bid, English language shall prevail.
+Confidentiality:
+a) Information
+relating
+to
+the
+of
+proposals
+recommendations concerning award shall not be disclosed to the
+bidder(s) who submitted the proposals or to other persons not officially
+concerned with the process, until the award of Contract is notified to
+the successful firm(s).
+b) Information related to the examination evaluation, comparison and
+post qualification of Proposals, and recommendation of contract
+award, shall not be disclosed to Bidders or any other persons.
+c) Any attempt by a Bidder to influence BIEK in the examination,
+evaluation, comparison, and post – qualification of the Proposals or
+Contract award decisions will result in the rejection of its proposals.
+d) The bidder must provide an undertaking on judicial paper stating to
+maintain confidentiality and binding that the documents provided
+under this bid are correct and can be verified from concerned
+authorities.
+Use of Documents and Information by external & internal Audit:
+The Bidder shall permit BIEK to inspect their accounts and records relating to
+the performance of the supplier and to have them audited by auditors
+appointed by the BIEK, if so required by the BIEK can directly contact the
+references given in the technical requirement as a part of TENDER
+DOCUMENT to verify the bidder’s technical reasons supporting compliance.
+Bid Validity:
+a) Bid shall remain valid and open for acceptance for a period of 30 days
+from the specified date of tender opening.
+b) In exceptional circumstances prior to expiry of the original bid validity
+period, the bidder may be requested in writing for an extension of the
+period of validity. A bidder agreeing to such request will not be
+permitted to modify his bid. A bidder not agreeing to such request may
+be withdrawn at the discretion of BIEK.
+Amendment of Bidding Documents:
+a) At any time prior to the deadline for submission of Bids, BIEK may for any
+reason, whether at its own initiative or in response to a clarification
+requested by a prospective Bidder can modify the Bidding Documents
+by making essential amendment.
+b) The amendment shall be the part of the Bidding Documents, and will
+be notified in writing through fax or letter by courier or shall be made
+available on the BIEK’s website https://www.biek.edu.pk/or SPPRA
+website to all prospective bidders who have received the Bidding
+Documents.
+Clarification(s) / Queries of Tender:
+a) The bidders are expected to carefully examine all instructions, forms
+and specifications in the Bidding Documents. Any Bidder in doubt as to
+the exact meaning or interpretation of any part of the Bidding
+Documents should immediately seek clarification in writing from the
+Secretary BIEK.
+b) Requests for all clarifications in regard to the given specifications or
+other information contained in Tender Documents should come either
+through E-mail/Fax or Courier to the Secretary BIEK. Telephone enquiries
+may not be entertained.
+Contradictions, Obscurities and Omissions:
+The Bidder should likewise notify to the above of any contradictions,
+obscurities and omissions in the Bidding Documents if clarification of these is
+necessary for the clear understanding of the documents and for preparation
+of the Bid. Such enquires must reach to the Secretary, BIE, KARACHI not later
+than February, 2022.
+Inspection:
+a) The inspection will be carried on the Services by representatives of the
+BIEK (Inspection Committee) or concerned officers upon software and
+its features according to the requirements. It is Bidders responsibility to
+ensure quantity, correctness and adherence to the Specifications etc.
+any deviation will be rejected, and the supplying firm will be solely
+responsible for it.
+b) The inspection report, which, inter-alia, should indicate the condition,
+Quality as approved in inspection, features of software provided by the
+firm, shall be signed by the inspection committee or concerned officer.
+c) Taking Over: Upon delivery of software development services at BIEK
+and after inspection, the concerned Officers of BIEK will issue a taking-
+over certificate in respect of those software deployment received in
+acceptable condition.
+Installation & Demonstration:
+Installation
+a) After inspection and taking over of the concerned officer, as stated
+above, the Contractor shall develop, install and deploy the required
+software with features are to be install and run appropriately with all
+required services. For this purpose, the Contractor shall co-ordinate with
+the Secretary BIEK, for making arrangements for proper installation of
+delivered goods/ Machinery equipment or services.
+Completion Certificate:
+After completion of the installation and demonstration, as stated above, a
+certificate is to be obtained by the Contractor from the Secretary BIEK stating
+that
+concerned
+officer
+have
+been
+satisfactorily
+installed
+demonstrated by the Contractor.
+Breach of Contract:
+In case of breach of warranty / guarantee / Support or Contract, the
+damages suffered by the BIEK shall be recovered from the Contractor out of
+any payment due to the Contractor and / or in accordance with the terms
+and conditions of the terms and conditions of the Contract Security /
+Performance Bond, without notice to the Contractor.
+Contractor’s Default Liability:
+a) The BIEK may upon written notice of default to the Contractor terminate
+the Contract in the circumstances detailed hereunder:
+i)
+If in the judgment of the BIEK, the Contractor fails to make
+delivery of the stores within the time specified in the Contract
+Agreement or within the period for which extension has been
+granted by the BIEK; and
+ii)
+If, in the judgment of the BIEK, the Contractor fails to comply with
+any of the other provisions of the Contract.
+b) In the event the BIEK terminates the Contract, in whole or in part, as
+provided in above, the BIEK reserves the right to purchase, on such
+terms and the conditions as it may deem appropriate, Stores similar to
+the one terminated, and the Contractor will be liable to the BIEK for any
+additional costs for such similar Stores, and / or for liquidated damages
+for delay, as defined in Clause 1.18 (c) of the Conditions of Contract
+until such reasonable time as may be required for the final supply of the
+Stores.
+c) If the Contract is terminated, as provided in above, the BIEK, in addition
+to any other rights provided in this Clause, may require the Contractor
+to transfer title and deliver to the BIEK under any of the following cases
+in the manner and as directed by the BIEK.
+d) Any completed work or services; and such partially completed,
+drawings,
+information
+right
+(hereinafter
+called
+manufacturing material or services) as the Contractor has specifically
+produced or acquired for the performance of such parts of the
+Contract as has been terminated.
+e) The BIEK will pay to the Contractor the Contract Price for the completed
+delivered to and accepted/ certified/ inspected by the Inspection
+Committee or concerned officers of BIEK and also for the delivered
+services.
+f) In the event the BIEK does not terminate the Contract, as provided
+above, the Contractor shall continue with the performance of his / her
+Contract, in which case the Contractor shall to liable to the BIEK for
+liquidated damages for delay as set out in Clause 1.18 (c) until the
+Stores are accepted.
+Partial Shipments or Services:
+a) The BIEK accepts partial shipments / Services and also allows partial
+payments subject to pre-information and agreement, by observing
+other terms and condition laid down in the contract agreement.
+b) In the event any portion of the services supplied by the Contractor is
+found defective or not up to the requirement, or otherwise not in
+conformity with the requirement, the BIEK shall have the right to reject
+or require, in writing, rectification of the Stores/concerned section. In
+the latter case, the Contractor shall with utmost diligence, and at his
+own expense, make good/services the defects so specified or replace
+the defective supplies or services. If the Contractor fails to rectify or
+replace the rejected supplies, the BIEK may adopt any of the following
+options:
+I.
+Replace or rectify, at its option, such defective supplies or
+services and
+charge to the Contractor the excess cost
+occasioned to the BIEK plus (15%) fifteen percent; or
+II.
+Acquire the said Stores/Services at a reduced price considered
+equitable under the circumstances; or terminate the Contract.
+III.
+Terminate the contract.
+Extension of Time:
+If the completion of the Contract is delayed due to reason beyond the
+control of the Contractor, the Contractor shall without delay request the BIEK,
+in writing, of his claim for an extension of time. The BIEK on receipt of such
+request may agree to extend the completion date as may be reasonable in
+the circumstances of the case but without prejudice to other terms and
+conditions of the Contract.
+Delay in Delivery – Liquidated Damages:
+a) Delivery plan: The Responding Organization shall provide a detailed
+delivery, installation and configuration plan. Bidder should provide the
+life line, which should describe exactly what and how material will be
+delivered, installed and configured. Delivery plan should not be in
+generic terms but should be specific to this assignment, Activities,
+schedule should be in tabular form mentioning names of tasks, and sub
+tasks, start date, finish date resources and milestones will also be
+appreciated.
+b) The progress of the Contract at any time should not be lagging behind
+the program agreed between the BIEK and the Contractor, the BIEK will
+notify the Contractor in writing and the Contractor shall there upon
+take such steps as he / she may deem fit to expedite the progress of
+the Contract. Non-issuance of this notice by the BIEK shall not in any
+way absolve the Contractor of the liquidated damages as stated in
+below section (c).
+c) If the Contractor fails to complete the Contract, in full or part, within the
+time laid down in the Contract Agreement or any extension thereof,
+there shall be deducted from the Contract Price, as liquidated
+damages, equal to (0.5%) of the Contract price of each unit of the
+delayed Stores for each calendar week of delay subject to the
+maximum of five percent (5%) of the Contract Price of the unit or units
+so delayed, and such deduction shall be in full satisfaction of the
+Contractor’s liability for the said failure.
+Post Deployment Support & Services or Warranty:
+Bidder is required to provide support services till 360 days from the date of
+supply or delivery of software, in this regard an under-tacking on company
+letter head is required to be submitted along with the technical proposal.
+Training:
+The bidder should provide a comprehensive training plan which should be
+flexible to cater to the current requirements. It should encompass all ranges of
+users i.e. functional, operational and managerial etc. Training Documents
+such as schedules, training material must be provided with the technical
+proposal.
+Signing of Contract:
+Within (15) working days after notification to the successful bidder regarding
+acceptance of his bid and submission of 5% Performance Security in shape of
+DD/Pay order or Bank Guarantee, the contract incorporating all agreements
+between the parties will be signed. The Contract agreement will be affixed
+with revenue stamps @ 0.35% of contract value as per stamp act. For sample
+of agreement refer to page No. 15.
+Post Letter of Intent / Contract Acceptance:
+Before signing of formal contract, a letter of intent will be issued by the BIEK to
+the lowest best evaluated bidder. In response to letter of intent (LOI) the
+bidder will have to submit its letter of consent for acceptance of the LOI
+within the prescribed time period i.e (07 days), in case letter of acceptance is
+not received within stipulated time framework it will be assumed that first
+lowest evaluated or technical qualify bidder is not interested in signing the
+formal contract with this Board. In that situation the LOI will be issued to the
+second lowest evaluated or technical qualify bidder and the earnest money
+of first evaluated bidder will be forfeited. This condition will also apply on the
+second and third evaluated bidder (as the case may).
+SECTION – II
+COMPONENTS REQUIREMENTS
+Name of the Article & Description
+Qty
+Automated Fictitious Codification System:
+This system will have an option for users, which will allow users to
+generate automated fictitious codes for all answer scripts using
+cryptographic system.
+Automated Fictitious Codifier Integration:
+integrate the automated fictitious codifier devices and print the batch
+jobs.
+Computerized Award List System:
+generate and print computerized award lists.
+Computerized OMR Award List System:
+generate and print OMR award lists.
+OMR Answer Script System:
+prepare OMR examinations and process candidates’ Answer Scripts
+using OMR System.
+OMR Award List System:
+prepare OMR codifications and process computerized Award Lists
+01
+INFRASTRUCTURE REQUIREMENTS
+Offers are invited from reputable software/Hardware companies for the
+purchase Implementation, Customization and Ongoing free support for 1 year
+of an out-of-box complete online examination system infrastructure; who is
+already offering services of same solution to the other Board Offices.
+Sr.
+Scanners Fujitsu, Kodak or Avision or Equivalent (Latest model)
+ 600 dpi
+ Speed: simplex: 65ppm, Duplex: 130ppm (200 dpi / 300 dpi)
+ Interface: USB 3.0 / USB 2.0 / USB 1.1 (backward compatible)
+ Zone Scanning (front and back)
+ Source Volt : 100 to 240 VAC ± 10%
+ Operating system Support (Windows 7, 8, 8.1, 10, Vista, (32 bit /
+64 bit) &Windows Server 2016 (64 bit)
+05
+02
+Automatic Fictitious Codification Machine
+1. Mechanical
+1.1 Answer Script Lifting Machine
+1.2 Answer Script Bundle Carrier
+1.3 Answer Script Shift to belt
+1.4 Conveyor belt
+1.5 Printing Station
+1.6 Output Answer Script Station
+2. Electrical
+2.1 Answer Script Lifting Sensors
+2.2 Answer Script Shifting Sensors
+2.3 Printing Station Sensors
+2.4 Answer Script print Signal Sensors
+2.5 Answer Script print Signal Sensors
+3. Software
+3.1 Automatic fictitious Code Algorithm
+3.2 System Integrated Code
+3.3 Machine Operating System Desk
+3.4 Belt Speed Control
+3.5 Encoding Decoding Management
+3.6 Reports
+4. Hardware
+4.1 UPS 2 KVA with dry battery
+4.3 Belt Motor
+4.4 Copy Lifting Motor
+4.5 Belt & Lifter Coupling
+IF PROVIDED INFORMATION FOUND FALSE, THE SERVICES OF THE HIRED SECURITY
+AGENCY / FIRM WILL BE TERMINATED WITHOUT ASSIGNING ANY REASON AND
+MAKING ANY REFUND / PAYMENT. FURTHER THE AGENCY / FIRM WILL BE
+BLACKLISTED.
+It is hereby certified that the terms and conditions have been read, agreed upon
+and signed.
+M/s._______________________________________________________________________
+Contact Person:______________________________________________________________
+Address:____________________________________________________________________
+Tel#:_________________________________ Fax#:________________________________
+Mobile#:_____________________________ Email:_________________________________
+Dated:_____________________.
+Stamp & Signature
+Tender Document – Security Services (Financial Proposal)
+Page 1
+STANDARD BIDDING DOCUMENTS
+NATIONAL COMPETITIVE BIDDING
+SINGLE STAGE – TWO ENVELOPES PROCEDURE
+SOLUTIONS WITH INFRASTRUCTURES
+FINANCIAL PROPOSAL
+IN RESPECT OF THE
+BIEK/AG/L&N/266/2022
+VOLUME–II
+Board of Intermediate Education
+Bakhtiari Youth Center, North Nazimabad,
+Karachi - 74700
+Phones:
+99260205
+99260214
+99260207
+99260219
+Page 2
+1. BIDDING DATA
+(a).
+Name of Procuring Agency: Board of Intermediate Education, Karachi
+(b).
+Brief description of works: Codification System & OMR Solutions with Infrastructure.
+(c).
+Procuring Agency’s address: Bakhtiari Youth Centre, North Nazimabad, Karachi.
+(d).
+Amount of Bid Security: Bid Security of 3% of total amount/cost will be
+submitted along with Tender Documents in shape of Pay Order / Demand Draft
+only in the name of Secretary, Board of Intermediate Education, Karachi.
+(e).
+Period of Bid Validity (days): Ninety (90) days.
+(f).
+Performance Security Deposit: Successful bidder should provide 10%
+Performance Security of total value of Work Order in the form of Pay Order or
+Bank Guarantee before submission of invoice. The Performance Security shall
+extend at least three months beyond the Date of Delivery / Completion of Work /
+Contract.
+(g).
+Deadline for Submission of Bids along with Time: The last date for submission
+the Tender Document in sealed envelope is February 09, 2022 by 03:30 pm in the
+office of the Procurement Wing of Board of Intermediate Education, Karachi.
+(h).
+Venue Time and Date of Bid Opening: In presence of representatives who may
+care to attend, the Tender will be opened on February 09, 2022 at 04:00 pm in the
+Committee Room situated on Ground Floor of Chairman’s Secretariat Building of
+Board of Intermediate Education, Karachi.
+Page 3
+Component Requirement
+S.No.
+Amount
+1.
+Automated Fictitious Codification System
+Automated Fictitious Codifier Integration
+Computerized Award List System
+Computerized OMR Award List System
+OMR Answer Script System
+OMR Award List System
+INFRASTRUCTURE
+S. No.
+Rate
+Scanners Fujitsu, Kodak or Avision OR Equivalent (Latest
+Model)
+
+600 dpi
+Speed: simplex:65ppm, Duplex: 130ppm (200 dpi
+/300 dpi)
+Interface: USB 3.0 / USB2.0/USB1.1 (backward
+compatible)
+Zone Scanning (front and back)
+Source Volt: 100 to 240 VAC±10%
+Operating system Support (Windows 7,8,8.1,10,
+Vista,(32 bit / 64 bit) & Windows Server 2016 (64bit)
+2.1 Anwer Script Lifting Sensors
+4.2 Belt Motor
+4.3 Copy Lifting Motor
+4.4 Belt & Lifter Coupling
+Total=
+TOTAL AMOUNT IN WORDS (with all Taxes):____________________________________.
+Page 4
+SUMMARY OF BID
+Rupees In Words
+Rupees In Figures
+Total cost of the Bid:
+(as offered by the Bidder)
+3% (three percent) amount
+of the Bid Price
+Bid Security (Refundable)
+10% (Ten percent) amount
+of the Contract Price
+Performance Security
+(Refundable)
+Page 5
+AGREEMENT
+This agreement is made on the _______ day of ________ 2022 between Board of Intermediate
+Education, Karachi of the one part:
+WHEREAS the procuring agency invited bids for Codification System & OMR Solutions with
+Infrastructure viz, and has accepted a bid by the M/s._____________________ for Procurement
+in the sum of Rs.___________/= (Rupees_______________________________________).
+NOW THIS AGREEMENT WITNESSES AS FOLLOWS:
+In this agreement words and expressions shall have the same meanings as are
+respectively assigned to them in the conditions of contract referred to in the Advance
+Acceptance Issued vide Letter No.____________________________, dated_______ (copy attached).
+In consideration of the payments to be made by the Board of Intermediate Education,
+Karachi to the M/s._______________________________, as hereinafter mentioned in the Terms &
+Conditions which is already signed by the bidder, the bidder hereby covenants with the
+procuring agency to provide the Codification System & OMR Solutions with
+Infrastructure and to remedy defects therein in conformity in all respect with the
+provisions of the Contract.
+As bidder, I am completely satisfied & agreed with the award items and do not have any
+grievances.
+Mr. ________________________________________, S/o. _____________________________________, Bearing
+CNIC
+________________________________Resident
+House
+________________________________________________________Sole
+proprietor
+M/s.
+________________________________________________________Having
+their
+registered
+office
+at
+_________________________________________________Which expression wherever the contest so
+admits shall mean and include their executors, successors-in-interest, and assign of the
+OTHER PART.
+WHEREAS the BIEK is desirous of availing Codification System & OMR Solutions with
+Infrastructure from a competent firm dealing in IT services for Codification System &
+OMR Solutions with Infrastructure of BIEK, situated at Bakhtiyari Youth Center, North
+Nazimabad, Karachi AND WHEREAS the “Contractor” has offered for as competent firm to
+carry out and perform the above said.
+Page 6
+NOW IT IS HEREBY AGREED & DECLARED BY AND BETWEEN THE PARTIES AS FOLLOWS:
+ARTICLE –I
+DUTIES & SCOPE OF WORK
+1.1
+Requirement.
+Description
+Total Contract Amount
+1.2
+“THE SERVICE PROVIDER” agrees to provide services to “BIEK” whenever and wherever form
+is required as per the terms & conditions of this Agreement.
+1.3
+“THE SERVICE PROVIDER” will coordinate with I.T. Manager, of the “BIEK” who will assist
+“THE SERVICE PROVIDER” in Supervision of proposed work.
+1.4
+“THE SERVICE PROVIDER” hereby agrees to accept variation, if occurred, in scope of
+professional
+works
+with
+mutual
+consent
+on
+acceptable
+cost/price/charges/amount inclusive of all taxes and levies.
+1.5
+All logistic charges will be borne by “THE SUPPLIER”
+ARTICLE –II
+SCOPE OF PROFESSIONAL SERVICES:
+2.1
+“THE SERVICE PROVIDER” hereby agrees and acknowledges for the periodic supervision of
+the work and to check the execution of work in accordance with the Description &
+Specification.
+2.2
+“THE SERVICE PROVIDER” hereby agrees and acknowledges the acceptance of attending
+the meetings with the I.T. Manager “BIEK” as & when required.
+.
+2.3
+“THE SERVICE PROVIDER” hereby agrees to provide services as per work scope provided in
+the bidding documents.
+ARTICLE –III
+REMUNERATION
+3.1
+The cost offered by the Service Provider is Rs. /- (Rupees ------------------------------------------
+--- only) (inclusive of all taxes) in connection with Codification System & OMR Solutions
+with Infrastructure vide Notification of Award of Contract # BIE/AG/L&N/ /2022.
+3.2
+Liquidity damages as per SPPRA Rules.
+3.3 One Year Free support will be provided by the “Service Provider”.
+3.3
+Payment will be made as per provisions of SPPRA Rules.
+3.4 Performance Security 10% of total amount of work order should be submitted in shape of
+Pay Order before signing of Contract Agreement.
+Page 7
+3.5
+Stamp Duty @ 0.35% of the cost of transaction / work order will be deposited in
+Government treasury by the Service Provider. This paid Stamp Duty challan would be
+submitted along with the Bill / Invoice.
+3.6
+Tax(es) Challan(s) / Levy(ies), If any, on additional will be paid / borne by the Service Provider
+as per SRO Notification.
+ARTICLE –IV
+ARBITRATION
+4.1
+In case of any dispute, difference or and question which may at any time arise between the
+parties hereto or any person under them, arising out in respect of this letter of intent
+or
+this
+subject matter thereof shall be referred to the Chairman BIEK for arbitration / settling of the
+dispute, failing which the decision of the court law in the jurisdiction of Karachi binding to the
+parties. The Arbitration proceedings will be governed by the Arbitration Act, 1940 and the
+Substantive and procedural law of Pakistan. The venue shall be Karachi.
+ARTICLE –V
+TERMINATION
+5.1
+“BIEK” may terminate this agreement if the job is not executed according to the
+requirement at any time after issuing a 15 day’s notice.
+ARTICLE –VI
+INDEMNITY
+6.1
+“THE SERVICE PROVIDER” in its individual capacity shall indemnify and keep “BIEK” and any
+person claiming through BIEK fully indemnified and harmless from and against all damages,
+cost and expenses caused to or incurred by “THE SERVICE PROVIDER”, as a result of any
+defect in the title of BIEK or any fault, neglect or omission by the “THE SERVICE PROVIDER”
+which disturbs or damage the reputation, quality or the standard of service provided by the
+“BIEK” and any person claiming through the BIEK.
+ARTICLE –VII
+NOTICE
+7.1
+Any notice given under this AGREEMENT shall be sufficient if it is in writing and if sent by
+courier or registered mail.
+ARTICLE –VIII
+INTEGRITY PACT
+8.1
+The intention not to obtain the procurement / work of any Contract, right, interest, privilege,
+or other obligation or benefit from the BIEK or any administrative or financial offices thereof
+or any other department under the control of the BIEK through any corrupt practice(s).
+8.2
+limiting
+generality
+forgoing
+M/s.___________________, represents and warrants that it has fully declared the charges,
+fees, commission, taxes, levies etc, paid or payable to anyone and not given or agreed to
+give and shall not give or agree to give anyone within the BIEK directly or indirectly through
+any means any commission, gratification, bribe, gifts, kickback whether described as
+consultation fee or otherwise, with the object of obtaining or including the procurement or
+Page 8
+service contract or order or other obligations whatsoever from the BIEK, except that which
+has been expressly declared pursuant hereto.
+8.3
+M/s. ______________ accepts full responsibility and strict liability for making any false
+declaration / statement, not making full disclosure, misrepresenting facts or taking any action
+likely to degrade the purpose of declaration, representation and warranty. It agrees that any
+contract / order obtained aforesaid shall without prejudice to any other right & remedies
+available to the BIEK under any law, contract, or other instrument, be stand void at the
+discretion of the BIEK.
+8.4
+Notwithstanding any right and remedies exercised by the BIEK in this regard,
+M/s. _________________ agrees to indemnify BIEK for any loss or damage incurred by it on
+account of its corrupt business practice & further pay compensation to BIEK in any amount
+equivalent to the loss of any commission, gratification, bribe, gifts, kickback given by the
+M/s._________________ as aforesaid for the purpose of obtaining or inducing procurement
+/ work / service or other obligation or benefit in whatsoever from the BIEK.
+ARTICLE –IX
+MISCELLANEOUS
+9.1 Any addition & alteration (s) made for item(s) as required by BIEK on the basis of the work in
+progress which entail extra time & labor and material on part of the supply, shall not be
+charged separately / extra on ‘Quantum Merit’ basis before & on final material handed over
+to the “BIEK”. After FINALAIZATION OF SAMPLE, if any alteration(s), arise charges will be paid
+on mutually agreed upon.
+9.2
+The terms & conditions of this AGREEMENT have been read over to the parties which they
+admit to be correct and abide by the same.
+9.3
+The contract will be effective from the date of issue of Purchase Order.
+9.4
+All terms and conditions of tender vide # BIE/AG/L&N/ /2022 will be the integral part of
+this agreement and can’t be revoked.
+IN WITNESS WHEREOF both the parties hereto have set & subscribed their respective hands to this
+agreement at Karachi on the date as mentioned above.
+___________
+_______________________
+SECRETARY
+Proprietor M/s. __________
+BIE, Karachi
+CNIC __________________
+WITNESSES:
+1. Name & Signature
+2. Name & Signature
+CNIC NO. _____________
+CNIC NO. ____________
+Page 9
+C E R T I F I C A T E
+I/We have carefully read & understood the Terms & Conditions whatever has been stated
+herein the enclosed pages and abide to the same. I/We guarantee to supply/deliver/install the items
+exactly in accordance with the requirements and enclosed the Bid Security payable to Board of
+Intermediate Education, Karachi.
+AUTHORISED SIGNATURE WITH DATE: _____________________________
+NAME OF FIRM: _____________________________
+ADDRESS OF FIRM: _____________________________
+_____________________________
+FULL NAME OF CONCERNED PERSON: _____________________________
+CNIC NUMBER:
+POSITION HELD IN: _____________________________
+PHONE NUMBER(S): _____________________________
+MOBILE NUMBER(S): ____________________________
+FAX NUMBER(S): _____________________________
+NATIONAL TAX NUMBER: _____________________________
+GENERAL SALES TAX NUMBER: _____________________________
+STAMP OF THE FIRM: _____________________________
+PAY ORDER NUMBER: _____________________________
+BANK & BRANCH NAME: _____________________________
+DATED: _____________________________
+FOR RUPEES: _____________________________
+DRAWN: _____________________________
+as Bid Security is enclosed herewith.
