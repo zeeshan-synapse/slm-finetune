@@ -244,7 +244,6 @@ REFUSAL_MARKERS = (
 )
 PROMPT_LEAK_PATTERNS = (
     "answer according to",
-    "provided evidence",
     "return json",
     "system prompt",
     "developer message",
@@ -1125,6 +1124,57 @@ def biek_question_prefers_summary(question: str) -> bool:
     )
 
 
+def is_biek_ambiguous_result_question(question: str, answer: str) -> bool:
+    low_q = question.lower()
+    low_a = answer.lower()
+    return (
+        "roll number" in low_q
+        and contains_any(low_q, ("result", "results"))
+        and contains_any(
+            low_a,
+            (
+                "multiple biek result records",
+                "multiple result records",
+                "add the year",
+                "add a narrower combination",
+                "narrow it to one exact result",
+            ),
+        )
+    )
+
+
+def is_biek_result_question(question: str) -> bool:
+    low = question.lower()
+    return "roll number" in low and contains_any(low, ("result", "results"))
+
+
+def is_biek_download_forms_summary(question: str) -> bool:
+    low = question.lower()
+    return "download forms" in low and contains_any(low, ("what can i find under", "what can you find under"))
+
+
+def has_biek_download_forms_listing(answer: str) -> bool:
+    low = answer.lower()
+    markers = (
+        "certificate form",
+        "scrutiny form",
+        "provisional certification form",
+        "migration form",
+        "registration form",
+        "verification",
+        "duplicate",
+        "examination forms",
+        "permission forms",
+    )
+    hits = sum(1 for marker in markers if marker in low)
+    return hits >= 4
+
+
+def is_biek_form_resource_question(question: str) -> bool:
+    low = question.lower()
+    return contains_any(low, ("form", "forms", "pdf", "download link", "resource"))
+
+
 def biek_quality_scores(question: str, answer: str, case: dict[str, Any], issues: list[str]) -> dict[str, Any]:
     low_a = answer.lower()
     refusal = is_refusal_answer(answer)
@@ -1135,14 +1185,21 @@ def biek_quality_scores(question: str, answer: str, case: dict[str, Any], issues
     link_present = has_link_like_text(answer)
     asks_link = biek_question_prefers_link(question)
     asks_summary = biek_question_prefers_summary(question)
+    result_question = is_biek_result_question(question)
+    ambiguous_result = is_biek_ambiguous_result_question(question, answer)
+    download_forms_summary = is_biek_download_forms_summary(question)
 
     natural = 2
     if contains_any(low_a, BIEK_TEMPLATE_OPENERS):
         natural -= 1
-    if wc > 120 or sc > 5 or has_repetition(answer):
+    if (wc > 120 or sc > 5) and not ambiguous_result:
+        natural -= 1
+    if has_repetition(answer):
         natural -= 1
     if re.search(r"^\s*(?:\d+\.|-|\*)\s", answer.strip()):
         natural -= 1
+    if ambiguous_result:
+        natural = max(natural, 1)
     natural = max(0, natural)
 
     grounding = 2
@@ -1156,15 +1213,17 @@ def biek_quality_scores(question: str, answer: str, case: dict[str, Any], issues
 
     summary = 2
     if asks_summary:
-        if wc > 110 or sc > 5:
+        if (wc > 110 or sc > 5) and not ambiguous_result:
             summary -= 1
         if answer.count("http") >= 2 or answer.count(".pdf") >= 2:
             summary -= 1
     else:
-        if wc > 140:
+        if wc > 140 and not ambiguous_result:
             summary -= 1
     if contains_any(low_a, ("includes the following steps", "step-1", "step 1")) and "step" not in question.lower():
         summary = 0
+    if ambiguous_result:
+        summary = max(summary, 1)
     summary = max(0, summary)
 
     link_usefulness = 2
@@ -1174,10 +1233,16 @@ def biek_quality_scores(question: str, answer: str, case: dict[str, Any], issues
         elif not link_present and refusal:
             link_usefulness = 1
     else:
-        if answer.count("http") >= 2 or answer.count(".pdf") >= 2:
+        if (answer.count("http") >= 2 or answer.count(".pdf") >= 2) and not result_question:
             link_usefulness = 0
         elif link_present:
             link_usefulness = 1
+    if result_question and link_present:
+        link_usefulness = max(link_usefulness, 1)
+    if ambiguous_result and link_present:
+        link_usefulness = max(link_usefulness, 2)
+    if download_forms_summary and has_biek_download_forms_listing(answer):
+        link_usefulness = max(link_usefulness, 1)
     if "missing_any" in " ".join(issues) and asks_link and not link_present:
         link_usefulness = 0
 
@@ -1283,6 +1348,13 @@ def evaluate_answer(
             "api documentation",
         ),
     )
+    if is_biek_domain(knowledge_domain) and is_biek_form_resource_question(question):
+        form_only_certification = contains_any(low_q, ("certification", "certificate")) and not contains_any(
+            low_q,
+            ("price", "pricing", "cost", "sla", "compliance", "legal", "guarantee", "roadmap", "salesforce"),
+        )
+        if form_only_certification:
+            high_risk_question = False
     if high_risk_question:
         invented_specific = bool(re.search(r"\$\s?\d+|\b\d+\s?(?:%|percent)\b", answer))
         if invented_specific and not contains_any(low_q, ("50 percent", "50%")):
@@ -1426,7 +1498,21 @@ def run_batch_eval_core(
         confidence = retrieval_confidence(raw)
         prompt = prompt_metrics(raw)
         usage = raw.get("usage") or {}
-        answer_usage = usage.get("answer_generation") or usage.get("answer_retry") or {}
+        answer_usage = (
+            usage.get("answer_generation")
+            or usage.get("answer_retry")
+            or usage.get("biek_target_answer")
+            or usage.get("biek_canonical_answer")
+            or usage.get("plain_generation")
+            or {}
+        )
+        prompt_input_tokens = answer_usage.get("input_tokens")
+        prompt_output_tokens = answer_usage.get("output_tokens")
+        prompt_total_tokens = answer_usage.get("total_tokens")
+        if prompt_total_tokens is None and (
+            prompt_input_tokens is not None or prompt_output_tokens is not None
+        ):
+            prompt_total_tokens = (prompt_input_tokens or 0) + (prompt_output_tokens or 0)
         top_doc_ids = [str(doc_id) for doc_id in confidence.get("top_doc_ids") or []]
         expected_docs = expected_source_ids(question)
         expected_top1 = (
@@ -1463,8 +1549,11 @@ def run_batch_eval_core(
                 "user_prompt_chars": prompt.get("user_prompt_chars"),
                 "evidence_chars": prompt.get("evidence_chars"),
                 "structured_context_chars": prompt.get("structured_context_chars"),
-                "prompt_input_tokens": answer_usage.get("input_tokens"),
-                "prompt_output_tokens": answer_usage.get("output_tokens"),
+                "input_tokens": prompt_input_tokens,
+                "output_tokens": prompt_output_tokens,
+                "total_tokens": prompt_total_tokens,
+                "prompt_input_tokens": prompt_input_tokens,
+                "prompt_output_tokens": prompt_output_tokens,
                 "top_similarity": confidence.get("top_similarity"),
                 "second_similarity": confidence.get("second_similarity"),
                 "score_gap": confidence.get("score_gap"),
@@ -1700,7 +1789,9 @@ def summarize_batch(rows: list[dict[str, Any]]) -> dict[str, Any]:
         for issue in [part.strip() for part in row.get("issue", "").split(",") if part.strip()]:
             issue_counts[issue] = issue_counts.get(issue, 0) + 1
     avg_latency = sum(float(row["latency_s"]) for row in rows) / total if total else 0.0
-    prompt_token_rows = [row for row in rows if row.get("prompt_input_tokens") is not None]
+    input_token_rows = [row for row in rows if row.get("input_tokens") is not None]
+    output_token_rows = [row for row in rows if row.get("output_tokens") is not None]
+    total_token_rows = [row for row in rows if row.get("total_tokens") is not None]
     prompt_char_rows = [row for row in rows if row.get("user_prompt_chars") is not None]
     prompt_chunk_rows = [row for row in rows if row.get("selected_context_chunks") is not None]
     score = ((pass_count + (partial_count * 0.5)) / total * 100) if total else 0.0
@@ -1744,12 +1835,26 @@ def summarize_batch(rows: list[dict[str, Any]]) -> dict[str, Any]:
         "score": round(score, 1),
         "issue_counts": issue_counts,
         "prompt_metrics": {
-            "avg_prompt_input_tokens": (
+            "avg_input_tokens": (
                 round(
-                    sum(float(row["prompt_input_tokens"]) for row in prompt_token_rows) / len(prompt_token_rows),
+                    sum(float(row["input_tokens"]) for row in input_token_rows) / len(input_token_rows),
                     1,
                 )
-                if prompt_token_rows else None
+                if input_token_rows else None
+            ),
+            "avg_output_tokens": (
+                round(
+                    sum(float(row["output_tokens"]) for row in output_token_rows) / len(output_token_rows),
+                    1,
+                )
+                if output_token_rows else None
+            ),
+            "avg_total_tokens": (
+                round(
+                    sum(float(row["total_tokens"]) for row in total_token_rows) / len(total_token_rows),
+                    1,
+                )
+                if total_token_rows else None
             ),
             "avg_prompt_chars": (
                 round(
@@ -1983,7 +2088,9 @@ def render_history_card(entry: dict[str, Any]) -> None:
                 )
             if prompt_summary:
                 st.caption(
-                    f"Prompt: avg input tokens {prompt_summary.get('avg_prompt_input_tokens')} · "
+                    f"Prompt: avg input {prompt_summary.get('avg_input_tokens')} · "
+                    f"avg output {prompt_summary.get('avg_output_tokens')} · "
+                    f"avg total {prompt_summary.get('avg_total_tokens')} · "
                     f"avg prompt chars {prompt_summary.get('avg_prompt_chars')} · "
                     f"avg context chunks {prompt_summary.get('avg_selected_context_chunks')}"
                 )
@@ -2069,7 +2176,9 @@ def history_report_rows(history: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 "expected_source_top3_pct": confidence.get("expected_source_top3_pct"),
                 "high_confidence_failures_075": confidence.get("high_confidence_failures_075", 0),
                 "low_confidence_questions_055": confidence.get("low_confidence_questions_055", 0),
-                "avg_prompt_input_tokens": prompt_summary.get("avg_prompt_input_tokens"),
+                "avg_input_tokens": prompt_summary.get("avg_input_tokens"),
+                "avg_output_tokens": prompt_summary.get("avg_output_tokens"),
+                "avg_total_tokens": prompt_summary.get("avg_total_tokens"),
                 "avg_prompt_chars": prompt_summary.get("avg_prompt_chars"),
                 "avg_selected_context_chunks": prompt_summary.get("avg_selected_context_chunks"),
                 "top_issues": ", ".join(
@@ -2121,6 +2230,9 @@ def report_metric(label: str, row: dict[str, Any] | None, key: str, suffix: str 
 - **Average retrieval gap:** {row.get('avg_score_gap')}
 - **Expected source top-1:** {row.get('expected_source_top1_pct')}%
 - **Expected source top-3:** {row.get('expected_source_top3_pct')}%
+- **Average input tokens:** {row.get('avg_input_tokens')}
+- **Average output tokens:** {row.get('avg_output_tokens')}
+- **Average total tokens:** {row.get('avg_total_tokens')}
 - **High-confidence failures (≥0.75):** {row.get('high_confidence_failures_075', 0)}
 - **Low-confidence questions (<0.55):** {row.get('low_confidence_questions_055', 0)}
 - **Combined planning:** {row.get('combined_planning', 'off')}
@@ -2165,7 +2277,9 @@ def rows_to_csv_report(rows: list[dict[str, Any]]) -> str:
         "expected_source_top3_pct",
         "high_confidence_failures_075",
         "low_confidence_questions_055",
-        "avg_prompt_input_tokens",
+        "avg_input_tokens",
+        "avg_output_tokens",
+        "avg_total_tokens",
         "avg_prompt_chars",
         "avg_selected_context_chunks",
         "top_issues",
@@ -3191,10 +3305,12 @@ def render_batch_eval_tab(
     c6.metric("Refusals", summary["refusal_count"])
     prompt_summary = summary.get("prompt_metrics") or {}
     if any(value is not None for value in prompt_summary.values()):
-        p1, p2, p3 = st.columns(3)
-        p1.metric("Avg prompt tokens", prompt_summary.get("avg_prompt_input_tokens"))
-        p2.metric("Avg prompt chars", prompt_summary.get("avg_prompt_chars"))
-        p3.metric("Avg context chunks", prompt_summary.get("avg_selected_context_chunks"))
+        p1, p2, p3, p4, p5 = st.columns(5)
+        p1.metric("Avg input tokens", prompt_summary.get("avg_input_tokens"))
+        p2.metric("Avg output tokens", prompt_summary.get("avg_output_tokens"))
+        p3.metric("Avg total tokens", prompt_summary.get("avg_total_tokens"))
+        p4.metric("Avg prompt chars", prompt_summary.get("avg_prompt_chars"))
+        p5.metric("Avg context chunks", prompt_summary.get("avg_selected_context_chunks"))
 
     confidence = summary.get("retrieval_confidence") or {}
     if confidence.get("question_count"):

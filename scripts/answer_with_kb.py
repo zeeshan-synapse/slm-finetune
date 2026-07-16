@@ -1645,10 +1645,81 @@ def product_detail_answer_needs_cleanup(question: str, answer: str, profile: dic
     )
 
 
-def finalize_kb_answer(question: str, answer: str) -> str:
+def biek_supporting_evidence_text(profile: dict[str, Any], hits: list[dict[str, Any]]) -> str:
+    parts: list[str] = []
+    target_evidence = profile.get("biek_target_evidence") or {}
+    for item in target_evidence.get("sources") or []:
+        text = str(item.get("text") or "").strip()
+        if text:
+            parts.append(text)
+    canonical_evidence = profile.get("biek_canonical_evidence") or {}
+    for item in canonical_evidence.get("sources") or []:
+        text = str(item.get("text") or "").strip()
+        if text:
+            parts.append(text)
+    for hit in hits[:4]:
+        text = str(hit.get("text") or "").strip()
+        if text:
+            parts.append(text[:1500])
+    return "\n".join(parts)
+
+
+def strip_unsupported_biek_expansions(answer: str, evidence_text: str) -> str:
+    cleaned = answer
+    evidence_low = evidence_text.lower()
+
+    def replace_biek_parenthetical(match: re.Match[str]) -> str:
+        full = match.group(0)
+        inside = match.group(1).strip()
+        if inside and inside.lower() not in evidence_low:
+            return "BIEK"
+        return full
+
+    cleaned = re.sub(r"\bBIEK\s*\(([^)]+)\)", replace_biek_parenthetical, cleaned, flags=re.IGNORECASE)
+
+    suspicious_expansions = (
+        "bharat institute of engineering",
+        "bilateral international educational commission",
+        "board of intermediate education and knowledge",
+        "biekarachi",
+    )
+    for phrase in suspicious_expansions:
+        if phrase in cleaned.lower() and phrase not in evidence_low:
+            cleaned = re.sub(re.escape(phrase), "BIEK", cleaned, flags=re.IGNORECASE)
+    cleaned = re.sub(r"\bBIEK stands for\b[^.]*\.?", "BIEK ", cleaned, flags=re.IGNORECASE).strip()
+    cleaned = re.sub(r"\s{2,}", " ", cleaned)
+    return cleaned.strip()
+
+
+def has_unsupported_biek_knowledge(answer: str, evidence_text: str) -> bool:
+    low_answer = answer.lower()
+    evidence_low = evidence_text.lower()
+    if "stands for" in low_answer and "stands for" not in evidence_low:
+        return True
+    if re.search(r"\bbiek\s*\([^)]+\)", answer, flags=re.IGNORECASE):
+        for match in re.finditer(r"\bbiek\s*\(([^)]+)\)", answer, flags=re.IGNORECASE):
+            inside = match.group(1).strip().lower()
+            if inside and inside not in evidence_low:
+                return True
+    suspicious_expansions = (
+        "bharat institute of engineering",
+        "bilateral international educational commission",
+        "board of intermediate education and knowledge",
+        "biekarachi",
+    )
+    return any(phrase in low_answer and phrase not in evidence_low for phrase in suspicious_expansions)
+
+
+def finalize_kb_answer(question: str, answer: str, profile: dict[str, Any], hits: list[dict[str, Any]]) -> str:
     low_a = answer.lower()
     if "available biek information" in low_a or "official biek website" in low_a:
         return answer
+    if is_biek_domain(profile):
+        evidence_text = biek_supporting_evidence_text(profile, hits)
+        if evidence_text:
+            answer = strip_unsupported_biek_expansions(answer, evidence_text)
+            if has_unsupported_biek_knowledge(answer, evidence_text):
+                return "This detail is not clearly confirmed in the available BIEK information. Please verify it on the official BIEK website."
     if answer_shape_mismatch(question, answer):
         return DEFAULT_FALLBACK_RESPONSE
     return answer
@@ -3379,8 +3450,100 @@ def load_biek_nav_coverage() -> list[dict[str, Any]]:
     except Exception:
         rows = []
 
-    _BIEK_NAV_COVERAGE_CACHE = list(rows)
+    _BIEK_NAV_COVERAGE_CACHE = [enrich_biek_coverage_row_runtime(row) for row in rows if isinstance(row, dict)]
     return _BIEK_NAV_COVERAGE_CACHE
+
+
+def biek_target_family_for_row(row: dict[str, Any]) -> str:
+    label = normalize_biek_nav_text(str(row.get("label") or ""))
+    if "duplicate manual admit card" in label or "duplicate computerized admit card" in label:
+        return "duplicate_admit_card"
+    if label.startswith("verification "):
+        return "verification_forms"
+    if "permission form" in label or label == "permission forms":
+        return "permission_forms"
+    if "examination form" in label or label == "examination forms":
+        return "examination_forms"
+    return re.sub(r"[^a-z0-9]+", "_", label).strip("_") or "biek_target"
+
+
+def biek_runtime_target_aliases(row: dict[str, Any]) -> list[str]:
+    label = clean_answer_text(str(row.get("label") or ""))
+    aliases = [label]
+    low = normalize_biek_nav_text(label)
+
+    def add(value: str) -> None:
+        value = clean_answer_text(value)
+        if value and value not in aliases:
+            aliases.append(value)
+
+    for suffix in (" Form", " Page", " Resource", " Document"):
+        if label.endswith(suffix):
+            add(label[: -len(suffix)])
+
+    if "duplicate manual admit card" in low:
+        add("duplicate manual admit card form")
+        add("manual admit card")
+        add("manual admit card form")
+        add("duplicate admit card")
+        add("duplicate admit card form")
+    if "duplicate computerized admit card" in low:
+        add("duplicate computerized admit card form")
+        add("computerized admit card")
+        add("computerized admit card form")
+        add("duplicate admit card")
+        add("duplicate admit card form")
+    if "migration form" in low:
+        add("migration")
+        add("migration thing")
+    if low == "certificate form":
+        add("certificate")
+        add("certificate thing")
+    if "provisional certification form" in low:
+        add("provisional certificate")
+        add("provisional certificate form")
+    if "verification certificate form" in low:
+        add("verification certificate")
+    if "verification provisional certificate" in low:
+        add("verification provisional certificate form")
+    if "verification marksheet form" in low:
+        add("verification marksheet")
+        add("marksheet verification")
+    if "verification migration form" in low:
+        add("verification migration")
+    if "permission forms" in low:
+        add("permission form")
+    if "examination forms" in low:
+        add("examination form")
+        add("enrollment stuff")
+        add("enrolment stuff")
+    return aliases
+
+
+def enrich_biek_coverage_row_runtime(row: dict[str, Any]) -> dict[str, Any]:
+    enriched = dict(row)
+    target_family = str(row.get("target_family") or "").strip() or biek_target_family_for_row(row)
+    aliases = row.get("aliases")
+    if not isinstance(aliases, list):
+        aliases = []
+    runtime_aliases = unique_preserve_order(
+        [str(alias).strip() for alias in aliases if str(alias).strip()] + biek_runtime_target_aliases(row)
+    )
+    handling_mode = str(row.get("handling_mode") or "").strip().lower()
+    answer_modes = row.get("answer_modes")
+    if not isinstance(answer_modes, list):
+        if handling_mode in {"document_summary", "info_page"}:
+            answer_modes = ["existence", "link", "requirements", "process", "summary"]
+        elif handling_mode == "container_summary":
+            answer_modes = ["summary", "link"]
+        elif handling_mode == "special_lookup":
+            answer_modes = ["existence", "link", "summary"]
+        else:
+            answer_modes = ["summary"]
+    enriched["target_family"] = target_family
+    enriched["aliases"] = runtime_aliases
+    enriched["answer_modes"] = answer_modes
+    return enriched
 
 
 def find_biek_nav_row_by_label(label: str) -> dict[str, Any] | None:
@@ -3631,6 +3794,77 @@ def extract_biek_contact_details(text: str) -> tuple[list[str], list[str]]:
     return phones[:4], emails[:3]
 
 
+def clean_biek_identity_line(value: str) -> str:
+    text = re.sub(r"\s+", " ", str(value or "")).strip(" ,.;:-")
+    return text
+
+
+def extract_biek_identity_names(text: str, *, limit: int = 6) -> list[str]:
+    prefixes = (
+        "MR.",
+        "MR ",
+        "MS.",
+        "MS ",
+        "MRS.",
+        "MRS ",
+        "DR.",
+        "DR ",
+        "PROF.",
+        "PROF ",
+        "COL(R)DR.",
+        "COL(R)DR ",
+        "COL(R) DR.",
+        "COL(R) DR ",
+    )
+    names: list[str] = []
+    for raw_line in text.splitlines():
+        line = clean_biek_identity_line(raw_line)
+        if not line:
+            continue
+        upper = line.upper()
+        if not any(upper.startswith(prefix) for prefix in prefixes):
+            continue
+        if any(
+            token in upper
+            for token in (
+                "BOARD OF ",
+                "UNIVERSITY OF ",
+                "DEPARTMENT OF ",
+                "DIRECTOR COLLEGES",
+                "SINDH ASSEMBLY",
+                "PRINCIPAL",
+                "ORGANIZATION",
+                "DESIGNATION",
+            )
+        ):
+            continue
+        if line not in names:
+            names.append(line)
+        if len(names) >= limit:
+            break
+    return names
+
+
+def extract_biek_chairman_name(text: str) -> str:
+    lines = [clean_biek_identity_line(line) for line in text.splitlines() if clean_biek_identity_line(line)]
+    for index, line in enumerate(lines):
+        upper = line.upper()
+        if "DESIGNATION" in upper and index > 0:
+            next_line = lines[index + 1].upper() if index + 1 < len(lines) else ""
+            if "CHAIRMAN" in next_line:
+                candidate = lines[index - 1]
+                if candidate:
+                    return candidate
+    match = re.search(
+        r"(?P<name>(?:MR|MS|MRS|DR|PROF|COL\(R\)DR)[^\n]+)\s+Designation:\s+Chairman",
+        text,
+        re.IGNORECASE,
+    )
+    if match:
+        return clean_biek_identity_line(match.group("name"))
+    return ""
+
+
 def has_person_like_biek_content(text: str) -> bool:
     if re.search(r"\b(MR|MS|MRS|DR|PROF|COL)\.?\b", text):
         return True
@@ -3697,7 +3931,9 @@ def has_strong_biek_identity_page_content(row: dict[str, Any], doc: dict[str, An
         return False
 
     if "chairman" in surface:
-        return has_person_like_biek_content(text) or "chairman" in low
+        if extract_biek_chairman_name(text):
+            return True
+        return has_person_like_biek_content(text)
     if _contains_any(surface, ("board members", "bmembers")):
         return "board members" in low or has_person_like_biek_content(text)
     if _contains_any(surface, ("committee", "committees")):
@@ -3739,6 +3975,44 @@ def resolve_biek_nav_primary_doc(row: dict[str, Any], docs: list[dict[str, Any]]
         if matched is not None:
             return matched
     return find_biek_content_for_nav_row(row, docs)
+
+
+def resolve_biek_identity_doc(
+    row: dict[str, Any],
+    coverage_rows: list[dict[str, Any]],
+    docs: list[dict[str, Any]],
+    *,
+    question: str = "",
+) -> dict[str, Any] | None:
+    primary_doc = resolve_biek_nav_primary_doc(row, docs)
+    if has_strong_biek_identity_page_content(row, primary_doc):
+        return primary_doc
+
+    row_label = str(row.get("label") or "").lower()
+    question_low = question.lower()
+    if "chairman" in row_label or "chairman" in question_low:
+        support_label = "Board Members"
+        support_row = find_biek_nav_row_by_label(support_label)
+        if support_row is not None:
+            support_doc = resolve_biek_nav_primary_doc(support_row, docs)
+            if support_doc is not None and has_strong_biek_identity_page_content(support_row, support_doc):
+                if extract_biek_chairman_name(biek_content_text(support_doc)):
+                    return support_doc
+
+    for support_doc in biek_target_support_docs(row, coverage_rows, docs, limit=4):
+        support_row = next(
+            (
+                candidate
+                for candidate in coverage_rows
+                if normalize_biek_target_url(str(candidate.get("url") or "")) == normalize_biek_target_url(
+                    str(support_doc.get("source_url") or support_doc.get("source_page") or "")
+                )
+            ),
+            row,
+        )
+        if has_strong_biek_identity_page_content(support_row, support_doc):
+            return support_doc
+    return None
 
 
 def biek_target_support_docs(
@@ -3794,8 +4068,10 @@ def build_biek_target_evidence_pack(
     target_kind = str(row.get("handling_mode") or "").strip().lower()
     evidence: list[dict[str, str]] = []
 
-    if is_biek_identity_row(row) and not has_strong_biek_identity_page_content(row, primary_doc):
-        return []
+    if is_biek_identity_row(row):
+        primary_doc = resolve_biek_identity_doc(row, coverage_rows, docs, question=question)
+        if primary_doc is None:
+            return []
 
     def append_doc(doc: dict[str, Any] | None, *, role: str, label_override: str | None = None) -> None:
         if doc is None:
@@ -3874,8 +4150,8 @@ def generate_biek_target_scoped_answer(
 
     if is_biek_identity_row(row):
         docs = biek_content_docs()
-        primary_doc = resolve_biek_nav_primary_doc(row, docs)
-        if not has_strong_biek_identity_page_content(row, primary_doc):
+        primary_doc = resolve_biek_identity_doc(row, coverage_rows, docs, question=question)
+        if primary_doc is None:
             return build_biek_identity_safe_answer()
 
     evidence_pack = build_biek_target_evidence_pack(question, row, coverage_rows)
@@ -3888,6 +4164,7 @@ def generate_biek_target_scoped_answer(
                 "role": item.get("role"),
                 "label": item.get("label"),
                 "url": item.get("url"),
+                "text": item.get("text"),
             }
             for item in evidence_pack
         ],
@@ -4056,15 +4333,51 @@ def build_biek_info_page_answer(question: str, row: dict[str, Any], content_doc:
     if is_weak_biek_content(text):
         return f"I found the {label} page on the BIEK website. You can view it here: {url}"
 
+    label_low = label.lower()
+    if "ioc proforma" in label_low:
+        summary = (
+            "The IOC proforma for affiliation is a BIEK affiliation-related resource for affiliation and renewal. "
+            "The page says the proforma can be downloaded from the board website and that it defines the required documents."
+        )
+        return f"{summary} You can view it here: {url}"
+
+    if is_biek_identity_row(row):
+        if "chairman" in label_low or "chairman" in question.lower():
+            chairman_name = extract_biek_chairman_name(text)
+            if chairman_name:
+                return (
+                    f"The available BIEK board-members information lists {chairman_name} as Chairman of the "
+                    f"Board of Intermediate Education, Karachi. You can view it here: {url}"
+                )
+            excerpt = extract_relevant_biek_excerpt(question, text, limit=2)
+            if excerpt:
+                return f"{' '.join(excerpt)} You can view the {label} page here: {url}"
+            return build_biek_identity_safe_answer()
+
+        if "board members" in label_low:
+            names = extract_biek_identity_names(text, limit=5)
+            if names:
+                lead = f"The Board Members page lists {join_list(names[:4])}"
+                if len(names) > 4:
+                    lead += ", among others."
+                else:
+                    lead += "."
+                return f"{lead} You can view it here: {url}"
+            excerpt = extract_relevant_biek_excerpt(question, text, limit=2)
+            if excerpt:
+                return f"{' '.join(excerpt)} You can view the {label} page here: {url}"
+            return build_biek_identity_safe_answer()
+
     if is_biek_contact_question(question) or "contact" in label.lower():
         phones, emails = extract_biek_contact_details(text)
-        detail_parts: list[str] = []
-        if phones:
-            detail_parts.append(f"phone numbers {', '.join(phones)}")
-        if emails:
-            detail_parts.append(f"email {', '.join(emails)}")
-        if detail_parts:
-            return f"BIEK contact details in the available page include {join_list(detail_parts)}. The page is here: {url}"
+        if phones or emails:
+            detail_parts: list[str] = []
+            if phones:
+                detail_parts.append("phone numbers")
+            if emails:
+                detail_parts.append("an email contact")
+            return f"You can contact BIEK through its Contact Us page: {url}. The page lists {join_list(detail_parts)}."
+        return f"You can contact BIEK through its Contact Us page: {url}"
 
     excerpt = extract_relevant_biek_excerpt(question, text, limit=3)
     if not excerpt:
@@ -4078,6 +4391,8 @@ def build_biek_document_answer(question: str, row: dict[str, Any], content_doc: 
     url = str(row.get("url") or content_doc.get("source_url") or "").strip()
     label = clean_answer_text(str(row.get("label") or content_doc.get("title") or "this BIEK document"))
     purpose = biek_document_purpose_snippet(content_doc)
+    if str(row.get("target_family") or "") == "verification_forms":
+        return f"Yes. BIEK provides this through the shared verification forms resource: {url}"
 
     if not is_biek_detail_request(question):
         if purpose:
@@ -4133,6 +4448,12 @@ def build_biek_content_backed_answer(question: str, row: dict[str, Any], coverag
     primary_doc = find_biek_content_for_nav_row(row, docs)
     target_kind = classify_biek_nav_target_kind(row, primary_doc, coverage_rows)
     support_docs = search_biek_content_docs(question, docs, limit=2)
+
+    if is_biek_identity_row(row):
+        chosen_identity_doc = resolve_biek_identity_doc(row, coverage_rows, docs, question=question)
+        if chosen_identity_doc is None:
+            return build_biek_identity_safe_answer()
+        return build_biek_info_page_answer(question, row, chosen_identity_doc)
 
     if target_kind == "special_lookup":
         return build_biek_special_lookup_answer(question, row)
@@ -4503,6 +4824,613 @@ def build_biek_close_match_answer(question: str, matched_rows: list[dict[str, An
 
 def build_biek_no_match_answer() -> str:
     return "This detail is not clearly confirmed in the available BIEK information. Please verify it on the official BIEK website."
+
+
+def normalize_biek_query_for_resolution(question: str) -> str:
+    text = normalize_biek_coverage_query(question)
+    replacements = {
+        "mark sheet": "marksheet",
+        "e sheet": "e-sheet",
+        "admitcard": "admit card",
+        "enrollment": "enrolment",
+    }
+    for source, target in replacements.items():
+        text = text.replace(source, target)
+    text = re.sub(r"\bthing\b", "form", text)
+    text = re.sub(r"\bstuff\b", "", text)
+    text = re.sub(r"\s+", " ", text).strip()
+    return text
+
+
+def classify_biek_target_subtype(question: str) -> str:
+    low = question.lower()
+    if _contains_any(low, ("link", "download", "url", "where is", "where can i find", "where do i find")):
+        return "link"
+    if re.search(r"\bwhat does\b.*\brequire\b", low):
+        return "requirements"
+    if _contains_any(
+        low,
+        (
+            "what does it require",
+            "what do i need",
+            "requirement",
+            "requirements",
+            "documents needed",
+            "documents required",
+            "needed for",
+            "required for",
+        ),
+    ):
+        return "requirements"
+    if _contains_any(low, ("how do i", "how to", "process", "procedure", "steps", "apply", "submit")):
+        return "process"
+    if _contains_any(low, ("do you have", "do u have", "is there", "can you help me find", "can u help me find")):
+        return "existence"
+    return "summary"
+
+
+def biek_alias_score(query_text: str, query_tokens: set[str], alias: str) -> float:
+    alias_text = normalize_biek_query_for_resolution(alias)
+    alias_tokens = set(biek_nav_tokens(alias_text))
+    if not alias_tokens:
+        return 0.0
+    overlap = query_tokens & alias_tokens
+    if not overlap:
+        return 0.0
+    query_coverage = len(overlap) / max(len(query_tokens), 1)
+    alias_coverage = len(overlap) / max(len(alias_tokens), 1)
+    score = (query_coverage * 0.65) + (alias_coverage * 0.3)
+    if alias_text and alias_text in query_text:
+        score += 0.9
+    elif query_text and query_text in alias_text and len(query_tokens) >= 2:
+        score += 0.2
+    return score
+
+
+def biek_target_family_candidates(question: str, coverage_rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    query_text = normalize_biek_query_for_resolution(question)
+    query_tokens = set(biek_nav_tokens(query_text))
+    families: dict[str, dict[str, Any]] = {}
+    for row in coverage_rows:
+        if str(row.get("handling_mode") or "").strip().lower() == "exclude":
+            continue
+        family = str(row.get("target_family") or "").strip()
+        if not family:
+            continue
+        bucket = families.setdefault(
+            family,
+            {
+                "family": family,
+                "rows": [],
+                "score": 0.0,
+                "matched_alias": "",
+            },
+        )
+        bucket["rows"].append(row)
+        for alias in row.get("aliases", []) or []:
+            score = biek_alias_score(query_text, query_tokens, str(alias))
+            if score > float(bucket["score"]):
+                bucket["score"] = score
+                bucket["matched_alias"] = str(alias)
+    ranked = sorted(families.values(), key=lambda item: float(item.get("score") or 0.0), reverse=True)
+    filtered: list[dict[str, Any]] = []
+    for item in ranked:
+        family = str(item.get("family") or "")
+        if family == "duplicate_admit_card" and not (query_tokens & {"duplicate", "manual", "computerized"}):
+            continue
+        if family == "verification_forms" and "verification" not in query_tokens:
+            continue
+        if float(item.get("score") or 0.0) < 0.58:
+            continue
+        filtered.append(item)
+    return filtered[:5]
+
+
+def resolve_biek_canonical_target(question: str, coverage_rows: list[dict[str, Any]]) -> dict[str, Any]:
+    query_text = normalize_biek_query_for_resolution(question)
+    query_tokens = set(biek_nav_tokens(query_text))
+    if not query_tokens:
+        return {
+            "applies": False,
+            "subtype": classify_biek_target_subtype(question),
+            "normalized_query": query_text,
+            "resolution_type": "none",
+            "rows": [],
+            "family": "",
+            "confidence": 0.0,
+        }
+
+    candidates = biek_target_family_candidates(question, coverage_rows)
+    if not candidates:
+        return {
+            "applies": False,
+            "subtype": classify_biek_target_subtype(question),
+            "normalized_query": query_text,
+            "resolution_type": "none",
+            "rows": [],
+            "family": "",
+            "confidence": 0.0,
+        }
+
+    best = candidates[0]
+    rows = list(best.get("rows") or [])
+    rows.sort(key=lambda row: normalize_biek_nav_text(str(row.get("label") or "")))
+    resolution_type = "family" if len(rows) > 1 else "row"
+    return {
+        "applies": True,
+        "subtype": classify_biek_target_subtype(question),
+        "normalized_query": query_text,
+        "resolution_type": resolution_type,
+        "rows": rows,
+        "family": str(best.get("family") or ""),
+        "confidence": round(min(1.0, float(best.get("score") or 0.0)), 4),
+        "matched_alias": str(best.get("matched_alias") or ""),
+    }
+
+
+def biek_resolution_links(rows: list[dict[str, Any]]) -> list[str]:
+    return unique_preserve_order(
+        [normalize_biek_target_url(str(row.get("url") or "").strip()) for row in rows if str(row.get("url") or "").strip()]
+    )
+
+
+def build_biek_resolution_evidence_pack(
+    question: str,
+    rows: list[dict[str, Any]],
+    coverage_rows: list[dict[str, Any]],
+) -> list[dict[str, str]]:
+    pack: list[dict[str, str]] = []
+    seen: set[tuple[str, str]] = set()
+    for row in rows[:3]:
+        for item in build_biek_target_evidence_pack(question, row, coverage_rows):
+            key = (str(item.get("url") or ""), str(item.get("text") or ""))
+            if key in seen:
+                continue
+            seen.add(key)
+            pack.append(item)
+    return pack[:6]
+
+
+def biek_resolution_pack_text(evidence_pack: list[dict[str, str]]) -> str:
+    return " ".join(clean_answer_text(str(item.get("text") or "")) for item in evidence_pack if str(item.get("text") or "").strip())
+
+
+def biek_evidence_supports_subtype(evidence_pack: list[dict[str, str]], subtype: str) -> bool:
+    low = biek_resolution_pack_text(evidence_pack).lower()
+    if not low:
+        return False
+    if subtype == "requirements":
+        return _contains_any(
+            low,
+            (
+                "required",
+                "require",
+                "requirements",
+                "attach",
+                "marks sheet",
+                "marksheet",
+                "fee",
+                "voucher",
+                "copy",
+                "copies",
+                "photo",
+                "photograph",
+                "cnic",
+            ),
+        )
+    if subtype == "process":
+        return _contains_any(
+            low,
+            (
+                "step",
+                "steps",
+                "procedure",
+                "process",
+                "submit",
+                "apply",
+                "download",
+                "upload",
+                "visit",
+                "issue",
+                "collect",
+            ),
+        )
+    return True
+
+
+def generate_biek_resolution_grounded_answer(
+    *,
+    question: str,
+    subtype: str,
+    rows: list[dict[str, Any]],
+    coverage_rows: list[dict[str, Any]],
+    profile: dict[str, Any],
+    ollama_url: str,
+    model: str,
+    temperature: float,
+    num_predict: int,
+) -> str | None:
+    evidence_pack = build_biek_resolution_evidence_pack(question, rows, coverage_rows)
+    if not evidence_pack:
+        return None
+    profile["biek_canonical_evidence"] = {
+        "row_ids": [row.get("id") for row in rows],
+        "row_labels": [row.get("label") for row in rows],
+        "evidence_count": len(evidence_pack),
+        "sources": evidence_pack,
+    }
+    labels = join_list([clean_answer_text(str(row.get("label") or "")) for row in rows if str(row.get("label") or "").strip()])
+    evidence_text = format_biek_target_evidence_pack(evidence_pack)
+    subtype_instruction = {
+        "requirements": (
+            "Summarize only requirements, needed documents, conditions, or fee-related requirements that are clearly supported. "
+            "If the requirements are not clearly stated, say that briefly and point to the link."
+        ),
+        "process": (
+            "Summarize only the steps or process clearly supported by the evidence. "
+            "If the process is not clearly stated, say that briefly and point to the link."
+        ),
+        "summary": (
+            "Give a short natural summary of the resource or related resources, grounded only in the evidence."
+        ),
+    }.get(subtype, "Answer only from the evidence.")
+    prompt = (
+        "Answer this BIEK question using only the evidence below.\n"
+        f"{subtype_instruction}\n"
+        "Use 2 to 4 short natural sentences.\n"
+        "Do not invent procedures, requirements, offices, signatures, or supporting documents.\n"
+        "If the evidence is not clear enough, say: "
+        "\"This detail is not clearly confirmed in the available BIEK information. Please verify it on the official BIEK website.\"\n\n"
+        f"Subtype: {subtype}\n"
+        f"Targets: {labels}\n"
+        f"Question: {question}\n\n"
+        f"Evidence:\n{evidence_text}"
+    )
+    usage = profile.setdefault("usage", {})
+    raw = ollama_chat(
+        ollama_url=ollama_url,
+        model=model,
+        messages=[
+            {
+                "role": "system",
+                "content": (
+                    "You are a grounded BIEK website assistant. "
+                    "Answer only from the provided evidence. "
+                    "Do not invent facts or procedure."
+                ),
+            },
+            {"role": "user", "content": prompt},
+        ],
+        temperature=min(max(temperature, 0.1), 0.25),
+        num_predict=max(num_predict, 160),
+        usage_sink=usage,
+        usage_label="biek_canonical_answer",
+        json_format=False,
+    )
+    answer = clean_answer_text(raw)
+    return answer or None
+
+
+def build_biek_target_subtype_answer(
+    *,
+    question: str,
+    resolution: dict[str, Any],
+    coverage_rows: list[dict[str, Any]],
+    profile: dict[str, Any],
+    ollama_url: str,
+    model: str,
+    temperature: float,
+    num_predict: int,
+) -> str | None:
+    rows = list(resolution.get("rows") or [])
+    if not rows:
+        return None
+    subtype = str(resolution.get("subtype") or "summary")
+    labels = [clean_answer_text(str(row.get("label") or "")) for row in rows if str(row.get("label") or "").strip()]
+    links = biek_resolution_links(rows)
+    shared_link = links[0] if len(links) == 1 else ""
+
+    if subtype == "existence":
+        if len(rows) > 1:
+            if shared_link:
+                return (
+                    f"Yes. BIEK provides {join_list(labels)}, and they are covered through this PDF: {shared_link}"
+                )
+            return f"Yes. BIEK provides related items including {join_list(labels)}."
+        row = rows[0]
+        return build_biek_exact_match_answer(question, row)
+
+    if subtype == "link":
+        if shared_link:
+            if len(rows) > 1:
+                return f"You can find the related BIEK items {join_list(labels)} here: {shared_link}"
+            return f"You can find the {labels[0]} here: {shared_link}"
+        if len(links) == 1:
+            return f"You can find the {labels[0]} here: {links[0]}"
+        if links:
+            return f"You can check these BIEK links: {', '.join(links[:2])}"
+        return None
+
+    if subtype == "summary":
+        if len(rows) > 1:
+            if shared_link:
+                return f"BIEK provides {join_list(labels)}, and they are covered through this PDF: {shared_link}"
+            return f"BIEK provides related items including {join_list(labels)}."
+        row = rows[0]
+        return build_biek_content_backed_answer(question, row, coverage_rows)
+
+    if subtype in {"requirements", "process"}:
+        evidence_pack = build_biek_resolution_evidence_pack(question, rows, coverage_rows)
+        if biek_evidence_supports_subtype(evidence_pack, subtype):
+            pack_text = biek_resolution_pack_text(evidence_pack)
+            excerpt = extract_relevant_biek_excerpt(question, pack_text, limit=2)
+            snippet = " ".join(excerpt).strip()
+            if snippet:
+                snippet = re.sub(r"\s+", " ", snippet)
+                if len(snippet) > 320:
+                    snippet = snippet[:317].rstrip(" ,;:") + "..."
+                if shared_link:
+                    return f"{snippet} You can review the related BIEK resource here: {shared_link}"
+                return snippet
+        if shared_link:
+            if subtype == "requirements":
+                return (
+                    "The available BIEK information does not clearly confirm the exact requirements here. "
+                    f"You can review the related resource here: {shared_link}"
+                )
+            return (
+                "The available BIEK information does not clearly confirm the full process here. "
+                f"You can review the related resource here: {shared_link}"
+            )
+    return None
+
+def biek_nav_candidate_labels(coverage_rows: list[dict[str, Any]]) -> dict[str, list[str]]:
+    target_labels: list[str] = []
+    section_labels: list[str] = []
+    for row in coverage_rows:
+        label = clean_answer_text(str(row.get("label") or ""))
+        if not label:
+            continue
+        if int(row.get("level") or 0) == 0:
+            section_labels.append(label)
+        target_labels.append(label)
+    return {
+        "nav_target": unique_preserve_order(target_labels),
+        "nav_section": unique_preserve_order(section_labels),
+    }
+
+
+def should_try_biek_slm_router(
+    question: str,
+    profile: dict[str, Any],
+    coverage_match: dict[str, Any],
+    context_hits: list[dict[str, Any]],
+) -> bool:
+    if not question.strip():
+        return False
+    if is_biek_identity_question(question):
+        return False
+    if profile.get("biek_slm_route_attempted"):
+        return False
+    match_type = str(coverage_match.get("match_type") or "")
+    if match_type == "exact_match":
+        return False
+    if match_type == "close_match" and float(coverage_match.get("best_score") or 0.0) >= 0.82:
+        return False
+    if is_biek_public_item_style_question(question):
+        return True
+    low = question.lower()
+    fuzzy_signals = (
+        "need",
+        "want",
+        "where",
+        "how",
+        "help me",
+        "tell me about",
+        "thing",
+        "stuff",
+        "find",
+        "give me",
+    )
+    if _contains_any(low, fuzzy_signals):
+        return True
+    return not bool(context_hits)
+
+
+def validate_biek_model_route(
+    route_obj: dict[str, Any],
+    coverage_rows: list[dict[str, Any]],
+) -> dict[str, Any]:
+    route_type = str(route_obj.get("route_type") or "").strip().lower()
+    if route_type not in {"special_lookup", "nav_target", "nav_section", "general_rag", "unsupported"}:
+        route_type = "general_rag"
+    target_label = clean_answer_text(str(route_obj.get("target_label") or ""))
+    reason = clean_answer_text(str(route_obj.get("reason") or ""))[:240]
+    confidence = route_obj.get("confidence")
+    try:
+        confidence_value = max(0.0, min(1.0, float(confidence)))
+    except Exception:
+        confidence_value = 0.0
+
+    matched_row = None
+    if target_label:
+        normalized_target = normalize_biek_nav_text(target_label)
+        for row in coverage_rows:
+            if normalize_biek_nav_text(str(row.get("label") or "")) == normalized_target:
+                matched_row = row
+                break
+
+    if route_type == "nav_section":
+        if matched_row is None or int(matched_row.get("level") or 0) != 0:
+            route_type = "general_rag"
+            matched_row = None
+    elif route_type in {"nav_target", "special_lookup"}:
+        if matched_row is None:
+            route_type = "general_rag"
+        elif route_type == "special_lookup":
+            handling_mode = str(matched_row.get("handling_mode") or "").strip().lower()
+            if handling_mode != "special_lookup":
+                route_type = "nav_target"
+
+    return {
+        "route_type": route_type,
+        "target_label": clean_answer_text(str(matched_row.get("label") or "")) if matched_row else "",
+        "row": matched_row,
+        "reason": reason,
+        "confidence": round(confidence_value, 4),
+    }
+
+
+def classify_biek_route_with_model(
+    *,
+    question: str,
+    coverage_rows: list[dict[str, Any]],
+    ollama_url: str,
+    model: str,
+    profile: dict[str, Any],
+) -> dict[str, Any]:
+    candidates = biek_nav_candidate_labels(coverage_rows)
+    nav_targets = "\n".join(f"- {label}" for label in candidates["nav_target"][:80])
+    nav_sections = "\n".join(f"- {label}" for label in candidates["nav_section"][:20])
+    usage: dict[str, Any] = {}
+    user_prompt = (
+        "You are a router for a BIEK public-site assistant.\n"
+        "Choose the best route for the user's question.\n"
+        "Allowed route_type values: special_lookup, nav_target, nav_section, general_rag, unsupported.\n"
+        "Only use target_label when route_type is nav_target, nav_section, or special_lookup.\n"
+        "If you use target_label, it must be chosen exactly from the provided candidate labels.\n"
+        "Prefer conservative routing. If unsure, choose general_rag or unsupported.\n"
+        "Helpful mapping hints:\n"
+        "- exam or exams often maps to the Examinations section\n"
+        "- migration thing often maps to Migration Form\n"
+        "- admit card often maps to Duplicate Computerized Admit Card or Duplicate Manual Admit Card\n"
+        "- result without a roll number often maps to Recent Result Declaration or special_lookup\n"
+        "Do not answer the user's question.\n\n"
+        f"User question: {question}\n\n"
+        "Nav section candidates:\n"
+        f"{nav_sections}\n\n"
+        "Nav target candidates:\n"
+        f"{nav_targets}\n\n"
+        'Return JSON only in this shape: {"route_type":"...","target_label":"...","reason":"...","confidence":0.0}'
+    )
+    try:
+        raw = ollama_chat(
+            ollama_url=ollama_url,
+            model=model,
+            messages=[
+                {
+                    "role": "system",
+                    "content": (
+                        "You classify BIEK public-site routing decisions. "
+                        "Be conservative, never invent labels, and return only valid JSON."
+                    ),
+                },
+                {"role": "user", "content": user_prompt},
+            ],
+            temperature=0.0,
+            num_predict=120,
+            usage_sink=usage,
+            usage_label="biek_route_classification",
+        )
+        payload = safe_parse_json(raw)
+    except Exception as exc:
+        payload = {
+            "route_type": "general_rag",
+            "reason": f"router_failed:{exc}",
+            "confidence": 0.0,
+        }
+    validated = validate_biek_model_route(payload, coverage_rows)
+    profile["biek_slm_route"] = {
+        "raw": payload,
+        "validated": {
+            "route_type": validated["route_type"],
+            "target_label": validated["target_label"],
+            "reason": validated["reason"],
+            "confidence": validated["confidence"],
+        },
+        "usage": usage.get("biek_route_classification"),
+    }
+    profile["biek_slm_route_attempted"] = True
+    return validated
+
+
+def apply_biek_model_route(
+    *,
+    question: str,
+    route_obj: dict[str, Any],
+    coverage_rows: list[dict[str, Any]],
+    context_hits: list[dict[str, Any]],
+    profile: dict[str, Any],
+    ollama_url: str,
+    model: str,
+    temperature: float,
+    num_predict: int,
+) -> str | None:
+    route_type = str(route_obj.get("route_type") or "")
+    row = route_obj.get("row") or {}
+    if route_type == "nav_section" and row:
+        profile["biek_answer_guard"] = {
+            "route": "biek_slm_nav_section",
+            "stale_suppression": False,
+            "row_id": row.get("id"),
+            "row_label": row.get("label"),
+            "slm_reason": route_obj.get("reason"),
+            "slm_confidence": route_obj.get("confidence"),
+        }
+        return observe_answer(
+            question=question,
+            answer=build_biek_nav_section_summary(str(row.get("label") or ""), coverage_rows),
+            profile=profile,
+            hits=context_hits,
+            route="biek_slm_nav_section",
+            used_template=True,
+        )
+    if route_type in {"nav_target", "special_lookup"} and row:
+        target_scoped_answer = generate_biek_target_scoped_answer(
+            question=question,
+            row=row,
+            coverage_rows=coverage_rows,
+            profile=profile,
+            ollama_url=ollama_url,
+            model=model,
+            temperature=temperature,
+            num_predict=num_predict,
+        )
+        profile["biek_answer_guard"] = {
+            "route": "biek_slm_nav_target",
+            "stale_suppression": False,
+            "row_id": row.get("id"),
+            "row_label": row.get("label"),
+            "slm_reason": route_obj.get("reason"),
+            "slm_confidence": route_obj.get("confidence"),
+            "evidence_pack_count": len((profile.get("biek_target_evidence") or {}).get("sources", [])),
+        }
+        return observe_answer(
+            question=question,
+            answer=target_scoped_answer or build_biek_content_backed_answer(question, row, coverage_rows),
+            profile=profile,
+            hits=context_hits,
+            route="biek_slm_nav_target",
+            used_template=not bool(target_scoped_answer),
+            used_refusal=not bool(target_scoped_answer and target_scoped_answer.strip()),
+        )
+    if route_type == "unsupported":
+        profile["biek_answer_guard"] = {
+            "route": "biek_slm_unsupported",
+            "stale_suppression": False,
+            "slm_reason": route_obj.get("reason"),
+            "slm_confidence": route_obj.get("confidence"),
+        }
+        return observe_answer(
+            question=question,
+            answer=build_biek_no_match_answer(),
+            profile=profile,
+            hits=context_hits,
+            route="biek_slm_unsupported",
+            used_template=True,
+            used_refusal=True,
+        )
+    return None
 
 
 def is_biek_nav_section_question(question: str) -> bool:
@@ -5087,20 +6015,13 @@ def build_biek_contact_safe_answer(hits: list[dict[str, Any]]) -> str:
             phones, emails = extract_biek_contact_details(text)
             url = str(contact_row.get("url") or contact_doc.get("source_url") or "").strip()
             if phones and emails:
-                return (
-                    f"BIEK contact details include phone numbers {', '.join(phones[:4])} "
-                    f"and email {', '.join(emails[:2])}. You can view the contact page here: {url}"
-                )
+                return f"You can contact BIEK through its Contact Us page: {url}. The page lists phone numbers and an email contact."
             if phones:
-                return (
-                    f"BIEK contact numbers include {', '.join(phones[:4])}. "
-                    f"You can view the contact page here: {url}"
-                )
+                return f"You can contact BIEK through its Contact Us page: {url}. The page lists phone numbers."
             if emails:
-                return (
-                    f"The available BIEK contact email is {', '.join(emails[:2])}. "
-                    f"You can view the contact page here: {url}"
-                )
+                return f"You can contact BIEK through its Contact Us page: {url}. The page lists an email contact."
+            if url:
+                return f"You can contact BIEK through its Contact Us page: {url}"
 
     combined_text = "\n".join(normalized_hit_text(hit) for hit in hits)
     phones = []
@@ -5109,15 +6030,11 @@ def build_biek_contact_safe_answer(hits: list[dict[str, Any]]) -> str:
             phones.append(match)
     email_match = EMAIL_RE.search(combined_text)
 
-    if phones and email_match:
-        return (
-            f"BIEK contact details in the available information include phone numbers {', '.join(phones[:4])} "
-            f"and email {email_match.group(0)}."
-        )
-    if phones:
-        return f"BIEK contact numbers in the available information include {', '.join(phones[:4])}."
-    if email_match:
-        return f"The available BIEK contact email is {email_match.group(0)}."
+    if phones or email_match:
+        if contact_row is not None:
+            url = str(contact_row.get("url") or "").strip()
+            if url:
+                return f"You can contact BIEK through its Contact Us page: {url}"
     return "This detail is not clearly confirmed in the available BIEK information. Please verify it on the official BIEK website."
 
 
@@ -6149,7 +7066,7 @@ def observe_answer(
     used_template: bool = False,
     used_refusal: bool = False,
 ) -> str:
-    final_answer = finalize_kb_answer(question, answer)
+    final_answer = finalize_kb_answer(question, answer, profile, hits)
     event = build_answer_observability(
         question=question,
         answer=final_answer,
@@ -6463,6 +7380,7 @@ def generate_grounded_answer(
                     used_template=True,
                 )
         nav_coverage_rows = load_biek_nav_coverage()
+        canonical_resolution = resolve_biek_canonical_target(question, nav_coverage_rows)
         if is_biek_nav_section_question(question):
             matched_section_row = match_biek_nav_section(question, nav_coverage_rows)
             if matched_section_row:
@@ -6484,7 +7402,19 @@ def generate_grounded_answer(
                     used_template=True,
                 )
         coverage_match = classify_biek_coverage_match(question, nav_coverage_rows)
-        if coverage_match.get("applies") and coverage_match.get("match_type") == "exact_match":
+        canonical_override = bool(
+            canonical_resolution.get("applies")
+            and canonical_resolution.get("rows")
+            and (
+                canonical_resolution.get("resolution_type") == "family"
+                or canonical_resolution.get("subtype") in {"existence", "link", "requirements", "process"}
+            )
+        )
+        if (
+            coverage_match.get("applies")
+            and coverage_match.get("match_type") == "exact_match"
+            and not canonical_override
+        ):
             matched_row = coverage_match.get("best_row") or {}
             target_scoped_answer = generate_biek_target_scoped_answer(
                 question=question,
@@ -6545,6 +7475,77 @@ def generate_grounded_answer(
                 used_template=True,
                 used_refusal=True,
             )
+        if is_biek_evidence_stale_for_question(question, context_hits, profile):
+            stale_answer = build_biek_stale_safe_answer(question, context_hits, profile)
+            profile["biek_answer_guard"] = {
+                "route": "biek_stale_suppression",
+                "stale_suppression": True,
+                "latest_supported_year": latest_supported_biek_year(biek_relevant_hits(context_hits) or context_hits),
+                "question_intent": profile.get("biek_time_intent"),
+            }
+            return observe_answer(
+                question=question,
+                answer=stale_answer,
+                profile=profile,
+                hits=context_hits,
+                route="biek_stale_suppression",
+                used_template=True,
+                used_refusal=True,
+            )
+        if canonical_resolution.get("applies"):
+            canonical_answer = build_biek_target_subtype_answer(
+                question=question,
+                resolution=canonical_resolution,
+                coverage_rows=nav_coverage_rows,
+                profile=profile,
+                ollama_url=ollama_url,
+                model=model,
+                temperature=temperature,
+                num_predict=num_predict,
+            )
+            if canonical_answer:
+                rows = canonical_resolution.get("rows") or []
+                profile["biek_answer_guard"] = {
+                    "route": "biek_canonical_target",
+                    "stale_suppression": False,
+                    "resolution_type": canonical_resolution.get("resolution_type"),
+                    "target_family": canonical_resolution.get("family"),
+                    "subtype": canonical_resolution.get("subtype"),
+                    "matched_alias": canonical_resolution.get("matched_alias"),
+                    "confidence": canonical_resolution.get("confidence"),
+                    "row_ids": [row.get("id") for row in rows],
+                    "row_labels": [row.get("label") for row in rows],
+                }
+                return observe_answer(
+                    question=question,
+                    answer=canonical_answer,
+                    profile=profile,
+                    hits=context_hits,
+                    route="biek_canonical_target",
+                    used_template=canonical_resolution.get("subtype") in {"existence", "link"},
+                    used_refusal="not clearly confirmed" in canonical_answer.lower(),
+                )
+        if should_try_biek_slm_router(question, profile, coverage_match, context_hits):
+            slm_route = classify_biek_route_with_model(
+                question=question,
+                coverage_rows=nav_coverage_rows,
+                ollama_url=ollama_url,
+                model=DEFAULT_CLASSIFIER_MODEL,
+                profile=profile,
+            )
+            slm_answer = apply_biek_model_route(
+                question=question,
+                route_obj=slm_route,
+                coverage_rows=nav_coverage_rows,
+                context_hits=context_hits,
+                profile=profile,
+                ollama_url=ollama_url,
+                model=model,
+                temperature=temperature,
+                num_predict=num_predict,
+            )
+            if slm_answer:
+                return slm_answer
         if coverage_match.get("applies") and coverage_match.get("match_type") == "close_match":
             matched_rows = coverage_match.get("rows") or []
             best_row = coverage_match.get("best_row") or {}
@@ -6577,23 +7578,6 @@ def generate_grounded_answer(
                 profile=profile,
                 hits=context_hits,
                 route="biek_coverage_no_match",
-                used_template=True,
-                used_refusal=True,
-            )
-        if is_biek_evidence_stale_for_question(question, context_hits, profile):
-            stale_answer = build_biek_stale_safe_answer(question, context_hits, profile)
-            profile["biek_answer_guard"] = {
-                "route": "biek_stale_suppression",
-                "stale_suppression": True,
-                "latest_supported_year": latest_supported_biek_year(biek_relevant_hits(context_hits) or context_hits),
-                "question_intent": profile.get("biek_time_intent"),
-            }
-            return observe_answer(
-                question=question,
-                answer=stale_answer,
-                profile=profile,
-                hits=context_hits,
-                route="biek_stale_suppression",
                 used_template=True,
                 used_refusal=True,
             )
