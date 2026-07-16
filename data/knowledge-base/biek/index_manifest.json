@@ -1,5 +1,5 @@
 {
-  "created_at": "2026-07-09T13:23:04.093696+00:00",
+  "created_at": "2026-07-10T08:11:05.287742+00:00",
   "embedding_model": "nomic-embed-text",
   "ollama_url": "http://localhost:11434",
   "source_chunks_path": "data/runtime/biek_student_chunks.jsonl",

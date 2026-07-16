@@ -40,6 +40,7 @@ from guardrail_stage1 import (  # noqa: E402
 )
 from kb_answer import kb_grounded_answer_with_meta  # noqa: E402
 import answer_with_kb as aw  # noqa: E402
+from biek_results_lookup import result_lookup_answer  # noqa: E402
 
 
 MODEL_OPTIONS: dict[str, dict[str, Any]] = {
@@ -83,6 +84,7 @@ DEFAULT_MODEL_LABEL = "Synapse Qwen 2.5 1.5B V2"
 KNOWLEDGE_SOURCE_OPTIONS = {
     "Synapse KB": "synapse",
     "BIEK KB": "biek",
+    "BIEK Full KB": "biek_full",
 }
 
 ANSWER_MODES = {
@@ -90,6 +92,86 @@ ANSWER_MODES = {
     "Base + RAG": "base_rag",
     "Fine-tuned": "fine_tuned_plain",
     "Fine-tuned + RAG": "fine_tuned_rag",
+}
+BATCH_QUESTION_PRESETS = {
+    "synapse": (
+        "What does Synapse Tech do?\n"
+        "What products does Synapse Tech offer?\n"
+        "Which Synapse product is best for recruitment automation?\n"
+        "How does iRecruit One improve the hiring process?\n"
+        "Tell me about Agentic Bot and its main capabilities.\n"
+        "Which product would help automate customer support conversations?\n"
+        "What is Coversaction AI used for?\n"
+        "Can Opira AI operate offline or on private infrastructure?\n"
+        "How does Synapse Tech help businesses automate workflows?\n"
+        "Do you build custom web and mobile applications?\n"
+        "What voice agent and call automation services do you provide?\n"
+        "Which industries does Synapse Tech serve?\n"
+        "How can I choose the right Synapse solution for my business?\n"
+        "How can I purchase a Synapse Tech product or contact your team?\n"
+        "Do you publish pricing, SLA guarantees, or security certifications?"
+    ),
+    "biek": (
+        "What is the history of the Board?\n"
+        "Who is the chairman of BIEK?\n"
+        "Who are the board members of BIEK?\n"
+        "What committees does BIEK have?\n"
+        "What were the last BIEK results?\n"
+        "How can I contact BIEK?\n"
+        "What circulars and notifications are available on the BIEK website?\n"
+        "What press releases are available on the BIEK website?\n"
+        "What is the recent result declaration page for?\n"
+        "What does the BIEK date sheet page contain?\n"
+        "What are the authorized banks for BIEK?\n"
+        "What statistics does BIEK provide?\n"
+        "Do you have the sample E-Sheet of 30 pages for Annual 2026 E-Marking?\n"
+        "Do you have the sample E-Sheet of 22 pages for Annual 2026 E-Marking?\n"
+        "What is the scheme of studies for higher secondary certificates?\n"
+        "Do you have Scheme and Model Paper 2023?\n"
+        "Is Model Paper 2026 available?\n"
+        "Do you have the Science General Mathematics Part-II model paper?\n"
+        "Do you have MCQs on the BIEK website?\n"
+        "Do you have the certificate form?\n"
+        "Do you have the scrutiny form?\n"
+        "Do you have the provisional certification form?\n"
+        "Do you have the migration form?\n"
+        "Do you have the registration form for commerce?\n"
+        "Do you have the registration form for humanities?\n"
+        "Do you have the verification certificate form?\n"
+        "Do you have the verification provisional certificate form?\n"
+        "Do you have the verification marksheet form?\n"
+        "Do you have the verification migration form?\n"
+        "Do you have the cancellation of enrolment form?\n"
+        "Do you have the cancellation of registration form?\n"
+        "Do you have the duplicate marksheet form?\n"
+        "Do you have the duplicate enrolment card form?\n"
+        "Do you have the duplicate computerized admit card form?\n"
+        "Do you have the duplicate registration card form?\n"
+        "Do you have the duplicate manual admit card form?\n"
+        "Do you have the proforma of special chance?\n"
+        "Do you have the improvement of division form?\n"
+        "Do you have the registration of all groups form?\n"
+        "Do you have the examination forms page?\n"
+        "Do you have the permission forms page?\n"
+        "What affiliated colleges information is available on the BIEK website?\n"
+        "What is the IOC proforma for affiliation?\n"
+        "What can I find under About Us on the BIEK website?\n"
+        "What can I find under Misc on the BIEK website?\n"
+        "What can I find under Examinations on the BIEK website?\n"
+        "What can I find under Download Forms on the BIEK website?\n"
+        "What can I find under Recognition on the BIEK website?\n"
+        "What can you help me with regarding BIEK?\n"
+        "What kind of information can I ask about on the BIEK website?\n"
+        "Can you help me find forms on the BIEK website?\n"
+        "Can you help me find model papers on the BIEK website?\n"
+        "Can you help me check BIEK results?\n"
+        "Give me the result for roll number 800926.\n"
+        "Give me the result for roll number 808259.\n"
+        "Show me the 2025 supplementary commerce regular result for roll number 800926.\n"
+        "Show me the 2025 supplementary commerce regular result for roll number 808259.\n"
+        "I want my BIEK result for roll number 800926.\n"
+        "Can you check the BIEK result for roll number 808259?"
+    ),
 }
 MODEL_PARAMETER_SIZES = {
     "qwen2.5:1.5b-instruct": "1.5B",
@@ -148,6 +230,8 @@ def model_family(model_key: str, display_name: str) -> str:
 
 V2_BUCKETS_PATH = PROJECT_ROOT / "eval" / "prompts" / "v2_50_buckets.json"
 DEMO_15_GOLD_PATH = PROJECT_ROOT / "eval" / "prompts" / "demo_15_gold.json"
+BIEK_GOLD_PATH = PROJECT_ROOT / "eval" / "prompts" / "biek_gold_v1.json"
+BIEK_BATCH_GOLD_PATH = PROJECT_ROOT / "eval" / "prompts" / "biek_batch_gold_v1.json"
 BATCH_HISTORY_PATH = PROJECT_ROOT / "eval" / "results" / "batch_eval_history.json"
 REFUSAL_MARKERS = (
     "not confirmed",
@@ -166,6 +250,31 @@ PROMPT_LEAK_PATTERNS = (
     "developer message",
     "rewrite query",
     "according to the prompt",
+)
+BIEK_TEMPLATE_OPENERS = (
+    "i found",
+    "biek has",
+    "you can view",
+    "you can find",
+    "the page is here",
+    "the document is here",
+    "this page contains",
+    "the page says",
+    "i could not clearly confirm a direct",
+)
+BIEK_GENERIC_DRIFT_PATTERNS = (
+    "historical and cultural institution",
+    "proof of enrollment",
+    "educational program",
+    "serves as proof of eligibility",
+    "institution's policies and regulations",
+    "students and educators alike",
+)
+BIEK_DOMAIN_LEAK_PATTERNS = (
+    "synapse tech",
+    "products, services, capabilities",
+    "deployment options",
+    "tech company",
 )
 ROUTER_SYSTEM_PROMPT = """You are a scope router for the Synapse Tech chatbot.
 
@@ -286,10 +395,46 @@ def ollama_plain_answer(
     }
 
 
-def quick_bypass(question: str) -> dict[str, Any] | None:
+def is_biek_domain(knowledge_domain: str) -> bool:
+    return (knowledge_domain or "").strip().lower().startswith("biek")
+
+
+def domain_assistant_label(knowledge_domain: str) -> str:
+    if is_biek_domain(knowledge_domain):
+        return "BIEK assistant"
+    return "Synapse chatbot assistant"
+
+
+def domain_help_text(knowledge_domain: str) -> str:
+    if is_biek_domain(knowledge_domain):
+        return (
+            "I can help with BIEK notifications, forms, datesheets, results-related information, "
+            "affiliated college details, and other questions grounded in the BIEK knowledge base."
+        )
+    return (
+        "I can help with Synapse Tech's products, services, capabilities, deployment options, "
+        "and related AI and business automation questions."
+    )
+
+
+def small_talk_response_for_domain(question: str, knowledge_domain: str) -> str:
+    low_q = question.strip().lower()
+    if is_biek_domain(knowledge_domain):
+        if low_q in {"thanks", "thank you"}:
+            return "You're welcome. If you have a BIEK question, I can help."
+        if low_q in {"who are you", "what can you do"}:
+            return (
+                "I am the BIEK assistant. I can help with notifications, forms, datesheets, "
+                "results-related information, and other BIEK knowledge-base questions."
+            )
+        return "Hi! How can I help you with BIEK today?"
+    return small_talk_response(question)
+
+
+def quick_bypass(question: str, knowledge_domain: str) -> dict[str, Any] | None:
     if is_small_talk_question(question):
         return {
-            "answer": small_talk_response(question),
+            "answer": small_talk_response_for_domain(question, knowledge_domain),
             "generation_model": None,
             "usage": {"quick_bypass": True},
             "observability": {
@@ -443,13 +588,13 @@ def classify_scope(question: str, classifier_model: str) -> dict[str, Any]:
     }
 
 
-def out_of_scope_response(question: str, scope_result: dict[str, Any]) -> dict[str, Any]:
+def out_of_scope_response(
+    question: str,
+    scope_result: dict[str, Any],
+    knowledge_domain: str,
+) -> dict[str, Any]:
     return {
-        "answer": (
-            "I don't know about that topic. I'm a Synapse chatbot assistant. "
-            "I can help with Synapse Tech's products, services, capabilities, deployment options, "
-            "and related AI and business automation questions."
-        ),
+        "answer": f"I don't know about that topic. I'm a {domain_assistant_label(knowledge_domain)}. {domain_help_text(knowledge_domain)}",
         "generation_model": None,
         "usage": {"scope_router": scope_result},
         "observability": {
@@ -462,13 +607,12 @@ def out_of_scope_response(question: str, scope_result: dict[str, Any]) -> dict[s
     }
 
 
-def invalid_intent_response(scope_result: dict[str, Any]) -> dict[str, Any]:
+def invalid_intent_response(
+    scope_result: dict[str, Any],
+    knowledge_domain: str,
+) -> dict[str, Any]:
     return {
-        "answer": (
-            "I don't know about this topic. I'm a Synapse chatbot assistant. "
-            "I can help with Synapse Tech's products, services, capabilities, deployment options, "
-            "and related AI and business automation questions."
-        ),
+        "answer": f"I don't know about this topic. I'm a {domain_assistant_label(knowledge_domain)}. {domain_help_text(knowledge_domain)}",
         "generation_model": None,
         "usage": {"scope_router": scope_result},
         "observability": {
@@ -477,6 +621,23 @@ def invalid_intent_response(scope_result: dict[str, Any]) -> dict[str, Any]:
             "sources": [],
             "used_refusal": True,
             "scope_router": scope_result,
+        },
+    }
+
+
+def biek_result_lookup_response(question: str) -> dict[str, Any] | None:
+    answer = result_lookup_answer(question)
+    if answer is None:
+        return None
+    return {
+        "answer": answer,
+        "generation_model": None,
+        "usage": {},
+        "observability": {
+            "intent": "result_lookup",
+            "route": "biek_result_lookup",
+            "sources": [],
+            "used_refusal": False,
         },
     }
 
@@ -503,6 +664,11 @@ def answer_question(
     selected_model = selected_model_for_mode(model_config, answer_mode)
     rag_mode = answer_mode in {"base_rag", "fine_tuned_rag"}
 
+    if is_biek_domain(normalized_knowledge_domain):
+        result_lookup = biek_result_lookup_response(question)
+        if result_lookup is not None:
+            return result_lookup
+
     if answer_mode == "base_plain":
         return ollama_plain_answer(
             model=base_model,
@@ -525,7 +691,7 @@ def answer_question(
             max_tokens=max_tokens,
         )
 
-    bypass = quick_bypass(question)
+    bypass = quick_bypass(question, normalized_knowledge_domain)
     if bypass is not None:
         return bypass
 
@@ -551,9 +717,9 @@ def answer_question(
 
     if scope_result is not None:
         if scope_result["intent_validity"] == "invalid":
-            return invalid_intent_response(scope_result)
+            return invalid_intent_response(scope_result, normalized_knowledge_domain)
         if scope_result["scope"] == "out_of_scope":
-            return out_of_scope_response(question, scope_result)
+            return out_of_scope_response(question, scope_result, normalized_knowledge_domain)
 
     if answer_mode == "base_rag":
         return kb_grounded_answer_with_meta(
@@ -768,12 +934,25 @@ def render_active_job(debug_enabled: bool, show_sources: bool) -> None:
 
 
 @st.cache_data(show_spinner=False)
-def load_demo_gold_manifest() -> dict[str, dict[str, Any]]:
-    if not DEMO_15_GOLD_PATH.exists():
-        return {}
-    payload = json.loads(DEMO_15_GOLD_PATH.read_text(encoding="utf-8"))
-    rows = payload.get("cases") or []
-    return {normalize_text(row.get("question", "")): row for row in rows if row.get("question")}
+def load_gold_manifest_for_domain(knowledge_domain: str) -> dict[str, dict[str, Any]]:
+    paths: list[Path]
+    if is_biek_domain(knowledge_domain):
+        paths = [BIEK_BATCH_GOLD_PATH, BIEK_GOLD_PATH]
+    else:
+        paths = [DEMO_15_GOLD_PATH]
+
+    manifest: dict[str, dict[str, Any]] = {}
+    for path in paths:
+        if not path.exists():
+            continue
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        rows = payload.get("cases") or []
+        for row in rows:
+            question = row.get("question")
+            if not question:
+                continue
+            manifest[normalize_text(question)] = row
+    return manifest
 
 
 @st.cache_data(show_spinner=False)
@@ -796,6 +975,25 @@ def contains_any(text: str, needles: tuple[str, ...] | list[str]) -> bool:
 
 def is_refusal_answer(answer: str) -> bool:
     return contains_any(answer, REFUSAL_MARKERS)
+
+
+def word_count(text: str) -> int:
+    return len([token for token in re.split(r"\s+", text.strip()) if token])
+
+
+def sentence_count(text: str) -> int:
+    return len([part for part in re.split(r"[.!?]+\s+|\n+", text.strip()) if part.strip()])
+
+
+def has_link_like_text(text: str) -> bool:
+    low = text.lower()
+    return (
+        "http://" in low
+        or "https://" in low
+        or "www.biek.edu.pk" in low
+        or "biek.edu.pk/" in low
+        or ".pdf" in low
+    )
 
 
 def has_repetition(answer: str) -> bool:
@@ -839,16 +1037,16 @@ def has_bad_contact_claim(answer: str) -> bool:
 def gold_case_issues(case: dict[str, Any], answer: str) -> list[str]:
     issues: list[str] = []
     low_a = answer.lower()
-    if not case.get("allowed_refusal", False) and is_refusal_answer(answer):
-        issues.append("over_refusal")
-    if case.get("allowed_refusal", False) and not is_refusal_answer(answer):
+    if case.get("require_refusal", False) and not is_refusal_answer(answer):
         issues.append("missing_required_refusal")
+    if not case.get("allowed_refusal", False) and not case.get("require_refusal", False) and is_refusal_answer(answer):
+        issues.append("over_refusal")
 
-    for needle in case.get("must_include") or []:
+    for needle in (case.get("must_include") or []) + (case.get("contains_all") or []):
         if needle.lower() not in low_a:
             issues.append(f"missing_required:{needle}")
 
-    for key in ("must_include_any", "must_include_any_group_2"):
+    for key in ("must_include_any", "must_include_any_group_2", "contains_any"):
         needles = case.get(key) or []
         if needles and not contains_any(answer, needles):
             issues.append(f"missing_any:{'|'.join(needles)}")
@@ -860,21 +1058,182 @@ def gold_case_issues(case: dict[str, Any], answer: str) -> list[str]:
     return issues
 
 
-def evaluate_answer(question: str, answer: str, raw: dict[str, Any]) -> dict[str, Any]:
-    demo_manifest = load_demo_gold_manifest()
-    demo_case = demo_manifest.get(normalize_text(question), {})
+def biek_target_terms(case: dict[str, Any]) -> list[str]:
+    if case.get("target_terms"):
+        return [str(item) for item in case.get("target_terms") if str(item).strip()]
+    generic = {
+        "biek",
+        "official biek website",
+        "not clearly confirmed",
+        ".pdf",
+        "page",
+        "form",
+        "forms",
+        "resource",
+        "document",
+        "results",
+        "result",
+    }
+    candidates = []
+    for value in case.get("contains_any") or []:
+        item = str(value).strip()
+        if not item:
+            continue
+        low = item.lower()
+        if low in generic or low.startswith("http"):
+            continue
+        if "%" in item:
+            continue
+        candidates.append(item)
+    return candidates[:4]
+
+
+def biek_question_prefers_link(question: str) -> bool:
+    low = question.lower()
+    return contains_any(
+        low,
+        (
+            "download",
+            "link",
+            "page",
+            "do you have",
+            "where can i",
+            "where do i",
+            "form",
+            "model paper",
+            "scheme",
+            "e-sheet",
+            "mcq",
+        ),
+    )
+
+
+def biek_question_prefers_summary(question: str) -> bool:
+    low = question.lower()
+    return contains_any(
+        low,
+        (
+            "what is",
+            "what are",
+            "what does",
+            "tell me about",
+            "can u tell me about",
+            "can you tell me about",
+            "how can i contact",
+            "what can i find under",
+        ),
+    )
+
+
+def biek_quality_scores(question: str, answer: str, case: dict[str, Any], issues: list[str]) -> dict[str, Any]:
+    low_a = answer.lower()
+    refusal = is_refusal_answer(answer)
+    wc = word_count(answer)
+    sc = sentence_count(answer)
+    target_terms = biek_target_terms(case)
+    target_hit = any(term.lower() in low_a for term in target_terms) if target_terms else False
+    link_present = has_link_like_text(answer)
+    asks_link = biek_question_prefers_link(question)
+    asks_summary = biek_question_prefers_summary(question)
+
+    natural = 2
+    if contains_any(low_a, BIEK_TEMPLATE_OPENERS):
+        natural -= 1
+    if wc > 120 or sc > 5 or has_repetition(answer):
+        natural -= 1
+    if re.search(r"^\s*(?:\d+\.|-|\*)\s", answer.strip()):
+        natural -= 1
+    natural = max(0, natural)
+
+    grounding = 2
+    if refusal:
+        grounding = 1
+    if not refusal and target_terms and not target_hit:
+        grounding -= 1
+    if contains_any(low_a, BIEK_GENERIC_DRIFT_PATTERNS):
+        grounding = 0
+    grounding = max(0, grounding)
+
+    summary = 2
+    if asks_summary:
+        if wc > 110 or sc > 5:
+            summary -= 1
+        if answer.count("http") >= 2 or answer.count(".pdf") >= 2:
+            summary -= 1
+    else:
+        if wc > 140:
+            summary -= 1
+    if contains_any(low_a, ("includes the following steps", "step-1", "step 1")) and "step" not in question.lower():
+        summary = 0
+    summary = max(0, summary)
+
+    link_usefulness = 2
+    if asks_link:
+        if not link_present and not refusal:
+            link_usefulness = 0
+        elif not link_present and refusal:
+            link_usefulness = 1
+    else:
+        if answer.count("http") >= 2 or answer.count(".pdf") >= 2:
+            link_usefulness = 0
+        elif link_present:
+            link_usefulness = 1
+    if "missing_any" in " ".join(issues) and asks_link and not link_present:
+        link_usefulness = 0
+
+    safety = 2
+    if has_prompt_leak(answer) or contains_any(low_a, BIEK_DOMAIN_LEAK_PATTERNS):
+        safety = 0
+    elif contains_any(low_a, BIEK_GENERIC_DRIFT_PATTERNS) or has_bad_contact_claim(answer):
+        safety = min(safety, 1)
+    if any(issue.startswith("forbidden_claim:") for issue in issues):
+        safety = 0
+
+    total = natural + grounding + summary + link_usefulness + safety
+    quality_issues: list[str] = []
+    if natural <= 0:
+        quality_issues.append("unnatural_answer")
+    if grounding <= 0:
+        quality_issues.append("weak_target_grounding")
+    if summary <= 0:
+        quality_issues.append("answer_dump_not_summary")
+    if link_usefulness <= 0:
+        quality_issues.append("missing_or_unhelpful_linking")
+    if safety <= 0:
+        quality_issues.append("hallucination_or_domain_leak_risk")
+
+    return {
+        "natural": natural,
+        "grounding": grounding,
+        "summary": summary,
+        "link_usefulness": link_usefulness,
+        "safety": safety,
+        "total": total,
+        "target_terms": target_terms,
+        "quality_issues": quality_issues,
+    }
+
+
+def evaluate_answer(
+    question: str,
+    answer: str,
+    raw: dict[str, Any],
+    knowledge_domain: str,
+) -> dict[str, Any]:
+    gold_manifest = load_gold_manifest_for_domain(knowledge_domain)
+    gold_case = gold_manifest.get(normalize_text(question), {})
     manifest = load_v2_eval_manifest()
     meta = manifest.get(normalize_text(question), {})
-    expected_behavior = demo_case.get("expected_behavior") or meta.get("expected_behavior", "")
+    expected_behavior = gold_case.get("expected_behavior") or meta.get("expected_behavior", "")
     bucket = meta.get("bucket", "CUSTOM")
     low_q = question.lower()
     low_a = answer.lower()
     issues: list[str] = []
     verdict = "✅ Pass"
 
-    if demo_case:
-        bucket = "DEMO_15_GOLD"
-        issues.extend(gold_case_issues(demo_case, answer))
+    if gold_case:
+        bucket = "BIEK_GOLD" if is_biek_domain(knowledge_domain) else "DEMO_15_GOLD"
+        issues.extend(gold_case_issues(gold_case, answer))
 
     if not answer.strip():
         issues.append("empty_answer")
@@ -947,10 +1306,23 @@ def evaluate_answer(question: str, answer: str, raw: dict[str, Any]) -> dict[str
     if observability.get("used_refusal") and bucket in {"KNOWN_FROM_SITE", "GENERAL_OPS_REASONING"}:
         issues.append("possible_over_refusal")
 
-    if issues:
-        verdict = "❌ Fail"
-    elif bucket == "CUSTOM" or not expected_behavior:
-        verdict = "⚠️ Partial"
+    quality = None
+    if is_biek_domain(knowledge_domain) and gold_case:
+        quality = biek_quality_scores(question, answer, gold_case, issues)
+        issues.extend(item for item in quality["quality_issues"] if item not in issues)
+
+    if quality is not None:
+        if issues or quality["total"] <= 5:
+            verdict = "❌ Fail"
+        elif quality["total"] <= 7 or bucket == "CUSTOM" or not expected_behavior:
+            verdict = "⚠️ Partial"
+        else:
+            verdict = "✅ Pass"
+    else:
+        if issues:
+            verdict = "❌ Fail"
+        elif bucket == "CUSTOM" or not expected_behavior:
+            verdict = "⚠️ Partial"
 
     return {
         "verdict": verdict,
@@ -958,6 +1330,7 @@ def evaluate_answer(question: str, answer: str, raw: dict[str, Any]) -> dict[str
         "bucket": bucket,
         "expected_behavior": expected_behavior,
         "is_refusal": is_refusal_answer(answer),
+        "quality": quality or {},
     }
 
 
@@ -1049,7 +1422,7 @@ def run_batch_eval_core(
         elapsed_s = time.perf_counter() - started
         raw["elapsed_s"] = round(elapsed_s, 3)
         answer = raw.get("answer", "")
-        evaluation = evaluate_answer(question, answer, raw)
+        evaluation = evaluate_answer(question, answer, raw, knowledge_domain)
         confidence = retrieval_confidence(raw)
         prompt = prompt_metrics(raw)
         usage = raw.get("usage") or {}
@@ -1072,6 +1445,12 @@ def run_batch_eval_core(
                 "issue": evaluation["issue"],
                 "bucket": evaluation["bucket"],
                 "expected_behavior": evaluation["expected_behavior"],
+                "quality_total": (evaluation.get("quality") or {}).get("total"),
+                "quality_natural": (evaluation.get("quality") or {}).get("natural"),
+                "quality_grounding": (evaluation.get("quality") or {}).get("grounding"),
+                "quality_summary": (evaluation.get("quality") or {}).get("summary"),
+                "quality_link_usefulness": (evaluation.get("quality") or {}).get("link_usefulness"),
+                "quality_safety": (evaluation.get("quality") or {}).get("safety"),
                 "latency_s": round(elapsed_s, 2),
                 "generation_model": raw.get("generation_model"),
                 "generation_model_display": resolved_model_display(
@@ -1519,6 +1898,12 @@ def rows_to_csv(rows: list[dict[str, Any]]) -> str:
         "issue",
         "bucket",
         "expected_behavior",
+        "quality_total",
+        "quality_natural",
+        "quality_grounding",
+        "quality_summary",
+        "quality_link_usefulness",
+        "quality_safety",
         "latency_s",
         "generation_model",
         "generation_model_display",
@@ -2593,24 +2978,44 @@ def render_batch_eval_tab(
         placeholder="Example: phase-2 top_k=6 -> context_k=3",
     )
 
-    default_questions = (
-        "What does Synapse Tech do?\n"
-        "What products does Synapse Tech offer?\n"
-        "Which Synapse product is best for recruitment automation?\n"
-        "How does iRecruit One improve the hiring process?\n"
-        "Tell me about Agentic Bot and its main capabilities.\n"
-        "Which product would help automate customer support conversations?\n"
-        "What is Coversaction AI used for?\n"
-        "Can Opira AI operate offline or on private infrastructure?\n"
-        "How does Synapse Tech help businesses automate workflows?\n"
-        "Do you build custom web and mobile applications?\n"
-        "What voice agent and call automation services do you provide?\n"
-        "Which industries does Synapse Tech serve?\n"
-        "How can I choose the right Synapse solution for my business?\n"
-        "How can I purchase a Synapse Tech product or contact your team?\n"
-        "Do you publish pricing, SLA guarantees, or security certifications?"
+    preset_domain = "biek" if is_biek_domain(knowledge_domain) else (
+        knowledge_domain if knowledge_domain in BATCH_QUESTION_PRESETS else "synapse"
     )
-    batch_text = st.text_area("Questions", value=default_questions, height=180)
+    selected_default_questions = BATCH_QUESTION_PRESETS[preset_domain]
+    if "batch_questions_text" not in st.session_state:
+        st.session_state.batch_questions_text = selected_default_questions
+    if "batch_questions_domain" not in st.session_state:
+        st.session_state.batch_questions_domain = preset_domain
+    if st.session_state.get("batch_questions_domain") != preset_domain:
+        st.session_state.batch_questions_text = selected_default_questions
+        st.session_state.batch_questions_domain = preset_domain
+
+    active_batch_preset = st.session_state.get("batch_questions_domain", preset_domain)
+    preset_col1, preset_col2 = st.columns(2)
+    with preset_col1:
+        if st.button(
+            "Load Synapse Batch",
+            type="primary" if active_batch_preset == "synapse" else "secondary",
+            use_container_width=True,
+        ):
+            st.session_state.batch_questions_text = BATCH_QUESTION_PRESETS["synapse"]
+            st.session_state.batch_questions_domain = "synapse"
+            st.rerun()
+    with preset_col2:
+        if st.button(
+            "Load BIEK Batch",
+            type="primary" if active_batch_preset == "biek" else "secondary",
+            use_container_width=True,
+        ):
+            st.session_state.batch_questions_text = BATCH_QUESTION_PRESETS["biek"]
+            st.session_state.batch_questions_domain = "biek"
+            st.rerun()
+
+    batch_text = st.text_area(
+        "Questions",
+        key="batch_questions_text",
+        height=180,
+    )
     questions = [line.strip() for line in batch_text.splitlines() if line.strip()]
 
     planned_runs, skipped_runs = selected_plan_runs(
@@ -3002,7 +3407,7 @@ def main() -> None:
 
         model_label = st.session_state.get("manual_model_label", DEFAULT_MODEL_LABEL)
         mode_label = st.session_state.get("manual_mode_label", "Base + RAG")
-        knowledge_source_label = st.session_state.get("knowledge_source_label", "Synapse KB")
+        knowledge_source_label = st.session_state.get("knowledge_source_label", "BIEK KB")
         if batch_view == "Manual":
             model_label = st.selectbox(
                 "Model family / selected model",
@@ -3101,7 +3506,7 @@ def main() -> None:
             value=True,
             help=(
                 "Displays the KB document IDs used as evidence. This helps confirm whether retrieval "
-                "found the right Synapse page or product before blaming the final model."
+                "found the right source documents before blaming the final model."
             ),
         )
 
@@ -3168,7 +3573,10 @@ def main() -> None:
             render_active_job(debug_enabled=debug_enabled, show_sources=show_sources)
             return
 
-        question = st.chat_input("Ask a Synapse Tech question")
+        prompt_placeholder = (
+            "Ask a BIEK question" if is_biek_domain(knowledge_domain) else "Ask a Synapse Tech question"
+        )
+        question = st.chat_input(prompt_placeholder)
         if question:
             st.session_state.active_job = start_generation_job(
                 question=question,

@@ -443,8 +443,13 @@ def build_hits(
                 "doc_id": row.get("doc_id"),
                 "page_type": row.get("page_type"),
                 "title": row.get("title"),
-                "url": row.get("url"),
+                "url": row.get("url") or row.get("source_url"),
                 "text": row.get("text"),
+                "issue_date": row.get("issue_date"),
+                "academic_year": row.get("academic_year"),
+                "document_type": row.get("document_type"),
+                "section": row.get("section"),
+                "action_type": row.get("action_type"),
                 "score_components": score_components,
             }
         )

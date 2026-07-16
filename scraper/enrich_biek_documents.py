@@ -123,6 +123,8 @@ def infer_document_type(url: str, title: str, body_text: str, section: str) -> s
         return "results_document"
     if section == "model_paper":
         return "model_paper"
+    if "e-sheet" in searchable or "omr" in searchable or "answer sheet" in searchable:
+        return "exam_material"
     if "scheme of studies" in searchable:
         return "scheme_of_studies"
     if "notification" in searchable or section == "notifications":
@@ -405,14 +407,14 @@ def infer_student_relevance(
     if section == "tenders" or document_type == "tender":
         return "exclude"
 
-    if "e-sheet" in searchable or "omr" in searchable or "answer sheet" in searchable:
-        return "exclude"
-
     if document_type in {"notification", "datesheet", "affiliation_list", "contact_info"}:
         return "high_relevance"
 
     if document_type == "results_document":
         return "high_relevance"
+
+    if document_type == "exam_material":
+        return "medium_relevance"
 
     if document_type == "form":
         if action_type in {
@@ -444,7 +446,7 @@ def infer_student_relevance(
 def strip_non_applicable_fields(section: str, document_type: str, data: dict) -> dict:
     cleaned = dict(data)
 
-    if document_type in {"model_paper", "scheme_of_studies", "general_page"}:
+    if document_type in {"model_paper", "scheme_of_studies", "general_page", "exam_material"}:
         cleaned["fee_details"] = []
         cleaned["contact_info"] = {"emails": [], "phones": []}
 
@@ -460,6 +462,14 @@ def strip_non_applicable_fields(section: str, document_type: str, data: dict) ->
         cleaned["action_type"] = None
         cleaned["important_dates"] = []
         cleaned["topic"] = "scheme of studies"
+
+    if document_type == "exam_material":
+        cleaned["action_type"] = None
+        cleaned["important_dates"] = []
+        cleaned["portal_links"] = []
+        cleaned["session_type"] = []
+        cleaned["exam_part"] = None
+        cleaned["topic"] = normalize_spaces(cleaned["title"])
 
     if section == "forms":
         cleaned["important_dates"] = []

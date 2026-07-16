@@ -35,6 +35,10 @@ import query_kb  # noqa: E402
 _CHECKED_OLLAMA_URLS: set[str] = set()
 
 
+def is_biek_domain(knowledge_domain: str | None) -> bool:
+    return str(knowledge_domain or "").strip().lower().startswith("biek")
+
+
 def resolve_ollama_url(ollama_url: str | None) -> str:
     if ollama_url:
         return ollama_url.strip()
@@ -69,7 +73,7 @@ def resolve_knowledge_domain(knowledge_domain: str | None) -> str:
 
 
 def fallback_response_for_domain(knowledge_domain: str) -> str:
-    if knowledge_domain.lower() == "biek":
+    if is_biek_domain(knowledge_domain):
         return (
             "This detail is not clearly confirmed in the available BIEK information. "
             "Please verify it on the official BIEK website."
@@ -78,7 +82,7 @@ def fallback_response_for_domain(knowledge_domain: str) -> str:
 
 
 def adapt_answer_for_domain(answer: str, knowledge_domain: str) -> str:
-    if knowledge_domain.lower() != "biek":
+    if not is_biek_domain(knowledge_domain):
         return answer
 
     biek_fallback = fallback_response_for_domain("biek")
