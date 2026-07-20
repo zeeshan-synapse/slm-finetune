@@ -1,11 +1,11 @@
 {
-  "created_at": "2026-07-10T08:11:05.287742+00:00",
+  "created_at": "2026-07-20T08:01:42.274052+00:00",
   "embedding_model": "nomic-embed-text",
   "ollama_url": "http://localhost:11434",
-  "source_chunks_path": "data/runtime/biek_student_chunks.jsonl",
+  "source_chunks_path": "data/runtime/biek_student_plus_nav_chunks.jsonl",
   "index_path": "data/knowledge-base/biek/faiss.index",
   "metadata_path": "data/knowledge-base/biek/index_meta.jsonl",
-  "total_vectors": 660,
+  "total_vectors": 965,
   "dimension": 768,
   "metric": "cosine_via_normalized_inner_product"
 }

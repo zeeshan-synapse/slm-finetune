@@ -1,0 +1,438 @@
+{
+  "name": "biek_batch_gold_v1",
+  "description": "Recovered BIEK batch expected behavior set from high-scoring pasted eval run.",
+  "recovered_from": "/Users/zeeshanwaheed/.codex/attachments/ebdc2040-5296-4331-9990-3226faf56ebf/pasted-text.txt",
+  "case_count": 59,
+  "cases": [
+    {
+      "question": "What is the history of the Board?",
+      "expected_behavior": "Answer in BIEK terms if supported, or abstain cleanly without inventing generic institutional history.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "The history of the Board of Intermediate and Secondary Education (BIEK) in Pakistan is rooted in its establishment through various legislative acts. The primary legislation that established BIEK was \"\"The Karachi Secondary Education Act number XVI of 1950,\"\" which created a board to oversee education from classes 6th to 10th. On January 8, 1962, the West Pakistan government promulgated an ordinance known as \"\"West Pakistan Board of Intermediate and secondary education Karachi Ordinance number III of 1962.\"\" This ordinance changed the designation of the President of BIEK from Chairman and Higher Secondary Education to Chairman, and it transferred the responsibility for intermediate education from the University to BIEK."
+    },
+    {
+      "question": "Who is the chairman of BIEK?",
+      "expected_behavior": "Either identify the chairman from supported BIEK content or abstain cleanly without inventing a name.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "❌ Fail",
+      "recovered_reference_answer": "The chairman of BIEK is not explicitly named in the provided evidence. To find this information, you should visit the official BIEK website at [URL].",
+      "recovered_issues": [
+        "prompt_leak",
+        "hallucination_or_domain_leak_risk"
+      ]
+    },
+    {
+      "question": "Who are the board members of BIEK?",
+      "expected_behavior": "Abstain cleanly if board-membership is not clearly supported.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "❌ Fail",
+      "recovered_reference_answer": "The board members of BIEK can be found on their official website at [https://www.biek.edu.pk/Bmembers.asp](https://www.biek.edu.pk/Bmembers.asp).",
+      "recovered_issues": [
+        "missing_any:not clearly confirmed|official BIEK website",
+        "missing_or_unhelpful_linking"
+      ]
+    },
+    {
+      "question": "What committees does BIEK have?",
+      "expected_behavior": "Either mention committee information from the BIEK site or abstain cleanly.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "This detail is not clearly confirmed in the available BIEK information. Please verify it on the official BIEK website."
+    },
+    {
+      "question": "What were the last BIEK results?",
+      "expected_behavior": "Treat this as a results-related request and mention results or guide toward the results area instead of drifting to Synapse.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "I could not clearly confirm that exact BIEK result item in the available information. However, related BIEK result sections include Last Results. You can start here: https://www.biek.edu.pk/LastResults.asp For roll-number-specific results, use the BIEK results lookup flow."
+    },
+    {
+      "question": "How can I contact BIEK?",
+      "expected_behavior": "Either provide supported BIEK contact guidance or abstain cleanly while pointing to the official BIEK site.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "❌ Fail",
+      "recovered_reference_answer": "BIEK contact details include phone numbers (+92) 99260211, (+92) 99260212, (+92) 99260213 and email info@biek.edu.pk. You can view the contact page here: https://www.biek.edu.pk/ContactUs.asp",
+      "recovered_issues": [
+        "bad_contact_claim"
+      ]
+    },
+    {
+      "question": "What circulars and notifications are available on the BIEK website?",
+      "expected_behavior": "Summarize supported circulars or notifications in BIEK terms, preferably recent ones.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "I found BIEK notifications for this topic from 2025, including Notifications regarding Collection of Enrolment Forms and submission of Fee there of for the HSC Part-I Annual Examinations 2025."
+    },
+    {
+      "question": "What press releases are available on the BIEK website?",
+      "expected_behavior": "Mention press releases if supported or abstain carefully without fabricating details.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "The BIEK website offers a press release dated February 2024, which can be accessed through the provided link. This document likely contains information relevant to recent events or developments at the institution."
+    },
+    {
+      "question": "What is the recent result declaration page for?",
+      "expected_behavior": "Explain that it is a results-related page or route to result lookup behavior.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "BIEK has a Recent Result Declaration page here: https://www.biek.edu.pk/results.asp. For roll-number-specific results, use the BIEK results lookup flow."
+    },
+    {
+      "question": "What does the BIEK date sheet page contain?",
+      "expected_behavior": "Describe the date sheet area and mention the latest supported year or a date sheet link if possible.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "The latest available BIEK date sheet I found is for 2026. You can view it here: https://www.biek.edu.pk/datesheet/2026/FINAL%20DATE%20SHEET%20ANNUAL%202026%20Consolidated%20(Page-1)%20copy%20(4%20files%20merged).pdf"
+    },
+    {
+      "question": "What are the authorized banks for BIEK?",
+      "expected_behavior": "Answer in BIEK terms about authorized banks or bank-related payment guidance if supported.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "The authorized banks for BIEK (Bureau of Intermediate Education) are United Bank Limited (UBL). You can find this information on their official website at https://www.biek.edu.pk/authbanks.asp."
+    },
+    {
+      "question": "What statistics does BIEK provide?",
+      "expected_behavior": "Mention the statistics area if supported, or abstain carefully without invention.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "BIEK provides statistics on various educational fronts including student enrollment, academic performance, school facilities, and more through their official website at https://www.biek.edu.pk/Stats.asp. This page offers comprehensive data that can help with understanding the current state of education in Karachi."
+    },
+    {
+      "question": "Do you have the sample E-Sheet of 30 pages for Annual 2026 E-Marking?",
+      "expected_behavior": "Confirm availability of the 30-page sample E-Sheet and preferably provide the direct link.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "Yes, I found the sample E-Sheet of 30 pages for Annual 2026 E-Marking on the official BIEK website. You can access it directly from this link: [https://www.biek.edu.pk/E-Sheet-Sample/E-Sheet%2030%20pages.pdf](https://www.biek.edu.pk/E-Sheet-Sample/E-Sheet%2030%20pages.pdf)."
+    },
+    {
+      "question": "Do you have the sample E-Sheet of 22 pages for Annual 2026 E-Marking?",
+      "expected_behavior": "Confirm availability of the 22-page sample E-Sheet and preferably provide the direct link.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "Yes, I have the sample E-Sheet of 22 pages for Annual 2026 E-Marking. You can view it directly on this link: [https://www.biek.edu.pk/E-Sheet-Sample/E-Sheet%2022%20Pages.pdf](https://www.biek.edu.pk/E-Sheet-Sample/E-Sheet%2022%20Pages.pdf)."
+    },
+    {
+      "question": "What is the scheme of studies for higher secondary certificates?",
+      "expected_behavior": "Recognize this as the scheme-of-studies resource and mention the BIEK document or link.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "The scheme of studies for higher secondary certificates in Sindhi, including Pakistan Studies, is outlined on the official BIEK website at this link: https://www.biek.edu.pk/Sc_Std/SCHEME-OF-STUDIES-FOR-HSC.pdf. This document specifies that Pakistan Studies (compulsory) is offered twice per week and consists of 50 marks."
+    },
+    {
+      "question": "Do you have Scheme and Model Paper 2023?",
+      "expected_behavior": "Confirm availability of the Scheme & Model Paper 2023 resource or page.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "Yes. The BIEK model paper for 2023 is available here: https://www.biek.edu.pk/ModelPaper/2023/Scheme%20%20&%20Model%20Paper%202023-final.pdf"
+    },
+    {
+      "question": "Is Model Paper 2026 available?",
+      "expected_behavior": "Confirm that Model Paper 2026 is available and preferably give the direct link.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "Yes. The BIEK model paper for 2026 is available here: https://www.biek.edu.pk/ModelPaper/2026/Model%20Paper%202026.pdf"
+    },
+    {
+      "question": "Do you have the Science General Mathematics Part-II model paper?",
+      "expected_behavior": "Confirm availability of the Science General Mathematics Part-II model paper.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "Yes. The latest BIEK model paper I found is for 2026: https://www.biek.edu.pk/ModelPaper/2026/SCI%20GENERAL%20Mathematics-II-NEW-BOOK%20MODEL%20PAPER%202026.pdf"
+    },
+    {
+      "question": "Do you have MCQs on the BIEK website?",
+      "expected_behavior": "Recognize the MCQs page or resource and answer in BIEK terms.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "Yes, you can find MCQs on the BIEK website. Visit their official page at [https://www.biek.edu.pk/mcq.asp](https://www.biek.edu.pk/mcq.asp) to access a variety of MCQs related to Annual Examinations 2021."
+    },
+    {
+      "question": "Do you have the certificate form?",
+      "expected_behavior": "Confirm availability of the certificate form and preferably provide the direct PDF link.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "Yes, you can view the certificate form on the official BIEK website at this link: https://www.biek.edu.pk/Online_Forms/HSC-CERTIFICATE/Certificate-Form-Final.pdf. This document outlines the conditions and requirements for obtaining an original Certificate as per your details provided."
+    },
+    {
+      "question": "Do you have the scrutiny form?",
+      "expected_behavior": "Confirm availability of the scrutiny form and preferably provide the direct PDF link.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "Yes, you have access to the scrutiny form on the official BIEK website at this link: [https://www.biek.edu.pk/Online_Forms/Scrutiny%20Forms/Scruitny-Form.pdf](https://www.biek.edu.pk/Online_Forms/Scrutiny%2520Forms/Scruitny-Form.pdf)."
+    },
+    {
+      "question": "Do you have the provisional certification form?",
+      "expected_behavior": "Confirm availability of the provisional certification form and preferably provide the direct PDF link.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "❌ Fail",
+      "recovered_reference_answer": "Yes, you can access the provisional certification form on the official BIEK website at this link: https://www.biek.edu.pk/Online_Forms/HSC-CERTIFICATE/Provisional-Certificate-Form.pdf. Ensure that your application includes a photostat copy of your marks sheet to be eligible for issuance.",
+      "recovered_issues": [
+        "under_refusal"
+      ]
+    },
+    {
+      "question": "Do you have the migration form?",
+      "expected_behavior": "Confirm availability of the migration form and preferably provide the direct PDF link.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "Yes, you can obtain a migration form by visiting the official BIEK website at https://www.biek.edu.pk/Online_Forms/HSC-CERTIFICATE/MIGRATION-CERTIFICATE.pdf. This document provides detailed instructions on how to request your Migration Certificate for Regular Students."
+    },
+    {
+      "question": "Do you have the registration form for commerce?",
+      "expected_behavior": "Confirm availability of the commerce registration form and preferably provide the direct PDF link.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "Yes, you have access to the registration form for commerce on the official BIEK website at [this link](https://www.biek.edu.pk/Online_Forms/Enrolment-Registration-forms/Registration-Form-Commerce.pdf)."
+    },
+    {
+      "question": "Do you have the registration form for humanities?",
+      "expected_behavior": "Confirm availability of the humanities registration form and preferably provide the direct PDF link.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "Yes, you have access to the registration form for humanities on the official BIEK website at this link: [https://www.biek.edu.pk/Online_Forms/Enrolment-Registration-forms/Registration-Form-Humanities.pdf](https://www.biek.edu.pk/Online_Forms/Enrolment-Registration-forms/Registration-Form-Humanities.pdf)."
+    },
+    {
+      "question": "Do you have the verification certificate form?",
+      "expected_behavior": "Confirm availability of the verification certificate form and preferably provide the direct resource link.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "Yes, you have access to a verification certificate form on the official BIEK website at https://www.biek.edu.pk/Online_Forms/Verification%20forms/Verification-Certificate-Form.pdf. This document is available for download if needed."
+    },
+    {
+      "question": "Do you have the verification provisional certificate form?",
+      "expected_behavior": "Confirm availability of the verification provisional certificate form or the shared verification resource.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "Yes, you have access to the Verification Provisional Certificate form on the official BIEK website at https://www.biek.edu.pk/Online_Forms/Verification%20forms/Verification-Forms-All.pdf. This document provides the necessary information and instructions for obtaining a provisional certificate. Please download it from there to proceed with your verification process."
+    },
+    {
+      "question": "Do you have the verification marksheet form?",
+      "expected_behavior": "Confirm availability of the verification marksheet form or the shared verification resource.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "Yes, you have access to the Verification Marksheet Form. You can download it directly from the official BIEK website at this link: [https://www.biek.edu.pk/Online_Forms/Verification%20forms/Verification-Forms-All.pdf](https://www.biek.edu.pk/Online_Forms/Verification%20forms/Verification-Forms-All.pdf)."
+    },
+    {
+      "question": "Do you have the verification migration form?",
+      "expected_behavior": "Confirm availability of the verification migration form or the shared verification resource.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "Yes, you have access to the verification migration form on the official BIEK website at https://www.biek.edu.pk/Online_Forms/Verification%20forms/Verification-Forms-All.pdf. This document provides information and instructions for downloading the necessary forms."
+    },
+    {
+      "question": "Do you have the cancellation of enrolment form?",
+      "expected_behavior": "Confirm availability of the cancellation of enrolment form and preferably provide the direct resource link.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "Yes, you have access to the cancellation of enrolment form on the official BIEK website at this link: [https://www.biek.edu.pk/Online_Forms/Enrolment-Registration-forms/CANCELATION-OF-ENROLMENT.pdf](https://www.biek.edu.pk/Online_Forms/Enrolment-Registration-forms/CANCELATION-OF-ENROLMENT.pdf)."
+    },
+    {
+      "question": "Do you have the cancellation of registration form?",
+      "expected_behavior": "Confirm availability of the cancellation of registration form and preferably provide the direct resource link.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "Yes, you have a cancellation of registration form available on the official BIEK website at this link: [https://www.biek.edu.pk/Online_Forms/Enrolment-Registration-forms/CANCELATION-OF-REGISTRATION.pdf](https://www.biek.edu.pk/Online_Forms/Enrolment-Registration-forms/CANCELATION-OF-REGISTRATION.pdf)."
+    },
+    {
+      "question": "Do you have the duplicate marksheet form?",
+      "expected_behavior": "Confirm availability of the duplicate marksheet form and preferably provide the direct resource link.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "Yes, you can find the duplicate marksheet form on the official BIEK website at this link: https://www.biek.edu.pk/Online_Forms/Duplicate%20Testimonials/BIEK-Duplicate-Forms.pdf. This document provides detailed instructions and guidance for obtaining a duplicate marksheet."
+    },
+    {
+      "question": "Do you have the duplicate enrolment card form?",
+      "expected_behavior": "Confirm availability of the duplicate enrolment card form and preferably provide the direct resource link.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "Yes, the duplicate enrolment card form is available on the official BIEK website at this link: https://www.biek.edu.pk/Online_Forms/Duplicate%20Testimonials/BIEK-Duplicate-Forms.pdf. Please ensure you follow all instructions and guidelines provided for filling out the application form correctly."
+    },
+    {
+      "question": "Do you have the duplicate computerized admit card form?",
+      "expected_behavior": "Confirm availability of the duplicate computerized admit card form and preferably provide the direct resource link.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "Yes, I have the duplicate computerized admit card form. You can access it directly from this link: [https://www.biek.edu.pk/Online_Forms/Duplicate%20Testimonials/BIEK-Duplicate-Forms.pdf](https://www.biek.edu.pk/Online_Forms/Duplicate%20Testimonials/BIEK-Duplicate-Forms.pdf)."
+    },
+    {
+      "question": "Do you have the duplicate registration card form?",
+      "expected_behavior": "Confirm availability of the duplicate registration card form and preferably provide the direct resource link.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "Yes, you can access the duplicate registration card form on the official BIEK website at this link: [https://www.biek.edu.pk/Online_Forms/Duplicate%20Testimonials/BIEK-Duplicate-Forms.pdf](https://www.biek.edu.pk/Online_Forms/Duplicate%20Testimonials/BIEK-Duplicate-Forms.pdf)."
+    },
+    {
+      "question": "Do you have the duplicate manual admit card form?",
+      "expected_behavior": "Confirm availability of the duplicate manual admit card form and preferably provide the direct resource link.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "Yes, you can find the duplicate manual admit card form on the official BIEK website. Visit [this link](https://www.biek.edu.pk/Online_Forms/Duplicate%20Testimonials/BIEK-Duplicate-Forms.pdf) to obtain it."
+    },
+    {
+      "question": "Do you have the proforma of special chance?",
+      "expected_behavior": "Confirm availability of the proforma of special chance resource.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "Yes, the BIEK website provides a downloadable proforma for special chance applications. You can access it directly from this link: [https://www.biek.edu.pk/Online_Forms/Duplicate%20Testimonials/BIEK-Duplicate-Forms.pdf](https://www.biek.edu.pk/Online_Forms/Duplicate%20Testimonials/BIEK-Duplicate-Forms.pdf)."
+    },
+    {
+      "question": "Do you have the improvement of division form?",
+      "expected_behavior": "Confirm availability of the improvement of division form and preferably provide the direct resource link.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "Yes, you can find the Improvement of Division form on the BIEK website. The link provided leads directly to the official document: [https://www.biek.edu.pk/Online_Forms/EXAMINATION-FORMS/Improvement-of-Division-Form-Final.pdf](https://www.biek.edu.pk/Online_Forms/EXAMINATION-FORMS/Improvement-of-Division-Form-Final.pdf). This form is for all groups' examination and should be used to apply for improvement of division based on grades or marks over two years."
+    },
+    {
+      "question": "Do you have the registration of all groups form?",
+      "expected_behavior": "Confirm availability of the registration of all groups form and preferably provide the direct resource link.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "Yes, you can find the registration form for all groups on the official BIEK website. The link provided leads directly to the document: https://www.biek.edu.pk/Online_Forms/Enrolment-Registration-forms/Registration-Form-All-Groups.pdf. This PDF contains the necessary information and instructions for registering all groups, ensuring compliance with the required procedures."
+    },
+    {
+      "question": "Do you have the examination forms page?",
+      "expected_behavior": "Recognize the examination forms page or link it directly.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "Yes, the BIEK website does have an examination forms page available for download. You can access it directly from their official website by following this link: [https://www.biek.edu.pk/Online_Forms/EXAMINATION-FORMS/Commerce-Private-Part-1.pdf](https://www.biek.edu.pk/Online_Forms/EXAMINATION-FORMS/Commerce-Private-Part-1.pdf)."
+    },
+    {
+      "question": "Do you have the permission forms page?",
+      "expected_behavior": "Recognize the permission forms page or link it directly.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "Yes, you can find the permission forms page on the official BIEK website at [https://www.biek.edu.pk/Online_Forms/PermissionForms/B.I.E. Permission Form Karachi Board 2020.pdf](https://www.biek.edu.pk/Online_Forms/PermissionForms/B.I.E. Permission Form Karachi Board 2020.pdf)."
+    },
+    {
+      "question": "What affiliated colleges information is available on the BIEK website?",
+      "expected_behavior": "Either summarize supported affiliated-college information or abstain cleanly without inventing details.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "The BIEK website provides information on affiliated colleges through its URL \"\"https://www.biek.edu.pk/affcoll.asp\"\". This page lists both all male and female government colleges as well as all male and female private colleges."
+    },
+    {
+      "question": "What is the IOC proforma for affiliation?",
+      "expected_behavior": "Recognize the IOC proforma for affiliation resource or explain it in BIEK terms if supported.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "The IOC proforma for affiliation is a document that institutions must complete to renew their affiliation with the International Olympic Committee (IOC). It includes conditions prescribed for renewal, which should be answered clearly and definitively in the Proforma. The link provided at https://www.biek.edu.pk/IOC/New Proforma for Affiliation Renewal of Affiliation 01-07-2020 ahsan-converted.pdf offers access to this form."
+    },
+    {
+      "question": "What can I find under About Us on the BIEK website?",
+      "expected_behavior": "List the main About Us items from the nav rather than refusing.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "Under About Us, BIEK lists History of Board, Chairman, Board Members, Committees, Last Results, and Contact us."
+    },
+    {
+      "question": "What can I find under Misc on the BIEK website?",
+      "expected_behavior": "List the Misc nav items from the site.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "Under Misc, BIEK lists Tenders, Circulars & Notificaitons, Press Release, and FTN No. (Active Tax Payer)."
+    },
+    {
+      "question": "What can I find under Examinations on the BIEK website?",
+      "expected_behavior": "List or summarize the main Examinations nav items from the site.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "Under Examinations, BIEK lists Tutorial Video about online documents issuance, Recent Result Declaration, Date Sheet, Authorized Banks, Statistics, Sample E-Sheet of 30 Pages for Annual 2026 E-Marking, Sample E-Sheet of 22 Pages for Annual 2026 E-Marking, Scheme of Studies for Higher Secondary Certificates, Scheme & Model Paper 2023, Model Paper 2026, Science General Mathematics Part-II Model Paper, and MCQs."
+    },
+    {
+      "question": "What can I find under Download Forms on the BIEK website?",
+      "expected_behavior": "List or summarize major downloadable form categories rather than mentioning only one form.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "❌ Fail",
+      "recovered_reference_answer": "Under Download Forms, BIEK lists Certificate Form, Scrutiny Form, Provisional Certification Form, Migration Form, Registration Form Commerce, Registration Form Humanities, Verification Certificate Form, Verification Provisional Certificate, Verification Marksheet Form, Verification Migration Form, Cancellation of Enrolment, Cancellation of Registration, Duplicate Marksheet, Duplicate Enrolment Card, Duplicate Computerized Admit Card, Duplicate Registration Card, Duplicate Manual Admit Card, Proforma of Special Chance, Improvement of Division, Registration of All Groups, Examination Forms, and Permission Forms.",
+      "recovered_issues": [
+        "missing_or_unhelpful_linking"
+      ]
+    },
+    {
+      "question": "What can I find under Recognition on the BIEK website?",
+      "expected_behavior": "List or summarize the Recognition nav items from the site.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "Under Recognition, BIEK lists Affiliated Colleges and IOC Proforma for Affiliation."
+    },
+    {
+      "question": "What can you help me with regarding BIEK?",
+      "expected_behavior": "Answer as a BIEK assistant and mention BIEK-specific support areas rather than generic tech-company wording.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "I can help with BIEK forms, date sheets, notifications, model papers, results-related questions, authorized banks, and affiliated-college information. A good place to start is: https://www.biek.edu.pk/Allforms.asp"
+    },
+    {
+      "question": "What kind of information can I ask about on the BIEK website?",
+      "expected_behavior": "Describe the kinds of BIEK information the assistant can help with using site-backed categories.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "I can help with BIEK forms, date sheets, notifications, model papers, results-related questions, authorized banks, and affiliated-college information. A good place to start is: https://www.biek.edu.pk/Allforms.asp"
+    },
+    {
+      "question": "Can you help me find forms on the BIEK website?",
+      "expected_behavior": "Say yes in BIEK terms and mention forms or downloads available on the site.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "Yes. I can help you find BIEK forms and downloads such as certificate, migration, verification, duplicate, registration, examination, and permission forms. Start here: https://www.biek.edu.pk/Allforms.asp"
+    },
+    {
+      "question": "Can you help me find model papers on the BIEK website?",
+      "expected_behavior": "Mention the model paper resources from the BIEK site rather than refusing.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "Yes. I can help you find BIEK model papers, scheme and model paper resources, and related examination materials from the website. A useful starting link is: https://www.biek.edu.pk/ModelPaper/2026/Model%20Paper%202026.pdf"
+    },
+    {
+      "question": "Can you help me check BIEK results?",
+      "expected_behavior": "Acknowledge result-checking support and steer toward result lookup or the results section.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "Yes. I can help with BIEK results-related questions, including guiding you to the results area or checking supported roll-number-based result lookups. Results page: https://www.biek.edu.pk/results.asp"
+    },
+    {
+      "question": "Give me the result for roll number 800926.",
+      "expected_behavior": "Use the result lookup flow and return the known BIEK result details for roll number 800926.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "I found multiple BIEK result records for roll number 800926. Please add a narrower combination such as year, session, group, or part. Matches I found: 2025 | Supplementary | Commerce Regular | Part II; 2022 | Supplementary | Humanities Regular | Section A-1; 2022 | Annual | Part I | Section 2 Papers."
+    },
+    {
+      "question": "Give me the result for roll number 808259.",
+      "expected_behavior": "Use the result lookup flow and return the known BIEK result details for roll number 808259.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "I found multiple BIEK result records for roll number 808259. Please add a narrower combination such as year, session, group, or part. Matches I found: 2025 | Supplementary | Commerce Regular | Part II | Section A; 2022 | Annual | Part I | Section 2 Papers."
+    },
+    {
+      "question": "Show me the 2025 supplementary commerce regular result for roll number 800926.",
+      "expected_behavior": "Return the matched 2025 supplementary commerce regular result for roll number 800926.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "⚠️ Partial",
+      "recovered_reference_answer": "I found a BIEK result for roll number 800926 for 2025, Supplementary, Commerce Regular, Part II. The record shows marks shown: 614, published on 2026-02-02. Result PDF: https://www.biek.edu.pk/Result-2025/Supply/CMR/RESULT-GAZZETTE-COMMERCE-REGULAR-HSC-PART-II-SUPPLEMENTARY-2025.pdf"
+    },
+    {
+      "question": "Show me the 2025 supplementary commerce regular result for roll number 808259.",
+      "expected_behavior": "Return the matched 2025 supplementary commerce regular result for roll number 808259.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "⚠️ Partial",
+      "recovered_reference_answer": "I found a BIEK result for roll number 808259 for 2025, Supplementary, Commerce Regular, Part II. The record shows Section: A, marks shown: 881, published on 2026-02-02. Result PDF: https://www.biek.edu.pk/Result-2025/Supply/CMR/RESULT-GAZZETTE-COMMERCE-REGULAR-HSC-PART-II-SUPPLEMENTARY-2025.pdf"
+    },
+    {
+      "question": "I want my BIEK result for roll number 800926.",
+      "expected_behavior": "Use result lookup and return the supported BIEK result details for roll number 800926.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "I found multiple BIEK result records for roll number 800926. Please add a narrower combination such as year, session, group, or part. Matches I found: 2025 | Supplementary | Commerce Regular | Part II; 2022 | Supplementary | Humanities Regular | Section A-1; 2022 | Annual | Part I | Section 2 Papers."
+    },
+    {
+      "question": "Can you check the BIEK result for roll number 808259?",
+      "expected_behavior": "Use result lookup and return the supported BIEK result details for roll number 808259.",
+      "source": "BIEK_GOLD",
+      "recovered_status": "✅ Pass",
+      "recovered_reference_answer": "I found multiple BIEK result records for roll number 808259. Please add a narrower combination such as year, session, group, or part. Matches I found: 2025 | Supplementary | Commerce Regular | Part II | Section A; 2022 | Annual | Part I | Section 2 Papers."
+    }
+  ]
+}

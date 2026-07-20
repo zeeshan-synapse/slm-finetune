@@ -40,7 +40,11 @@ from guardrail_stage1 import (  # noqa: E402
 )
 from kb_answer import kb_grounded_answer_with_meta  # noqa: E402
 import answer_with_kb as aw  # noqa: E402
-from biek_results_lookup import result_lookup_answer  # noqa: E402
+try:
+    from biek_results_lookup import result_lookup_answer  # noqa: E402
+except ModuleNotFoundError:  # pragma: no cover - optional local BIEK result index feature
+    def result_lookup_answer(question: str) -> str | None:
+        return None
 
 
 MODEL_OPTIONS: dict[str, dict[str, Any]] = {
@@ -1025,6 +1029,14 @@ def has_bad_contact_claim(answer: str) -> bool:
     low = answer.lower()
     if "info@synapsetechinc.com" in low:
         return False
+    if (
+        "info@biek.edu.pk" in low
+        or "contactus.asp" in low
+        or "99260211" in low
+        or "99260212" in low
+        or "99260213" in low
+    ):
+        return False
     return (
         "@" in answer
         or "add to cart" in low
@@ -1906,6 +1918,14 @@ def load_batch_history() -> list[dict[str, Any]]:
     except Exception:
         return []
     return payload if isinstance(payload, list) else []
+
+
+def batch_history_file_status() -> str:
+    relative_path = BATCH_HISTORY_PATH.relative_to(PROJECT_ROOT)
+    if not BATCH_HISTORY_PATH.exists():
+        return f"Latest eval result file: `{relative_path}` is not created yet."
+    modified_at = datetime.fromtimestamp(BATCH_HISTORY_PATH.stat().st_mtime).strftime("%b %d %H:%M")
+    return f"Latest eval result file: `{relative_path}` · modified {modified_at}."
 
 
 def save_batch_history(history: list[dict[str, Any]]) -> None:
@@ -3084,6 +3104,7 @@ def render_batch_eval_tab(
 ) -> None:
     st.subheader("Batch Eval")
     st.caption("Paste one question per line. The batch uses the current sidebar configuration.")
+    st.caption(batch_history_file_status())
     retrieval_change_label = st.text_input(
         "Retrieval change label",
         value=st.session_state.get("retrieval_change_label", ""),

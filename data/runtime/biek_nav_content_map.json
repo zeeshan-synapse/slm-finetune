@@ -1,0 +1,1027 @@
+{
+  "site": "biek",
+  "source_coverage_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/config/biek_nav_coverage.json",
+  "generated_at": "2026-07-20T07:52:11.401750+00:00",
+  "total_item_count": 52,
+  "mapped_count": 49,
+  "unmapped_count": 3,
+  "suspicious_mappings_prevented": 3,
+  "rows": [
+    {
+      "id": "biek-nav::home",
+      "label": "Home",
+      "url": "https://www.biek.edu.pk/default.asp",
+      "parent": null,
+      "handling_mode": "container_summary",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/default.asp",
+        "source_page": "",
+        "title": "Welcome to Board of Intermediate Education Karachi",
+        "kind": "html_page",
+        "text_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/raw/biek-extracted-html/default.asp-63c01f0b.txt",
+        "text_length": 1149,
+        "extraction_status": "ok"
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/default.asp",
+      "warning": ""
+    },
+    {
+      "id": "biek-nav::about-us",
+      "label": "About Us",
+      "url": "https://www.biek.edu.pk/default.asp#",
+      "parent": null,
+      "handling_mode": "container_summary",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/default.asp",
+        "source_page": "",
+        "title": "Welcome to Board of Intermediate Education Karachi",
+        "kind": "html_page",
+        "text_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/raw/biek-extracted-html/default.asp-63c01f0b.txt",
+        "text_length": 1149,
+        "extraction_status": "ok"
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/default.asp#",
+      "warning": ""
+    },
+    {
+      "id": "biek-nav::about-us::history-of-board",
+      "label": "History of Board",
+      "url": "https://www.biek.edu.pk/history.asp",
+      "parent": "About Us",
+      "handling_mode": "info_page",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/history.asp",
+        "source_page": "",
+        "title": "Welcome to Board of Intermediate Education Karachi",
+        "kind": "html_page",
+        "text_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/raw/biek-extracted-html/history.asp-6ca84203.txt",
+        "text_length": 3506,
+        "extraction_status": "ok"
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/history.asp",
+      "warning": ""
+    },
+    {
+      "id": "biek-nav::about-us::chairman",
+      "label": "Chairman",
+      "url": "https://www.biek.edu.pk/chairman.asp",
+      "parent": "About Us",
+      "handling_mode": "info_page",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/chairman.asp",
+        "source_page": "https://www.biek.edu.pk/default.asp",
+        "title": "Welcome to Board of Intermediate Education Karachi",
+        "kind": "html_page",
+        "text_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/raw/biek-extracted-html/chairman.asp-552be83c.txt",
+        "text_length": 816,
+        "extraction_status": "ok"
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/chairman.asp",
+      "warning": ""
+    },
+    {
+      "id": "biek-nav::about-us::board-members",
+      "label": "Board Members",
+      "url": "https://www.biek.edu.pk/Bmembers.asp",
+      "parent": "About Us",
+      "handling_mode": "info_page",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/Bmembers.asp",
+        "source_page": "https://www.biek.edu.pk/default.asp",
+        "title": "Welcome to Board of Intermediate Education Karachi",
+        "kind": "html_page",
+        "text_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/raw/biek-extracted-html/bmembers.asp-e75de55b.txt",
+        "text_length": 1232,
+        "extraction_status": "ok"
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/Bmembers.asp",
+      "warning": ""
+    },
+    {
+      "id": "biek-nav::about-us::committees",
+      "label": "Committees",
+      "url": "https://www.biek.edu.pk/Committees.asp",
+      "parent": "About Us",
+      "handling_mode": "info_page",
+      "preferred_source": {},
+      "match_type": "unmapped",
+      "match_score": 0.0,
+      "fallback_link": "https://www.biek.edu.pk/Committees.asp",
+      "warning": "No exact extracted source found; weak matching disabled for sensitive nav item."
+    },
+    {
+      "id": "biek-nav::about-us::last-results",
+      "label": "Last Results",
+      "url": "https://www.biek.edu.pk/LastResults.asp",
+      "parent": "About Us",
+      "handling_mode": "special_lookup",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/LastResults.asp",
+        "source_page": "https://www.biek.edu.pk/default.asp",
+        "title": "Welcome to Board of Intermediate Education Karachi",
+        "kind": "html_page",
+        "text_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/raw/biek-extracted-html/lastresults.asp-8cb9e825.txt",
+        "text_length": 1165,
+        "extraction_status": "ok"
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/LastResults.asp",
+      "warning": ""
+    },
+    {
+      "id": "biek-nav::about-us::contact-us",
+      "label": "Contact us",
+      "url": "https://www.biek.edu.pk/ContactUs.asp",
+      "parent": "About Us",
+      "handling_mode": "info_page",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/contactus.asp",
+        "source_page": "https://www.biek.edu.pk/default.asp",
+        "title": "Welcome to Board of Intermediate Education Karachi",
+        "kind": "html_page",
+        "text_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/raw/biek-extracted-html/contactus.asp-5920dc1c.txt",
+        "text_length": 82,
+        "extraction_status": "ok"
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/ContactUs.asp",
+      "warning": ""
+    },
+    {
+      "id": "biek-nav::misc",
+      "label": "Misc",
+      "url": "https://www.biek.edu.pk/default.asp#",
+      "parent": null,
+      "handling_mode": "container_summary",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/default.asp",
+        "source_page": "",
+        "title": "Welcome to Board of Intermediate Education Karachi",
+        "kind": "html_page",
+        "text_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/raw/biek-extracted-html/default.asp-63c01f0b.txt",
+        "text_length": 1149,
+        "extraction_status": "ok"
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/default.asp#",
+      "warning": ""
+    },
+    {
+      "id": "biek-nav::misc::tenders",
+      "label": "Tenders",
+      "url": "https://www.biek.edu.pk/Tenders.asp",
+      "parent": "Misc",
+      "handling_mode": "exclude",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/Tenders.asp",
+        "source_page": "https://www.biek.edu.pk/default.asp",
+        "title": "Welcome to Board of Intermediate Education Karachi",
+        "kind": "html_page",
+        "text_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/raw/biek-extracted-html/tenders.asp-41c8395d.txt",
+        "text_length": 26092,
+        "extraction_status": "ok"
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/Tenders.asp",
+      "warning": ""
+    },
+    {
+      "id": "biek-nav::misc::circulars-notificaitons",
+      "label": "Circulars & Notificaitons",
+      "url": "https://www.biek.edu.pk/notifications.asp",
+      "parent": "Misc",
+      "handling_mode": "info_page",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/notifications.asp",
+        "source_page": "",
+        "title": "Welcome to Board of Intermediate Education Karachi",
+        "kind": "html_page",
+        "text_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/raw/biek-extracted-html/notifications.asp-0085b33d.txt",
+        "text_length": 13154,
+        "extraction_status": "ok"
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/notifications.asp",
+      "warning": ""
+    },
+    {
+      "id": "biek-nav::misc::press-release",
+      "label": "Press Release",
+      "url": "https://www.biek.edu.pk/press_release.asp",
+      "parent": "Misc",
+      "handling_mode": "info_page",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/press_release.asp",
+        "source_page": "https://www.biek.edu.pk/default.asp",
+        "title": "Welcome to Board of Intermediate Education Karachi",
+        "kind": "html_page",
+        "text_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/raw/biek-extracted-html/press_release.asp-c2be213f.txt",
+        "text_length": 828,
+        "extraction_status": "ok"
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/press_release.asp",
+      "warning": ""
+    },
+    {
+      "id": "biek-nav::misc::ftn-no-active-tax-payer",
+      "label": "FTN No. (Active Tax Payer)",
+      "url": "https://www.biek.edu.pk/FBR/FBR.jpg",
+      "parent": "Misc",
+      "handling_mode": "exclude",
+      "preferred_source": {},
+      "match_type": "unmapped",
+      "match_score": 0.0,
+      "fallback_link": "https://www.biek.edu.pk/FBR/FBR.jpg",
+      "warning": "No extracted document matched the exact nav URL."
+    },
+    {
+      "id": "biek-nav::examinations",
+      "label": "Examinations",
+      "url": "https://www.biek.edu.pk/default.asp#",
+      "parent": null,
+      "handling_mode": "container_summary",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/default.asp",
+        "source_page": "",
+        "title": "Welcome to Board of Intermediate Education Karachi",
+        "kind": "html_page",
+        "text_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/raw/biek-extracted-html/default.asp-63c01f0b.txt",
+        "text_length": 1149,
+        "extraction_status": "ok"
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/default.asp#",
+      "warning": ""
+    },
+    {
+      "id": "biek-nav::examinations::tutorial-video-about-online-documents-issuance",
+      "label": "Tutorial Video about online documents issuance",
+      "url": "https://www.biek.edu.pk/online%20videos/tutorial_video_of_online_documents.mp4",
+      "parent": "Examinations",
+      "handling_mode": "document_summary",
+      "preferred_source": {},
+      "match_type": "unmapped",
+      "match_score": 0.0,
+      "fallback_link": "https://www.biek.edu.pk/online%20videos/tutorial_video_of_online_documents.mp4",
+      "warning": "No extracted document matched the exact nav URL."
+    },
+    {
+      "id": "biek-nav::examinations::recent-result-declaration",
+      "label": "Recent Result Declaration",
+      "url": "https://www.biek.edu.pk/results.asp",
+      "parent": "Examinations",
+      "handling_mode": "special_lookup",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/results.asp",
+        "source_page": "https://www.biek.edu.pk/default.asp",
+        "title": "https://www.biek.edu.pk/results.asp",
+        "kind": "html_page",
+        "text_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/raw/biek-extracted-html/results.asp-f276d02d.txt",
+        "text_length": 146,
+        "extraction_status": "ok"
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/results.asp",
+      "warning": ""
+    },
+    {
+      "id": "biek-nav::examinations::date-sheet",
+      "label": "Date Sheet",
+      "url": "https://www.biek.edu.pk/Datesheet.asp",
+      "parent": "Examinations",
+      "handling_mode": "info_page",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/Datesheet.asp",
+        "source_page": "https://www.biek.edu.pk/default.asp",
+        "title": "Welcome to Board of Intermediate Education Karachi",
+        "kind": "html_page",
+        "text_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/raw/biek-extracted-html/datesheet.asp-30fea96c.txt",
+        "text_length": 159,
+        "extraction_status": "ok"
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/Datesheet.asp",
+      "warning": ""
+    },
+    {
+      "id": "biek-nav::examinations::authorized-banks",
+      "label": "Authorized Banks",
+      "url": "https://www.biek.edu.pk/authbanks.asp",
+      "parent": "Examinations",
+      "handling_mode": "info_page",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/authbanks.asp",
+        "source_page": "https://www.biek.edu.pk/default.asp",
+        "title": "Welcome to Board of Intermediate Education Karachi",
+        "kind": "html_page",
+        "text_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/raw/biek-extracted-html/authbanks.asp-0527959e.txt",
+        "text_length": 308,
+        "extraction_status": "ok"
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/authbanks.asp",
+      "warning": ""
+    },
+    {
+      "id": "biek-nav::examinations::statistics",
+      "label": "Statistics",
+      "url": "https://www.biek.edu.pk/Stats.asp",
+      "parent": "Examinations",
+      "handling_mode": "info_page",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/Stats.asp",
+        "source_page": "https://www.biek.edu.pk/default.asp",
+        "title": "Welcome to Board of Intermediate Education Karachi",
+        "kind": "html_page",
+        "text_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/raw/biek-extracted-html/stats.asp-30444d76.txt",
+        "text_length": 828,
+        "extraction_status": "ok"
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/Stats.asp",
+      "warning": ""
+    },
+    {
+      "id": "biek-nav::examinations::sample-e-sheet-of-30-pages-for-annual-2026-e-marking",
+      "label": "Sample E-Sheet of 30 Pages for Annual 2026 E-Marking",
+      "url": "https://www.biek.edu.pk/E-Sheet-Sample/E-Sheet%2030%20pages.pdf",
+      "parent": "Examinations",
+      "handling_mode": "document_summary",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/E-Sheet-Sample/E-Sheet%2030%20pages.pdf",
+        "source_page": "https://www.biek.edu.pk/default.asp",
+        "title": "Sample E-Sheet of 30 Pages for Annual 2026 E-Marking",
+        "kind": "pdf",
+        "text_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/raw/biek-extracted-pdf/e-sheet-sample-e-sheet-2030-20pages.pdf-e544aa09.txt",
+        "text_length": 6567,
+        "extraction_status": null
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/E-Sheet-Sample/E-Sheet%2030%20pages.pdf",
+      "warning": ""
+    },
+    {
+      "id": "biek-nav::examinations::sample-e-sheet-of-22-pages-for-annual-2026-e-marking",
+      "label": "Sample E-Sheet of 22 Pages for Annual 2026 E-Marking",
+      "url": "https://www.biek.edu.pk/E-Sheet-Sample/E-Sheet%2022%20Pages.pdf",
+      "parent": "Examinations",
+      "handling_mode": "document_summary",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/E-Sheet-Sample/E-Sheet%2022%20Pages.pdf",
+        "source_page": "https://www.biek.edu.pk/default.asp",
+        "title": "Sample E-Sheet of 22 Pages for Annual 2026 E-Marking",
+        "kind": "pdf",
+        "text_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/raw/biek-extracted-pdf/e-sheet-sample-e-sheet-2022-20pages.pdf-cd3d7db7.txt",
+        "text_length": 6399,
+        "extraction_status": null
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/E-Sheet-Sample/E-Sheet%2022%20Pages.pdf",
+      "warning": ""
+    },
+    {
+      "id": "biek-nav::examinations::scheme-of-studies-for-higher-secondary-certificates",
+      "label": "Scheme of Studies for Higher Secondary Certificates",
+      "url": "https://www.biek.edu.pk/Sc_Std/SCHEME-OF-STUDIES-FOR-HSC.pdf",
+      "parent": "Examinations",
+      "handling_mode": "document_summary",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/Sc_Std/SCHEME-OF-STUDIES-FOR-HSC.pdf",
+        "source_page": "https://www.biek.edu.pk/default.asp",
+        "title": "Scheme of Studies for Higher Secondary Certificates",
+        "kind": "pdf",
+        "text_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/raw/biek-extracted-pdf/sc_std-scheme-of-studies-for-hsc.pdf-016fb531.txt",
+        "text_length": 5837,
+        "extraction_status": null
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/Sc_Std/SCHEME-OF-STUDIES-FOR-HSC.pdf",
+      "warning": ""
+    },
+    {
+      "id": "biek-nav::examinations::scheme-model-paper-2023",
+      "label": "Scheme & Model Paper 2023",
+      "url": "https://www.biek.edu.pk/PapersScheme-2023.asp",
+      "parent": "Examinations",
+      "handling_mode": "info_page",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/PapersScheme-2023.asp",
+        "source_page": "https://www.biek.edu.pk/default.asp",
+        "title": "Welcome to Board of Intermediate Education Karachi - Papers Scheme 2023",
+        "kind": "html_page",
+        "text_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/raw/biek-extracted-html/papersscheme-2023.asp-16fd00a5.txt",
+        "text_length": 828,
+        "extraction_status": "ok"
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/PapersScheme-2023.asp",
+      "warning": ""
+    },
+    {
+      "id": "biek-nav::examinations::model-paper-2026",
+      "label": "Model Paper 2026",
+      "url": "https://www.biek.edu.pk/ModelPaper/2026/Model%20Paper%202026.pdf",
+      "parent": "Examinations",
+      "handling_mode": "document_summary",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/ModelPaper/2026/Model%20Paper%202026.pdf",
+        "source_page": "https://www.biek.edu.pk/default.asp",
+        "title": "Model Paper 2026",
+        "kind": "pdf",
+        "text_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/raw/biek-extracted-pdf/modelpaper-2026-model-20paper-202026.pdf-c17ecbb4.txt",
+        "text_length": 116783,
+        "extraction_status": null
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/ModelPaper/2026/Model%20Paper%202026.pdf",
+      "warning": ""
+    },
+    {
+      "id": "biek-nav::examinations::science-general-mathematics-part-ii-model-paper",
+      "label": "Science General Mathematics Part-II Model Paper",
+      "url": "https://www.biek.edu.pk/ModelPaper/2026/SCI%20GENERAL%20Mathematics-II-NEW-BOOK%20MODEL%20PAPER%202026.pdf",
+      "parent": "Examinations",
+      "handling_mode": "document_summary",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/ModelPaper/2026/SCI%20GENERAL%20Mathematics-II-NEW-BOOK%20MODEL%20PAPER%202026.pdf",
+        "source_page": "https://www.biek.edu.pk/default.asp",
+        "title": "Science General Mathematics Part-II Model Paper",
+        "kind": "pdf",
+        "text_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/raw/biek-extracted-pdf/modelpaper-2026-sci-20general-20mathematics-ii-new-book-20model-20paper-202026.pdf-a554c56c.txt",
+        "text_length": 4526,
+        "extraction_status": null
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/ModelPaper/2026/SCI%20GENERAL%20Mathematics-II-NEW-BOOK%20MODEL%20PAPER%202026.pdf",
+      "warning": ""
+    },
+    {
+      "id": "biek-nav::examinations::mcqs",
+      "label": "MCQs",
+      "url": "https://www.biek.edu.pk/mcq.asp",
+      "parent": "Examinations",
+      "handling_mode": "info_page",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/mcq.asp",
+        "source_page": "https://www.biek.edu.pk/default.asp",
+        "title": "Welcome to Board of Intermediate Education Karachi",
+        "kind": "html_page",
+        "text_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/raw/biek-extracted-html/mcq.asp-d3058c2a.txt",
+        "text_length": 1179,
+        "extraction_status": "ok"
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/mcq.asp",
+      "warning": ""
+    },
+    {
+      "id": "biek-nav::download-forms",
+      "label": "Download Forms",
+      "url": "https://www.biek.edu.pk/Allforms.asp",
+      "parent": null,
+      "handling_mode": "container_summary",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/Allforms.asp",
+        "source_page": "",
+        "title": "Board of Intermediate Education Karachi - Download Types of Form",
+        "kind": "html_page",
+        "text_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/raw/biek-extracted-html/allforms.asp-49129f2b.txt",
+        "text_length": 849,
+        "extraction_status": "ok"
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/Allforms.asp",
+      "warning": ""
+    },
+    {
+      "id": "biek-nav::download-forms::certificate-form",
+      "label": "Certificate Form",
+      "url": "https://www.biek.edu.pk/Online_Forms/HSC-CERTIFICATE/Certificate-Form-Final.pdf",
+      "parent": "Download Forms",
+      "handling_mode": "document_summary",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/Online_Forms/HSC-CERTIFICATE/Certificate-Form-Final.pdf",
+        "source_page": "https://www.biek.edu.pk/default.asp",
+        "title": "Certificate Form",
+        "kind": "pdf",
+        "text_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/raw/biek-extracted-pdf/online_forms-hsc-certificate-certificate-form-final.pdf-840976eb.txt",
+        "text_length": 2700,
+        "extraction_status": null
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/Online_Forms/HSC-CERTIFICATE/Certificate-Form-Final.pdf",
+      "warning": ""
+    },
+    {
+      "id": "biek-nav::download-forms::scrutiny-form",
+      "label": "Scrutiny Form",
+      "url": "https://www.biek.edu.pk/Online_Forms/Scrutiny%20Forms/Scruitny-Form.pdf",
+      "parent": "Download Forms",
+      "handling_mode": "document_summary",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/Online_Forms/Scrutiny%20Forms/Scruitny-Form.pdf",
+        "source_page": "https://www.biek.edu.pk/default.asp",
+        "title": "Scrutiny Form",
+        "kind": "pdf",
+        "text_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/raw/biek-extracted-pdf/online_forms-scrutiny-20forms-scruitny-form.pdf-84e8ba7e.txt",
+        "text_length": 1443,
+        "extraction_status": null
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/Online_Forms/Scrutiny%20Forms/Scruitny-Form.pdf",
+      "warning": ""
+    },
+    {
+      "id": "biek-nav::download-forms::provisional-certification-form",
+      "label": "Provisional Certification Form",
+      "url": "https://www.biek.edu.pk/Online_Forms/HSC-CERTIFICATE/Provisional-Certificate-Form.pdf",
+      "parent": "Download Forms",
+      "handling_mode": "document_summary",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/Online_Forms/HSC-CERTIFICATE/Provisional-Certificate-Form.pdf",
+        "source_page": "https://www.biek.edu.pk/default.asp",
+        "title": "Provisional Certification Form",
+        "kind": "pdf",
+        "text_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/raw/biek-extracted-pdf/online_forms-hsc-certificate-provisional-certificate-form.pdf-f5139e86.txt",
+        "text_length": 2165,
+        "extraction_status": null
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/Online_Forms/HSC-CERTIFICATE/Provisional-Certificate-Form.pdf",
+      "warning": ""
+    },
+    {
+      "id": "biek-nav::download-forms::migration-form",
+      "label": "Migration Form",
+      "url": "https://www.biek.edu.pk/Online_Forms/HSC-CERTIFICATE/MIGRATION-CERTIFICATE.pdf",
+      "parent": "Download Forms",
+      "handling_mode": "document_summary",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/Online_Forms/HSC-CERTIFICATE/MIGRATION-CERTIFICATE.pdf",
+        "source_page": "https://www.biek.edu.pk/default.asp",
+        "title": "Migration Form",
+        "kind": "pdf",
+        "text_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/raw/biek-extracted-pdf/online_forms-hsc-certificate-migration-certificate.pdf-0668e027.txt",
+        "text_length": 2839,
+        "extraction_status": null
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/Online_Forms/HSC-CERTIFICATE/MIGRATION-CERTIFICATE.pdf",
+      "warning": ""
+    },
+    {
+      "id": "biek-nav::download-forms::registration-form-commerce",
+      "label": "Registration Form Commerce",
+      "url": "https://www.biek.edu.pk/Online_Forms/Enrolment-Registration-forms/Registration-Form-Commerce.pdf",
+      "parent": "Download Forms",
+      "handling_mode": "document_summary",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/Online_Forms/Enrolment-Registration-forms/Registration-Form-Commerce.pdf",
+        "source_page": "https://www.biek.edu.pk/default.asp",
+        "title": "Registration Form Commerce",
+        "kind": "pdf",
+        "text_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/raw/biek-extracted-pdf/online_forms-enrolment-registration-forms-registration-form-commerce.pdf-6940df52.txt",
+        "text_length": 1666,
+        "extraction_status": null
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/Online_Forms/Enrolment-Registration-forms/Registration-Form-Commerce.pdf",
+      "warning": ""
+    },
+    {
+      "id": "biek-nav::download-forms::registration-form-humanities",
+      "label": "Registration Form Humanities",
+      "url": "https://www.biek.edu.pk/Online_Forms/Enrolment-Registration-forms/Registration-Form-Humanities.pdf",
+      "parent": "Download Forms",
+      "handling_mode": "document_summary",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/Online_Forms/Enrolment-Registration-forms/Registration-Form-Humanities.pdf",
+        "source_page": "https://www.biek.edu.pk/default.asp",
+        "title": "Registration Form Humanities",
+        "kind": "pdf",
+        "text_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/raw/biek-extracted-pdf/online_forms-enrolment-registration-forms-registration-form-humanities.pdf-9ab7aeeb.txt",
+        "text_length": 1670,
+        "extraction_status": null
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/Online_Forms/Enrolment-Registration-forms/Registration-Form-Humanities.pdf",
+      "warning": ""
+    },
+    {
+      "id": "biek-nav::download-forms::verification-certificate-form",
+      "label": "Verification Certificate Form",
+      "url": "https://www.biek.edu.pk/Online_Forms/Verification%20forms/Verification-Certificate-Form.pdf",
+      "parent": "Download Forms",
+      "handling_mode": "document_summary",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/Online_Forms/Verification%20forms/Verification-Certificate-Form.pdf",
+        "source_page": "https://www.biek.edu.pk/default.asp",
+        "title": "Verification Certificate Form",
+        "kind": "pdf",
+        "text_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/raw/biek-extracted-pdf/online_forms-verification-20forms-verification-certificate-form.pdf-83827626.txt",
+        "text_length": 1684,
+        "extraction_status": null
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/Online_Forms/Verification%20forms/Verification-Certificate-Form.pdf",
+      "warning": ""
+    },
+    {
+      "id": "biek-nav::download-forms::verification-provisional-certificate",
+      "label": "Verification Provisional Certificate",
+      "url": "https://www.biek.edu.pk/Online_Forms/Verification%20forms/Verification-Forms-All.pdf",
+      "parent": "Download Forms",
+      "handling_mode": "document_summary",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/Online_Forms/Verification%20forms/Verification-Forms-All.pdf",
+        "source_page": "https://www.biek.edu.pk/default.asp",
+        "title": "Verification Provisional Certificate",
+        "kind": "pdf",
+        "text_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/raw/biek-extracted-pdf/online_forms-verification-20forms-verification-forms-all.pdf-66bc3386.txt",
+        "text_length": 1542,
+        "extraction_status": null
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/Online_Forms/Verification%20forms/Verification-Forms-All.pdf",
+      "warning": ""
+    },
+    {
+      "id": "biek-nav::download-forms::verification-marksheet-form",
+      "label": "Verification Marksheet Form",
+      "url": "https://www.biek.edu.pk/Online_Forms/Verification%20forms/Verification-Forms-All.pdf",
+      "parent": "Download Forms",
+      "handling_mode": "document_summary",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/Online_Forms/Verification%20forms/Verification-Forms-All.pdf",
+        "source_page": "https://www.biek.edu.pk/default.asp",
+        "title": "Verification Provisional Certificate",
+        "kind": "pdf",
+        "text_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/raw/biek-extracted-pdf/online_forms-verification-20forms-verification-forms-all.pdf-66bc3386.txt",
+        "text_length": 1542,
+        "extraction_status": null
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/Online_Forms/Verification%20forms/Verification-Forms-All.pdf",
+      "warning": ""
+    },
+    {
+      "id": "biek-nav::download-forms::verification-migration-form",
+      "label": "Verification Migration Form",
+      "url": "https://www.biek.edu.pk/Online_Forms/Verification%20forms/Verification-Forms-All.pdf",
+      "parent": "Download Forms",
+      "handling_mode": "document_summary",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/Online_Forms/Verification%20forms/Verification-Forms-All.pdf",
+        "source_page": "https://www.biek.edu.pk/default.asp",
+        "title": "Verification Provisional Certificate",
+        "kind": "pdf",
+        "text_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/raw/biek-extracted-pdf/online_forms-verification-20forms-verification-forms-all.pdf-66bc3386.txt",
+        "text_length": 1542,
+        "extraction_status": null
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/Online_Forms/Verification%20forms/Verification-Forms-All.pdf",
+      "warning": ""
+    },
+    {
+      "id": "biek-nav::download-forms::cancellation-of-enrolment",
+      "label": "Cancellation of Enrolment",
+      "url": "https://www.biek.edu.pk/Online_Forms/Enrolment-Registration-forms/CANCELATION-OF-ENROLMENT.pdf",
+      "parent": "Download Forms",
+      "handling_mode": "document_summary",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/Online_Forms/Enrolment-Registration-forms/CANCELATION-OF-ENROLMENT.pdf",
+        "source_page": "https://www.biek.edu.pk/default.asp",
+        "title": "Cancellation of Enrolment",
+        "kind": "pdf",
+        "text_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/raw/biek-extracted-pdf/online_forms-enrolment-registration-forms-cancelation-of-enrolment.pdf-9c87d2de.txt",
+        "text_length": 1463,
+        "extraction_status": null
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/Online_Forms/Enrolment-Registration-forms/CANCELATION-OF-ENROLMENT.pdf",
+      "warning": ""
+    },
+    {
+      "id": "biek-nav::download-forms::cancellation-of-registration",
+      "label": "Cancellation of Registration",
+      "url": "https://www.biek.edu.pk/Online_Forms/Enrolment-Registration-forms/CANCELATION-OF-REGISTRATION.pdf",
+      "parent": "Download Forms",
+      "handling_mode": "document_summary",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/Online_Forms/Enrolment-Registration-forms/CANCELATION-OF-REGISTRATION.pdf",
+        "source_page": "https://www.biek.edu.pk/default.asp",
+        "title": "Cancellation of Registration",
+        "kind": "pdf",
+        "text_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/raw/biek-extracted-pdf/online_forms-enrolment-registration-forms-cancelation-of-registration.pdf-c3796fd6.txt",
+        "text_length": 1042,
+        "extraction_status": null
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/Online_Forms/Enrolment-Registration-forms/CANCELATION-OF-REGISTRATION.pdf",
+      "warning": ""
+    },
+    {
+      "id": "biek-nav::download-forms::duplicate-marksheet",
+      "label": "Duplicate Marksheet",
+      "url": "https://www.biek.edu.pk/Online_Forms/Duplicate%20Testimonials/BIEK-Duplicate-Forms.pdf",
+      "parent": "Download Forms",
+      "handling_mode": "document_summary",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/Online_Forms/Duplicate%20Testimonials/BIEK-Duplicate-Forms.pdf",
+        "source_page": "https://www.biek.edu.pk/default.asp",
+        "title": "Duplicate Marksheet",
+        "kind": "pdf",
+        "text_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/raw/biek-extracted-pdf/online_forms-duplicate-20testimonials-biek-duplicate-forms.pdf-980f4b68.txt",
+        "text_length": 1141,
+        "extraction_status": null
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/Online_Forms/Duplicate%20Testimonials/BIEK-Duplicate-Forms.pdf",
+      "warning": ""
+    },
+    {
+      "id": "biek-nav::download-forms::duplicate-enrolment-card",
+      "label": "Duplicate Enrolment Card",
+      "url": "https://www.biek.edu.pk/Online_Forms/Duplicate%20Testimonials/BIEK-Duplicate-Forms.pdf",
+      "parent": "Download Forms",
+      "handling_mode": "document_summary",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/Online_Forms/Duplicate%20Testimonials/BIEK-Duplicate-Forms.pdf",
+        "source_page": "https://www.biek.edu.pk/default.asp",
+        "title": "Duplicate Marksheet",
+        "kind": "pdf",
+        "text_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/raw/biek-extracted-pdf/online_forms-duplicate-20testimonials-biek-duplicate-forms.pdf-980f4b68.txt",
+        "text_length": 1141,
+        "extraction_status": null
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/Online_Forms/Duplicate%20Testimonials/BIEK-Duplicate-Forms.pdf",
+      "warning": ""
+    },
+    {
+      "id": "biek-nav::download-forms::duplicate-computerized-admit-card",
+      "label": "Duplicate Computerized Admit Card",
+      "url": "https://www.biek.edu.pk/Online_Forms/Duplicate%20Testimonials/BIEK-Duplicate-Forms.pdf",
+      "parent": "Download Forms",
+      "handling_mode": "document_summary",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/Online_Forms/Duplicate%20Testimonials/BIEK-Duplicate-Forms.pdf",
+        "source_page": "https://www.biek.edu.pk/default.asp",
+        "title": "Duplicate Marksheet",
+        "kind": "pdf",
+        "text_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/raw/biek-extracted-pdf/online_forms-duplicate-20testimonials-biek-duplicate-forms.pdf-980f4b68.txt",
+        "text_length": 1141,
+        "extraction_status": null
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/Online_Forms/Duplicate%20Testimonials/BIEK-Duplicate-Forms.pdf",
+      "warning": ""
+    },
+    {
+      "id": "biek-nav::download-forms::duplicate-registration-card",
+      "label": "Duplicate Registration Card",
+      "url": "https://www.biek.edu.pk/Online_Forms/Duplicate%20Testimonials/BIEK-Duplicate-Forms.pdf",
+      "parent": "Download Forms",
+      "handling_mode": "document_summary",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/Online_Forms/Duplicate%20Testimonials/BIEK-Duplicate-Forms.pdf",
+        "source_page": "https://www.biek.edu.pk/default.asp",
+        "title": "Duplicate Marksheet",
+        "kind": "pdf",
+        "text_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/raw/biek-extracted-pdf/online_forms-duplicate-20testimonials-biek-duplicate-forms.pdf-980f4b68.txt",
+        "text_length": 1141,
+        "extraction_status": null
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/Online_Forms/Duplicate%20Testimonials/BIEK-Duplicate-Forms.pdf",
+      "warning": ""
+    },
+    {
+      "id": "biek-nav::download-forms::duplicate-manual-admit-card",
+      "label": "Duplicate Manual Admit Card",
+      "url": "https://www.biek.edu.pk/Online_Forms/Duplicate%20Testimonials/BIEK-Duplicate-Forms.pdf",
+      "parent": "Download Forms",
+      "handling_mode": "document_summary",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/Online_Forms/Duplicate%20Testimonials/BIEK-Duplicate-Forms.pdf",
+        "source_page": "https://www.biek.edu.pk/default.asp",
+        "title": "Duplicate Marksheet",
+        "kind": "pdf",
+        "text_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/raw/biek-extracted-pdf/online_forms-duplicate-20testimonials-biek-duplicate-forms.pdf-980f4b68.txt",
+        "text_length": 1141,
+        "extraction_status": null
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/Online_Forms/Duplicate%20Testimonials/BIEK-Duplicate-Forms.pdf",
+      "warning": ""
+    },
+    {
+      "id": "biek-nav::download-forms::proforma-of-special-chance",
+      "label": "Proforma of Special Chance",
+      "url": "https://www.biek.edu.pk/Online_Forms/EXAMINATION-FORMS/BIEK-Duplicate-Forms.pdf",
+      "parent": "Download Forms",
+      "handling_mode": "document_summary",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/Online_Forms/EXAMINATION-FORMS/BIEK-Duplicate-Forms.pdf",
+        "source_page": "",
+        "title": "Proforma of Special Chance",
+        "kind": "pdf",
+        "text_file": "",
+        "text_length": 0,
+        "extraction_status": "request_failed: 404 Client Error: Not Found for url: https://www.biek.edu.pk/Online_Forms/EXAMINATION-FORMS/BIEK-Duplicate-Forms.pdf"
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/Online_Forms/EXAMINATION-FORMS/BIEK-Duplicate-Forms.pdf",
+      "warning": ""
+    },
+    {
+      "id": "biek-nav::download-forms::improvement-of-division",
+      "label": "Improvement of Division",
+      "url": "https://www.biek.edu.pk/Online_Forms/EXAMINATION-FORMS/Improvement-of-Division-Form-Final.pdf",
+      "parent": "Download Forms",
+      "handling_mode": "document_summary",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/Online_Forms/EXAMINATION-FORMS/Improvement-of-Division-Form-Final.pdf",
+        "source_page": "https://www.biek.edu.pk/default.asp",
+        "title": "Improvement of Division",
+        "kind": "pdf",
+        "text_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/raw/biek-extracted-pdf/online_forms-examination-forms-improvement-of-division-form-final.pdf-f1c3f75c.txt",
+        "text_length": 4010,
+        "extraction_status": null
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/Online_Forms/EXAMINATION-FORMS/Improvement-of-Division-Form-Final.pdf",
+      "warning": ""
+    },
+    {
+      "id": "biek-nav::download-forms::registration-of-all-groups",
+      "label": "Registration of All Groups",
+      "url": "https://www.biek.edu.pk/Online_Forms/Enrolment-Registration-forms/Registration-Form-All-Groups.pdf",
+      "parent": "Download Forms",
+      "handling_mode": "document_summary",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/Online_Forms/Enrolment-Registration-forms/Registration-Form-All-Groups.pdf",
+        "source_page": "https://www.biek.edu.pk/default.asp",
+        "title": "Registration of All Groups",
+        "kind": "pdf",
+        "text_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/raw/biek-extracted-pdf/online_forms-enrolment-registration-forms-registration-form-all-groups.pdf-e2cc67fa.txt",
+        "text_length": 1734,
+        "extraction_status": null
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/Online_Forms/Enrolment-Registration-forms/Registration-Form-All-Groups.pdf",
+      "warning": ""
+    },
+    {
+      "id": "biek-nav::download-forms::examination-forms",
+      "label": "Examination Forms",
+      "url": "https://www.biek.edu.pk/examinationforms.asp",
+      "parent": "Download Forms",
+      "handling_mode": "info_page",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/examinationforms.asp",
+        "source_page": "https://www.biek.edu.pk/default.asp",
+        "title": "Board of Intermediate Education Karachi - Download Types of Form",
+        "kind": "html_page",
+        "text_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/raw/biek-extracted-html/examinationforms.asp-88ec5caf.txt",
+        "text_length": 216,
+        "extraction_status": "ok"
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/examinationforms.asp",
+      "warning": ""
+    },
+    {
+      "id": "biek-nav::download-forms::permission-forms",
+      "label": "Permission Forms",
+      "url": "https://www.biek.edu.pk/Permissionforms.asp",
+      "parent": "Download Forms",
+      "handling_mode": "info_page",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/Permissionforms.asp",
+        "source_page": "https://www.biek.edu.pk/default.asp",
+        "title": "Board of Intermediate Education Karachi - Download Types of Form",
+        "kind": "html_page",
+        "text_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/raw/biek-extracted-html/permissionforms.asp-17be63a2.txt",
+        "text_length": 216,
+        "extraction_status": "ok"
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/Permissionforms.asp",
+      "warning": ""
+    },
+    {
+      "id": "biek-nav::recognition",
+      "label": "Recognition",
+      "url": "https://www.biek.edu.pk/default.asp#",
+      "parent": null,
+      "handling_mode": "container_summary",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/default.asp",
+        "source_page": "",
+        "title": "Welcome to Board of Intermediate Education Karachi",
+        "kind": "html_page",
+        "text_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/raw/biek-extracted-html/default.asp-63c01f0b.txt",
+        "text_length": 1149,
+        "extraction_status": "ok"
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/default.asp#",
+      "warning": ""
+    },
+    {
+      "id": "biek-nav::recognition::affiliated-colleges",
+      "label": "Affiliated Colleges",
+      "url": "https://www.biek.edu.pk/affcoll.asp",
+      "parent": "Recognition",
+      "handling_mode": "info_page",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/affcoll.asp",
+        "source_page": "",
+        "title": "Welcome to Board of Intermediate Education Karachi",
+        "kind": "html_page",
+        "text_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/raw/biek-extracted-html/affcoll.asp-1daa300e.txt",
+        "text_length": 80,
+        "extraction_status": "ok"
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/affcoll.asp",
+      "warning": ""
+    },
+    {
+      "id": "biek-nav::recognition::ioc-proforma-for-affiliation",
+      "label": "IOC Proforma for Affiliation",
+      "url": "https://www.biek.edu.pk/IOC-Performa.asp",
+      "parent": "Recognition",
+      "handling_mode": "info_page",
+      "preferred_source": {
+        "url": "https://www.biek.edu.pk/IOC-Performa.asp",
+        "source_page": "https://www.biek.edu.pk/default.asp",
+        "title": "Board of Intermediate Education Karachi - Download IOC Proforma for Affiliation",
+        "kind": "html_page",
+        "text_file": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/raw/biek-extracted-html/ioc-performa.asp-91622141.txt",
+        "text_length": 333,
+        "extraction_status": "ok"
+      },
+      "match_type": "exact_url",
+      "match_score": 100.0,
+      "fallback_link": "https://www.biek.edu.pk/IOC-Performa.asp",
+      "warning": ""
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "source_content_map": "/Users/zeeshanwaheed/Documents/Projects/Python/slm-finetune/data/runtime/biek_nav_content_map.json",
+  "nav_rows": 52,
+  "mapped_rows": 49,
+  "nav_docs_used": 47,
+  "chunk_count": 307,
+  "chunks_by_parent": {
+    "": 11,
+    "About Us": 8,
+    "Misc": 17,
+    "Examinations": 231,
+    "Download Forms": 38,
+    "Recognition": 2
+  },
+  "chunks_by_label": {
+    "Home": 2,
+    "About Us": 2,
+    "History of Board": 4,
+    "Chairman": 1,
+    "Board Members": 1,
+    "Last Results": 1,
+    "Contact us": 1,
+    "Misc": 2,
+    "Circulars & Notificaitons": 16,
+    "Press Release": 1,
+    "Examinations": 2,
+    "Recent Result Declaration": 1,
+    "Date Sheet": 1,
+    "Authorized Banks": 1,
+    "Statistics": 1,
+    "Sample E-Sheet of 30 Pages for Annual 2026 E-Marking": 10,
+    "Sample E-Sheet of 22 Pages for Annual 2026 E-Marking": 10,
+    "Scheme of Studies for Higher Secondary Certificates": 6,
+    "Scheme & Model Paper 2023": 1,
+    "Model Paper 2026": 192,
+    "Science General Mathematics Part-II Model Paper": 6,
+    "MCQs": 2,
+    "Download Forms": 1,
+    "Certificate Form": 3,
+    "Scrutiny Form": 2,
+    "Provisional Certification Form": 2,
+    "Migration Form": 3,
+    "Registration Form Commerce": 2,
+    "Registration Form Humanities": 2,
+    "Verification Certificate Form": 2,
+    "Verification Provisional Certificate": 2,
+    "Verification Marksheet Form": 2,
+    "Verification Migration Form": 2,
+    "Cancellation of Enrolment": 2,
+    "Cancellation of Registration": 1,
+    "Duplicate Marksheet": 1,
+    "Duplicate Enrolment Card": 1,
+    "Duplicate Computerized Admit Card": 1,
+    "Duplicate Registration Card": 1,
+    "Duplicate Manual Admit Card": 1,
+    "Improvement of Division": 4,
+    "Registration of All Groups": 2,
+    "Examination Forms": 1,
+    "Permission Forms": 1,
+    "Recognition": 2,
+    "Affiliated Colleges": 1,
+    "IOC Proforma for Affiliation": 1
+  },
+  "chunks_by_document_type": {
+    "nav_page": 47,
+    "nav_document": 260
+  },
+  "unmapped_rows": [
+    {
+      "label": "Committees",
+      "url": "https://www.biek.edu.pk/Committees.asp",
+      "warning": "No exact extracted source found; weak matching disabled for sensitive nav item."
+    },
+    {
+      "label": "FTN No. (Active Tax Payer)",
+      "url": "https://www.biek.edu.pk/FBR/FBR.jpg",
+      "warning": "No extracted document matched the exact nav URL."
+    },
+    {
+      "label": "Tutorial Video about online documents issuance",
+      "url": "https://www.biek.edu.pk/online%20videos/tutorial_video_of_online_documents.mp4",
+      "warning": "No extracted document matched the exact nav URL."
+    }
+  ]
+}

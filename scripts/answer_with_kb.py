@@ -3845,6 +3845,13 @@ def extract_biek_identity_names(text: str, *, limit: int = 6) -> list[str]:
     return names
 
 
+def format_biek_identity_name_for_answer(value: str) -> str:
+    text = clean_biek_identity_line(value)
+    text = re.sub(r"^(?:MR|MS|MRS|DR|PROF|COL\(R\)DR|COL\(R\)\s*DR)\.?\s+", "", text, flags=re.IGNORECASE)
+    text = " ".join(part.capitalize() for part in text.split())
+    return text.strip()
+
+
 def extract_biek_chairman_name(text: str) -> str:
     lines = [clean_biek_identity_line(line) for line in text.splitlines() if clean_biek_identity_line(line)]
     for index, line in enumerate(lines):
@@ -4134,6 +4141,35 @@ def format_biek_target_evidence_pack(evidence_pack: list[dict[str, str]]) -> str
     return "\n\n".join(blocks)
 
 
+def biek_doc_matches_nav_url(row: dict[str, Any], doc: dict[str, Any] | None) -> bool:
+    if doc is None:
+        return False
+    target_url = normalize_biek_target_url(str(row.get("url") or ""))
+    source_url = normalize_biek_target_url(str(doc.get("source_url") or ""))
+    return bool(target_url and source_url and target_url == source_url)
+
+
+def build_biek_safe_nav_page_answer(row: dict[str, Any]) -> str:
+    label = clean_answer_text(str(row.get("label") or "this BIEK page"))
+    url = str(row.get("url") or "").strip()
+    if url:
+        return f"BIEK has a {label} page here: {url}"
+    return f"BIEK has a {label} page."
+
+
+def build_biek_scheme_of_studies_answer(row: dict[str, Any]) -> str:
+    url = str(row.get("url") or "").strip()
+    if url:
+        return (
+            "The Scheme of Studies for Higher Secondary Certificates is a BIEK document for HSC examinations. "
+            f"It covers the scheme of studies and compulsory subjects for higher secondary certificate examinations. "
+            f"You can view it here: {url}"
+        )
+    return (
+        "The Scheme of Studies for Higher Secondary Certificates is a BIEK document for HSC examinations."
+    )
+
+
 def generate_biek_target_scoped_answer(
     *,
     question: str,
@@ -4148,11 +4184,30 @@ def generate_biek_target_scoped_answer(
     if str(row.get("handling_mode") or "").strip().lower() == "special_lookup":
         return build_biek_special_lookup_answer(question, row)
 
+    label_low = str(row.get("label") or "").strip().lower()
+
     if is_biek_identity_row(row):
         docs = biek_content_docs()
         primary_doc = resolve_biek_identity_doc(row, coverage_rows, docs, question=question)
         if primary_doc is None:
             return build_biek_identity_safe_answer()
+        if "committees" in label_low or "committee" in label_low:
+            if biek_doc_matches_nav_url(row, primary_doc):
+                return build_biek_info_page_answer(question, row, primary_doc)
+            return build_biek_safe_nav_page_answer(row)
+        return build_biek_info_page_answer(question, row, primary_doc)
+
+    if "authorized banks" in label_low:
+        docs = biek_content_docs()
+        primary_doc = resolve_biek_nav_primary_doc(row, docs)
+        if primary_doc is not None:
+            return build_biek_info_page_answer(question, row, primary_doc)
+
+    if "press release" in label_low or "statistics" in label_low:
+        return build_biek_safe_nav_page_answer(row)
+
+    if "scheme of studies" in label_low:
+        return build_biek_scheme_of_studies_answer(row)
 
     evidence_pack = build_biek_target_evidence_pack(question, row, coverage_rows)
     profile["biek_target_evidence"] = {
@@ -4334,6 +4389,17 @@ def build_biek_info_page_answer(question: str, row: dict[str, Any], content_doc:
         return f"I found the {label} page on the BIEK website. You can view it here: {url}"
 
     label_low = label.lower()
+    if "authorized banks" in label_low:
+        low_text = text.lower()
+        if "ubl" in low_text or "united bank limited" in low_text:
+            return (
+                "The authorized bank for BIEK is UBL - United Bank Limited. "
+                f"Candidates can submit fees at any UBL branch. You can view it here: {url}"
+            )
+        excerpt = extract_relevant_biek_excerpt(question, text, limit=2)
+        if excerpt:
+            return f"{' '.join(excerpt)} You can view it here: {url}"
+
     if "ioc proforma" in label_low:
         summary = (
             "The IOC proforma for affiliation is a BIEK affiliation-related resource for affiliation and renewal. "
@@ -4357,12 +4423,17 @@ def build_biek_info_page_answer(question: str, row: dict[str, Any], content_doc:
         if "board members" in label_low:
             names = extract_biek_identity_names(text, limit=5)
             if names:
-                lead = f"The Board Members page lists {join_list(names[:4])}"
+                formatted_names = [
+                    name
+                    for name in (format_biek_identity_name_for_answer(item) for item in names[:4])
+                    if name
+                ]
+                lead = f"BIEK's Board Members page includes {join_list(formatted_names)}"
                 if len(names) > 4:
                     lead += ", among others."
                 else:
                     lead += "."
-                return f"{lead} You can view it here: {url}"
+                return f"{lead} Link: {url}"
             excerpt = extract_relevant_biek_excerpt(question, text, limit=2)
             if excerpt:
                 return f"{' '.join(excerpt)} You can view the {label} page here: {url}"
@@ -4926,6 +4997,53 @@ def biek_target_family_candidates(question: str, coverage_rows: list[dict[str, A
     return filtered[:5]
 
 
+def biek_row_alias_match_score(query_text: str, query_tokens: set[str], row: dict[str, Any]) -> float:
+    scores = [
+        biek_alias_score(query_text, query_tokens, str(alias))
+        for alias in row.get("aliases", []) or []
+        if str(alias).strip()
+    ]
+    label = str(row.get("label") or "").strip()
+    if label:
+        scores.append(biek_alias_score(query_text, query_tokens, label))
+    return max(scores or [0.0])
+
+
+def narrow_biek_family_rows(
+    question: str,
+    family: str,
+    rows: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """Prefer the exact requested row inside shared-resource families."""
+    if len(rows) <= 1:
+        return rows
+
+    query_text = normalize_biek_query_for_resolution(question)
+    query_tokens = set(biek_nav_tokens(query_text))
+    if not query_tokens:
+        return rows
+
+    scored = [
+        (biek_row_alias_match_score(query_text, query_tokens, row), row)
+        for row in rows
+    ]
+    scored.sort(key=lambda item: item[0], reverse=True)
+    best_score = scored[0][0] if scored else 0.0
+    if best_score < 0.75:
+        return rows
+
+    if family == "verification_forms":
+        specific_tokens = {"certificate", "provisional", "marksheet", "migration"}
+        if not (query_tokens & specific_tokens):
+            return rows
+        return [row for score, row in scored if score >= best_score - 0.08]
+
+    if family in {"duplicate_admit_card", "permission_forms", "examination_forms"}:
+        return [row for score, row in scored if score >= best_score - 0.08]
+
+    return rows
+
+
 def resolve_biek_canonical_target(question: str, coverage_rows: list[dict[str, Any]]) -> dict[str, Any]:
     query_text = normalize_biek_query_for_resolution(question)
     query_tokens = set(biek_nav_tokens(query_text))
@@ -4954,6 +5072,8 @@ def resolve_biek_canonical_target(question: str, coverage_rows: list[dict[str, A
 
     best = candidates[0]
     rows = list(best.get("rows") or [])
+    family = str(best.get("family") or "")
+    rows = narrow_biek_family_rows(question, family, rows)
     rows.sort(key=lambda row: normalize_biek_nav_text(str(row.get("label") or "")))
     resolution_type = "family" if len(rows) > 1 else "row"
     return {
@@ -4962,7 +5082,7 @@ def resolve_biek_canonical_target(question: str, coverage_rows: list[dict[str, A
         "normalized_query": query_text,
         "resolution_type": resolution_type,
         "rows": rows,
-        "family": str(best.get("family") or ""),
+        "family": family,
         "confidence": round(min(1.0, float(best.get("score") or 0.0)), 4),
         "matched_alias": str(best.get("matched_alias") or ""),
     }
@@ -6015,11 +6135,11 @@ def build_biek_contact_safe_answer(hits: list[dict[str, Any]]) -> str:
             phones, emails = extract_biek_contact_details(text)
             url = str(contact_row.get("url") or contact_doc.get("source_url") or "").strip()
             if phones and emails:
-                return f"You can contact BIEK through its Contact Us page: {url}. The page lists phone numbers and an email contact."
+                return f"You can contact BIEK at {join_list(phones)} and {join_list(emails)}. The Contact Us page is here: {url}"
             if phones:
-                return f"You can contact BIEK through its Contact Us page: {url}. The page lists phone numbers."
+                return f"You can contact BIEK at {join_list(phones)}. The Contact Us page is here: {url}"
             if emails:
-                return f"You can contact BIEK through its Contact Us page: {url}. The page lists an email contact."
+                return f"You can contact BIEK at {join_list(emails)}. The Contact Us page is here: {url}"
             if url:
                 return f"You can contact BIEK through its Contact Us page: {url}"
 

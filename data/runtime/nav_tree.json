@@ -1,0 +1,228 @@
+{
+  "site": "biek",
+  "url": "https://www.biek.edu.pk/default.asp",
+  "title": "Welcome to Board of Intermediate Education Karachi",
+  "source": "fallback",
+  "generated_at": "2026-07-20T07:51:33.853585+00:00",
+  "top_level_count": 6,
+  "items": [
+    {
+      "label": "Home",
+      "url": "https://www.biek.edu.pk/default.asp"
+    },
+    {
+      "label": "About Us",
+      "url": "https://www.biek.edu.pk/default.asp#",
+      "children": [
+        {
+          "label": "History of Board",
+          "url": "https://www.biek.edu.pk/history.asp"
+        },
+        {
+          "label": "Chairman",
+          "url": "https://www.biek.edu.pk/chairman.asp"
+        },
+        {
+          "label": "Board Members",
+          "url": "https://www.biek.edu.pk/Bmembers.asp"
+        },
+        {
+          "label": "Committees",
+          "url": "https://www.biek.edu.pk/Committees.asp"
+        },
+        {
+          "label": "Last Results",
+          "url": "https://www.biek.edu.pk/LastResults.asp"
+        },
+        {
+          "label": "Contact us",
+          "url": "https://www.biek.edu.pk/ContactUs.asp"
+        }
+      ]
+    },
+    {
+      "label": "Misc",
+      "url": "https://www.biek.edu.pk/default.asp#",
+      "children": [
+        {
+          "label": "Tenders",
+          "url": "https://www.biek.edu.pk/Tenders.asp"
+        },
+        {
+          "label": "Circulars & Notificaitons",
+          "url": "https://www.biek.edu.pk/notifications.asp"
+        },
+        {
+          "label": "Press Release",
+          "url": "https://www.biek.edu.pk/press_release.asp"
+        },
+        {
+          "label": "FTN No. (Active Tax Payer)",
+          "url": "https://www.biek.edu.pk/FBR/FBR.jpg"
+        }
+      ]
+    },
+    {
+      "label": "Examinations",
+      "url": "https://www.biek.edu.pk/default.asp#",
+      "children": [
+        {
+          "label": "Tutorial Video about online documents issuance",
+          "url": "https://www.biek.edu.pk/online%20videos/tutorial_video_of_online_documents.mp4"
+        },
+        {
+          "label": "Recent Result Declaration",
+          "url": "https://www.biek.edu.pk/results.asp"
+        },
+        {
+          "label": "Date Sheet",
+          "url": "https://www.biek.edu.pk/Datesheet.asp"
+        },
+        {
+          "label": "Authorized Banks",
+          "url": "https://www.biek.edu.pk/authbanks.asp"
+        },
+        {
+          "label": "Statistics",
+          "url": "https://www.biek.edu.pk/Stats.asp"
+        },
+        {
+          "label": "Sample E-Sheet of 30 Pages for Annual 2026 E-Marking",
+          "url": "https://www.biek.edu.pk/E-Sheet-Sample/E-Sheet%2030%20pages.pdf"
+        },
+        {
+          "label": "Sample E-Sheet of 22 Pages for Annual 2026 E-Marking",
+          "url": "https://www.biek.edu.pk/E-Sheet-Sample/E-Sheet%2022%20Pages.pdf"
+        },
+        {
+          "label": "Scheme of Studies for Higher Secondary Certificates",
+          "url": "https://www.biek.edu.pk/Sc_Std/SCHEME-OF-STUDIES-FOR-HSC.pdf"
+        },
+        {
+          "label": "Scheme & Model Paper 2023",
+          "url": "https://www.biek.edu.pk/PapersScheme-2023.asp"
+        },
+        {
+          "label": "Model Paper 2026",
+          "url": "https://www.biek.edu.pk/ModelPaper/2026/Model%20Paper%202026.pdf"
+        },
+        {
+          "label": "Science General Mathematics Part-II Model Paper",
+          "url": "https://www.biek.edu.pk/ModelPaper/2026/SCI%20GENERAL%20Mathematics-II-NEW-BOOK%20MODEL%20PAPER%202026.pdf"
+        },
+        {
+          "label": "MCQs",
+          "url": "https://www.biek.edu.pk/mcq.asp"
+        }
+      ]
+    },
+    {
+      "label": "Download Forms",
+      "url": "https://www.biek.edu.pk/Allforms.asp",
+      "children": [
+        {
+          "label": "Certificate Form",
+          "url": "https://www.biek.edu.pk/Online_Forms/HSC-CERTIFICATE/Certificate-Form-Final.pdf"
+        },
+        {
+          "label": "Scrutiny Form",
+          "url": "https://www.biek.edu.pk/Online_Forms/Scrutiny%20Forms/Scruitny-Form.pdf"
+        },
+        {
+          "label": "Provisional Certification Form",
+          "url": "https://www.biek.edu.pk/Online_Forms/HSC-CERTIFICATE/Provisional-Certificate-Form.pdf"
+        },
+        {
+          "label": "Migration Form",
+          "url": "https://www.biek.edu.pk/Online_Forms/HSC-CERTIFICATE/MIGRATION-CERTIFICATE.pdf"
+        },
+        {
+          "label": "Registration Form Commerce",
+          "url": "https://www.biek.edu.pk/Online_Forms/Enrolment-Registration-forms/Registration-Form-Commerce.pdf"
+        },
+        {
+          "label": "Registration Form Humanities",
+          "url": "https://www.biek.edu.pk/Online_Forms/Enrolment-Registration-forms/Registration-Form-Humanities.pdf"
+        },
+        {
+          "label": "Verification Certificate Form",
+          "url": "https://biek.edu.pk/Online_Forms/Verification%20forms/Verification-Certificate-Form.pdf"
+        },
+        {
+          "label": "Verification Provisional Certificate",
+          "url": "https://biek.edu.pk/Online_Forms/Verification%20forms/Verification-Forms-All.pdf"
+        },
+        {
+          "label": "Verification Marksheet Form",
+          "url": "https://biek.edu.pk/Online_Forms/Verification%20forms/Verification-Forms-All.pdf"
+        },
+        {
+          "label": "Verification Migration Form",
+          "url": "https://biek.edu.pk/Online_Forms/Verification%20forms/Verification-Forms-All.pdf"
+        },
+        {
+          "label": "Cancellation of Enrolment",
+          "url": "https://biek.edu.pk/Online_Forms/Enrolment-Registration-forms/CANCELATION-OF-ENROLMENT.pdf"
+        },
+        {
+          "label": "Cancellation of Registration",
+          "url": "https://biek.edu.pk/Online_Forms/Enrolment-Registration-forms/CANCELATION-OF-REGISTRATION.pdf"
+        },
+        {
+          "label": "Duplicate Marksheet",
+          "url": "https://biek.edu.pk/Online_Forms/Duplicate%20Testimonials/BIEK-Duplicate-Forms.pdf"
+        },
+        {
+          "label": "Duplicate Enrolment Card",
+          "url": "https://biek.edu.pk/Online_Forms/Duplicate%20Testimonials/BIEK-Duplicate-Forms.pdf"
+        },
+        {
+          "label": "Duplicate Computerized Admit Card",
+          "url": "https://biek.edu.pk/Online_Forms/Duplicate%20Testimonials/BIEK-Duplicate-Forms.pdf"
+        },
+        {
+          "label": "Duplicate Registration Card",
+          "url": "https://biek.edu.pk/Online_Forms/Duplicate%20Testimonials/BIEK-Duplicate-Forms.pdf"
+        },
+        {
+          "label": "Duplicate Manual Admit Card",
+          "url": "https://biek.edu.pk/Online_Forms/Duplicate%20Testimonials/BIEK-Duplicate-Forms.pdf"
+        },
+        {
+          "label": "Proforma of Special Chance",
+          "url": "https://www.biek.edu.pk/Online_Forms/EXAMINATION-FORMS/BIEK-Duplicate-Forms.pdf"
+        },
+        {
+          "label": "Improvement of Division",
+          "url": "https://www.biek.edu.pk/Online_Forms/EXAMINATION-FORMS/Improvement-of-Division-Form-Final.pdf"
+        },
+        {
+          "label": "Registration of All Groups",
+          "url": "https://www.biek.edu.pk/Online_Forms/Enrolment-Registration-forms/Registration-Form-All-Groups.pdf"
+        },
+        {
+          "label": "Examination Forms",
+          "url": "https://www.biek.edu.pk/examinationforms.asp"
+        },
+        {
+          "label": "Permission Forms",
+          "url": "https://www.biek.edu.pk/Permissionforms.asp"
+        }
+      ]
+    },
+    {
+      "label": "Recognition",
+      "url": "https://www.biek.edu.pk/default.asp#",
+      "children": [
+        {
+          "label": "Affiliated Colleges",
+          "url": "https://www.biek.edu.pk/affcoll.asp"
+        },
+        {
+          "label": "IOC Proforma for Affiliation",
+          "url": "https://www.biek.edu.pk/IOC-Performa.asp"
+        }
+      ]
+    }
+  ]
+}
