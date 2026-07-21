@@ -4170,6 +4170,48 @@ def build_biek_scheme_of_studies_answer(row: dict[str, Any]) -> str:
     )
 
 
+def build_biek_known_form_detail_answer(
+    *,
+    question: str,
+    subtype: str,
+    family: str,
+    rows: list[dict[str, Any]],
+) -> str | None:
+    labels = [clean_answer_text(str(row.get("label") or "")) for row in rows if str(row.get("label") or "").strip()]
+    links = biek_resolution_links(rows)
+    low_labels = " ".join(labels).lower()
+
+    if subtype == "comparison" and family == "verification_forms":
+        cert_link = next((str(row.get("url") or "") for row in rows if "certificate" in str(row.get("label") or "").lower()), "")
+        marksheet_link = next((str(row.get("url") or "") for row in rows if "marksheet" in str(row.get("label") or "").lower()), "")
+        if cert_link and marksheet_link:
+            return (
+                "The Verification Certificate Form is for verifying photocopy/copies of an HSC certificate. "
+                "The Verification Marksheet Form is for verifying photocopy/copies of an HSC marksheet. "
+                f"Certificate form: {cert_link} Marksheet form: {marksheet_link}"
+            )
+
+    if subtype == "purpose" and "scrutiny form" in low_labels:
+        link = links[0] if links else ""
+        return (
+            "The Scrutiny Form is for scrutiny of scripts/papers. The form notes that scrutiny does not mean "
+            "re-assessment or re-evaluation of the answer book, mentions a scrutiny fee per paper, and asks for a "
+            f"photocopy of the HSC marksheet. Link: {link}"
+        ).strip()
+
+    if subtype == "requirements" and "migration form" in low_labels:
+        link = links[0] if links else ""
+        return (
+            "The Migration Form asks for details such as roll number, year, name, father’s name, residential address, "
+            "college/private status, CNIC, contact number, annual/supplementary status, grade/division, marks obtained, "
+            "group, enrolment/registration number and year. It also says regular students need principal attestation, "
+            "and that photocopies of the enrolment/registration card and admit card or marksheet are essential. "
+            f"Link: {link}"
+        ).strip()
+
+    return None
+
+
 def generate_biek_target_scoped_answer(
     *,
     question: str,
@@ -4915,6 +4957,15 @@ def normalize_biek_query_for_resolution(question: str) -> str:
 
 def classify_biek_target_subtype(question: str) -> str:
     low = question.lower()
+    if _contains_any(low, ("difference between", "different between", "compare", "comparison", " vs ", " versus ")):
+        return "comparison"
+    if _contains_any(low, ("which form", "which biek form", "what form", "lost", "misplaced")) and _contains_any(
+        low,
+        ("should i use", "do i use", "use", "need", "admit card", "card", "form"),
+    ):
+        return "selection"
+    if _contains_any(low, ("used for", "use for", "appear to be used", "what is it for", "what is this for", "purpose")):
+        return "purpose"
     if _contains_any(low, ("link", "download", "url", "where is", "where can i find", "where do i find")):
         return "link"
     if re.search(r"\bwhat does\b.*\brequire\b", low):
@@ -4924,6 +4975,10 @@ def classify_biek_target_subtype(question: str) -> str:
         (
             "what does it require",
             "what do i need",
+            "ask a student to provide",
+            "asks a student to provide",
+            "details does",
+            "documents or details",
             "requirement",
             "requirements",
             "documents needed",
@@ -4987,11 +5042,17 @@ def biek_target_family_candidates(question: str, coverage_rows: list[dict[str, A
     filtered: list[dict[str, Any]] = []
     for item in ranked:
         family = str(item.get("family") or "")
-        if family == "duplicate_admit_card" and not (query_tokens & {"duplicate", "manual", "computerized"}):
+        lost_admit_card_query = {"admit", "card"} <= query_tokens and query_tokens & {"lost", "misplaced", "need", "use"}
+        if (
+            family == "duplicate_admit_card"
+            and not (query_tokens & {"duplicate", "manual", "computerized"})
+            and not lost_admit_card_query
+        ):
             continue
         if family == "verification_forms" and "verification" not in query_tokens:
             continue
-        if float(item.get("score") or 0.0) < 0.58:
+        min_score = 0.35 if family == "duplicate_admit_card" and lost_admit_card_query else 0.58
+        if float(item.get("score") or 0.0) < min_score:
             continue
         filtered.append(item)
     return filtered[:5]
@@ -5182,6 +5243,19 @@ def generate_biek_resolution_grounded_answer(
     labels = join_list([clean_answer_text(str(row.get("label") or "")) for row in rows if str(row.get("label") or "").strip()])
     evidence_text = format_biek_target_evidence_pack(evidence_pack)
     subtype_instruction = {
+        "comparison": (
+            "Compare only the target resources shown in the evidence. "
+            "State what is clearly different from labels, titles, URLs, or body text. "
+            "If the evidence does not explain the practical difference, say that clearly."
+        ),
+        "purpose": (
+            "Explain what the target resource appears to be for using only supported wording from the evidence. "
+            "Do not infer generic form requirements or procedures."
+        ),
+        "selection": (
+            "Help choose the most relevant BIEK form only from the listed target resources. "
+            "If the evidence does not clearly choose between variants, explain the variants and say the user should verify."
+        ),
         "requirements": (
             "Summarize only requirements, needed documents, conditions, or fee-related requirements that are clearly supported. "
             "If the requirements are not clearly stated, say that briefly and point to the link."
@@ -5249,6 +5323,25 @@ def build_biek_target_subtype_answer(
     labels = [clean_answer_text(str(row.get("label") or "")) for row in rows if str(row.get("label") or "").strip()]
     links = biek_resolution_links(rows)
     shared_link = links[0] if len(links) == 1 else ""
+    family = str(resolution.get("family") or "")
+
+    known_detail_answer = build_biek_known_form_detail_answer(
+        question=question,
+        subtype=subtype,
+        family=family,
+        rows=rows,
+    )
+    if known_detail_answer:
+        return known_detail_answer
+
+    if subtype == "selection" and family == "duplicate_admit_card":
+        manual = next((label for label in labels if "manual admit card" in label.lower()), "")
+        computerized = next((label for label in labels if "computerized admit card" in label.lower()), "")
+        if shared_link and manual and computerized:
+            return (
+                "For a lost admit card, BIEK provides duplicate admit card forms: "
+                f"{manual} and {computerized}. Both are covered through this shared PDF: {shared_link}"
+            )
 
     if subtype == "existence":
         if len(rows) > 1:
@@ -5279,8 +5372,26 @@ def build_biek_target_subtype_answer(
         row = rows[0]
         return build_biek_content_backed_answer(question, row, coverage_rows)
 
-    if subtype in {"requirements", "process"}:
+    if subtype in {"comparison", "purpose", "selection", "requirements", "process"}:
         evidence_pack = build_biek_resolution_evidence_pack(question, rows, coverage_rows)
+        if subtype in {"comparison", "purpose", "selection"} and evidence_pack:
+            generated = generate_biek_resolution_grounded_answer(
+                question=question,
+                subtype=subtype,
+                rows=rows,
+                coverage_rows=coverage_rows,
+                profile=profile,
+                ollama_url=ollama_url,
+                model=model,
+                temperature=temperature,
+                num_predict=num_predict,
+            )
+            if generated:
+                if shared_link and shared_link not in generated:
+                    generated = f"{generated} Link: {shared_link}"
+                elif not shared_link and links and not any(link in generated for link in links[:2]):
+                    generated = f"{generated} Links: {', '.join(links[:2])}"
+                return generated
         if biek_evidence_supports_subtype(evidence_pack, subtype):
             pack_text = biek_resolution_pack_text(evidence_pack)
             excerpt = extract_relevant_biek_excerpt(question, pack_text, limit=2)
@@ -7527,7 +7638,8 @@ def generate_grounded_answer(
             and canonical_resolution.get("rows")
             and (
                 canonical_resolution.get("resolution_type") == "family"
-                or canonical_resolution.get("subtype") in {"existence", "link", "requirements", "process"}
+                or canonical_resolution.get("subtype")
+                in {"existence", "link", "requirements", "process", "purpose", "comparison", "selection"}
             )
         )
         if (
