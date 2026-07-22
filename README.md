@@ -192,3 +192,31 @@ Primary file for on-device usage:
 Reference high-precision file:
 
 - `models/gguf/synapse-qwen1.5b-f16.gguf`
+
+## Context-aware messaging experiment backup
+
+On July 21, 2026, the uncommitted context-aware messaging experiment was saved as a patch before cleaning the branch.
+
+Repo copy:
+
+```text
+backups/context_aware_messaging/context_aware_messaging_uncommitted_2026-07-21.patch
+```
+
+Temporary copy outside the repo:
+
+```text
+/private/tmp/context_aware_messaging_uncommitted_2026-07-21.patch
+```
+
+If the working tree still has those changes and you want to discard them:
+
+```bash
+git restore app.py chat/kb_answer.py scripts/answer_with_kb.py eval/results/batch_eval_history.json logs/kb_answer_debug.jsonl
+```
+
+If you want to restore the experiment later:
+
+```bash
+git apply /private/tmp/context_aware_messaging_uncommitted_2026-07-21.patch
+```
